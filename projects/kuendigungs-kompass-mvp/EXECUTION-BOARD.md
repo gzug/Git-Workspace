@@ -100,7 +100,7 @@ Die Hauptlücken liegen aktuell in **vollständiger Testhärtung**, **konkreter 
 - Priorität: P0
 
 ### Task 3.3 — Fragebogen-Flow implementieren
-- Status: vorbereitet
+- Status: erledigt
 - Priorität: P1
 
 ### Task 3.4 — Ergebnisansicht implementieren
@@ -136,7 +136,7 @@ Die Hauptlücken liegen aktuell in **vollständiger Testhärtung**, **konkreter 
 ---
 
 ## Aktueller Fokus
-1. den geschlossenen Adapter-Pfad dokumentieren und absichern
-2. danach Fragebogen-Flow und Ergebnisansicht als nächsten Integrationsschritt konkretisieren
-3. Fehler- und Fallback-Handling früh mitdenken
+1. Ergebnisansicht als nächsten Integrationsschritt konkret umsetzen
+2. Fehler- und Fallback-Handling früh mitdenken
+3. End-to-End-Anschluss zwischen Flow, Engine und Produktausgabe härten
 4. UI-Polish weiter hinter Stabilität halten

@@ -88,8 +88,14 @@ Damit wird die Arbeitslosmeldung nur dann aktiviert, wenn sie wirklich fallrelev
 
 ### Technischer Arbeitsstand
 - `src/demo.js`
+- `src/engine/`
+- `src/adapters/`
+- `src/flow/questionnaireFlow.js`
 - `test-fixtures.js`
-- laut vorherigem Projektstand zusätzlich Engine-Layer unter `src/engine/`
+- `test-normalize-input.js`
+- `test-product-tiers.js`
+- `test-render-product-tiers.js`
+- `test-questionnaire-flow.js`
 
 ---
 
@@ -200,6 +206,7 @@ Der fachliche Dokumentationsstand ist aktuell **sicher belastbar**. Der technisc
 
 ### 1. Noch kein final integrierter UI-/API-Anschluss
 Der Projektstand ist stark in Logik und Spezifikation, aber noch nicht als echtes Produkt-Interface verdrahtet.
+Ein erster technischer Fragebogen-Flow für Launch V1 ist jetzt jedoch im Runtime-Layer angelegt (`src/flow/questionnaireFlow.js`) und respektiert die Mindest-Screenlogik aus `FLOW-CONTRACT-V1.md`.
 
 ### 2. Render-Tests sind da, aber noch nicht final als textuelle Golden Snapshots ausgebaut
 Es gibt jetzt harte Render-Assertions für:

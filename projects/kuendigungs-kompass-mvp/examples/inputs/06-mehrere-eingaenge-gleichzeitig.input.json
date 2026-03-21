@@ -1,0 +1,18 @@
+{
+  "case_entry": "multiple",
+  "termination_access_date": "2026-03-21",
+  "employment_end_date": "2026-04-30",
+  "jobseeker_registered": false,
+  "already_unemployed_now": false,
+  "agreement_present": true,
+  "agreement_already_signed": false,
+  "release_status": "yes_revocable",
+  "special_protection_indicator": [
+    "unsure"
+  ],
+  "documents_secured": [
+    "termination_letter",
+    "agreement_draft"
+  ],
+  "primary_goal": "plan_next_step"
+}

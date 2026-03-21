@@ -1,0 +1,112 @@
+{
+  "resultVersion": "v2",
+  "caseSnapshot": {
+    "headline": "Jetzt geht es um Folgen, Fristen und saubere Einordnung",
+    "situation": "Ein Aufhebungs- oder Abwicklungsvertrag wurde bereits unterschrieben. Damit ist dein Fall kein reiner Standard-Stopp-Fall mehr.",
+    "riskLevel": "high",
+    "primaryGoal": "prepare_advice"
+  },
+  "synthesisDecision": {
+    "primaryTrack": "special-case-review",
+    "reasoning": "Weil der Vertrag bereits unterschrieben ist, ist der Standardhinweis 'nicht unterschreiben' nicht mehr ausreichend. Jetzt stehen Folgenanalyse, Fristen und individuelle Prüfung im Vordergrund.",
+    "confidenceClass": "cautious-check"
+  },
+  "topActions": [
+    {
+      "priority": 1,
+      "label": "Unterzeichneten Vertrag sofort individuell prüfen lassen",
+      "why": "Nach der Unterschrift geht es nicht mehr um allgemeines Bremsen, sondern um konkrete Folgen und mögliche nächste Schritte.",
+      "timing": "sofort",
+      "statementClass": "cautious-check"
+    },
+    {
+      "priority": 2,
+      "label": "Agentur-Themen und Leistungsfolgen gezielt klären",
+      "why": "Mitwirkung an der Beendigung kann Auswirkungen auf Arbeitslosengeld und weitere Abläufe haben.",
+      "timing": "sehr zeitnah",
+      "statementClass": "mvp-reliable"
+    },
+    {
+      "priority": 3,
+      "label": "Alle Vertrags- und Freistellungsunterlagen vollständig bündeln",
+      "why": "Für jede belastbare Einordnung wird jetzt der genaue Wortlaut und die begleitende Dokumentation wichtig.",
+      "timing": "heute",
+      "statementClass": "mvp-reliable"
+    }
+  ],
+  "deadlines": [
+    {
+      "label": "Arbeitsuchendmeldung",
+      "timing": "spätestens 3 Monate vor Ende, sonst innerhalb von 3 Tagen nach Kenntnis",
+      "importance": "critical",
+      "note": "Im Beispiel bereits erledigt, aber als Fachlogik weiterhin relevant.",
+      "statementClass": "mvp-reliable"
+    }
+  ],
+  "riskFlags": [
+    {
+      "label": "Vertrag bereits unterschrieben",
+      "description": "Damit verschiebt sich der Fokus von allgemeiner Warnung auf Folgen, Fristen und individuelle Prüfung.",
+      "severity": "high",
+      "statementClass": "cautious-check"
+    },
+    {
+      "label": "ALG-I-Risiken weiter relevant",
+      "description": "Auch nach Unterschrift können Sperrzeit- oder andere Leistungsfragen im Raum stehen.",
+      "severity": "high",
+      "statementClass": "mvp-reliable"
+    }
+  ],
+  "redFlags": [
+    {
+      "label": "Bereits unterschriebener Beendigungsvertrag",
+      "whyEscalated": "Der MVP soll hier nicht mit pauschalen Aussagen arbeiten, weil die konkrete Folgenlage individuell geprüft werden muss.",
+      "recommendedEscalation": "Qualifizierte individuelle Prüfung mit Anwalt, Gewerkschaft oder passender Beratungsstelle"
+    }
+  ],
+  "documentChecklist": [
+    {
+      "label": "Unterzeichneter Vertrag",
+      "reason": "Der exakte Inhalt ist jetzt zentral für jede weitere Einordnung.",
+      "status": "already-secured"
+    },
+    {
+      "label": "Arbeitsvertrag",
+      "reason": "Hilft, Ausgangslage und Abweichungen sauber zu prüfen.",
+      "status": "already-secured"
+    },
+    {
+      "label": "Lohnunterlagen",
+      "reason": "Nützlich für Leistungs- und Beratungsthemen.",
+      "status": "already-secured"
+    },
+    {
+      "label": "Freistellungs- und Restanspruchsinfos",
+      "reason": "Relevant, weil die praktische Abwicklung jetzt wichtig bleibt.",
+      "status": "already-secured"
+    }
+  ],
+  "advisorQuestions": [
+    "Welche unmittelbaren Folgen hat die bereits erfolgte Unterschrift?",
+    "Welche Fristen oder nächsten Schritte laufen jetzt trotzdem?",
+    "Welche Punkte im Vertrag sind für ALG I oder weitere Ansprüche besonders kritisch?"
+  ],
+  "opportunities": [],
+  "disclaimers": [
+    "Der MVP ersetzt keine individuelle Rechtsberatung.",
+    "Konkrete Rechtsfolgen eines bereits unterschriebenen Vertrags hängen stark vom Einzelfall ab.",
+    "Der MVP löst keine Anfechtungs- oder Wirksamkeitsprüfung."
+  ],
+  "statementLedger": {
+    "mvpReliable": [
+      "Mitwirkung an der Beendigung kann ALG-I-Risiken auslösen.",
+      "Nach Unterschrift werden individuelle Vertragsfolgen wichtiger als Standardwarnungen."
+    ],
+    "cautiousChecks": [
+      "Bereits unterschriebene Verträge nur individuell prüfen, nicht pauschal bewerten."
+    ],
+    "notUsedYet": [
+      "Keine Aussage zu Anfechtungschancen oder sicherer Unwirksamkeit treffen."
+    ]
+  }
+}

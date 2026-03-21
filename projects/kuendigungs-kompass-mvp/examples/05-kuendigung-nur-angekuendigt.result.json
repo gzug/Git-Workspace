@@ -1,0 +1,101 @@
+{
+  "resultVersion": "v2",
+  "caseSnapshot": {
+    "headline": "Jetzt Vorbereitung statt falscher Fristpanik",
+    "situation": "Eine Kündigung wurde angekündigt, aber es liegt noch keine schriftliche Kündigung vor. Gleichzeitig ist die Arbeitsuchendmeldung noch offen.",
+    "riskLevel": "medium",
+    "primaryGoal": "plan_next_step"
+  },
+  "synthesisDecision": {
+    "primaryTrack": "prepare-advice",
+    "reasoning": "Weil noch keine schriftliche Kündigung zugegangen ist, steht nicht die 3-Wochen-Klagefrist im Vordergrund, sondern Vorbereitung und frühe Agentur-Absicherung.",
+    "confidenceClass": "mvp-reliable"
+  },
+  "topActions": [
+    {
+      "priority": 1,
+      "label": "Arbeitsuchendmeldung sofort prüfen oder nachholen",
+      "why": "Auch ohne schriftliche Kündigung kann die frühe Meldelogik relevant werden, wenn das Ende des Arbeitsverhältnisses absehbar ist.",
+      "timing": "sofort",
+      "statementClass": "mvp-reliable"
+    },
+    {
+      "priority": 2,
+      "label": "Noch keine Fristen aus nicht vorhandener Schriftform ableiten",
+      "why": "Ohne schriftliche Kündigung soll der MVP keine künstliche 3-Wochen-Panik erzeugen.",
+      "timing": "ab jetzt",
+      "statementClass": "mvp-reliable"
+    },
+    {
+      "priority": 3,
+      "label": "Kernunterlagen schon jetzt sichern",
+      "why": "Wenn sich die Lage zuspitzt, spart vorbereitete Dokumentation Zeit und Fehler.",
+      "timing": "heute",
+      "statementClass": "mvp-reliable"
+    }
+  ],
+  "deadlines": [
+    {
+      "label": "Arbeitsuchendmeldung",
+      "timing": "spätestens 3 Monate vor Ende, sonst innerhalb von 3 Tagen nach Kenntnis",
+      "importance": "critical",
+      "note": "Diese frühe Meldelogik kann schon vor Zugang einer schriftlichen Kündigung relevant sein.",
+      "statementClass": "mvp-reliable"
+    }
+  ],
+  "riskFlags": [
+    {
+      "label": "Frühe Agentur-Schritte könnten übersehen werden",
+      "description": "Wer nur auf das schriftliche Kündigungsschreiben wartet, kann frühe To-dos bei der Agentur aus dem Blick verlieren.",
+      "severity": "high",
+      "statementClass": "mvp-reliable"
+    }
+  ],
+  "redFlags": [],
+  "documentChecklist": [
+    {
+      "label": "Arbeitsvertrag",
+      "reason": "Hilft, die Ausgangslage zu sortieren, bevor Schriftstücke vorliegen.",
+      "status": "secure-now"
+    },
+    {
+      "label": "Lohnunterlagen",
+      "reason": "Nützlich für spätere Agentur- oder Beratungsthemen.",
+      "status": "secure-now"
+    },
+    {
+      "label": "Schriftliche Kommunikation zur angekündigten Kündigung",
+      "reason": "Hilfreich, um den Verlauf später nachvollziehen zu können.",
+      "status": "secure-now"
+    }
+  ],
+  "advisorQuestions": [
+    "Ab wann ist in meinem Fall die Arbeitsuchendmeldung relevant?",
+    "Welche Schritte sollte ich jetzt schon vorbereiten, obwohl noch nichts Schriftliches vorliegt?",
+    "Welche Unterlagen sollte ich sofort sichern?"
+  ],
+  "opportunities": [
+    {
+      "label": "Weiteren nächsten Schritt strukturiert planen",
+      "description": "Wenn der Fall noch in Bewegung ist, kann eine saubere Vorbereitung sinnvoller sein als voreilige Detailschlüsse.",
+      "statementClass": "cautious-check"
+    }
+  ],
+  "disclaimers": [
+    "Ohne schriftliche Kündigung soll der MVP keine Klagefrist fingieren.",
+    "Der MVP ersetzt keine individuelle Rechtsberatung.",
+    "Arbeitsuchendmeldung und Arbeitslosmeldung sind nicht dasselbe."
+  ],
+  "statementLedger": {
+    "mvpReliable": [
+      "Ohne schriftliche Kündigung soll keine 3-Wochen-Klagefrist ausgelöst werden.",
+      "Arbeitsuchendmeldung kann schon vor Zugang einer schriftlichen Kündigung relevant werden."
+    ],
+    "cautiousChecks": [
+      "Frühe Planung und Vorbereitung sind sinnvoll, ohne die Lage künstlich zu dramatisieren."
+    ],
+    "notUsedYet": [
+      "Keine Aussage über die Wirksamkeit einer nur angekündigten Kündigung."
+    ]
+  }
+}

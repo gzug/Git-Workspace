@@ -1,0 +1,125 @@
+{
+  "resultVersion": "v2",
+  "caseSnapshot": {
+    "headline": "Dein Fall hat mehrere gleichzeitige Risikotreiber",
+    "situation": "Es liegen gleichzeitig eine schriftliche Kündigung, ein noch nicht unterschriebener Vertrag und ein unklarer Sonderfallindikator vor.",
+    "riskLevel": "high",
+    "primaryGoal": "plan_next_step"
+  },
+  "synthesisDecision": {
+    "primaryTrack": "special-case-review",
+    "reasoning": "Weil sich Fristdruck, Vertragsrisiko und unklare Schutzlage gleichzeitig überlagern, darf der MVP hier nicht nur eine Standard-Track-Logik fahren.",
+    "confidenceClass": "cautious-check"
+  },
+  "topActions": [
+    {
+      "priority": 1,
+      "label": "Nichts vorschnell unterschreiben",
+      "why": "Der Vertrag ist noch offen und könnte deine Lage zusätzlich verschärfen.",
+      "timing": "sofort",
+      "statementClass": "mvp-reliable"
+    },
+    {
+      "priority": 2,
+      "label": "3-Wochen-Frist und Agentur-Meldung parallel absichern",
+      "why": "Hier laufen mehrere kritische Themen gleichzeitig und keines sollte isoliert liegen bleiben.",
+      "timing": "heute",
+      "statementClass": "mvp-reliable"
+    },
+    {
+      "priority": 3,
+      "label": "Sonderfall individuell prüfen lassen",
+      "why": "Die unklare Schutzlage macht pauschale Standardlogik zu riskant.",
+      "timing": "sehr zeitnah",
+      "statementClass": "cautious-check"
+    }
+  ],
+  "deadlines": [
+    {
+      "label": "Arbeitsuchendmeldung",
+      "timing": "spätestens 3 Monate vor Ende, sonst innerhalb von 3 Tagen nach Kenntnis",
+      "importance": "critical",
+      "note": "Die frühe Agentur-Meldung ist hier parallel zum Vertrags- und Fristthema relevant.",
+      "statementClass": "mvp-reliable"
+    },
+    {
+      "label": "Kündigungsschutzklage prüfen",
+      "timing": "regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung",
+      "importance": "critical",
+      "note": "Die kurze Frist läuft trotz weiterer Baustellen parallel.",
+      "statementClass": "mvp-reliable"
+    }
+  ],
+  "riskFlags": [
+    {
+      "label": "Sperrzeit-/Ruhensrisiko bei möglicher Vertragsmitwirkung",
+      "description": "Ein noch nicht unterschriebener Vertrag kann zusätzliche Risiken beim Arbeitslosengeld auslösen.",
+      "severity": "critical",
+      "statementClass": "mvp-reliable"
+    },
+    {
+      "label": "Möglicher Sonderfall / unklare Schutzlage",
+      "description": "Solange unklar ist, ob ein besonderer Schutz greift, sollte der Fall nicht als Standardfall behandelt werden.",
+      "severity": "high",
+      "statementClass": "cautious-check"
+    },
+    {
+      "label": "Mehrfachdruck erhöht Fehlentscheidungsrisiko",
+      "description": "Wenn Kündigung, Vertrag und Schutzfragen gleichzeitig auftauchen, steigt das Risiko falscher Priorisierung.",
+      "severity": "high",
+      "statementClass": "cautious-check"
+    }
+  ],
+  "redFlags": [
+    {
+      "label": "Überlagerter Mehrfachfall mit möglichem Sonderfall",
+      "whyEscalated": "Mehrere Risikotreiber laufen gleichzeitig. Der MVP sollte hier priorisieren, aber nicht so tun, als sei der Fall vollständig standardisierbar.",
+      "recommendedEscalation": "Qualifizierte individuelle Prüfung mit Anwalt, Gewerkschaft oder passender Beratungsstelle"
+    }
+  ],
+  "documentChecklist": [
+    {
+      "label": "Kündigungsschreiben",
+      "reason": "Zentral für Zugang und Fristprüfung.",
+      "status": "already-secured"
+    },
+    {
+      "label": "Vertragsentwurf",
+      "reason": "Wichtig, weil eine Unterschrift gerade aktiv vermieden werden sollte.",
+      "status": "already-secured"
+    },
+    {
+      "label": "Arbeitsvertrag",
+      "reason": "Fehlt noch und hilft bei der Einordnung des Gesamtfalls.",
+      "status": "secure-now"
+    },
+    {
+      "label": "Lohnunterlagen",
+      "reason": "Hilfreich für Agentur- und Beratungsthemen.",
+      "status": "secure-now"
+    }
+  ],
+  "advisorQuestions": [
+    "Welche Reihenfolge ist in meinem Fall wirklich die richtige: Vertrag, Klagefrist, Agentur oder Schutzstatus?",
+    "Welche Risiken entstehen, wenn ich jetzt falsch priorisiere?",
+    "Welche Unterlagen fehlen noch für eine belastbare Prüfung?"
+  ],
+  "opportunities": [],
+  "disclaimers": [
+    "Der MVP ersetzt keine individuelle Rechtsberatung.",
+    "Bei mehreren gleichzeitigen Risikotreibern soll der MVP priorisieren, aber keine Scheinsicherheit erzeugen.",
+    "Arbeitsuchendmeldung und Arbeitslosmeldung sind nicht dasselbe."
+  ],
+  "statementLedger": {
+    "mvpReliable": [
+      "Die 3-Wochen-Frist und die Arbeitsuchendmeldung können parallel relevant sein.",
+      "Ein nicht unterschriebener Vertrag sollte nicht vorschnell unterzeichnet werden."
+    ],
+    "cautiousChecks": [
+      "Unklare Schutzlagen und Mehrfachkonflikte sollten individuell geprüft werden."
+    ],
+    "notUsedYet": [
+      "Keine pauschale Gesamtbewertung des Falls als sicher lösbar im MVP."
+    ]
+  }
+}

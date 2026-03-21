@@ -23,6 +23,27 @@ Diese Datei koppelt die Input-Fixtures mit den erwarteten Result-Fixtures.
 - **Track:** `special-case-review`
 - **Zweck:** prüft Eskalation bei Sonderfallindikator bei gleichzeitigem Fristdruck
 
+## Paar 4
+
+- **Input:** `inputs/04-vertrag-bereits-unterschrieben.input.json`
+- **Expected Result:** `04-vertrag-bereits-unterschrieben.result.json`
+- **Track:** `special-case-review`
+- **Zweck:** prüft Eskalation bei bereits unterschriebenem Vertrag statt stumpfer Nicht-unterschreiben-Logik
+
+## Paar 5
+
+- **Input:** `inputs/05-kuendigung-nur-angekuendigt.input.json`
+- **Expected Result:** `05-kuendigung-nur-angekuendigt.result.json`
+- **Track:** `prepare-advice`
+- **Zweck:** prüft, dass ohne schriftliche Kündigung keine falsche 3-Wochen-Panik ausgelöst wird
+
+## Paar 6
+
+- **Input:** `inputs/06-mehrere-eingaenge-gleichzeitig.input.json`
+- **Expected Result:** `06-mehrere-eingaenge-gleichzeitig.result.json`
+- **Track:** `special-case-review`
+- **Zweck:** prüft Priorisierung bei überlagerten Risikotreibern
+
 ## Operative Nutzung
 
 Ein späterer Mapper ist für ein Fixture-Paar korrekt, wenn mindestens Folgendes stabil stimmt:

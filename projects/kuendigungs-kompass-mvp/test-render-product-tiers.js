@@ -7,9 +7,14 @@ const { renderProductResult } = require('./src/adapters/renderProductResult');
 
 const ROOT = __dirname;
 const SAMPLE_INPUT = 'examples/inputs/06-mehrere-eingaenge-gleichzeitig.input.json';
+const SNAPSHOT_DIR = 'examples/render-snapshots';
 
 function readJson(relativePath) {
   return JSON.parse(fs.readFileSync(path.join(ROOT, relativePath), 'utf8'));
+}
+
+function readText(relativePath) {
+  return fs.readFileSync(path.join(ROOT, relativePath), 'utf8');
 }
 
 const input = readJson(SAMPLE_INPUT);
@@ -25,6 +30,7 @@ function run() {
   assert.ok(previewText.includes(`Wichtigster nächster Schritt: ${result.topActions[0].label}`));
   assert.ok(!previewText.includes('Unterlagen:'));
   assert.ok(!previewText.includes('Fragen für Beratung:'));
+  assert.equal(previewText, readText(`${SNAPSHOT_DIR}/06-mehrere-eingaenge-gleichzeitig.preview.txt`).trim());
 
   const baseText = renderProductResult(base, { tier: 'base' });
   assert.ok(baseText.startsWith(result.caseSnapshot.headline));
@@ -35,11 +41,13 @@ function run() {
   assert.ok(!baseText.includes('Warum dieser Fokus:'));
   assert.ok(!baseText.includes('Fragen für Beratung:'));
   assert.ok(!baseText.includes('Chancen:'));
+  assert.equal(baseText, readText(`${SNAPSHOT_DIR}/06-mehrere-eingaenge-gleichzeitig.base.txt`).trim());
 
   const upgradeText = renderProductResult(upgrade, { tier: 'upgrade' });
   assert.ok(upgradeText.includes(`Warum dieser Fokus: ${result.synthesisDecision.reasoning}`));
   assert.ok(upgradeText.includes('Fragen für Beratung:'));
   assert.ok(upgradeText.includes('Hinweise:'));
+  assert.equal(upgradeText, readText(`${SNAPSHOT_DIR}/06-mehrere-eingaenge-gleichzeitig.upgrade.txt`).trim());
 
   assert.ok(!/statementLedger|do-not-use-yet/.test(previewText));
   assert.ok(!/statementLedger|do-not-use-yet/.test(baseText));

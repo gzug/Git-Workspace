@@ -209,13 +209,17 @@ Der fachliche Dokumentationsstand ist aktuell **sicher belastbar**. Der technisc
 Der Projektstand ist stark in Logik und Spezifikation, aber noch nicht als echtes Produkt-Interface verdrahtet.
 Ein erster technischer Fragebogen-Flow für Launch V1 ist jetzt jedoch im Runtime-Layer angelegt (`src/flow/questionnaireFlow.js`) und respektiert die Mindest-Screenlogik aus `FLOW-CONTRACT-V1.md`.
 
-### 2. Render-Tests sind da, aber noch nicht final als textuelle Golden Snapshots ausgebaut
+### 2. Render-Tests sind da und haben jetzt einen ersten textuellen Snapshot-Anker
 Es gibt jetzt harte Render-Assertions für:
 - short
 - standard
 - advice
 
-Was noch fehlt, sind echte **textuelle Golden Outputs pro View**, falls später stärker auf Copy-Stabilität getestet werden soll.
+Zusätzlich gibt es erste **textuelle Golden Snapshots pro View** für den Mehrfachfall `06-mehrere-eingaenge-gleichzeitig` unter `examples/render-snapshots/`.
+
+Was noch fehlt, falls später mehr Copy-Stabilität nötig ist:
+- weitere Snapshot-Fälle über den Mehrfachfall hinaus
+- bewusste Entscheidung, ob alle 6 Fälle oder nur repräsentative Kernfälle snapshot-stabil gehalten werden sollen
 
 ### 3. Technischer Code-Stand muss weiter gegen Doku stabil gehalten werden
 Ein wichtiger Drift wurde bereits sichtbar gemacht und bereinigt:

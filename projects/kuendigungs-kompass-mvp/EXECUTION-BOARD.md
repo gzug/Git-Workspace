@@ -155,7 +155,7 @@ Die Hauptlücken liegen aktuell in **vollständiger Testhärtung**, **konkreter 
 ---
 
 ## Aktueller Fokus
-1. Ergebnisansicht als nächsten Integrationsschritt konkret umsetzen
-2. Fehler- und Fallback-Handling früh mitdenken
-3. End-to-End-Anschluss zwischen Flow, Engine und Produktausgabe härten
+1. End-to-End-Anschluss zwischen Flow, Engine und Produktausgabe weiter härten
+2. Monitoring-/Telemetry-Felder an den späteren UI/API-Anschluss andockbar halten
+3. Render-Snapshots gezielt ausbauen, wo Copy-Stabilität kritisch ist
 4. UI-Polish weiter hinter Stabilität halten

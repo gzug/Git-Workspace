@@ -20,7 +20,7 @@
 
 - **Kündigungs-Kompass** (aktives MVP-Projekt)
 - OpenClaw-Setup und Automatisierung
-- Kleinanzeigen/Vinted (Resell — archiviert, aber aktiv)
+- Kleinanzeigen/Vinted (Resell — archiviert, aber bei Bedarf weiter relevant)
 
 ## Kanäle
 

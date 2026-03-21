@@ -92,11 +92,11 @@ Die Hauptlücken liegen aktuell in **vollständiger Testhärtung**, **konkreter 
 **Ziel:** aus Spec und Engine einen echten Produktflow machen.
 
 ### Task 3.1 — Input-Adapter bauen
-- Status: offen
+- Status: vorbereitet
 - Priorität: P0
 
 ### Task 3.2 — Output-Adapter bauen
-- Status: offen
+- Status: vorbereitet
 - Priorität: P0
 
 ### Task 3.3 — Fragebogen-Flow implementieren

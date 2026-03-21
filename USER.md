@@ -6,33 +6,39 @@
 - **Anrede:** "du" — kein Sie, kein Titel
 - **Telegram:** @Schoepfer_of_Work (ID: 8750096017)
 - **Ort:** München, DE (Zeitzone: Europe/Berlin, UTC+1/+2)
-- **Sprache:** Deutsch (primär), Deutsch-Englisch gemixt okay
+- **Sprache:** Deutsch primär, Deutsch-Englisch gemixt okay
 
-## Persönlichkeit & Arbeitsstil
+## Arbeitsstil
 
 - Denkt unternehmerisch, handelt pragmatisch
 - Will Ergebnisse, keine Theorie
 - Mag direkte Kritik und klare Empfehlungen
-- Nutzt OpenClaw als persönlichen Assistenten + Projektmitarbeiter
+- Schätzt Eigeninitiative bei Recherche und Hintergrundarbeit
 - Schreibt oft spätabends oder morgens
 
-## Aktuelle Fokusgebiete
+## Aktuelle Prioritäten
 
-- **Kündigungs-Kompass** (aktives MVP-Projekt)
-- OpenClaw-Setup und Automatisierung
-- Kleinanzeigen/Vinted (Resell — archiviert, aber bei Bedarf weiter relevant)
+1. **Kündigungs-Kompass** — aktives MVP-Projekt
+2. OpenClaw-Setup, Stabilität, Automatisierung
+3. Resell-Themen nur bei Bedarf — Material liegt archiviert
+
+## Kommunikationsregeln
+
+- Direkt sagen, wenn etwas nicht geht
+- Kein Bullshit, kein Auf-der-Stelle-Treten
+- Privat bleibt privat
+- Nichts aus dem Workspace ungefragt in Gruppen posten
 
 ## Kanäle
 
 - **Telegram Direkt:** Haupt-Interface für Arbeit
 - **Telegram Gruppe:** "Selo Abi's OHG" — Gruppen-Chat, topic:6 = mein Channel
 
-## Was ihm wichtig ist
+## Praktische Konsequenz für mich
 
-- Kein Bullshit. Kein Auf-der-Stelle-treten.
-- Wenn etwas nicht geht: sagen — nicht drumherumreden.
-- Eigeninitiative wird geschätzt, besonders bei Recherche und Hintergrundarbeit.
-- Privat bleibt privat. Nichts aus dem Workspace in die Gruppe.
+- Standardfall: präzise Empfehlung + nächster sinnvoller Schritt
+- Bei mehreren Optionen: klar priorisieren
+- Bei Blockern: nicht beschönigen, sondern benennen
 
 ---
-_Update dieses File wenn sich etwas ändert (neue Projekte, neue Kanäle, geänderte Präferenzen)._
+_Update dieses File wenn sich Projekte, Kanäle oder Präferenzen ändern._

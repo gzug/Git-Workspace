@@ -1,33 +1,48 @@
 # HEARTBEAT.md — Wiederkehrende Checks
 
-_Dieses File steuert was ich proaktiv tue. Leer = ich tue nichts beim Heartbeat._
-_Heartbeat-Modell: möglichst günstiges Modell (lokal via Ollama) verwenden — nicht GPT-5.4 verschwenden._
+_Dieses File steuert, was ich proaktiv tue. Leer = ich tue nichts beim Heartbeat._
+_Heartbeat-Modell: ChatGPT / openai-codex/gpt-5.4 verwenden — das ist das aktive Modell in diesem Workspace._
+
+## Ziel
+
+Heartbeat ist kein zweiter Chat. Er soll leise nützlich sein: kleine Prüfungen, keine Romanproduktion.
 
 ## Aktive Checks (2–4x täglich, rotierend)
 
-### Memory-Pflege (jeden 2. Tag)
-- Lese memory/daily/ der letzten 2 Tage
-- Prüfe ob Entscheidungen oder Einsichten für MEMORY.md relevant sind
-- Update MEMORY.md wenn ja — kein Update wenn nichts Neues
+### 1. Memory-Pflege (jeden 2. Tag)
+- Lese `memory/daily/` von heute + gestern
+- Prüfe nur auf dauerhafte Entscheidungen, neue Präferenzen, offene Risiken
+- Update `MEMORY.md` nur wenn wirklich etwas dauerhaft relevant ist
 
-### Kündigungs-Kompass Status (1x pro Tag)
-- Check projects/kuendigungs-kompass-mvp/ auf offene TODOs
-- Falls offene Punkte: kurze Statusnotiz in memory/daily/YYYY-MM-DD.md
+### 2. Kündigungs-Kompass Status (1x pro Tag)
+- Check `projects/kuendigungs-kompass-mvp/`
+- Suche nur nach klaren TODOs, Lücken oder Blockern
+- Falls etwas offen ist: kurze Statusnotiz in `memory/daily/YYYY-MM-DD.md`
 
-### Workspace-Hygiene (1x pro Woche, montags)
-- Alte leere Dateien identifizieren
-- memory/daily/ Einträge älter als 14 Tage prüfen: Was davon in MEMORY.md promoten?
+### 3. Workspace-Hygiene (montags)
+- Leere oder offensichtliche Karteileichen identifizieren
+- `memory/daily/` älter als 14 Tage auf MEMORY-würdige Punkte prüfen
 
-## Wann SCHWEIGE ich?
-- Zwischen 23:00 und 08:00 Uhr (Europe/Berlin) — außer bei expliziter Dringlichkeit
+## Wann ich schweige
+
+- Zwischen 23:00 und 08:00 Uhr (Europe/Berlin), außer bei klarer Dringlichkeit
 - Wenn Y. Hatabi gerade aktiv schreibt
 - Wenn ich in den letzten 30 Minuten schon gecheckt habe
-- Wenn nichts Neues vorliegt — dann: HEARTBEAT_OK
+- Wenn nichts Neues vorliegt
+
+Dann antworte ich exakt: `HEARTBEAT_OK`
+
+## Heartbeat-Ausgabeformat bei Fund
+
+Wenn ich etwas finde, dann knapp in dieser Reihenfolge:
+1. Was ist neu oder relevant?
+2. Warum ist es wichtig?
+3. Was ist der nächste konkrete Schritt?
 
 ## Heartbeat vs. Cron
 
-**Heartbeat:** Mehrere Checks gebatcht, Kontext aus letzten Nachrichten nutzbar, kleine Zeitdrift okay.
-**Cron:** Für exakte Zeitpunkte ("täglich 09:00"), isolierte Tasks, andere Modelle.
+**Heartbeat:** gebatchte Mini-Prüfungen mit leichtem Kontext.
+**Cron:** exakte Zeitpunkte, isolierte Aufgaben, Erinnerungen.
 
 ---
-_Dieses File klein halten. Alles was hier steht verbrennt bei jedem Heartbeat Token._
+_Dieses File klein halten. Alles hier kostet bei jedem Heartbeat Kontext._

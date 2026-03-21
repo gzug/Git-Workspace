@@ -12,6 +12,7 @@ source: curated
 - [Workspace Map](setup/workspace-map.md)
 - [Housekeeper Spec](setup/housekeeper-spec.md)
 - [Runbooks](runbooks/README.md)
+- [Agent Operations](runbooks/agent-operations.md)
 - [Decisions](decisions/README.md)
 - [Projects](projects/README.md)
 - [Inbox](inbox.md)

@@ -74,13 +74,13 @@ Die Hauptlücken liegen aktuell in **vollständiger Testhärtung**, **konkreter 
   - Headline, Einordnung, To-dos, Fristen, Risiken, Unterlagen und Disclaimer sind final geordnet
 
 ### Task 2.2 — Copy-Layer schärfen
-- Status: in Arbeit
+- Status: erledigt
 - Priorität: P1
 - Done-When:
   - jeder Track hat klare, ruhige und konsistente Nutzertexte
 
 ### Task 2.3 — Free/Paid-Grenze definieren
-- Status: offen
+- Status: erledigt
 - Priorität: P1
 - Done-When:
   - Basis-Auswertung und Upgrade sind inhaltlich sauber getrennt
@@ -136,7 +136,7 @@ Die Hauptlücken liegen aktuell in **vollständiger Testhärtung**, **konkreter 
 ---
 
 ## Aktueller Fokus
-1. Product Output finalisieren
-2. Free/Paid-Grenze und Offer-Logik sauber entscheiden
-3. danach Input-/Output-Adapter vorbereiten
+1. Block 3 vorbereiten: Input-/Output-Adapter konkretisieren
+2. technische Render-Modi für Preview/Base/Upgrade ableiten
+3. danach ersten Integrationsschnitt bauen
 4. UI-Polish weiter hinter Stabilität halten

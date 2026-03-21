@@ -257,6 +257,9 @@ Das ist bewusst so und aktuell richtig.
 - `test-fixtures.js` auf alle 6 Fixture-Paare erweitert
 - Render-Assertions für `short`, `standard` und `advice` ergänzt
 - Engine für den Mehrfachfall `06-mehrere-eingaenge-gleichzeitig` nachgeschärft
+- Externe Copy-Review sauber in Copy-Layer, Engine, Fixtures und Golden Outputs integriert
+- Launch-Hardening-Rahmen angelegt: `LAUNCH-HARDENING-V1.md`, `E2E-REALITY-CHECK-V1.md`, `MONITORING-ANALYTICS-V1.md`, `SOFT-LAUNCH-CHECKLIST-V1.md`
+- `buildQuestionnaireResultView` liefert jetzt telemetry-taugliche Summary-Felder für `ready`, `incomplete`, `render-fallback` und `error`
 
 ### Mein aktueller offener Todo-Bereich
 

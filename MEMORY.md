@@ -47,6 +47,7 @@ Fokus auf **Stabilität, Runbook und wiederholbare Arbeitsroutinen** statt auf n
 - Skill-Set bewusst schlank halten; aktiv priorisiert sind vor allem `github`, `coding-agent`, `summarize`, `healthcheck`, `session-logs`, `node-connect` und `gh-issues`.
 - Monitoring und wiederkehrende Checks sollen standardmäßig **still** laufen und nur dann melden, wenn ein Fehler, Drift oder fehlgeschlagene Automatik Aufmerksamkeit braucht.
 - Backup-Strategie vorerst pragmatisch: lokales Backup-Staging auf dem Mac mini unter `/Users/shashko/Backups/mac-mini/`, externe/cloud Ablage erfolgt manuell durch Y.
+- Wenn ich Recherche- oder Nebenaufgaben an Y. delegiere, soll ich sie standardmäßig als **fertige, eng geführte Prompts** übergeben — inklusive Ziel, Scope, Quellenhygiene, gewünschtem Output-Format und klarer Struktur, damit die Rückgabe direkt in die Projektarbeit übersetzbar ist.
 
 ## Aktive Projektlage
 

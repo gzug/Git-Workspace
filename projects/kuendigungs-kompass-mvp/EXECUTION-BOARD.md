@@ -125,20 +125,32 @@ Die Hauptlücken liegen aktuell in **vollständiger Testhärtung**, **konkreter 
 **Ziel:** kontrolliert live-fähig werden.
 
 ### Task 4.1 — End-to-End-Realitätscheck
-- Status: offen
+- Status: in Arbeit
 - Priorität: P0
+- Ergebnis bisher:
+  - `E2E-REALITY-CHECK-V1.md` definiert die Pflichtfälle und Done-When-Kriterien
+  - Runtime-Result-View-Tests decken zentrale Zustände bereits technisch ab
 
 ### Task 4.2 — Monitoring und Error Logging
-- Status: offen
+- Status: in Arbeit
 - Priorität: P1
+- Ergebnis bisher:
+  - `MONITORING-ANALYTICS-V1.md` definiert das MVP-Monitoring-Minimum
+  - `buildQuestionnaireResultView` liefert jetzt eine telemetry-taugliche Summary für `ready`, `incomplete`, `render-fallback` und `error`
 
 ### Task 4.3 — Minimal-Analytics
-- Status: offen
+- Status: in Arbeit
 - Priorität: P2
+- Ergebnis bisher:
+  - Analytics-Scope auf wenige belastbare Runtime-Felder eingegrenzt
+  - noch nicht an ein echtes Persistenz-/Event-System angeschlossen
 
 ### Task 4.4 — Soft-Launch-Checkliste und Rollback
-- Status: offen
+- Status: in Arbeit
 - Priorität: P0
+- Ergebnis bisher:
+  - `SOFT-LAUNCH-CHECKLIST-V1.md` und `LAUNCH-HARDENING-V1.md` angelegt
+  - Go/No-Go- und Stop-Signale sind jetzt dokumentiert
 
 ---
 

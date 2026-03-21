@@ -20,6 +20,9 @@ function run() {
   assert.ok(readyView.projected);
   assert.ok(typeof readyView.rendered === 'string');
   assert.ok(readyView.rendered.includes('Warum dieser Fokus:'));
+  assert.equal(readyView.telemetry.status, 'ready');
+  assert.equal(readyView.telemetry.primaryTrack, 'deadline-first');
+  assert.ok(typeof readyView.telemetry.generatedAt === 'string');
 
   const incompleteView = buildQuestionnaireResultView({
     case_entry: 'termination_received',
@@ -33,6 +36,8 @@ function run() {
   assert.equal(incompleteView.flowState.nextScreen.id, 'time-critical-basics');
   assert.ok(incompleteView.missingAnswers.some((item) => item.id === 'termination_access_date'));
   assert.ok(incompleteView.message.includes('Für die Auswertung fehlt noch:'));
+  assert.equal(incompleteView.telemetry.status, 'incomplete');
+  assert.ok(incompleteView.telemetry.missingAnswersCount >= 1);
 
   const unknownTierView = buildQuestionnaireResultView(completeInput, { tier: 'vip' });
   assert.equal(unknownTierView.status, 'ready');
@@ -43,6 +48,8 @@ function run() {
   const invalidInputView = buildQuestionnaireResultView(null, { tier: 'base' });
   assert.equal(invalidInputView.status, 'error');
   assert.equal(invalidInputView.error.code, 'invalid_input');
+  assert.equal(invalidInputView.telemetry.status, 'error');
+  assert.equal(invalidInputView.telemetry.errorCode, 'invalid_input');
 
   const renderFallbackView = buildQuestionnaireResultView(completeInput, {
     tier: 'base',
@@ -56,6 +63,8 @@ function run() {
   assert.equal(renderFallbackView.rendered, null);
   assert.ok(renderFallbackView.result);
   assert.ok(renderFallbackView.projected);
+  assert.equal(renderFallbackView.telemetry.status, 'render-fallback');
+  assert.equal(renderFallbackView.telemetry.errorCode, 'render_failed');
 
   console.log('All questionnaire result view tests passed.');
 }

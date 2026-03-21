@@ -92,11 +92,11 @@ Die Hauptlücken liegen aktuell in **vollständiger Testhärtung**, **konkreter 
 **Ziel:** aus Spec und Engine einen echten Produktflow machen.
 
 ### Task 3.1 — Input-Adapter bauen
-- Status: vorbereitet
+- Status: erledigt
 - Priorität: P0
 
 ### Task 3.2 — Output-Adapter bauen
-- Status: vorbereitet
+- Status: erledigt
 - Priorität: P0
 
 ### Task 3.3 — Fragebogen-Flow implementieren
@@ -136,7 +136,7 @@ Die Hauptlücken liegen aktuell in **vollständiger Testhärtung**, **konkreter 
 ---
 
 ## Aktueller Fokus
-1. Block 3 vorbereiten: Input-/Output-Adapter konkretisieren
-2. technische Render-Modi für Preview/Base/Upgrade ableiten
-3. danach ersten Integrationsschnitt bauen
+1. den geschlossenen Adapter-Pfad dokumentieren und absichern
+2. danach Fragebogen-Flow und Ergebnisansicht als nächsten Integrationsschritt konkretisieren
+3. Fehler- und Fallback-Handling früh mitdenken
 4. UI-Polish weiter hinter Stabilität halten

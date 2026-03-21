@@ -100,11 +100,11 @@ Die Hauptlücken liegen aktuell in **vollständiger Testhärtung**, **konkreter 
 - Priorität: P0
 
 ### Task 3.3 — Fragebogen-Flow implementieren
-- Status: offen
+- Status: vorbereitet
 - Priorität: P1
 
 ### Task 3.4 — Ergebnisansicht implementieren
-- Status: offen
+- Status: vorbereitet
 - Priorität: P1
 
 ### Task 3.5 — Fehler- und Fallback-Handling

@@ -1,0 +1,114 @@
+{
+  "resultVersion": "v2",
+  "caseSnapshot": {
+    "headline": "Jetzt zuerst Fristen und Meldungen absichern",
+    "situation": "Du hast eine schriftliche Kündigung erhalten, dein Arbeitsverhältnis ist bereits beendet und wichtige Agentur-Meldungen sind noch offen.",
+    "riskLevel": "high",
+    "primaryGoal": "protect_deadlines"
+  },
+  "synthesisDecision": {
+    "primaryTrack": "deadline-first",
+    "reasoning": "Weil du schon arbeitslos bist und sowohl Agentur-Meldungen als auch kurze Fristen gleichzeitig aktiv sind, hat Fristschutz jetzt Vorrang.",
+    "confidenceClass": "mvp-reliable"
+  },
+  "topActions": [
+    {
+      "priority": 1,
+      "label": "Arbeitslosmeldung sofort prüfen oder nachholen",
+      "why": "Wenn du bereits arbeitslos bist, ist das ein eigener zeitkritischer Schritt gegenüber der Agentur für Arbeit.",
+      "timing": "sofort",
+      "statementClass": "mvp-reliable"
+    },
+    {
+      "priority": 2,
+      "label": "Arbeitsuchendmeldung ebenfalls sofort prüfen oder nachholen",
+      "why": "Die Arbeitsuchendmeldung ist fachlich getrennt von der Arbeitslosmeldung und sollte nicht offen bleiben.",
+      "timing": "sofort",
+      "statementClass": "mvp-reliable"
+    },
+    {
+      "priority": 3,
+      "label": "3-Wochen-Frist für Kündigungsschutzklage sofort einordnen",
+      "why": "Nach Zugang einer schriftlichen Kündigung läuft regelmäßig eine sehr kurze Frist, die du nicht versehentlich verstreichen lassen solltest.",
+      "timing": "heute",
+      "statementClass": "mvp-reliable"
+    }
+  ],
+  "deadlines": [
+    {
+      "label": "Arbeitslosmeldung",
+      "timing": "spätestens am ersten Tag der Arbeitslosigkeit; wenn noch offen, jetzt sofort prüfen",
+      "importance": "critical",
+      "note": "Die Arbeitslosmeldung ist ein eigener Schritt und nicht dasselbe wie die Arbeitsuchendmeldung.",
+      "statementClass": "mvp-reliable"
+    },
+    {
+      "label": "Arbeitsuchendmeldung",
+      "timing": "spätestens 3 Monate vor Ende, sonst innerhalb von 3 Tagen nach Kenntnis",
+      "importance": "critical",
+      "note": "Auch wenn du schon arbeitslos bist, sollte diese Meldung als eigener Pflichtpunkt nicht übersehen werden.",
+      "statementClass": "mvp-reliable"
+    },
+    {
+      "label": "Kündigungsschutzklage prüfen",
+      "timing": "regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung",
+      "importance": "critical",
+      "note": "Der MVP prüft nicht die Erfolgsaussicht, sondern markiert die Frist als priorisiert.",
+      "statementClass": "mvp-reliable"
+    }
+  ],
+  "riskFlags": [
+    {
+      "label": "Verspätete Agentur-Meldungen können Nachteile auslösen",
+      "description": "Wenn Arbeitsuchend- oder Arbeitslosmeldung offen bleiben, steigt das Risiko unnötiger Probleme im weiteren ALG-I-Prozess.",
+      "severity": "critical",
+      "statementClass": "mvp-reliable"
+    },
+    {
+      "label": "Kurze Klagefrist kann unbemerkt verstreichen",
+      "description": "Nach Zugang einer schriftlichen Kündigung sollte die 3-Wochen-Frist nicht aus dem Blick geraten.",
+      "severity": "critical",
+      "statementClass": "mvp-reliable"
+    }
+  ],
+  "redFlags": [],
+  "documentChecklist": [
+    {
+      "label": "Kündigungsschreiben",
+      "reason": "Zugang und Datum sind für die Fristprüfung zentral.",
+      "status": "already-secured"
+    },
+    {
+      "label": "Arbeitsvertrag",
+      "reason": "Hilft bei Beratung und Einordnung der Ausgangslage.",
+      "status": "already-secured"
+    },
+    {
+      "label": "Lohnunterlagen",
+      "reason": "Hilfreich für Agentur-Themen und Beratungsvorbereitung.",
+      "status": "secure-now"
+    }
+  ],
+  "advisorQuestions": [
+    "Welche Schritte erwartet die Agentur für Arbeit in meinem Fall jetzt sofort von mir?",
+    "Bis wann muss ich die 3-Wochen-Frist konkret gerechnet haben?",
+    "Welche Unterlagen sollte ich für Agentur oder Beratung direkt bereithalten?"
+  ],
+  "opportunities": [],
+  "disclaimers": [
+    "Die Arbeitsuchendmeldung ersetzt nicht die Arbeitslosmeldung.",
+    "Der MVP ersetzt keine individuelle Rechtsberatung.",
+    "Das Tool bewertet keine Erfolgsaussichten einer Kündigungsschutzklage im Einzelfall."
+  ],
+  "statementLedger": {
+    "mvpReliable": [
+      "Arbeitsuchendmeldung und Arbeitslosmeldung sind fachlich getrennte Schritte.",
+      "Die Arbeitslosmeldung soll spätestens am ersten Tag der Arbeitslosigkeit erfolgt sein.",
+      "Für die Kündigungsschutzklage ist regelmäßig die 3-Wochen-Frist ab Zugang der schriftlichen Kündigung relevant."
+    ],
+    "cautiousChecks": [],
+    "notUsedYet": [
+      "Keine Aussage zu Erfolgschancen oder Abfindung ableiten."
+    ]
+  }
+}

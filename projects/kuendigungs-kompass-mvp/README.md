@@ -11,6 +11,7 @@ Dieses Verzeichnis enthält die erste Datenbasis für den MVP des **Kündigungs-
 - `RESULT-COPY.md` – Copy-/Antwortbausteine je Primary Track
 - `RESULT-MAPPING.md` – Mapping-Logik von Rules zu Result-Output
 - `GOLDEN-OUTPUTS.md` – vollständige Soll-Ergebnisse für Kernfälle
+- `examples/` – maschinenlesbare JSON-Fixtures der Golden Outputs
 
 ## Wie die Dateien zusammenspielen
 

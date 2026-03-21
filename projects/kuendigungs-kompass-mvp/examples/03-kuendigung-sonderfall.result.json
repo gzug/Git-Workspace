@@ -1,0 +1,113 @@
+{
+  "resultVersion": "v2",
+  "caseSnapshot": {
+    "headline": "Dein Fall sollte nicht als Standardfall behandelt werden",
+    "situation": "Du hast eine schriftliche Kündigung erhalten und es gibt Hinweise auf einen möglichen Sonderfall oder besonderen Schutz, der gesondert geprüft werden sollte.",
+    "riskLevel": "high",
+    "primaryGoal": "prepare_advice"
+  },
+  "synthesisDecision": {
+    "primaryTrack": "special-case-review",
+    "reasoning": "Weil hier neben der Kündigungsfrist auch ein möglicher Schutzstatus oder Sonderfall im Raum steht, wäre Standardlogik zu grob und eine individuelle Prüfung vorrangig.",
+    "confidenceClass": "cautious-check"
+  },
+  "topActions": [
+    {
+      "priority": 1,
+      "label": "3-Wochen-Frist für Kündigungsschutzklage sofort prüfen",
+      "why": "Auch bei möglichem Sonderfall bleibt die kurze Frist nach Zugang der schriftlichen Kündigung zentral.",
+      "timing": "heute",
+      "statementClass": "mvp-reliable"
+    },
+    {
+      "priority": 2,
+      "label": "Möglichen Sonderfall gezielt prüfen lassen",
+      "why": "Hier sollte nicht mit pauschalen Aussagen gearbeitet werden, wenn ein besonderer Schutz in Betracht kommt.",
+      "timing": "sehr zeitnah",
+      "statementClass": "cautious-check"
+    },
+    {
+      "priority": 3,
+      "label": "Unterlagen für Beratung vollständig bündeln",
+      "why": "Je klarer der Fall dokumentiert ist, desto schneller lässt sich der mögliche Schutzstatus einordnen.",
+      "timing": "heute",
+      "statementClass": "mvp-reliable"
+    }
+  ],
+  "deadlines": [
+    {
+      "label": "Kündigungsschutzklage prüfen",
+      "timing": "regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung",
+      "importance": "critical",
+      "note": "Der mögliche Sonderfall ändert nichts daran, dass die Frist nicht liegen bleiben sollte.",
+      "statementClass": "mvp-reliable"
+    }
+  ],
+  "riskFlags": [
+    {
+      "label": "Möglicher Sonderkündigungsschutz / heikler Sonderfall",
+      "description": "Der Fall sollte nicht wie eine Standard-Kündigung behandelt werden, solange unklar ist, ob ein besonderer Schutz eingreift.",
+      "severity": "high",
+      "statementClass": "mvp-reliable"
+    },
+    {
+      "label": "Unsicherheit bei Schutzstatus erhöht das Fehlentscheidungsrisiko",
+      "description": "Wenn die Schutzlage unklar ist, kann vorschnelles Handeln wichtige Optionen verschlechtern.",
+      "severity": "high",
+      "statementClass": "cautious-check"
+    }
+  ],
+  "redFlags": [
+    {
+      "label": "Möglicher besonderer Schutz oder Sonderfall",
+      "whyEscalated": "Es gibt Hinweise auf Schwangerschaft / Mutterschutz oder eine unklare Schutzlage, die der MVP nicht selbst verlässlich auflösen sollte.",
+      "recommendedEscalation": "Qualifizierte individuelle Prüfung mit Anwalt, Gewerkschaft oder passender Beratungsstelle"
+    }
+  ],
+  "documentChecklist": [
+    {
+      "label": "Kündigungsschreiben",
+      "reason": "Zugang und Inhalt sind für Fristen und Prüfung zentral.",
+      "status": "already-secured"
+    },
+    {
+      "label": "Arbeitsvertrag",
+      "reason": "Hilft bei der rechtlichen und praktischen Einordnung des Falls.",
+      "status": "already-secured"
+    },
+    {
+      "label": "Lohnunterlagen",
+      "reason": "Nützlich für Beratung und eventuelle Anschlussfragen.",
+      "status": "already-secured"
+    },
+    {
+      "label": "Nachweise zum möglichen Schutzstatus",
+      "reason": "Falls vorhanden, helfen diese Unterlagen, den Sonderfall schneller individuell einzuordnen.",
+      "status": "secure-now"
+    }
+  ],
+  "advisorQuestions": [
+    "Greift in meinem Fall möglicherweise ein besonderer Schutz?",
+    "Welche Frist läuft trotz Sonderfall jetzt sofort?",
+    "Welche Unterlagen oder Nachweise sollte ich für die Prüfung direkt mitbringen?"
+  ],
+  "opportunities": [],
+  "disclaimers": [
+    "Der MVP ersetzt keine individuelle Rechtsberatung.",
+    "Ob tatsächlich ein besonderer Schutz greift, muss im Einzelfall geprüft werden.",
+    "Das Tool priorisiert Fristen und Eskalation, entscheidet aber keinen Sonderfall abschließend."
+  ],
+  "statementLedger": {
+    "mvpReliable": [
+      "Die 3-Wochen-Frist nach Zugang der schriftlichen Kündigung bleibt regelmäßig relevant.",
+      "Hinweise auf besonderen Schutz oder Sonderfälle sollen im MVP eine Eskalation auslösen."
+    ],
+    "cautiousChecks": [
+      "Ob tatsächlich Sonderkündigungsschutz oder eine vergleichbare Schutzlage greift, muss individuell geprüft werden.",
+      "Unsichere Schutzlagen dürfen nicht als feste Rechtsposition ausgegeben werden."
+    ],
+    "notUsedYet": [
+      "Keine pauschale Aussage zur Wirksamkeit der Kündigung."
+    ]
+  }
+}

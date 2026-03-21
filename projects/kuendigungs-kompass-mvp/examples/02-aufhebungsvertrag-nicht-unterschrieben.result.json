@@ -1,0 +1,107 @@
+{
+  "resultVersion": "v2",
+  "caseSnapshot": {
+    "headline": "Nichts vorschnell unterschreiben",
+    "situation": "Dir liegt ein Aufhebungs- oder Abwicklungsvertrag vor, du bist noch nicht arbeitssuchend gemeldet und dein wichtigstes Ziel ist der Schutz beim ALG I.",
+    "riskLevel": "high",
+    "primaryGoal": "protect_alg1"
+  },
+  "synthesisDecision": {
+    "primaryTrack": "contract-do-not-sign",
+    "reasoning": "Weil ein noch nicht unterschriebener Vertrag gerade der stärkste Hebel für Nachteile beim Arbeitslosengeld und beim Handlungsspielraum ist, hat der Vertragsstopp Vorrang.",
+    "confidenceClass": "mvp-reliable"
+  },
+  "topActions": [
+    {
+      "priority": 1,
+      "label": "Aufhebungsvertrag nicht vorschnell unterschreiben",
+      "why": "Vor einer Unterschrift sollten die möglichen Folgen für Arbeitslosengeld, Fristen und Optionen sauber geprüft sein.",
+      "timing": "vor jeder Unterschrift",
+      "statementClass": "mvp-reliable"
+    },
+    {
+      "priority": 2,
+      "label": "Arbeitsuchendmeldung sofort prüfen oder nachholen",
+      "why": "Auch ohne bereits eingetretene Arbeitslosigkeit ist diese frühe Meldung ein kritischer Pflichtpunkt.",
+      "timing": "sofort",
+      "statementClass": "mvp-reliable"
+    },
+    {
+      "priority": 3,
+      "label": "Vertragsentwurf und Fragen für Beratung bündeln",
+      "why": "Eine saubere Vorbereitung hilft, die Folgen des Vertrags und sinnvolle Alternativen belastbar einzuordnen.",
+      "timing": "heute",
+      "statementClass": "mvp-reliable"
+    }
+  ],
+  "deadlines": [
+    {
+      "label": "Arbeitsuchendmeldung",
+      "timing": "spätestens 3 Monate vor Ende, sonst innerhalb von 3 Tagen nach Kenntnis",
+      "importance": "critical",
+      "note": "Diese Meldung sollte nicht aufgeschoben werden, auch wenn der Vertrag noch nicht unterschrieben ist.",
+      "statementClass": "mvp-reliable"
+    }
+  ],
+  "riskFlags": [
+    {
+      "label": "Sperrzeit-/Ruhensrisiko bei einvernehmlicher Beendigung",
+      "description": "Wenn du an der Beendigung des Arbeitsverhältnisses mitwirkst, kann das Folgen für dein Arbeitslosengeld haben.",
+      "severity": "critical",
+      "statementClass": "mvp-reliable"
+    },
+    {
+      "label": "Freistellung beendet nicht automatisch alle To-dos",
+      "description": "Auch bei unwiderruflicher Freistellung bleiben Agentur-Themen, Fristen und Unterlagen relevant.",
+      "severity": "medium",
+      "statementClass": "mvp-reliable"
+    }
+  ],
+  "redFlags": [],
+  "documentChecklist": [
+    {
+      "label": "Aufhebungs-/Abwicklungsvertrag oder Entwurf",
+      "reason": "Nur mit dem konkreten Text lassen sich Risiken und offene Punkte sinnvoll prüfen.",
+      "status": "already-secured"
+    },
+    {
+      "label": "Arbeitsvertrag",
+      "reason": "Wichtig für die Ausgangslage und mögliche Rückfragen in der Beratung.",
+      "status": "already-secured"
+    },
+    {
+      "label": "Lohnunterlagen",
+      "reason": "Hilfreich für ALG-I-Themen und die Vorbereitung auf Rückfragen.",
+      "status": "already-secured"
+    },
+    {
+      "label": "Infos zu Freistellung / Urlaub / Restansprüchen",
+      "reason": "Relevant, weil Freistellung organisatorisch wichtig bleibt und offene Ansprüche später eine Rolle spielen können.",
+      "status": "secure-now"
+    }
+  ],
+  "advisorQuestions": [
+    "Welche unmittelbaren Folgen hätte dieser Vertrag für mein Arbeitslosengeld?",
+    "Gibt es in diesem Entwurf Formulierungen, die ich besonders kritisch prüfen lassen sollte?",
+    "Welche Alternative habe ich, wenn ich jetzt nicht unterschreibe?"
+  ],
+  "opportunities": [],
+  "disclaimers": [
+    "Arbeitsuchendmeldung und Arbeitslosmeldung sind nicht dasselbe.",
+    "Der MVP ersetzt keine individuelle Rechtsberatung.",
+    "Abfindung, Sperrzeit und Ruhen hängen stark vom konkreten Einzelfall ab."
+  ],
+  "statementLedger": {
+    "mvpReliable": [
+      "Ein noch nicht unterschriebener Aufhebungs- oder Abwicklungsvertrag sollte nicht vorschnell unterzeichnet werden.",
+      "Arbeitsuchendmeldung ist eine frühe Pflicht und bleibt zeitkritisch.",
+      "Mitwirkung an der Beendigung kann ALG-I-Risiken auslösen."
+    ],
+    "cautiousChecks": [
+      "Details der Freistellung und konkrete Vertragsfolgen im Einzelfall gesondert prüfen."
+    ],
+    "notUsedYet": [
+      "Keine Abfindungserwartung oder Erfolgswahrscheinlichkeit ausgeben."
+    ]
+  }
+}

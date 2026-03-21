@@ -1,8 +1,8 @@
 {
   "resultVersion": "v2",
   "caseSnapshot": {
-    "headline": "Jetzt zuerst Fristen und Meldungen absichern",
-    "situation": "Du hast eine schriftliche Kündigung erhalten, dein Arbeitsverhältnis ist bereits beendet und wichtige Agentur-Meldungen sind noch offen.",
+    "headline": "Jetzt zuerst: Fristen und Meldungen im Blick behalten",
+    "situation": "Du hast eine schriftliche Kündigung erhalten. Jetzt kommt es darauf an, dass keine Frist und keine Meldung durchrutscht.",
     "riskLevel": "high",
     "primaryGoal": "protect_deadlines"
   },
@@ -51,7 +51,7 @@
     },
     {
       "label": "Kündigungsschutzklage prüfen",
-      "timing": "regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung",
+      "timing": "regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung (ausgehend vom angegebenen Zugangsdatum: bis 08.04.2026)",
       "importance": "critical",
       "note": "Der MVP prüft nicht die Erfolgsaussicht, sondern markiert die Frist als priorisiert.",
       "statementClass": "mvp-reliable"
@@ -102,13 +102,17 @@
   ],
   "statementLedger": {
     "mvpReliable": [
-      "Arbeitsuchendmeldung und Arbeitslosmeldung sind fachlich getrennte Schritte.",
-      "Die Arbeitslosmeldung soll spätestens am ersten Tag der Arbeitslosigkeit erfolgt sein.",
-      "Für die Kündigungsschutzklage ist regelmäßig die 3-Wochen-Frist ab Zugang der schriftlichen Kündigung relevant."
+      "Die Arbeitsuchendmeldung soll in der Regel spätestens 3 Monate vor Ende des Arbeitsverhältnisses erfolgen; erfährst du später davon, binnen 3 Tagen.",
+      "Zu späte Meldungen können finanzielle Nachteile beim späteren Arbeitslosengeld auslösen.",
+      "Die Arbeitslosmeldung ist eine eigene Pflicht und soll spätestens am ersten Tag der Arbeitslosigkeit erfolgt sein. Wenn das noch offen ist, jetzt direkt handeln.",
+      "Arbeitsuchendmeldung und Arbeitslosmeldung sind nicht dasselbe. Für Leistungsbezug und Start der Arbeitslosigkeit muss die separate Meldung geprüft werden.",
+      "Beide Meldungen sind fachlich getrennt. Im MVP soll diese Unterscheidung explizit sichtbar bleiben.",
+      "Wer die Unwirksamkeit einer schriftlichen Kündigung geltend machen will, muss regelmäßig innerhalb von 3 Wochen nach Zugang Klage erheben.",
+      "Ob die Kündigung im Einzelfall wirksam oder angreifbar ist, leistet der MVP nicht."
     ],
     "cautiousChecks": [],
     "notUsedYet": [
-      "Keine Aussage zu Erfolgschancen oder Abfindung ableiten."
+      "Der MVP soll keine belastbare Erwartung zu Abfindungshöhe oder Durchsetzbarkeit suggerieren."
     ]
   }
 }

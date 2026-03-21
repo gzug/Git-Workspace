@@ -1,8 +1,8 @@
 {
   "resultVersion": "v2",
   "caseSnapshot": {
-    "headline": "Jetzt Vorbereitung statt falscher Fristpanik",
-    "situation": "Eine Kündigung wurde angekündigt, aber es liegt noch keine schriftliche Kündigung vor. Gleichzeitig ist die Arbeitsuchendmeldung noch offen.",
+    "headline": "Gut vorbereitet in den nächsten Schritt gehen",
+    "situation": "Eine Kündigung wurde angekündigt, aber noch nicht schriftlich ausgesprochen. Jetzt helfen vor allem geordnete Unterlagen, Fragen und Prioritäten.",
     "riskLevel": "medium",
     "primaryGoal": "plan_next_step"
   },
@@ -14,15 +14,15 @@
   "topActions": [
     {
       "priority": 1,
-      "label": "Arbeitsuchendmeldung sofort prüfen oder nachholen",
-      "why": "Auch ohne schriftliche Kündigung kann die frühe Meldelogik relevant werden, wenn das Ende des Arbeitsverhältnisses absehbar ist.",
+      "label": "Arbeitsuchendmeldung jetzt prüfen oder nachholen",
+      "why": "Die Arbeitsuchendmeldung ist ein eigener Schritt und sollte jetzt geprüft oder nachgeholt werden — sie ist nicht dasselbe wie die spätere Arbeitslosmeldung.",
       "timing": "sofort",
       "statementClass": "mvp-reliable"
     },
     {
       "priority": 2,
-      "label": "Noch keine Fristen aus nicht vorhandener Schriftform ableiten",
-      "why": "Ohne schriftliche Kündigung soll der MVP keine künstliche 3-Wochen-Panik erzeugen.",
+      "label": "Schriftliche Kündigung erst zeitnah einordnen, wenn sie vorliegt",
+      "why": "Nach einer schriftlichen Kündigung läuft in der Regel eine kurze Frist. Solange noch nichts Schriftliches vorliegt, sollte das sauber getrennt bleiben.",
       "timing": "ab jetzt",
       "statementClass": "mvp-reliable"
     },
@@ -39,7 +39,7 @@
       "label": "Arbeitsuchendmeldung",
       "timing": "spätestens 3 Monate vor Ende, sonst innerhalb von 3 Tagen nach Kenntnis",
       "importance": "critical",
-      "note": "Diese frühe Meldelogik kann schon vor Zugang einer schriftlichen Kündigung relevant sein.",
+      "note": "Diese Meldung sollte nicht aufgeschoben werden, auch wenn der Vertrag noch nicht unterschrieben ist.",
       "statementClass": "mvp-reliable"
     }
   ],
@@ -54,18 +54,18 @@
   "redFlags": [],
   "documentChecklist": [
     {
+      "label": "Schriftliche Kommunikation zur angekündigten Kündigung",
+      "reason": "Hilfreich, um den Verlauf später nachvollziehen zu können.",
+      "status": "secure-now"
+    },
+    {
       "label": "Arbeitsvertrag",
-      "reason": "Hilft, die Ausgangslage zu sortieren, bevor Schriftstücke vorliegen.",
+      "reason": "Hilft bei Beratung und Einordnung der Ausgangslage.",
       "status": "secure-now"
     },
     {
       "label": "Lohnunterlagen",
-      "reason": "Nützlich für spätere Agentur- oder Beratungsthemen.",
-      "status": "secure-now"
-    },
-    {
-      "label": "Schriftliche Kommunikation zur angekündigten Kündigung",
-      "reason": "Hilfreich, um den Verlauf später nachvollziehen zu können.",
+      "reason": "Hilfreich für Agentur-Themen und Beratungsvorbereitung.",
       "status": "secure-now"
     }
   ],
@@ -88,14 +88,16 @@
   ],
   "statementLedger": {
     "mvpReliable": [
-      "Ohne schriftliche Kündigung soll keine 3-Wochen-Klagefrist ausgelöst werden.",
-      "Arbeitsuchendmeldung kann schon vor Zugang einer schriftlichen Kündigung relevant werden."
+      "Die Arbeitsuchendmeldung soll in der Regel spätestens 3 Monate vor Ende des Arbeitsverhältnisses erfolgen; erfährst du später davon, binnen 3 Tagen.",
+      "Zu späte Meldungen können finanzielle Nachteile beim späteren Arbeitslosengeld auslösen.",
+      "Beide Meldungen sind fachlich getrennt. Im MVP soll diese Unterscheidung explizit sichtbar bleiben.",
+      "Mindestens Kündigung / Vertrag / Entwurf / Lohnunterlagen sichern, damit Beratung und Behördenwege sauber vorbereitet sind."
     ],
     "cautiousChecks": [
-      "Frühe Planung und Vorbereitung sind sinnvoll, ohne die Lage künstlich zu dramatisieren."
+      "Ein Bildungsgutschein setzt individuelle Voraussetzungen und Beratung voraus. Für den MVP nur als Option nachrangig markieren."
     ],
     "notUsedYet": [
-      "Keine Aussage über die Wirksamkeit einer nur angekündigten Kündigung."
+      "Der MVP soll keine belastbare Erwartung zu Abfindungshöhe oder Durchsetzbarkeit suggerieren."
     ]
   }
 }

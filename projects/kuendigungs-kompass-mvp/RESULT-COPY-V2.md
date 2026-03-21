@@ -1,7 +1,7 @@
 # Kündigungs-Kompass MVP — Result Copy Layer V2
 
-Stand: 2026-03-21
-Status: Block 2 Arbeitsstand
+Stand: 2026-03-21  
+Status: überarbeiteter Copy-Stand nach externer Review aus `~/Downloads/External Review - Copy.md`
 
 ## Ziel
 Die Copy soll in einer Stresslage schnell tragen:
@@ -10,11 +10,12 @@ Die Copy soll in einer Stresslage schnell tragen:
 - ohne Behörden- oder Kanzlei-Ton
 - ohne falsche Sicherheit
 
-Diese Version ergänzt den bestehenden Copy-Layer um **Produktstufen**, **Stress-Kommunikation** und **knappe Formulierungsregeln** für die spätere Integration.
+Diese Version ergänzt den bestehenden Copy-Layer um **Produktstufen**, **Stress-Kommunikation** und die konkret überarbeiteten Formulierungen für die Ergebnisansichten.
 
 ---
 
 ## 1. Allgemeine Stilregeln
+
 ### So soll es klingen
 - direkt, aber nicht hart
 - ruhig, aber nicht weichgespült
@@ -26,16 +27,36 @@ Diese Version ergänzt den bestehenden Copy-Layer um **Produktstufen**, **Stress
 - juristisch verklausuliert
 - verkäuferisch aufgesetzt
 - künstlich dramatisch
+- technisch nach Tool oder interner Engine
 
 ### Formprinzip
 - kurze Sätze
 - klare Verben
 - erst Priorität, dann Erklärung
 - keine langen Vorreden
+- keine unnötigen Imperative
 
 ---
 
-## 2. Formulierungsregeln pro Produktstufe
+## 2. Übergreifende Copy-Guardrails aus der Review
+
+Vermeiden:
+- „priorisiert der Kompass“
+- doppelte Negationen
+- unnötig dramatische Wörter wie „verschlechtern“, „kritischster Hebel“, „Risiken entschärfen“
+- abwertende Wörter wie „Aktionismus“
+- Meta-Sprache wie „Standardwarnungen“
+
+Bevorzugen:
+- nutzerbezogene Formulierungen
+- konkrete Prioritäten statt diffuse Warnungen
+- ruhige Einordnung statt Alarm-Ton
+- Unterschiede erklären, ohne Disclaimer-Stimme
+
+---
+
+## 3. Formulierungsregeln pro Produktstufe
+
 ### Preview
 Ziel: Orientierung + Wert sichtbar machen
 
@@ -45,9 +66,9 @@ Ton:
 - nicht überladen
 
 Muster:
-- "Dein Fokus jetzt: ..."
-- "Wichtigster nächster Schritt: ..."
-- "Kritisch bleibt: ..."
+- „Dein Fokus jetzt: ...“
+- „Wichtigster nächster Schritt: ...“
+- „Kritisch bleibt: ...“
 
 Nicht tun:
 - komplette Lösung ausrollen
@@ -63,9 +84,9 @@ Ton:
 - kompakt genug, um nicht zu erschlagen
 
 Muster:
-- "Bei dir zählt jetzt vor allem: ..."
-- "Mach als Erstes ..."
-- "Wichtig ist, dass ... nicht liegen bleibt."
+- „Bei dir zählt jetzt vor allem: ...“
+- „Mach als Erstes ...“
+- „Wichtig ist, dass ...“
 
 ### Upgrade
 Ziel: bessere Gesprächs- und Entscheidungs-Vorbereitung
@@ -76,120 +97,121 @@ Ton:
 - mehr Struktur, nicht bloß mehr Text
 
 Muster:
-- "Warum dieser Fokus: ..."
-- "Nimm in das nächste Gespräch vor allem diese Punkte mit: ..."
-- "Für die Beratung ist jetzt vor allem wichtig: ..."
+- „Warum dieser Fokus: ...“
+- „Nimm in das nächste Gespräch vor allem diese Punkte mit: ...“
+- „Für die Beratung ist jetzt vor allem wichtig: ...“
 
 ---
 
-## 3. Track-Templates V2
+## 4. Track-Templates V2
+
 ### `deadline-first`
 #### Headline
-- Jetzt zuerst Fristen und Meldungen absichern.
-- Bei dir darf jetzt nichts Zeitkritisches liegen bleiben.
+- Jetzt zuerst: Fristen und Meldungen im Blick behalten.
+- Bei dir kommt es gerade darauf an, dass keine Frist und keine Meldung durchrutscht.
 
 #### Kurz-Einordnung
-- In deinem Fall geht es zuerst nicht um jedes Detail, sondern darum, dass keine wichtige Frist oder Meldung übersehen wird.
-- Deshalb priorisiert der Kompass jetzt die Punkte, die sofort gesichert werden sollten.
+- In deiner Situation ist es wichtiger, Zeitkritisches zu sichern, als jeden Aspekt sofort vollständig zu sortieren.
+- Deshalb stehen Agentur-Meldungen und kurze Fristen jetzt vorn.
 
 #### CTA-Ton
-- Erst Fristen und Meldungen dicht machen, dann den Rest sortieren.
+- Starte mit den Meldungen und Fristen — den Rest kannst du danach in Ruhe angehen.
 
 ### `alg1-risk-first`
 #### Headline
-- Jetzt zuerst ALG-I-Risiken begrenzen.
-- Bei dir ist gerade das größte Risiko ein möglicher Nachteil beim Arbeitslosengeld.
+- Jetzt zuerst sicherstellen, dass dein Arbeitslosengeld nicht in Gefahr gerät.
+- Bei dir hängt gerade am meisten davon ab, wie die Meldungen und die Beendigung laufen.
 
 #### Kurz-Einordnung
-- Wenn Meldungen fehlen oder die Beendigung ungünstig läuft, kann das direkte Nachteile auslösen.
-- Deshalb stehen jetzt zuerst die Schritte vorn, die finanzielle Schäden eher begrenzen.
+- Wenn bestimmte Meldungen fehlen oder die Beendigung des Arbeitsverhältnisses ungünstig gestaltet ist, kann das Auswirkungen auf dein Arbeitslosengeld haben.
+- Deshalb kommen diese Punkte jetzt zuerst.
 
 #### CTA-Ton
-- Erst Risiken entschärfen, dann tiefer sortieren.
+- Fang mit den Meldungen und der Vertragsseite an — danach lässt sich der Rest besser einordnen.
 
 ### `contract-do-not-sign`
 #### Headline
-- Nichts vorschnell unterschreiben.
-- Der Vertrag ist gerade dein kritischster Hebel.
+- Vor der Unterschrift kurz innehalten.
+- Dieser Vertrag ist gerade der Punkt, der am meisten beeinflusst, wie es weitergeht.
 
 #### Kurz-Einordnung
-- Ein Aufhebungs- oder Abwicklungsvertrag kann deine Lage schnell verschlechtern, wenn Folgen und Fristen vorher nicht sauber geprüft sind.
-- Deshalb ist die Reihenfolge klar: erst einordnen, dann entscheiden.
+- Ein Aufhebungs- oder Abwicklungsvertrag hat Folgen für dein Arbeitslosengeld und deinen Handlungsspielraum — beides sollte vor einer Unterschrift klar sein.
+- Es lohnt sich, einen Moment zu warten und die wichtigen Punkte zuerst zu prüfen.
 
 #### CTA-Ton
-- Nicht unter Druck unterschreiben.
-- Erst Wirkung auf Arbeitslosengeld, Fristen und Optionen klären.
+- Erst Folgen und Optionen klären, dann entscheiden.
 
 ### `special-case-review`
 #### Headline
-- Dein Fall sollte nicht als Standardfall behandelt werden.
-- Hier braucht es Vorsicht statt Schnellschlüsse.
+- Dein Fall hat Besonderheiten, die individuell geprüft werden sollten.
+- Hier ist eine sorgfältige Einordnung wichtiger als eine schnelle Antwort.
 
 #### Kurz-Einordnung
-- In deinem Fall wäre falsche Sicherheit gefährlicher als eine vorsichtige Eskalation.
-- Der Kompass priorisiert deshalb Fristschutz plus individuelle Prüfung statt pauschaler Aussagen.
+- Es gibt Hinweise, dass dein Fall Aspekte hat, die über eine Standard-Kündigung hinausgehen.
+- Deshalb stehen Fristschutz und gezielte Prüfung jetzt im Vordergrund — statt pauschaler Einordnungen.
 
 #### CTA-Ton
-- Fristen sichern, dann gezielt prüfen lassen.
+- Fristen zuerst absichern, dann individuell klären lassen.
 
 ### `prepare-advice`
 #### Headline
-- Jetzt sauber vorbereiten statt in Aktionismus rutschen.
-- Dein nächster Hebel ist gute Vorbereitung.
+- Gut vorbereitet in den nächsten Schritt gehen.
+- Dein stärkster nächster Zug ist eine klare Vorbereitung.
 
 #### Kurz-Einordnung
-- Wenn die Lage noch nicht komplett klar ist, bringt saubere Vorbereitung oft mehr als voreilige Einzelaktionen.
-- Der Kompass ordnet deshalb Fragen, Unterlagen und die wichtigsten nächsten Schritte vor.
+- Wenn noch nicht alles klar ist, bringt ein gut vorbereiteter Beratungstermin oft mehr als ein schneller Einzelschritt.
+- Deshalb kommen jetzt Unterlagen, Fragen und Prioritäten als Erstes.
 
 #### CTA-Ton
-- Erst sauber ordnen, dann gezielt handeln.
+- Unterlagen, Fragen und Fristen ordnen — dann gezielt handeln.
 
 ---
 
-## 4. Bausteine für wiederkehrende Inhalte
+## 5. Wiederkehrende Bausteine
+
 ### Arbeitsuchendmeldung
-- Die Arbeitsuchendmeldung sollte sofort geprüft oder nachgeholt werden.
-- Wichtig: Sie ersetzt nicht automatisch die spätere Arbeitslosmeldung.
+- Die Arbeitsuchendmeldung ist ein eigener Schritt und sollte jetzt geprüft oder nachgeholt werden — sie ist nicht dasselbe wie die spätere Arbeitslosmeldung.
 
 ### Arbeitslosmeldung
-- Wenn dein Arbeitsverhältnis schon beendet ist und du jetzt arbeitslos bist, ist die Arbeitslosmeldung ein eigener Schritt.
-- Genau diese Trennung sollte nicht untergehen.
+- Wenn dein Arbeitsverhältnis schon beendet ist und du jetzt arbeitslos bist, ist die Arbeitslosmeldung ein eigener, zeitkritischer Schritt — der sich von der Arbeitsuchendmeldung unterscheidet.
 
 ### Kündigungsschutzklage / Frist
-- Wenn dir eine schriftliche Kündigung zugegangen ist, läuft oft eine kurze Frist.
-- Diese Prüfung sollte jetzt nicht liegen bleiben.
+- Nach einer schriftlichen Kündigung läuft in der Regel eine kurze Frist.
+- Es lohnt sich, das zeitnah einzuordnen.
 
 ### Vertrag nicht unterschrieben
-- Unterschreibe nicht vorschnell.
-- Erst die Folgen für Arbeitslosengeld, Fristen und Handlungsspielraum klären.
+- Vor der Unterschrift ist es sinnvoll, die möglichen Folgen für Arbeitslosengeld, Fristen und Optionen zu kennen.
 
 ### Vertrag bereits unterschrieben
-- Jetzt geht es weniger um Standardwarnungen und mehr um Folgen, Fristen und saubere Einordnung.
+- Da der Vertrag bereits unterschrieben ist, geht es jetzt darum, die nächsten Schritte, offene Fristen und mögliche Folgen sauber einzuordnen.
 
 ### Sonderfall
-- Es gibt Hinweise, dass dein Fall nicht nur als Standard-Kündigung behandelt werden sollte.
+- Dein Fall hat Merkmale, die über eine typische Kündigung hinausgehen und individuell geprüft werden sollten.
 
 ### Freistellung
-- Auch bei Freistellung verschwinden Fristen, Meldungen und Unterlagenthemen nicht automatisch.
+- Auch während einer Freistellung bleiben Fristen, Meldungen und wichtige Unterlagen relevant.
 
 ---
 
-## 5. Guardrails für die Sprache
-Nicht schreiben:
-- "sicher unwirksam"
-- "garantiert ohne Sperre"
-- "eindeutig"
-- "du bekommst sicher ..."
+## 6. Was aus der Review fachlich übernommen wurde
 
-Stattdessen:
-- "prüfen"
-- "kann Folgen haben"
-- "sollte jetzt priorisiert werden"
-- "im Einzelfall gesondert klären"
+Übernommen wurden nur Änderungen, die mit den Guardrails des MVP zusammenpassen:
+- ruhigerer Ton
+- weniger Tool- und Meta-Sprache
+- weniger Wiederholung
+- keine weichgespülten juristischen Aussagen
+- keine neue Produktdebatte
+
+Nicht übernommen würden Formulierungen, die:
+- Fristen relativieren
+- Schutzfälle verharmlosen
+- Vertragsrisiken weichzeichnen
+- falsche Sicherheit erzeugen
 
 ---
 
-## 6. Done-When
+## 7. Done-When
 - Preview-, Basis- und Upgrade-Ton sind unterscheidbar, aber konsistent
 - jede Track-Familie hat kurze, belastbare Formulierungen
-- die Copy hilft dem Nutzer unter Stress, statt ihn mit Text zu erschlagen
+- wiederkehrende Bausteine sind ruhiger und klarer formuliert
+- Doku, Fixtures und Runtime verwenden denselben Copy-Grundton

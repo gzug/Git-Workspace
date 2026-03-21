@@ -168,9 +168,9 @@ Sondern:
 - sekundär aus dem dringendsten Effekt
 
 Beispiele:
-- `deadline-first` → „Jetzt zuerst Fristen und Meldungen absichern“
-- `contract-do-not-sign` → „Nichts vorschnell unterschreiben“
-- `special-case-review` → „Dein Fall sollte nicht als Standardfall behandelt werden“
+- `deadline-first` → „Jetzt zuerst: Fristen und Meldungen im Blick behalten“
+- `contract-do-not-sign` → „Vor der Unterschrift kurz innehalten“
+- `special-case-review` → „Dein Fall hat Besonderheiten, die individuell geprüft werden sollten“
 
 ## `situation`
 Kurzbeschreibung aus Kernantworten:

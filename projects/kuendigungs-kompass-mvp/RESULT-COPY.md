@@ -18,69 +18,67 @@ Die Ausgabe besteht aus 4 Schichten:
 ### 1) `deadline-first`
 
 **Headline-Muster**
-- Jetzt zuerst Fristen und Meldungen absichern.
-- Bei dir zählt gerade vor allem: nichts Zeitkritisches liegen lassen.
+- Jetzt zuerst: Fristen und Meldungen im Blick behalten.
+- Bei dir kommt es gerade darauf an, dass keine Frist und keine Meldung durchrutscht.
 
 **Kurz-Einordnung**
-- In deinem Fall ist nicht die Detailbewertung zuerst entscheidend, sondern dass keine wichtige Frist oder Meldung verpasst wird.
-- Deshalb priorisiert der Kompass jetzt Agentur-Themen und die Prüfung kurzer Fristen.
+- In deiner Situation ist es wichtiger, Zeitkritisches zu sichern, als jeden Aspekt sofort vollständig zu sortieren.
+- Deshalb stehen Agentur-Meldungen und kurze Fristen jetzt vorn.
 
 **CTA-/TopAction-Ton**
-- Mach zuerst die Meldungen und Fristen dicht.
-- Alles andere kommt danach.
+- Starte mit den Meldungen und Fristen — den Rest kannst du danach in Ruhe angehen.
 
 ### 2) `alg1-risk-first`
 
 **Headline-Muster**
-- Jetzt zuerst ALG-I-Risiken begrenzen.
-- Bei dir ist das größte Risiko gerade nicht die Ordnung im Papier, sondern ein möglicher Nachteil beim Arbeitslosengeld.
+- Jetzt zuerst sicherstellen, dass dein Arbeitslosengeld nicht in Gefahr gerät.
+- Bei dir hängt gerade am meisten davon ab, wie die Meldungen und die Beendigung laufen.
 
 **Kurz-Einordnung**
-- Wenn Meldungen fehlen oder die Beendigung ungünstig läuft, kann das direkte Folgen für dein Arbeitslosengeld haben.
-- Deshalb priorisiert der Kompass jetzt die Schritte, die finanzielle Nachteile eher verhindern.
+- Wenn bestimmte Meldungen fehlen oder die Beendigung des Arbeitsverhältnisses ungünstig gestaltet ist, kann das Auswirkungen auf dein Arbeitslosengeld haben.
+- Deshalb kommen diese Punkte jetzt zuerst.
 
 **CTA-/TopAction-Ton**
-- Erst ALG-I-Risiken entschärfen, dann den Rest sortieren.
+- Fang mit den Meldungen und der Vertragsseite an — danach lässt sich der Rest besser einordnen.
 
 ### 3) `contract-do-not-sign`
 
 **Headline-Muster**
-- Nichts vorschnell unterschreiben.
-- Bei dir ist der Vertrag gerade der kritische Hebel.
+- Vor der Unterschrift kurz innehalten.
+- Dieser Vertrag ist gerade der Punkt, der am meisten beeinflusst, wie es weitergeht.
 
 **Kurz-Einordnung**
-- Ein Aufhebungs- oder Abwicklungsvertrag kann deine Lage schnell verschlechtern, wenn Folgen und Fristen vorher nicht sauber geprüft sind.
-- Deshalb ist die klare Priorität: erst einordnen, dann entscheiden.
+- Ein Aufhebungs- oder Abwicklungsvertrag hat Folgen für dein Arbeitslosengeld und deinen Handlungsspielraum — beides sollte vor einer Unterschrift klar sein.
+- Es lohnt sich, einen Moment zu warten und die wichtigen Punkte zuerst zu prüfen.
 
 **CTA-/TopAction-Ton**
-- Nicht unter Zeitdruck unterschreiben.
-- Erst Wirkung auf ALG I, Fristen und Optionen klären.
+- Erst Folgen und Optionen klären, dann entscheiden.
 
 ### 4) `special-case-review`
 
 **Headline-Muster**
-- Dein Fall sollte nicht als Standardfall behandelt werden.
-- Es gibt Hinweise auf einen Sonderfall, der separat geprüft werden sollte.
+- Dein Fall hat Besonderheiten, die individuell geprüft werden sollten.
+- Hier ist eine sorgfältige Einordnung wichtiger als eine schnelle Antwort.
 
 **Kurz-Einordnung**
-- Hier wäre falsche Sicherheit gefährlicher als eine vorsichtige Eskalation.
-- Der Kompass priorisiert deshalb Fristschutz plus individuelle Prüfung statt pauschaler Aussagen.
+- Es gibt Hinweise, dass dein Fall Aspekte hat, die über eine Standard-Kündigung hinausgehen.
+- Deshalb stehen Fristschutz und gezielte Prüfung jetzt im Vordergrund — statt pauschaler Einordnungen.
 
 **CTA-/TopAction-Ton**
-- Fristen sichern, dann gezielt beraten lassen.
+- Fristen zuerst absichern, dann individuell klären lassen.
 
 ### 5) `prepare-advice`
 
 **Headline-Muster**
-- Jetzt sauber für Beratung oder Anwalt vorbereiten.
-- Dein nächster Hebel ist gute Vorbereitung statt Aktionismus.
+- Gut vorbereitet in den nächsten Schritt gehen.
+- Dein stärkster nächster Zug ist eine klare Vorbereitung.
 
 **Kurz-Einordnung**
-- Wenn die Lage nicht komplett klar ist, bringt ein sauber vorbereiteter Beratungstermin oft mehr als voreilige Einzelaktionen.
-- Der Kompass ordnet deshalb Fragen, Unterlagen und die wichtigsten Punkte vor.
+- Wenn noch nicht alles klar ist, bringt ein gut vorbereiteter Beratungstermin oft mehr als ein schneller Einzelschritt.
+- Deshalb kommen jetzt Unterlagen, Fragen und Prioritäten als Erstes.
 
 **CTA-/TopAction-Ton**
-- Unterlagen, Fragen und Fristen geordnet mitnehmen.
+- Unterlagen, Fragen und Fristen ordnen — dann gezielt handeln.
 
 ---
 
@@ -89,43 +87,37 @@ Die Ausgabe besteht aus 4 Schichten:
 ### Arbeitsuchendmeldung
 
 **Kurzbaustein**
-- Die Arbeitsuchendmeldung ist eine frühe Pflicht und sollte sofort geprüft oder nachgeholt werden.
-
-**Wenn Nutzer denkt, das sei schon alles**
-- Wichtig: Die Arbeitsuchendmeldung ersetzt nicht automatisch die spätere Arbeitslosmeldung.
+- Die Arbeitsuchendmeldung ist ein eigener Schritt und sollte jetzt geprüft oder nachgeholt werden — sie ist nicht dasselbe wie die spätere Arbeitslosmeldung.
 
 ### Arbeitslosmeldung
 
 **Kurzbaustein**
-- Wenn dein Arbeitsverhältnis schon beendet ist und du jetzt arbeitslos bist, ist die Arbeitslosmeldung ein eigener Schritt und sollte sofort geprüft oder nachgeholt werden.
-
-**Abgrenzungsbaustein**
-- Arbeitsuchendmeldung und Arbeitslosmeldung sind nicht dasselbe. Genau diese Trennung muss im Output sichtbar bleiben.
+- Wenn dein Arbeitsverhältnis schon beendet ist und du jetzt arbeitslos bist, ist die Arbeitslosmeldung ein eigener, zeitkritischer Schritt — der sich von der Arbeitsuchendmeldung unterscheidet.
 
 ### Kündigungsschutzklage / 3-Wochen-Frist
 
 **Kurzbaustein**
-- Wenn dir eine schriftliche Kündigung zugegangen ist, läuft oft eine sehr kurze Frist. Die 3-Wochen-Prüfung sollte deshalb nicht liegen bleiben.
+- Nach einer schriftlichen Kündigung läuft in der Regel eine kurze Frist. Es lohnt sich, das zeitnah einzuordnen.
 
 ### Vertrag noch nicht unterschrieben
 
 **Kurzbaustein**
-- Unterschreibe den Vertrag nicht vorschnell. Erst die Folgen für Arbeitslosengeld, Fristen und Handlungsspielraum klären.
+- Vor der Unterschrift ist es sinnvoll, die möglichen Folgen für Arbeitslosengeld, Fristen und Optionen zu kennen.
 
 ### Vertrag schon unterschrieben
 
 **Kurzbaustein**
-- Weil schon unterschrieben wurde, geht es jetzt weniger um Standardtipps und mehr um Folgen, Fristen und individuelle Prüfung.
+- Da der Vertrag bereits unterschrieben ist, geht es jetzt darum, die nächsten Schritte, offene Fristen und mögliche Folgen sauber einzuordnen.
 
 ### Sonderfallindikator
 
 **Kurzbaustein**
-- Es gibt Hinweise auf einen möglichen Sonderfall. Deshalb sollte dein Fall nicht nur als Standard-Kündigung eingeordnet werden.
+- Dein Fall hat Merkmale, die über eine typische Kündigung hinausgehen und individuell geprüft werden sollten.
 
 ### Freistellung
 
 **Kurzbaustein**
-- Auch bei Freistellung verschwinden Fristen, Meldungen und Unterlagenthemen nicht automatisch.
+- Auch während einer Freistellung bleiben Fristen, Meldungen und wichtige Unterlagen relevant.
 
 ---
 

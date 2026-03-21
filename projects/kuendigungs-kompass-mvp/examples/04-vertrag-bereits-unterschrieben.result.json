@@ -8,7 +8,7 @@
   },
   "synthesisDecision": {
     "primaryTrack": "special-case-review",
-    "reasoning": "Weil der Vertrag bereits unterschrieben ist, ist der Standardhinweis 'nicht unterschreiben' nicht mehr ausreichend. Jetzt stehen Folgenanalyse, Fristen und individuelle Prüfung im Vordergrund.",
+    "reasoning": "Weil der Vertrag bereits unterschrieben ist, ist der Standardhinweis \"nicht unterschreiben\" nicht mehr ausreichend. Jetzt stehen Folgenanalyse, Fristen und individuelle Prüfung im Vordergrund.",
     "confidenceClass": "cautious-check"
   },
   "topActions": [
@@ -72,12 +72,12 @@
     },
     {
       "label": "Arbeitsvertrag",
-      "reason": "Hilft, Ausgangslage und Abweichungen sauber zu prüfen.",
+      "reason": "Wichtig für die Ausgangslage und mögliche Rückfragen in der Beratung.",
       "status": "already-secured"
     },
     {
       "label": "Lohnunterlagen",
-      "reason": "Nützlich für Leistungs- und Beratungsthemen.",
+      "reason": "Hilfreich für ALG-I-Themen und die Vorbereitung auf Rückfragen.",
       "status": "already-secured"
     },
     {
@@ -99,14 +99,14 @@
   ],
   "statementLedger": {
     "mvpReliable": [
-      "Mitwirkung an der Beendigung kann ALG-I-Risiken auslösen.",
-      "Nach Unterschrift werden individuelle Vertragsfolgen wichtiger als Standardwarnungen."
+      "Beide Meldungen sind fachlich getrennt. Im MVP soll diese Unterscheidung explizit sichtbar bleiben.",
+      "Auch bei Freistellung bleiben Meldungen, Fristen und Unterlagenthemen relevant."
     ],
     "cautiousChecks": [
-      "Bereits unterschriebene Verträge nur individuell prüfen, nicht pauschal bewerten."
+      "Jetzt stehen Folgenanalyse, Fristen und individuelle Beratung stärker im Vordergrund als ein allgemeiner Nicht-unterschreiben-Hinweis."
     ],
     "notUsedYet": [
-      "Keine Aussage zu Anfechtungschancen oder sicherer Unwirksamkeit treffen."
+      "Der MVP soll keine belastbare Erwartung zu Abfindungshöhe oder Durchsetzbarkeit suggerieren."
     ]
   }
 }

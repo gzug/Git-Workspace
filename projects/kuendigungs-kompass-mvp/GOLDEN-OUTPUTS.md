@@ -20,8 +20,13 @@ Diese Outputs sind **keine zusätzliche Produktlogik**, sondern ein Prüfmaßsta
   "unemployment_registered": false,
   "agreement_present": false,
   "release_status": "no",
-  "special_protection_indicator": ["none_known"],
-  "documents_secured": ["termination_letter", "employment_contract"],
+  "special_protection_indicator": [
+    "none_known"
+  ],
+  "documents_secured": [
+    "termination_letter",
+    "employment_contract"
+  ],
   "primary_goal": "protect_deadlines"
 }
 ```
@@ -32,8 +37,8 @@ Diese Outputs sind **keine zusätzliche Produktlogik**, sondern ein Prüfmaßsta
 {
   "resultVersion": "v2",
   "caseSnapshot": {
-    "headline": "Jetzt zuerst Fristen und Meldungen absichern",
-    "situation": "Du hast eine schriftliche Kündigung erhalten, dein Arbeitsverhältnis ist bereits beendet und wichtige Agentur-Meldungen sind noch offen.",
+    "headline": "Jetzt zuerst: Fristen und Meldungen im Blick behalten",
+    "situation": "Du hast eine schriftliche Kündigung erhalten. Jetzt kommt es darauf an, dass keine Frist und keine Meldung durchrutscht.",
     "riskLevel": "high",
     "primaryGoal": "protect_deadlines"
   },
@@ -82,7 +87,7 @@ Diese Outputs sind **keine zusätzliche Produktlogik**, sondern ein Prüfmaßsta
     },
     {
       "label": "Kündigungsschutzklage prüfen",
-      "timing": "regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung",
+      "timing": "regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung (ausgehend vom angegebenen Zugangsdatum: bis 08.04.2026)",
       "importance": "critical",
       "note": "Der MVP prüft nicht die Erfolgsaussicht, sondern markiert die Frist als priorisiert.",
       "statementClass": "mvp-reliable"
@@ -133,13 +138,17 @@ Diese Outputs sind **keine zusätzliche Produktlogik**, sondern ein Prüfmaßsta
   ],
   "statementLedger": {
     "mvpReliable": [
-      "Arbeitsuchendmeldung und Arbeitslosmeldung sind fachlich getrennte Schritte.",
-      "Die Arbeitslosmeldung soll spätestens am ersten Tag der Arbeitslosigkeit erfolgt sein.",
-      "Für die Kündigungsschutzklage ist regelmäßig die 3-Wochen-Frist ab Zugang der schriftlichen Kündigung relevant."
+      "Die Arbeitsuchendmeldung soll in der Regel spätestens 3 Monate vor Ende des Arbeitsverhältnisses erfolgen; erfährst du später davon, binnen 3 Tagen.",
+      "Zu späte Meldungen können finanzielle Nachteile beim späteren Arbeitslosengeld auslösen.",
+      "Die Arbeitslosmeldung ist eine eigene Pflicht und soll spätestens am ersten Tag der Arbeitslosigkeit erfolgt sein. Wenn das noch offen ist, jetzt direkt handeln.",
+      "Arbeitsuchendmeldung und Arbeitslosmeldung sind nicht dasselbe. Für Leistungsbezug und Start der Arbeitslosigkeit muss die separate Meldung geprüft werden.",
+      "Beide Meldungen sind fachlich getrennt. Im MVP soll diese Unterscheidung explizit sichtbar bleiben.",
+      "Wer die Unwirksamkeit einer schriftlichen Kündigung geltend machen will, muss regelmäßig innerhalb von 3 Wochen nach Zugang Klage erheben.",
+      "Ob die Kündigung im Einzelfall wirksam oder angreifbar ist, leistet der MVP nicht."
     ],
     "cautiousChecks": [],
     "notUsedYet": [
-      "Keine Aussage zu Erfolgschancen oder Abfindung ableiten."
+      "Der MVP soll keine belastbare Erwartung zu Abfindungshöhe oder Durchsetzbarkeit suggerieren."
     ]
   }
 }
@@ -160,8 +169,14 @@ Diese Outputs sind **keine zusätzliche Produktlogik**, sondern ein Prüfmaßsta
   "agreement_present": true,
   "agreement_already_signed": false,
   "release_status": "yes_irrevocable",
-  "special_protection_indicator": ["none_known"],
-  "documents_secured": ["agreement_draft", "employment_contract", "salary_docs"],
+  "special_protection_indicator": [
+    "none_known"
+  ],
+  "documents_secured": [
+    "agreement_draft",
+    "employment_contract",
+    "salary_docs"
+  ],
   "primary_goal": "protect_alg1"
 }
 ```
@@ -172,8 +187,8 @@ Diese Outputs sind **keine zusätzliche Produktlogik**, sondern ein Prüfmaßsta
 {
   "resultVersion": "v2",
   "caseSnapshot": {
-    "headline": "Nichts vorschnell unterschreiben",
-    "situation": "Dir liegt ein Aufhebungs- oder Abwicklungsvertrag vor, du bist noch nicht arbeitssuchend gemeldet und dein wichtigstes Ziel ist der Schutz beim ALG I.",
+    "headline": "Vor der Unterschrift kurz innehalten",
+    "situation": "Dir liegt ein Aufhebungs- oder Abwicklungsvertrag vor. Vor einer Unterschrift sollten die Folgen für dein Arbeitslosengeld und deine nächsten Optionen klar sein.",
     "riskLevel": "high",
     "primaryGoal": "protect_alg1"
   },
@@ -222,8 +237,8 @@ Diese Outputs sind **keine zusätzliche Produktlogik**, sondern ein Prüfmaßsta
       "statementClass": "mvp-reliable"
     },
     {
-      "label": "Freistellung beendet nicht automatisch alle To-dos",
-      "description": "Auch bei unwiderruflicher Freistellung bleiben Agentur-Themen, Fristen und Unterlagen relevant.",
+      "label": "Freistellung ändert nichts daran, dass zentrale Schritte offen bleiben können",
+      "description": "Auch während einer Freistellung bleiben Fristen, Meldungen und wichtige Unterlagen relevant.",
       "severity": "medium",
       "statementClass": "mvp-reliable"
     }
@@ -264,15 +279,16 @@ Diese Outputs sind **keine zusätzliche Produktlogik**, sondern ein Prüfmaßsta
   ],
   "statementLedger": {
     "mvpReliable": [
-      "Ein noch nicht unterschriebener Aufhebungs- oder Abwicklungsvertrag sollte nicht vorschnell unterzeichnet werden.",
-      "Arbeitsuchendmeldung ist eine frühe Pflicht und bleibt zeitkritisch.",
-      "Mitwirkung an der Beendigung kann ALG-I-Risiken auslösen."
+      "Die Arbeitsuchendmeldung soll in der Regel spätestens 3 Monate vor Ende des Arbeitsverhältnisses erfolgen; erfährst du später davon, binnen 3 Tagen.",
+      "Zu späte Meldungen können finanzielle Nachteile beim späteren Arbeitslosengeld auslösen.",
+      "Beide Meldungen sind fachlich getrennt. Im MVP soll diese Unterscheidung explizit sichtbar bleiben.",
+      "Aufhebungs- oder Abwicklungsverträge können erhebliche Folgen für Arbeitslosengeld und Verhandlungsspielraum haben.",
+      "Bei Vertragsbeendigungen mit eigener Mitwirkung können Auswirkungen auf das Arbeitslosengeld entstehen.",
+      "Auch bei Freistellung bleiben Meldungen, Fristen und Unterlagenthemen relevant."
     ],
-    "cautiousChecks": [
-      "Details der Freistellung und konkrete Vertragsfolgen im Einzelfall gesondert prüfen."
-    ],
+    "cautiousChecks": [],
     "notUsedYet": [
-      "Keine Abfindungserwartung oder Erfolgswahrscheinlichkeit ausgeben."
+      "Der MVP soll keine belastbare Erwartung zu Abfindungshöhe oder Durchsetzbarkeit suggerieren."
     ]
   }
 }
@@ -293,8 +309,15 @@ Diese Outputs sind **keine zusätzliche Produktlogik**, sondern ein Prüfmaßsta
   "already_unemployed_now": false,
   "agreement_present": false,
   "release_status": "unknown",
-  "special_protection_indicator": ["pregnancy_or_maternity", "unsure"],
-  "documents_secured": ["termination_letter", "employment_contract", "salary_docs"],
+  "special_protection_indicator": [
+    "pregnancy_or_maternity",
+    "unsure"
+  ],
+  "documents_secured": [
+    "termination_letter",
+    "employment_contract",
+    "salary_docs"
+  ],
   "primary_goal": "prepare_advice"
 }
 ```
@@ -305,8 +328,8 @@ Diese Outputs sind **keine zusätzliche Produktlogik**, sondern ein Prüfmaßsta
 {
   "resultVersion": "v2",
   "caseSnapshot": {
-    "headline": "Dein Fall sollte nicht als Standardfall behandelt werden",
-    "situation": "Du hast eine schriftliche Kündigung erhalten und es gibt Hinweise auf einen möglichen Sonderfall oder besonderen Schutz, der gesondert geprüft werden sollte.",
+    "headline": "Dein Fall hat Besonderheiten, die individuell geprüft werden sollten",
+    "situation": "Du hast eine schriftliche Kündigung erhalten und es gibt Hinweise auf Aspekte, die über eine Standard-Kündigung hinausgehen.",
     "riskLevel": "high",
     "primaryGoal": "prepare_advice"
   },
@@ -325,8 +348,8 @@ Diese Outputs sind **keine zusätzliche Produktlogik**, sondern ein Prüfmaßsta
     },
     {
       "priority": 2,
-      "label": "Möglichen Sonderfall gezielt prüfen lassen",
-      "why": "Hier sollte nicht mit pauschalen Aussagen gearbeitet werden, wenn ein besonderer Schutz in Betracht kommt.",
+      "label": "Besonderheiten gezielt prüfen lassen",
+      "why": "Dein Fall hat Merkmale, die über eine typische Kündigung hinausgehen und individuell geprüft werden sollten.",
       "timing": "sehr zeitnah",
       "statementClass": "cautious-check"
     },
@@ -341,7 +364,7 @@ Diese Outputs sind **keine zusätzliche Produktlogik**, sondern ein Prüfmaßsta
   "deadlines": [
     {
       "label": "Kündigungsschutzklage prüfen",
-      "timing": "regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung",
+      "timing": "regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung (ausgehend vom angegebenen Zugangsdatum: bis 09.04.2026)",
       "importance": "critical",
       "note": "Der mögliche Sonderfall ändert nichts daran, dass die Frist nicht liegen bleiben sollte.",
       "statementClass": "mvp-reliable"
@@ -350,13 +373,13 @@ Diese Outputs sind **keine zusätzliche Produktlogik**, sondern ein Prüfmaßsta
   "riskFlags": [
     {
       "label": "Möglicher Sonderkündigungsschutz / heikler Sonderfall",
-      "description": "Der Fall sollte nicht wie eine Standard-Kündigung behandelt werden, solange unklar ist, ob ein besonderer Schutz eingreift.",
+      "description": "Dein Fall hat Merkmale, die über eine typische Kündigung hinausgehen und individuell geprüft werden sollten.",
       "severity": "high",
       "statementClass": "mvp-reliable"
     },
     {
       "label": "Unsicherheit bei Schutzstatus erhöht das Fehlentscheidungsrisiko",
-      "description": "Wenn die Schutzlage unklar ist, kann vorschnelles Handeln wichtige Optionen verschlechtern.",
+      "description": "Wenn die Schutzlage unklar ist, braucht es eher eine sorgfältige Einordnung als eine schnelle Standardantwort.",
       "severity": "high",
       "statementClass": "cautious-check"
     }
@@ -371,18 +394,23 @@ Diese Outputs sind **keine zusätzliche Produktlogik**, sondern ein Prüfmaßsta
   "documentChecklist": [
     {
       "label": "Kündigungsschreiben",
-      "reason": "Zugang und Inhalt sind für Fristen und Prüfung zentral.",
+      "reason": "Zugang und Datum sind für die Fristprüfung zentral.",
       "status": "already-secured"
     },
     {
       "label": "Arbeitsvertrag",
-      "reason": "Hilft bei der rechtlichen und praktischen Einordnung des Falls.",
+      "reason": "Hilft bei Beratung und Einordnung der Ausgangslage.",
       "status": "already-secured"
     },
     {
       "label": "Lohnunterlagen",
-      "reason": "Nützlich für Beratung und eventuelle Anschlussfragen.",
+      "reason": "Hilfreich für Agentur-Themen und Beratungsvorbereitung.",
       "status": "already-secured"
+    },
+    {
+      "label": "Infos zu Freistellung / Urlaub / Restansprüchen",
+      "reason": "Relevant, weil Freistellung organisatorisch wichtig bleibt und offene Ansprüche später eine Rolle spielen können.",
+      "status": "secure-now"
     },
     {
       "label": "Nachweise zum möglichen Schutzstatus",
@@ -403,15 +431,17 @@ Diese Outputs sind **keine zusätzliche Produktlogik**, sondern ein Prüfmaßsta
   ],
   "statementLedger": {
     "mvpReliable": [
-      "Die 3-Wochen-Frist nach Zugang der schriftlichen Kündigung bleibt regelmäßig relevant.",
-      "Hinweise auf besonderen Schutz oder Sonderfälle sollen im MVP eine Eskalation auslösen."
+      "Beide Meldungen sind fachlich getrennt. Im MVP soll diese Unterscheidung explizit sichtbar bleiben.",
+      "Wer die Unwirksamkeit einer schriftlichen Kündigung geltend machen will, muss regelmäßig innerhalb von 3 Wochen nach Zugang Klage erheben.",
+      "Ob die Kündigung im Einzelfall wirksam oder angreifbar ist, leistet der MVP nicht.",
+      "Auch bei Freistellung bleiben Meldungen, Fristen und Unterlagenthemen relevant.",
+      "Hier sollte der MVP nicht normalisieren, sondern auf erhöhte Vorsicht und individuelle Prüfung umschalten."
     ],
     "cautiousChecks": [
-      "Ob tatsächlich Sonderkündigungsschutz oder eine vergleichbare Schutzlage greift, muss individuell geprüft werden.",
-      "Unsichere Schutzlagen dürfen nicht als feste Rechtsposition ausgegeben werden."
+      "Ob tatsächlich ein besonderer Schutz greift, muss im Einzelfall verifiziert werden."
     ],
     "notUsedYet": [
-      "Keine pauschale Aussage zur Wirksamkeit der Kündigung."
+      "Der MVP soll keine belastbare Erwartung zu Abfindungshöhe oder Durchsetzbarkeit suggerieren."
     ]
   }
 }

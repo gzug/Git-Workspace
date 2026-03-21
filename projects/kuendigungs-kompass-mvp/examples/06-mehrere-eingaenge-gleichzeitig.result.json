@@ -14,22 +14,22 @@
   "topActions": [
     {
       "priority": 1,
-      "label": "Nichts vorschnell unterschreiben",
-      "why": "Der Vertrag ist noch offen und könnte deine Lage zusätzlich verschärfen.",
+      "label": "Vor der Unterschrift kurz innehalten",
+      "why": "Dieser Vertrag ist gerade der Punkt, der am meisten beeinflusst, wie es weitergeht.",
       "timing": "sofort",
       "statementClass": "mvp-reliable"
     },
     {
       "priority": 2,
-      "label": "3-Wochen-Frist und Agentur-Meldung parallel absichern",
-      "why": "Hier laufen mehrere kritische Themen gleichzeitig und keines sollte isoliert liegen bleiben.",
+      "label": "3-Wochen-Frist und Agentur-Meldungen parallel im Blick behalten",
+      "why": "Hier laufen mehrere wichtige Themen gleichzeitig und sollten zusammen eingeordnet werden.",
       "timing": "heute",
       "statementClass": "mvp-reliable"
     },
     {
       "priority": 3,
-      "label": "Sonderfall individuell prüfen lassen",
-      "why": "Die unklare Schutzlage macht pauschale Standardlogik zu riskant.",
+      "label": "Besonderheiten individuell prüfen lassen",
+      "why": "Dein Fall hat Merkmale, die über eine typische Kündigung hinausgehen und individuell geprüft werden sollten.",
       "timing": "sehr zeitnah",
       "statementClass": "cautious-check"
     }
@@ -39,14 +39,14 @@
       "label": "Arbeitsuchendmeldung",
       "timing": "spätestens 3 Monate vor Ende, sonst innerhalb von 3 Tagen nach Kenntnis",
       "importance": "critical",
-      "note": "Die frühe Agentur-Meldung ist hier parallel zum Vertrags- und Fristthema relevant.",
+      "note": "Diese Meldung sollte nicht aufgeschoben werden, auch wenn der Vertrag noch nicht unterschrieben ist.",
       "statementClass": "mvp-reliable"
     },
     {
       "label": "Kündigungsschutzklage prüfen",
-      "timing": "regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung",
+      "timing": "regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung (ausgehend vom angegebenen Zugangsdatum: bis 11.04.2026)",
       "importance": "critical",
-      "note": "Die kurze Frist läuft trotz weiterer Baustellen parallel.",
+      "note": "Der mögliche Sonderfall ändert nichts daran, dass die Frist nicht liegen bleiben sollte.",
       "statementClass": "mvp-reliable"
     }
   ],
@@ -79,23 +79,28 @@
   ],
   "documentChecklist": [
     {
-      "label": "Kündigungsschreiben",
-      "reason": "Zentral für Zugang und Fristprüfung.",
-      "status": "already-secured"
-    },
-    {
-      "label": "Vertragsentwurf",
-      "reason": "Wichtig, weil eine Unterschrift gerade aktiv vermieden werden sollte.",
+      "label": "Aufhebungs-/Abwicklungsvertrag oder Entwurf",
+      "reason": "Nur mit dem konkreten Text lassen sich Risiken und offene Punkte sinnvoll prüfen.",
       "status": "already-secured"
     },
     {
       "label": "Arbeitsvertrag",
-      "reason": "Fehlt noch und hilft bei der Einordnung des Gesamtfalls.",
+      "reason": "Wichtig für die Ausgangslage und mögliche Rückfragen in der Beratung.",
       "status": "secure-now"
     },
     {
       "label": "Lohnunterlagen",
-      "reason": "Hilfreich für Agentur- und Beratungsthemen.",
+      "reason": "Hilfreich für ALG-I-Themen und die Vorbereitung auf Rückfragen.",
+      "status": "secure-now"
+    },
+    {
+      "label": "Infos zu Freistellung / Urlaub / Restansprüchen",
+      "reason": "Relevant, weil Freistellung organisatorisch wichtig bleibt und offene Ansprüche später eine Rolle spielen können.",
+      "status": "secure-now"
+    },
+    {
+      "label": "Nachweise zum möglichen Schutzstatus",
+      "reason": "Falls vorhanden, helfen diese Unterlagen, den Sonderfall schneller individuell einzuordnen.",
       "status": "secure-now"
     }
   ],
@@ -112,14 +117,22 @@
   ],
   "statementLedger": {
     "mvpReliable": [
-      "Die 3-Wochen-Frist und die Arbeitsuchendmeldung können parallel relevant sein.",
-      "Ein nicht unterschriebener Vertrag sollte nicht vorschnell unterzeichnet werden."
+      "Die Arbeitsuchendmeldung soll in der Regel spätestens 3 Monate vor Ende des Arbeitsverhältnisses erfolgen; erfährst du später davon, binnen 3 Tagen.",
+      "Zu späte Meldungen können finanzielle Nachteile beim späteren Arbeitslosengeld auslösen.",
+      "Beide Meldungen sind fachlich getrennt. Im MVP soll diese Unterscheidung explizit sichtbar bleiben.",
+      "Wer die Unwirksamkeit einer schriftlichen Kündigung geltend machen will, muss regelmäßig innerhalb von 3 Wochen nach Zugang Klage erheben.",
+      "Ob die Kündigung im Einzelfall wirksam oder angreifbar ist, leistet der MVP nicht.",
+      "Aufhebungs- oder Abwicklungsverträge können erhebliche Folgen für Arbeitslosengeld und Verhandlungsspielraum haben.",
+      "Bei Vertragsbeendigungen mit eigener Mitwirkung können Auswirkungen auf das Arbeitslosengeld entstehen.",
+      "Auch bei Freistellung bleiben Meldungen, Fristen und Unterlagenthemen relevant.",
+      "Hier sollte der MVP nicht normalisieren, sondern auf erhöhte Vorsicht und individuelle Prüfung umschalten."
     ],
     "cautiousChecks": [
-      "Unklare Schutzlagen und Mehrfachkonflikte sollten individuell geprüft werden."
+      "Ob tatsächlich ein besonderer Schutz greift, muss im Einzelfall verifiziert werden.",
+      "Ein Bildungsgutschein setzt individuelle Voraussetzungen und Beratung voraus. Für den MVP nur als Option nachrangig markieren."
     ],
     "notUsedYet": [
-      "Keine pauschale Gesamtbewertung des Falls als sicher lösbar im MVP."
+      "Der MVP soll keine belastbare Erwartung zu Abfindungshöhe oder Durchsetzbarkeit suggerieren."
     ]
   }
 }

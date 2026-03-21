@@ -397,24 +397,24 @@ function buildTopActions(answers, effects, track) {
     if (isOverlappingMultiRiskCase(answers)) {
       actions.push({
         priority: 1,
-        label: 'Nichts vorschnell unterschreiben',
-        why: 'Der Vertrag ist noch offen und könnte deine Lage zusätzlich verschärfen.',
+        label: 'Vor der Unterschrift kurz innehalten',
+        why: 'Dieser Vertrag ist gerade der Punkt, der am meisten beeinflusst, wie es weitergeht.',
         timing: 'sofort',
         statementClass: 'mvp-reliable',
         _severity: 'critical',
       });
       actions.push({
         priority: 2,
-        label: '3-Wochen-Frist und Agentur-Meldung parallel absichern',
-        why: 'Hier laufen mehrere kritische Themen gleichzeitig und keines sollte isoliert liegen bleiben.',
+        label: '3-Wochen-Frist und Agentur-Meldungen parallel im Blick behalten',
+        why: 'Hier laufen mehrere wichtige Themen gleichzeitig und sollten zusammen eingeordnet werden.',
         timing: 'heute',
         statementClass: 'mvp-reliable',
         _severity: 'critical',
       });
       actions.push({
         priority: 3,
-        label: 'Sonderfall individuell prüfen lassen',
-        why: 'Die unklare Schutzlage macht pauschale Standardlogik zu riskant.',
+        label: 'Besonderheiten individuell prüfen lassen',
+        why: 'Dein Fall hat Merkmale, die über eine typische Kündigung hinausgehen und individuell geprüft werden sollten.',
         timing: 'sehr zeitnah',
         statementClass: 'cautious-check',
         _severity: 'high',
@@ -457,8 +457,8 @@ function buildTopActions(answers, effects, track) {
       }
       actions.push({
         priority: 2,
-        label: 'Möglichen Sonderfall gezielt prüfen lassen',
-        why: 'Hier sollte nicht mit pauschalen Aussagen gearbeitet werden, wenn ein besonderer Schutz in Betracht kommt.',
+        label: 'Besonderheiten gezielt prüfen lassen',
+        why: 'Dein Fall hat Merkmale, die über eine typische Kündigung hinausgehen und individuell geprüft werden sollten.',
         timing: 'sehr zeitnah',
         statementClass: 'cautious-check',
         _severity: 'high',
@@ -478,8 +478,8 @@ function buildTopActions(answers, effects, track) {
     if (answers.jobseeker_registered === false) {
       actions.push({
         priority: 1,
-        label: 'Arbeitsuchendmeldung sofort prüfen oder nachholen',
-        why: 'Auch ohne schriftliche Kündigung kann die frühe Meldelogik relevant werden, wenn das Ende des Arbeitsverhältnisses absehbar ist.',
+        label: 'Arbeitsuchendmeldung jetzt prüfen oder nachholen',
+        why: 'Die Arbeitsuchendmeldung ist ein eigener Schritt und sollte jetzt geprüft oder nachgeholt werden — sie ist nicht dasselbe wie die spätere Arbeitslosmeldung.',
         timing: 'sofort',
         statementClass: 'mvp-reliable',
         _severity: 'critical',
@@ -488,8 +488,8 @@ function buildTopActions(answers, effects, track) {
     if (answers.case_entry === 'termination_announced_only') {
       actions.push({
         priority: 2,
-        label: 'Noch keine Fristen aus nicht vorhandener Schriftform ableiten',
-        why: 'Ohne schriftliche Kündigung soll der MVP keine künstliche 3-Wochen-Panik erzeugen.',
+        label: 'Schriftliche Kündigung erst zeitnah einordnen, wenn sie vorliegt',
+        why: 'Nach einer schriftlichen Kündigung läuft in der Regel eine kurze Frist. Solange noch nichts Schriftliches vorliegt, sollte das sauber getrennt bleiben.',
         timing: 'ab jetzt',
         statementClass: 'mvp-reliable',
         _severity: 'medium',
@@ -586,8 +586,8 @@ function buildRiskFlags(answers, track) {
     });
     if (answers.release_status && answers.release_status !== 'no') {
       riskFlags.push({
-        label: 'Freistellung beendet nicht automatisch alle To-dos',
-        description: 'Auch bei unwiderruflicher Freistellung bleiben Agentur-Themen, Fristen und Unterlagen relevant.',
+        label: 'Freistellung ändert nichts daran, dass zentrale Schritte offen bleiben können',
+        description: 'Auch während einer Freistellung bleiben Fristen, Meldungen und wichtige Unterlagen relevant.',
         severity: 'medium',
         statementClass: 'mvp-reliable',
       });
@@ -630,13 +630,13 @@ function buildRiskFlags(answers, track) {
     } else {
       riskFlags.push({
         label: 'Möglicher Sonderkündigungsschutz / heikler Sonderfall',
-        description: 'Der Fall sollte nicht wie eine Standard-Kündigung behandelt werden, solange unklar ist, ob ein besonderer Schutz eingreift.',
+        description: 'Dein Fall hat Merkmale, die über eine typische Kündigung hinausgehen und individuell geprüft werden sollten.',
         severity: 'high',
         statementClass: 'mvp-reliable',
       });
       riskFlags.push({
         label: 'Unsicherheit bei Schutzstatus erhöht das Fehlentscheidungsrisiko',
-        description: 'Wenn die Schutzlage unklar ist, kann vorschnelles Handeln wichtige Optionen verschlechtern.',
+        description: 'Wenn die Schutzlage unklar ist, braucht es eher eine sorgfältige Einordnung als eine schnelle Standardantwort.',
         severity: 'high',
         statementClass: 'cautious-check',
       });
@@ -655,7 +655,7 @@ function buildRiskFlags(answers, track) {
   if (!special && answers.agreement_already_signed && track !== 'special-case-review') {
     riskFlags.push({
       label: 'Vertrag bereits unterschrieben',
-      description: 'Damit verschiebt sich der Fokus von allgemeiner Warnung auf Folgen, Fristen und individuelle Prüfung.',
+      description: 'Da der Vertrag bereits unterschrieben ist, geht es jetzt darum, die nächsten Schritte, offene Fristen und mögliche Folgen sauber einzuordnen.',
       severity: 'high',
       statementClass: 'cautious-check',
     });
@@ -757,16 +757,16 @@ function selectPrimaryTrack(rawAnswers, evaluation = evaluateRules(rawAnswers)) 
 function buildCaseSnapshot(answers, track) {
   if (track === 'contract-do-not-sign') {
     return {
-      headline: 'Nichts vorschnell unterschreiben',
-      situation: 'Dir liegt ein Aufhebungs- oder Abwicklungsvertrag vor, du bist noch nicht arbeitssuchend gemeldet und dein wichtigstes Ziel ist der Schutz beim ALG I.',
+      headline: 'Vor der Unterschrift kurz innehalten',
+      situation: 'Dir liegt ein Aufhebungs- oder Abwicklungsvertrag vor. Vor einer Unterschrift sollten die Folgen für dein Arbeitslosengeld und deine nächsten Optionen klar sein.',
       riskLevel: 'high',
       primaryGoal: answers.primary_goal,
     };
   }
   if (track === 'deadline-first') {
     return {
-      headline: 'Jetzt zuerst Fristen und Meldungen absichern',
-      situation: 'Du hast eine schriftliche Kündigung erhalten, dein Arbeitsverhältnis ist bereits beendet und wichtige Agentur-Meldungen sind noch offen.',
+      headline: 'Jetzt zuerst: Fristen und Meldungen im Blick behalten',
+      situation: 'Du hast eine schriftliche Kündigung erhalten. Jetzt kommt es darauf an, dass keine Frist und keine Meldung durchrutscht.',
       riskLevel: 'high',
       primaryGoal: answers.primary_goal,
     };
@@ -789,15 +789,15 @@ function buildCaseSnapshot(answers, track) {
       };
     }
     return {
-      headline: 'Dein Fall sollte nicht als Standardfall behandelt werden',
-      situation: 'Du hast eine schriftliche Kündigung erhalten und es gibt Hinweise auf einen möglichen Sonderfall oder besonderen Schutz, der gesondert geprüft werden sollte.',
+      headline: 'Dein Fall hat Besonderheiten, die individuell geprüft werden sollten',
+      situation: 'Du hast eine schriftliche Kündigung erhalten und es gibt Hinweise auf Aspekte, die über eine Standard-Kündigung hinausgehen.',
       riskLevel: 'high',
       primaryGoal: answers.primary_goal,
     };
   }
   return {
-    headline: 'Jetzt Vorbereitung statt falscher Fristpanik',
-    situation: 'Eine Kündigung wurde angekündigt, aber es liegt noch keine schriftliche Kündigung vor. Gleichzeitig ist die Arbeitsuchendmeldung noch offen.',
+    headline: 'Gut vorbereitet in den nächsten Schritt gehen',
+    situation: 'Eine Kündigung wurde angekündigt, aber noch nicht schriftlich ausgesprochen. Jetzt helfen vor allem geordnete Unterlagen, Fragen und Prioritäten.',
     riskLevel: 'medium',
     primaryGoal: answers.primary_goal,
   };

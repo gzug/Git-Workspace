@@ -1,8 +1,8 @@
 {
   "resultVersion": "v2",
   "caseSnapshot": {
-    "headline": "Nichts vorschnell unterschreiben",
-    "situation": "Dir liegt ein Aufhebungs- oder Abwicklungsvertrag vor, du bist noch nicht arbeitssuchend gemeldet und dein wichtigstes Ziel ist der Schutz beim ALG I.",
+    "headline": "Vor der Unterschrift kurz innehalten",
+    "situation": "Dir liegt ein Aufhebungs- oder Abwicklungsvertrag vor. Vor einer Unterschrift sollten die Folgen für dein Arbeitslosengeld und deine nächsten Optionen klar sein.",
     "riskLevel": "high",
     "primaryGoal": "protect_alg1"
   },
@@ -51,8 +51,8 @@
       "statementClass": "mvp-reliable"
     },
     {
-      "label": "Freistellung beendet nicht automatisch alle To-dos",
-      "description": "Auch bei unwiderruflicher Freistellung bleiben Agentur-Themen, Fristen und Unterlagen relevant.",
+      "label": "Freistellung ändert nichts daran, dass zentrale Schritte offen bleiben können",
+      "description": "Auch während einer Freistellung bleiben Fristen, Meldungen und wichtige Unterlagen relevant.",
       "severity": "medium",
       "statementClass": "mvp-reliable"
     }
@@ -93,15 +93,16 @@
   ],
   "statementLedger": {
     "mvpReliable": [
-      "Ein noch nicht unterschriebener Aufhebungs- oder Abwicklungsvertrag sollte nicht vorschnell unterzeichnet werden.",
-      "Arbeitsuchendmeldung ist eine frühe Pflicht und bleibt zeitkritisch.",
-      "Mitwirkung an der Beendigung kann ALG-I-Risiken auslösen."
+      "Die Arbeitsuchendmeldung soll in der Regel spätestens 3 Monate vor Ende des Arbeitsverhältnisses erfolgen; erfährst du später davon, binnen 3 Tagen.",
+      "Zu späte Meldungen können finanzielle Nachteile beim späteren Arbeitslosengeld auslösen.",
+      "Beide Meldungen sind fachlich getrennt. Im MVP soll diese Unterscheidung explizit sichtbar bleiben.",
+      "Aufhebungs- oder Abwicklungsverträge können erhebliche Folgen für Arbeitslosengeld und Verhandlungsspielraum haben.",
+      "Bei Vertragsbeendigungen mit eigener Mitwirkung können Auswirkungen auf das Arbeitslosengeld entstehen.",
+      "Auch bei Freistellung bleiben Meldungen, Fristen und Unterlagenthemen relevant."
     ],
-    "cautiousChecks": [
-      "Details der Freistellung und konkrete Vertragsfolgen im Einzelfall gesondert prüfen."
-    ],
+    "cautiousChecks": [],
     "notUsedYet": [
-      "Keine Abfindungserwartung oder Erfolgswahrscheinlichkeit ausgeben."
+      "Der MVP soll keine belastbare Erwartung zu Abfindungshöhe oder Durchsetzbarkeit suggerieren."
     ]
   }
 }

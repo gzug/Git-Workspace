@@ -18,6 +18,7 @@ Dieses Verzeichnis enthält die erste Datenbasis für den MVP des **Kündigungs-
 1. Der Nutzer beantwortet adaptive Fragen aus `questions.schema.json`.
 2. Die Antworten werden gegen Regeln aus `rules.schema.json` ausgewertet.
 3. Daraus entsteht ein personalisierter Output in der Form von `result.schema.json`.
+4. `src/runtime/buildQuestionnaireResultView.js` verbindet Flow, Normalisierung, Engine, Produktstufe und Rendering zu einem nutzbaren Ergebniszustand.
 
 ## Produktlogik im MVP
 

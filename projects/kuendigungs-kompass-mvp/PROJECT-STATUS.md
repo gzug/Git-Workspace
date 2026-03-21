@@ -6,13 +6,14 @@ Stand: 2026-03-21
 
 Der Kündigungs-Kompass steht aktuell auf einem **operativ belastbaren V2-MVP-Zwischenstand**.
 
-Der Kern ist nicht mehr nur Schema-Design, sondern bereits in vier Schichten angelegt:
+Der Kern ist nicht mehr nur Schema-Design, sondern bereits in fünf Schichten angelegt:
 - **Frage-/Entscheidungsmodell**
 - **Regel- und Priorisierungslogik**
 - **Result- und Copy-Layer**
-- **erste Mapping-/Rendering- und Fixture-Struktur**
+- **Mapping-/Rendering- und Fixture-Struktur**
+- **integrierter Runtime-Pfad vom Fragebogen bis zur Ergebnisansicht**
 
-Das Projekt ist damit fachlich deutlich weiter als ein reines Konzept, aber noch **nicht als integriertes Produkt-Interface** angeschlossen.
+Das Projekt ist damit nicht mehr nur fachlich vorbereitet, sondern besitzt jetzt einen echten produktnahen Ergebnis-Flow mit klaren Fallback-Zuständen.
 
 ---
 
@@ -326,3 +327,4 @@ Der Kündigungs-Kompass ist aktuell **kein loses Ideenpaket mehr**, sondern ein 
 - und klaren nächsten Schritten.
 
 Der nächste echte Hebel ist jetzt **Test- und Render-Stabilität**, nicht weitere fachliche Ausdehnung.
+ehnung.

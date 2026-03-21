@@ -104,12 +104,19 @@ Die Hauptlücken liegen aktuell in **vollständiger Testhärtung**, **konkreter 
 - Priorität: P1
 
 ### Task 3.4 — Ergebnisansicht implementieren
-- Status: vorbereitet
+- Status: erledigt
 - Priorität: P1
+- Ergebnis:
+  - produktseitiger Runtime-Orchestrator verbindet jetzt Flow → Normalisierung → Engine → Tier-Projektion → Rendering
+  - `src/runtime/buildQuestionnaireResultView.js` liefert einen klaren View-State für `ready`, `incomplete`, `render-fallback` und harte Fehler
 
 ### Task 3.5 — Fehler- und Fallback-Handling
-- Status: offen
+- Status: erledigt
 - Priorität: P1
+- Ergebnis:
+  - unvollständige Fragebögen werden nicht still weitergerechnet, sondern mit fehlenden Fragen und nächstem Screen zurückgegeben
+  - unbekannte Produktstufen fallen kontrolliert auf `base` zurück und markieren das als Warning
+  - Renderfehler behalten das strukturierte Result als Fallback, statt die komplette Auswertung wegzuwerfen
 
 ---
 

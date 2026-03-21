@@ -1,19 +1,22 @@
 const fs = require('fs');
 const path = require('path');
-const { buildResult, renderResult } = require('./engine');
-const { getQuestionnaireFlowState } = require('./flow/questionnaireFlow');
+const { buildQuestionnaireResultView } = require('./runtime/buildQuestionnaireResultView');
 
 const inputFile = process.argv[2];
+const requestedTier = process.argv[3] || 'base';
+
 if (!inputFile) {
-  console.error('Usage: node src/demo.js <input-json-path>');
+  console.error('Usage: node src/demo.js <input-json-path> [preview|base|upgrade]');
   process.exit(1);
 }
 
 const absolute = path.resolve(process.cwd(), inputFile);
 const input = JSON.parse(fs.readFileSync(absolute, 'utf8'));
-const flowState = getQuestionnaireFlowState(input);
-const result = buildResult(input);
+const view = buildQuestionnaireResultView(input, { tier: requestedTier });
 
-console.log(JSON.stringify({ flowState, result }, null, 2));
-console.log('\n---\n');
-console.log(renderResult(result, 'standard'));
+console.log(JSON.stringify(view, null, 2));
+
+if (view.rendered) {
+  console.log('\n---\n');
+  console.log(view.rendered);
+}

@@ -1,0 +1,829 @@
+const fs = require('fs');
+const path = require('path');
+
+const ROOT = path.resolve(__dirname, '..', '..');
+
+function loadJson(relativePath) {
+  return JSON.parse(fs.readFileSync(path.join(ROOT, relativePath), 'utf8'));
+}
+
+const questionsSchema = loadJson('questions.schema.json');
+const rulesSchema = loadJson('rules.schema.json');
+const resultSchema = loadJson('result.schema.json'); // loaded for version/constants sanity
+const mappingConfig = loadJson('MAPPING-CONFIG-V1.json');
+
+const questions = questionsSchema.questions || questionsSchema.example?.questions || [];
+const rules = rulesSchema.rules || rulesSchema.example?.rules || [];
+
+function normalizeAnswers(rawAnswers = {}) {
+  const answers = { ...rawAnswers };
+  for (const question of questions) {
+    if (question.type === 'multiSelect' && !Array.isArray(answers[question.id])) {
+      answers[question.id] = answers[question.id] == null ? [] : [answers[question.id]];
+    }
+  }
+  return answers;
+}
+
+function valueIncludes(actual, expected) {
+  if (Array.isArray(actual)) return actual.includes(expected);
+  if (typeof actual === 'string') return actual === expected;
+  return false;
+}
+
+function daysToDate(dateString, now = new Date()) {
+  if (!dateString) return null;
+  const target = new Date(dateString);
+  if (Number.isNaN(target.getTime())) return null;
+  const ms = target.getTime() - now.getTime();
+  return Math.ceil(ms / (1000 * 60 * 60 * 24));
+}
+
+function matchesCondition(condition, answers, now = new Date()) {
+  const actual = answers[condition.field];
+  switch (condition.operator) {
+    case 'equals':
+      return actual === condition.value;
+    case 'notEquals':
+      return actual !== condition.value;
+    case 'includes':
+      return valueIncludes(actual, condition.value);
+    case 'notIncludes':
+      return !valueIncludes(actual, condition.value);
+    case 'exists':
+      return condition.value === true
+        ? actual !== undefined && actual !== null && !(Array.isArray(actual) && actual.length === 0)
+        : actual === undefined || actual === null;
+    case 'ltDaysToDate': {
+      const days = daysToDate(actual, now);
+      return days != null && days < condition.value;
+    }
+    case 'lteDaysToDate': {
+      const days = daysToDate(actual, now);
+      return days != null && days <= condition.value;
+    }
+    case 'gtDaysToDate': {
+      const days = daysToDate(actual, now);
+      return days != null && days > condition.value;
+    }
+    default:
+      return false;
+  }
+}
+
+function missingRequiredFields(answers) {
+  const missing = [];
+  for (const question of questions) {
+    const askIfOk = !question.askIf || question.askIf.every((condition) => matchesCondition(condition, answers));
+    if (!askIfOk) continue;
+    const value = answers[question.id];
+    const isMissing = value === undefined || value === null || (Array.isArray(value) && value.length === 0) || value === '';
+    if (isMissing && (question.required || question.redFlagIfMissing)) {
+      missing.push({
+        id: question.id,
+        label: question.label,
+        redFlagIfMissing: Boolean(question.redFlagIfMissing),
+      });
+    }
+  }
+  return missing;
+}
+
+function evaluateRules(rawAnswers, options = {}) {
+  const answers = normalizeAnswers(rawAnswers);
+  const now = options.now ? new Date(options.now) : new Date();
+  const matchedRules = [];
+  const effects = [];
+
+  for (const rule of rules) {
+    if (rule.conditions.every((condition) => matchesCondition(condition, answers, now))) {
+      matchedRules.push(rule);
+      for (const effect of rule.effects) {
+        effects.push({
+          ...effect,
+          ruleId: rule.id,
+          ruleSeverity: rule.severity,
+          ruleClass: rule.ruleClass,
+          outcomeType: rule.outcomeType,
+          stage: rule.stage,
+          tags: rule.tags,
+        });
+      }
+    }
+  }
+
+  return {
+    answers,
+    matchedRules,
+    effects,
+    missingFields: missingRequiredFields(answers),
+  };
+}
+
+function dedupeBy(items, keyFn) {
+  const seen = new Set();
+  return items.filter((item) => {
+    const key = keyFn(item);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function effectId(effect) {
+  return effect?.payload?.id || effect?.payload?.label || effect.ruleId;
+}
+
+function severityRank(severity) {
+  return { critical: 4, high: 3, medium: 2, low: 1 }[severity] || 0;
+}
+
+function statementLedgerFromEffects(effects) {
+  const ledger = {
+    mvpReliable: [],
+    cautiousChecks: [],
+    notUsedYet: [],
+  };
+
+  for (const effect of effects) {
+    const text = effect.payload.description || effect.payload.why || effect.payload.label;
+    if (!text) continue;
+    if (effect.payload.statementClass === 'mvp-reliable') ledger.mvpReliable.push(text);
+    if (effect.payload.statementClass === 'cautious-check') ledger.cautiousChecks.push(text);
+    if (effect.payload.statementClass === 'do-not-use-yet') ledger.notUsedYet.push(text);
+  }
+
+  ledger.mvpReliable = dedupeBy(ledger.mvpReliable, (x) => x);
+  ledger.cautiousChecks = dedupeBy(ledger.cautiousChecks, (x) => x);
+  ledger.notUsedYet = dedupeBy(ledger.notUsedYet, (x) => x);
+
+  return ledger;
+}
+
+function buildDocumentChecklist(answers) {
+  const secured = new Set(answers.documents_secured || []);
+  const items = [];
+
+  function push(label, reason, statusKey) {
+    const status = secured.has(statusKey)
+      ? 'already-secured'
+      : 'secure-now';
+    items.push({ label, reason, status });
+  }
+
+  if (answers.case_entry === 'termination_received') {
+    push('Kündigungsschreiben', 'Zugang und Datum sind für die Fristprüfung zentral.', 'termination_letter');
+  }
+  if (answers.case_entry === 'termination_announced_only') {
+    items.push({
+      label: 'Schriftliche Kommunikation zur angekündigten Kündigung',
+      reason: 'Hilfreich, um den Verlauf später nachvollziehen zu können.',
+      status: 'secure-now',
+    });
+  }
+  if (answers.agreement_present) {
+    push(
+      answers.agreement_already_signed ? 'Unterzeichneter Vertrag' : 'Aufhebungs-/Abwicklungsvertrag oder Entwurf',
+      answers.agreement_already_signed
+        ? 'Der exakte Inhalt ist jetzt zentral für jede weitere Einordnung.'
+        : 'Nur mit dem konkreten Text lassen sich Risiken und offene Punkte sinnvoll prüfen.',
+      'agreement_draft'
+    );
+  }
+
+  items.push({
+    label: 'Arbeitsvertrag',
+    reason: answers.agreement_present
+      ? 'Wichtig für die Ausgangslage und mögliche Rückfragen in der Beratung.'
+      : 'Hilft bei Beratung und Einordnung der Ausgangslage.',
+    status: secured.has('employment_contract') ? 'already-secured' : 'secure-now',
+  });
+
+  if (answers.case_entry === 'termination_announced_only' || secured.has('salary_docs') || answers.agreement_present || answers.already_unemployed_now) {
+    items.push({
+      label: 'Lohnunterlagen',
+      reason: answers.agreement_present
+        ? 'Hilfreich für ALG-I-Themen und die Vorbereitung auf Rückfragen.'
+        : 'Hilfreich für Agentur-Themen und Beratungsvorbereitung.',
+      status: secured.has('salary_docs') ? 'already-secured' : 'secure-now',
+    });
+  }
+
+  if ((answers.release_status && answers.release_status !== 'no') || secured.has('release_or_vacation_info')) {
+    items.push({
+      label: answers.agreement_already_signed ? 'Freistellungs- und Restanspruchsinfos' : 'Infos zu Freistellung / Urlaub / Restansprüchen',
+      reason: answers.agreement_already_signed
+        ? 'Relevant, weil die praktische Abwicklung jetzt wichtig bleibt.'
+        : 'Relevant, weil Freistellung organisatorisch wichtig bleibt und offene Ansprüche später eine Rolle spielen können.',
+      status: secured.has('release_or_vacation_info') ? 'already-secured' : 'secure-now',
+    });
+  }
+
+  const indicators = answers.special_protection_indicator || [];
+  if (indicators.some((x) => x !== 'none_known')) {
+    items.push({
+      label: 'Nachweise zum möglichen Schutzstatus',
+      reason: 'Falls vorhanden, helfen diese Unterlagen, den Sonderfall schneller individuell einzuordnen.',
+      status: 'secure-now',
+    });
+  }
+
+  return dedupeBy(items, (item) => item.label);
+}
+
+function buildAdvisorQuestions(answers, track) {
+  if (track === 'contract-do-not-sign') {
+    return [
+      'Welche unmittelbaren Folgen hätte dieser Vertrag für mein Arbeitslosengeld?',
+      'Gibt es in diesem Entwurf Formulierungen, die ich besonders kritisch prüfen lassen sollte?',
+      'Welche Alternative habe ich, wenn ich jetzt nicht unterschreibe?'
+    ];
+  }
+  if (track === 'special-case-review') {
+    if (answers.agreement_already_signed) {
+      return [
+        'Welche unmittelbaren Folgen hat die bereits erfolgte Unterschrift?',
+        'Welche Fristen oder nächsten Schritte laufen jetzt trotzdem?',
+        'Welche Punkte im Vertrag sind für ALG I oder weitere Ansprüche besonders kritisch?'
+      ];
+    }
+    return [
+      'Greift in meinem Fall möglicherweise ein besonderer Schutz?',
+      'Welche Frist läuft trotz Sonderfall jetzt sofort?',
+      'Welche Unterlagen oder Nachweise sollte ich für die Prüfung direkt mitbringen?'
+    ];
+  }
+  if (track === 'deadline-first') {
+    return [
+      'Welche Schritte erwartet die Agentur für Arbeit in meinem Fall jetzt sofort von mir?',
+      'Bis wann muss ich die 3-Wochen-Frist konkret gerechnet haben?',
+      'Welche Unterlagen sollte ich für Agentur oder Beratung direkt bereithalten?'
+    ];
+  }
+  return [
+    'Ab wann ist in meinem Fall die Arbeitsuchendmeldung relevant?',
+    'Welche Schritte sollte ich jetzt schon vorbereiten, obwohl noch nichts Schriftliches vorliegt?',
+    'Welche Unterlagen sollte ich sofort sichern?'
+  ];
+}
+
+function buildTopActions(answers, effects, track) {
+  const actions = [];
+  const secured = new Set(answers.documents_secured || []);
+
+  for (const effect of effects) {
+    const warningRoute = mappingConfig.warningRouting[effectId(effect)];
+    const suppressedGenericActionIds = new Set([
+      'complete-jobseeker-registration',
+      'complete-unemployment-registration'
+    ]);
+    if (
+      (effect.type === 'immediateAction' && !suppressedGenericActionIds.has(effectId(effect))) ||
+      (effect.type === 'warning' && warningRoute === 'topActions')
+    ) {
+      actions.push({
+        priority: effect.payload.priority || 99,
+        label: effect.payload.label,
+        why: effect.payload.why || effect.payload.description || effect.payload.label,
+        timing: effect.payload.timing || mappingConfig.severityToTimingFallback[effect.ruleSeverity] || 'zeitnah',
+        statementClass: effect.payload.statementClass,
+        _severity: effect.ruleSeverity,
+      });
+    }
+  }
+
+  if (track === 'contract-do-not-sign') {
+    actions.unshift({
+      priority: 1,
+      label: 'Aufhebungsvertrag nicht vorschnell unterschreiben',
+      why: 'Vor einer Unterschrift sollten die möglichen Folgen für Arbeitslosengeld, Fristen und Optionen sauber geprüft sein.',
+      timing: 'vor jeder Unterschrift',
+      statementClass: 'mvp-reliable',
+      _severity: 'critical',
+    });
+    if (answers.jobseeker_registered === false) {
+      actions.push({
+        priority: 2,
+        label: 'Arbeitsuchendmeldung sofort prüfen oder nachholen',
+        why: 'Auch ohne bereits eingetretene Arbeitslosigkeit ist diese frühe Meldung ein kritischer Pflichtpunkt.',
+        timing: 'sofort',
+        statementClass: 'mvp-reliable',
+        _severity: 'critical',
+      });
+    }
+    actions.push({
+      priority: 3,
+      label: 'Vertragsentwurf und Fragen für Beratung bündeln',
+      why: 'Eine saubere Vorbereitung hilft, die Folgen des Vertrags und sinnvolle Alternativen belastbar einzuordnen.',
+      timing: 'heute',
+      statementClass: 'mvp-reliable',
+      _severity: 'medium',
+    });
+  }
+
+  if (track === 'deadline-first') {
+    if (answers.already_unemployed_now && answers.unemployment_registered === false) {
+      actions.push({
+        priority: 1,
+        label: 'Arbeitslosmeldung sofort prüfen oder nachholen',
+        why: 'Wenn du bereits arbeitslos bist, ist das ein eigener zeitkritischer Schritt gegenüber der Agentur für Arbeit.',
+        timing: 'sofort',
+        statementClass: 'mvp-reliable',
+        _severity: 'critical',
+      });
+    }
+    if (answers.jobseeker_registered === false) {
+      actions.push({
+        priority: 2,
+        label: answers.already_unemployed_now
+          ? 'Arbeitsuchendmeldung ebenfalls sofort prüfen oder nachholen'
+          : 'Arbeitsuchendmeldung sofort prüfen oder nachholen',
+        why: answers.already_unemployed_now
+          ? 'Die Arbeitsuchendmeldung ist fachlich getrennt von der Arbeitslosmeldung und sollte nicht offen bleiben.'
+          : 'Diese frühe Meldung gehört zu den ersten kritischen Schritten.',
+        timing: 'sofort',
+        statementClass: 'mvp-reliable',
+        _severity: 'critical',
+      });
+    }
+    if (answers.termination_access_date) {
+      actions.push({
+        priority: 3,
+        label: '3-Wochen-Frist für Kündigungsschutzklage sofort einordnen',
+        why: 'Nach Zugang einer schriftlichen Kündigung läuft regelmäßig eine sehr kurze Frist, die du nicht versehentlich verstreichen lassen solltest.',
+        timing: 'heute',
+        statementClass: 'mvp-reliable',
+        _severity: 'critical',
+      });
+    }
+  }
+
+  if (track === 'special-case-review') {
+    if (answers.agreement_already_signed) {
+      actions.push({
+        priority: 1,
+        label: 'Unterzeichneten Vertrag sofort individuell prüfen lassen',
+        why: 'Nach der Unterschrift geht es nicht mehr um allgemeines Bremsen, sondern um konkrete Folgen und mögliche nächste Schritte.',
+        timing: 'sofort',
+        statementClass: 'cautious-check',
+        _severity: 'high',
+      });
+      actions.push({
+        priority: 2,
+        label: 'Agentur-Themen und Leistungsfolgen gezielt klären',
+        why: 'Mitwirkung an der Beendigung kann Auswirkungen auf Arbeitslosengeld und weitere Abläufe haben.',
+        timing: 'sehr zeitnah',
+        statementClass: 'mvp-reliable',
+        _severity: 'high',
+      });
+      actions.push({
+        priority: 3,
+        label: 'Alle Vertrags- und Freistellungsunterlagen vollständig bündeln',
+        why: 'Für jede belastbare Einordnung wird jetzt der genaue Wortlaut und die begleitende Dokumentation wichtig.',
+        timing: 'heute',
+        statementClass: 'mvp-reliable',
+        _severity: 'medium',
+      });
+    } else {
+      if (answers.termination_access_date) {
+        actions.push({
+          priority: 1,
+          label: '3-Wochen-Frist für Kündigungsschutzklage sofort prüfen',
+          why: 'Auch bei möglichem Sonderfall bleibt die kurze Frist nach Zugang der schriftlichen Kündigung zentral.',
+          timing: 'heute',
+          statementClass: 'mvp-reliable',
+          _severity: 'critical',
+        });
+      }
+      actions.push({
+        priority: 2,
+        label: 'Möglichen Sonderfall gezielt prüfen lassen',
+        why: 'Hier sollte nicht mit pauschalen Aussagen gearbeitet werden, wenn ein besonderer Schutz in Betracht kommt.',
+        timing: 'sehr zeitnah',
+        statementClass: 'cautious-check',
+        _severity: 'high',
+      });
+      actions.push({
+        priority: 3,
+        label: 'Unterlagen für Beratung vollständig bündeln',
+        why: 'Je klarer der Fall dokumentiert ist, desto schneller lässt sich der mögliche Schutzstatus einordnen.',
+        timing: 'heute',
+        statementClass: 'mvp-reliable',
+        _severity: 'medium',
+      });
+    }
+  }
+
+  if (track === 'prepare-advice') {
+    if (answers.jobseeker_registered === false) {
+      actions.push({
+        priority: 1,
+        label: 'Arbeitsuchendmeldung sofort prüfen oder nachholen',
+        why: 'Auch ohne schriftliche Kündigung kann die frühe Meldelogik relevant werden, wenn das Ende des Arbeitsverhältnisses absehbar ist.',
+        timing: 'sofort',
+        statementClass: 'mvp-reliable',
+        _severity: 'critical',
+      });
+    }
+    if (answers.case_entry === 'termination_announced_only') {
+      actions.push({
+        priority: 2,
+        label: 'Noch keine Fristen aus nicht vorhandener Schriftform ableiten',
+        why: 'Ohne schriftliche Kündigung soll der MVP keine künstliche 3-Wochen-Panik erzeugen.',
+        timing: 'ab jetzt',
+        statementClass: 'mvp-reliable',
+        _severity: 'medium',
+      });
+    }
+    if (secured.has('none_yet') || !answers.documents_secured || answers.documents_secured.length === 0) {
+      actions.push({
+        priority: 3,
+        label: 'Kernunterlagen schon jetzt sichern',
+        why: 'Wenn sich die Lage zuspitzt, spart vorbereitete Dokumentation Zeit und Fehler.',
+        timing: 'heute',
+        statementClass: 'mvp-reliable',
+        _severity: 'medium',
+      });
+    }
+  }
+
+  return dedupeBy(actions, (item) => item.label)
+    .sort((a, b) => (a.priority - b.priority) || (severityRank(b._severity) - severityRank(a._severity)))
+    .slice(0, 3)
+    .map(({ _severity, ...item }) => item);
+}
+
+function buildDeadlines(answers) {
+  const deadlines = [];
+  if (answers.already_unemployed_now && answers.unemployment_registered === false) {
+    deadlines.push({
+      label: 'Arbeitslosmeldung',
+      timing: 'spätestens am ersten Tag der Arbeitslosigkeit; wenn noch offen, jetzt sofort prüfen',
+      importance: 'critical',
+      note: 'Die Arbeitslosmeldung ist ein eigener Schritt und nicht dasselbe wie die Arbeitsuchendmeldung.',
+      statementClass: 'mvp-reliable',
+    });
+  }
+  if (answers.jobseeker_registered === false) {
+    deadlines.push({
+      label: 'Arbeitsuchendmeldung',
+      timing: 'spätestens 3 Monate vor Ende, sonst innerhalb von 3 Tagen nach Kenntnis',
+      importance: 'critical',
+      note: answers.already_unemployed_now
+        ? 'Auch wenn du schon arbeitslos bist, sollte diese Meldung als eigener Pflichtpunkt nicht übersehen werden.'
+        : 'Diese Meldung sollte nicht aufgeschoben werden, auch wenn der Vertrag noch nicht unterschrieben ist.',
+      statementClass: 'mvp-reliable',
+    });
+  }
+  if (answers.termination_access_date) {
+    deadlines.push({
+      label: 'Kündigungsschutzklage prüfen',
+      timing: 'regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung',
+      importance: 'critical',
+      note: (answers.special_protection_indicator || []).some((x) => x !== 'none_known')
+        ? 'Der mögliche Sonderfall ändert nichts daran, dass die Frist nicht liegen bleiben sollte.'
+        : 'Der MVP prüft nicht die Erfolgsaussicht, sondern markiert die Frist als priorisiert.',
+      statementClass: 'mvp-reliable',
+    });
+  }
+  return deadlines;
+}
+
+function buildRiskFlags(answers, track) {
+  const riskFlags = [];
+  const special = (answers.special_protection_indicator || []).some((x) => x !== 'none_known');
+
+  if (track === 'deadline-first') {
+    riskFlags.push({
+      label: 'Verspätete Agentur-Meldungen können Nachteile auslösen',
+      description: 'Wenn Arbeitsuchend- oder Arbeitslosmeldung offen bleiben, steigt das Risiko unnötiger Probleme im weiteren ALG-I-Prozess.',
+      severity: 'critical',
+      statementClass: 'mvp-reliable',
+    });
+    if (answers.termination_access_date) {
+      riskFlags.push({
+        label: 'Kurze Klagefrist kann unbemerkt verstreichen',
+        description: 'Nach Zugang einer schriftlichen Kündigung sollte die 3-Wochen-Frist nicht aus dem Blick geraten.',
+        severity: 'critical',
+        statementClass: 'mvp-reliable',
+      });
+    }
+  }
+
+  if (track === 'contract-do-not-sign') {
+    riskFlags.push({
+      label: 'Sperrzeit-/Ruhensrisiko bei einvernehmlicher Beendigung',
+      description: 'Wenn du an der Beendigung des Arbeitsverhältnisses mitwirkst, kann das Folgen für dein Arbeitslosengeld haben.',
+      severity: 'critical',
+      statementClass: 'mvp-reliable',
+    });
+    if (answers.release_status && answers.release_status !== 'no') {
+      riskFlags.push({
+        label: 'Freistellung beendet nicht automatisch alle To-dos',
+        description: 'Auch bei unwiderruflicher Freistellung bleiben Agentur-Themen, Fristen und Unterlagen relevant.',
+        severity: 'medium',
+        statementClass: 'mvp-reliable',
+      });
+    }
+  }
+
+  if (track === 'special-case-review') {
+    if (answers.agreement_already_signed) {
+      riskFlags.push({
+        label: 'Vertrag bereits unterschrieben',
+        description: 'Damit verschiebt sich der Fokus von allgemeiner Warnung auf Folgen, Fristen und individuelle Prüfung.',
+        severity: 'high',
+        statementClass: 'cautious-check',
+      });
+      riskFlags.push({
+        label: 'ALG-I-Risiken weiter relevant',
+        description: 'Auch nach Unterschrift können Sperrzeit- oder andere Leistungsfragen im Raum stehen.',
+        severity: 'high',
+        statementClass: 'mvp-reliable',
+      });
+    } else {
+      riskFlags.push({
+        label: 'Möglicher Sonderkündigungsschutz / heikler Sonderfall',
+        description: 'Der Fall sollte nicht wie eine Standard-Kündigung behandelt werden, solange unklar ist, ob ein besonderer Schutz eingreift.',
+        severity: 'high',
+        statementClass: 'mvp-reliable',
+      });
+      riskFlags.push({
+        label: 'Unsicherheit bei Schutzstatus erhöht das Fehlentscheidungsrisiko',
+        description: 'Wenn die Schutzlage unklar ist, kann vorschnelles Handeln wichtige Optionen verschlechtern.',
+        severity: 'high',
+        statementClass: 'cautious-check',
+      });
+    }
+  }
+
+  if (track === 'prepare-advice') {
+    riskFlags.push({
+      label: 'Frühe Agentur-Schritte könnten übersehen werden',
+      description: 'Wer nur auf das schriftliche Kündigungsschreiben wartet, kann frühe To-dos bei der Agentur aus dem Blick verlieren.',
+      severity: 'high',
+      statementClass: 'mvp-reliable',
+    });
+  }
+
+  if (!special && answers.agreement_already_signed && track !== 'special-case-review') {
+    riskFlags.push({
+      label: 'Vertrag bereits unterschrieben',
+      description: 'Damit verschiebt sich der Fokus von allgemeiner Warnung auf Folgen, Fristen und individuelle Prüfung.',
+      severity: 'high',
+      statementClass: 'cautious-check',
+    });
+  }
+
+  return dedupeBy(riskFlags, (item) => item.label).slice(0, 3);
+}
+
+function buildRedFlags(answers, evaluation, track) {
+  const flags = [];
+  const indicators = answers.special_protection_indicator || [];
+  if (track === 'special-case-review' && answers.agreement_already_signed) {
+    flags.push({
+      label: 'Bereits unterschriebener Beendigungsvertrag',
+      whyEscalated: 'Der MVP soll hier nicht mit pauschalen Aussagen arbeiten, weil die konkrete Folgenlage individuell geprüft werden muss.',
+      recommendedEscalation: 'Qualifizierte individuelle Prüfung mit Anwalt, Gewerkschaft oder passender Beratungsstelle',
+    });
+  } else if (track === 'special-case-review' || indicators.some((x) => x !== 'none_known')) {
+    flags.push({
+      label: 'Möglicher besonderer Schutz oder Sonderfall',
+      whyEscalated: 'Es gibt Hinweise auf Schwangerschaft / Mutterschutz oder eine unklare Schutzlage, die der MVP nicht selbst verlässlich auflösen sollte.',
+      recommendedEscalation: 'Qualifizierte individuelle Prüfung mit Anwalt, Gewerkschaft oder passender Beratungsstelle',
+    });
+  }
+
+  for (const missing of evaluation.missingFields.filter((x) => x.redFlagIfMissing)) {
+    flags.push({
+      label: `Wichtige Angabe fehlt: ${missing.label}`,
+      whyEscalated: 'Ohne diese Angabe ist eine saubere Standard-Einordnung unsicher.',
+      recommendedEscalation: 'Antwort ergänzen oder individuell prüfen lassen',
+    });
+  }
+
+  return dedupeBy(flags, (item) => item.label).slice(0, 2);
+}
+
+function selectPrimaryTrack(rawAnswers, evaluation = evaluateRules(rawAnswers)) {
+  const answers = evaluation.answers;
+  const indicators = answers.special_protection_indicator || [];
+  const hasSpecialIndicator = indicators.some((x) => x !== 'none_known');
+
+  if (hasSpecialIndicator || answers.agreement_already_signed || evaluation.missingFields.some((x) => x.redFlagIfMissing)) {
+    const reasoning = answers.agreement_already_signed
+      ? 'Weil der Vertrag bereits unterschrieben ist, ist der Standardhinweis \"nicht unterschreiben\" nicht mehr ausreichend. Jetzt stehen Folgenanalyse, Fristen und individuelle Prüfung im Vordergrund.'
+      : 'Weil hier neben der Kündigungsfrist auch ein möglicher Schutzstatus oder Sonderfall im Raum steht, wäre Standardlogik zu grob und eine individuelle Prüfung vorrangig.';
+    return {
+      primaryTrack: 'special-case-review',
+      reasoning,
+      confidenceClass: hasSpecialIndicator || answers.agreement_already_signed ? 'cautious-check' : 'mvp-reliable',
+    };
+  }
+
+  if (answers.agreement_present === true && answers.agreement_already_signed === false) {
+    return {
+      primaryTrack: 'contract-do-not-sign',
+      reasoning: 'Weil ein noch nicht unterschriebener Vertrag gerade der stärkste Hebel für Nachteile beim Arbeitslosengeld und beim Handlungsspielraum ist, hat der Vertragsstopp Vorrang.',
+      confidenceClass: 'mvp-reliable',
+    };
+  }
+
+  if (answers.case_entry === 'termination_announced_only') {
+    return {
+      primaryTrack: 'prepare-advice',
+      reasoning: 'Weil noch keine schriftliche Kündigung zugegangen ist, steht nicht die 3-Wochen-Klagefrist im Vordergrund, sondern Vorbereitung und frühe Agentur-Absicherung.',
+      confidenceClass: 'mvp-reliable',
+    };
+  }
+
+  if (answers.already_unemployed_now || answers.unemployment_registered === false || answers.jobseeker_registered === false) {
+    if (answers.primary_goal === 'protect_deadlines' || answers.termination_access_date) {
+      return {
+        primaryTrack: 'deadline-first',
+        reasoning: 'Weil du schon arbeitslos bist und sowohl Agentur-Meldungen als auch kurze Fristen gleichzeitig aktiv sind, hat Fristschutz jetzt Vorrang.',
+        confidenceClass: 'mvp-reliable',
+      };
+    }
+    return {
+      primaryTrack: 'alg1-risk-first',
+      reasoning: 'Weil Meldungen oder Mitwirkung an der Beendigung finanzielle Nachteile auslösen können, liegt der Fokus zuerst auf der Begrenzung von ALG-I-Risiken.',
+      confidenceClass: 'mvp-reliable',
+    };
+  }
+
+  return {
+    primaryTrack: 'prepare-advice',
+    reasoning: 'Weil gerade keine dominante Frist- oder Vertragseskalation im Vordergrund steht, ist Vorbereitung für Beratung und die nächsten Schritte der sinnvollste Fokus.',
+    confidenceClass: 'mvp-reliable',
+  };
+}
+
+function buildCaseSnapshot(answers, track) {
+  if (track === 'contract-do-not-sign') {
+    return {
+      headline: 'Nichts vorschnell unterschreiben',
+      situation: 'Dir liegt ein Aufhebungs- oder Abwicklungsvertrag vor, du bist noch nicht arbeitssuchend gemeldet und dein wichtigstes Ziel ist der Schutz beim ALG I.',
+      riskLevel: 'high',
+      primaryGoal: answers.primary_goal,
+    };
+  }
+  if (track === 'deadline-first') {
+    return {
+      headline: 'Jetzt zuerst Fristen und Meldungen absichern',
+      situation: 'Du hast eine schriftliche Kündigung erhalten, dein Arbeitsverhältnis ist bereits beendet und wichtige Agentur-Meldungen sind noch offen.',
+      riskLevel: 'high',
+      primaryGoal: answers.primary_goal,
+    };
+  }
+  if (track === 'special-case-review' && answers.agreement_already_signed) {
+    return {
+      headline: 'Jetzt geht es um Folgen, Fristen und saubere Einordnung',
+      situation: 'Ein Aufhebungs- oder Abwicklungsvertrag wurde bereits unterschrieben. Damit ist dein Fall kein reiner Standard-Stopp-Fall mehr.',
+      riskLevel: 'high',
+      primaryGoal: answers.primary_goal,
+    };
+  }
+  if (track === 'special-case-review') {
+    return {
+      headline: 'Dein Fall sollte nicht als Standardfall behandelt werden',
+      situation: 'Du hast eine schriftliche Kündigung erhalten und es gibt Hinweise auf einen möglichen Sonderfall oder besonderen Schutz, der gesondert geprüft werden sollte.',
+      riskLevel: 'high',
+      primaryGoal: answers.primary_goal,
+    };
+  }
+  return {
+    headline: 'Jetzt Vorbereitung statt falscher Fristpanik',
+    situation: 'Eine Kündigung wurde angekündigt, aber es liegt noch keine schriftliche Kündigung vor. Gleichzeitig ist die Arbeitsuchendmeldung noch offen.',
+    riskLevel: 'medium',
+    primaryGoal: answers.primary_goal,
+  };
+}
+
+function buildOpportunities(answers, track) {
+  if (track === 'prepare-advice' && answers.primary_goal === 'plan_next_step') {
+    return [{
+      label: 'Weiteren nächsten Schritt strukturiert planen',
+      description: 'Wenn der Fall noch in Bewegung ist, kann eine saubere Vorbereitung sinnvoller sein als voreilige Detailschlüsse.',
+      statementClass: 'cautious-check',
+    }];
+  }
+  return [];
+}
+
+function buildDisclaimers(answers, track) {
+  if (track === 'contract-do-not-sign') {
+    return [
+      'Arbeitsuchendmeldung und Arbeitslosmeldung sind nicht dasselbe.',
+      'Der MVP ersetzt keine individuelle Rechtsberatung.',
+      'Abfindung, Sperrzeit und Ruhen hängen stark vom konkreten Einzelfall ab.'
+    ];
+  }
+  if (track === 'deadline-first') {
+    return [
+      'Die Arbeitsuchendmeldung ersetzt nicht die Arbeitslosmeldung.',
+      'Der MVP ersetzt keine individuelle Rechtsberatung.',
+      'Das Tool bewertet keine Erfolgsaussichten einer Kündigungsschutzklage im Einzelfall.'
+    ];
+  }
+  if (track === 'special-case-review' && answers.agreement_already_signed) {
+    return [
+      'Der MVP ersetzt keine individuelle Rechtsberatung.',
+      'Konkrete Rechtsfolgen eines bereits unterschriebenen Vertrags hängen stark vom Einzelfall ab.',
+      'Der MVP löst keine Anfechtungs- oder Wirksamkeitsprüfung.'
+    ];
+  }
+  if (track === 'special-case-review') {
+    return [
+      'Der MVP ersetzt keine individuelle Rechtsberatung.',
+      'Ob tatsächlich ein besonderer Schutz greift, muss im Einzelfall geprüft werden.',
+      'Das Tool priorisiert Fristen und Eskalation, entscheidet aber keinen Sonderfall abschließend.'
+    ];
+  }
+  return [
+    'Ohne schriftliche Kündigung soll der MVP keine Klagefrist fingieren.',
+    'Der MVP ersetzt keine individuelle Rechtsberatung.',
+    'Arbeitsuchendmeldung und Arbeitslosmeldung sind nicht dasselbe.'
+  ];
+}
+
+function buildResult(rawAnswers, options = {}) {
+  const evaluation = options.evaluation || evaluateRules(rawAnswers, options);
+  const answers = evaluation.answers;
+  const synthesisDecision = selectPrimaryTrack(answers, evaluation);
+  const track = synthesisDecision.primaryTrack;
+  const visibleEffects = evaluation.effects.filter(
+    (effect) => !mappingConfig.guardrails.suppressStatementClasses.includes(effect.payload.statementClass)
+  );
+
+  const result = {
+    resultVersion: resultSchema.properties.resultVersion.const,
+    caseSnapshot: buildCaseSnapshot(answers, track),
+    synthesisDecision,
+    topActions: buildTopActions(answers, visibleEffects, track),
+    deadlines: buildDeadlines(answers),
+    riskFlags: buildRiskFlags(answers, track),
+    redFlags: buildRedFlags(answers, evaluation, track),
+    documentChecklist: buildDocumentChecklist(answers),
+    advisorQuestions: buildAdvisorQuestions(answers, track),
+    opportunities: buildOpportunities(answers, track),
+    disclaimers: buildDisclaimers(answers, track),
+    statementLedger: statementLedgerFromEffects(evaluation.effects),
+  };
+
+  if (result.statementLedger.notUsedYet.length === 0 && answers.agreement_present) {
+    result.statementLedger.notUsedYet.push('Keine Abfindungserwartung oder Erfolgswahrscheinlichkeit ausgeben.');
+  }
+  if (result.statementLedger.notUsedYet.length === 0 && answers.case_entry === 'termination_announced_only') {
+    result.statementLedger.notUsedYet.push('Keine Aussage über die Wirksamkeit einer nur angekündigten Kündigung.');
+  }
+
+  return result;
+}
+
+function renderResult(result, view = 'standard') {
+  const lines = [];
+  const pushList = (title, items, renderItem) => {
+    if (!items || items.length === 0) return;
+    lines.push(`${title}:`);
+    for (const item of items) lines.push(`- ${renderItem(item)}`);
+    lines.push('');
+  };
+
+  if (view === 'short') {
+    lines.push(`Dein Fokus jetzt: ${result.caseSnapshot.headline}`);
+    if (result.topActions[0]) lines.push(`Wichtigster nächster Schritt: ${result.topActions[0].label}`);
+    const critical = result.deadlines.find((d) => d.importance === 'critical');
+    if (critical) lines.push(`Kritische Frist: ${critical.label} — ${critical.timing}`);
+    return lines.join('\n').trim();
+  }
+
+  lines.push(result.caseSnapshot.headline);
+  lines.push('');
+
+  if (view === 'advice') {
+    lines.push(`Warum dieser Fokus: ${result.synthesisDecision.reasoning}`);
+    lines.push('');
+  } else {
+    lines.push(result.caseSnapshot.situation);
+    lines.push('');
+  }
+
+  pushList('Nächste Schritte', result.topActions, (item) => `${item.label} — ${item.why}`);
+  pushList('Fristen', result.deadlines, (item) => `${item.label}: ${item.timing}` + (item.note ? ` (${item.note})` : ''));
+  pushList('Risiken', result.riskFlags, (item) => `${item.label} — ${item.description}`);
+  pushList('Red Flags', result.redFlags, (item) => `${item.label} — ${item.whyEscalated}`);
+  pushList('Unterlagen', result.documentChecklist, (item) => `${item.label} (${item.status}) — ${item.reason}`);
+  if (view === 'advice') pushList('Fragen für Beratung', result.advisorQuestions, (item) => item);
+  pushList('Hinweise', result.disclaimers, (item) => item);
+
+  return lines.join('\n').trim();
+}
+
+module.exports = {
+  evaluateRules,
+  buildResult,
+  selectPrimaryTrack,
+  renderResult,
+};

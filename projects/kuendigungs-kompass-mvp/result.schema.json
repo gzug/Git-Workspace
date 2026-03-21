@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Kündigungs-Kompass Result Schema",
+  "description": "Struktur für den personalisierten Output des MVP.",
+  "type": "object",
+  "required": ["summary", "topPriorities", "deadlines", "warnings", "opportunities", "documents", "advisorQuestions", "disclaimers"],
+  "properties": {
+    "summary": {
+      "type": "object",
+      "required": ["headline", "situation", "riskLevel"],
+      "properties": {
+        "headline": { "type": "string" },
+        "situation": { "type": "string" },
+        "riskLevel": { "type": "string", "enum": ["low", "medium", "high"] }
+      }
+    },
+    "topPriorities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["priority", "label", "why"],
+        "properties": {
+          "priority": { "type": "integer" },
+          "label": { "type": "string" },
+          "why": { "type": "string" }
+        }
+      }
+    },
+    "deadlines": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["label", "timing", "importance"],
+        "properties": {
+          "label": { "type": "string" },
+          "timing": { "type": "string" },
+          "importance": { "type": "string", "enum": ["critical", "high", "medium"] },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["label", "description"],
+        "properties": {
+          "label": { "type": "string" },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "opportunities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["label", "description"],
+        "properties": {
+          "label": { "type": "string" },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "documents": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "advisorQuestions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "disclaimers": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "example": {
+    "summary": {
+      "headline": "Jetzt zuerst Fristen und ALG-I-Risiken absichern",
+      "situation": "Du hast einen Aufhebungsvertrag vorliegen und bist noch nicht arbeitssuchend gemeldet.",
+      "riskLevel": "high"
+    },
+    "topPriorities": [
+      {
+        "priority": 1,
+        "label": "Arbeitsuchendmeldung sofort prüfen oder nachholen",
+        "why": "Frühe Meldung gehört zu den wichtigsten ersten Schritten."
+      },
+      {
+        "priority": 2,
+        "label": "Aufhebungsvertrag nicht vorschnell unterschreiben",
+        "why": "Vor einer Unterschrift sollten ALG-I-Risiken und weitere Folgen besser eingeordnet werden."
+      },
+      {
+        "priority": 3,
+        "label": "Unterlagen und offene Fragen bündeln",
+        "why": "So gehst du besser vorbereitet in Gespräche mit Agentur, Anwalt oder Gewerkschaft."
+      }
+    ],
+    "deadlines": [
+      {
+        "label": "Arbeitsuchendmeldung",
+        "timing": "sofort prüfen",
+        "importance": "critical",
+        "note": "Je nach Zeitpunkt des Wissens kann die Frist sehr kurz sein."
+      }
+    ],
+    "warnings": [
+      {
+        "label": "Nicht sofort unterschreiben",
+        "description": "Ein Aufhebungsvertrag kann spürbare Folgen für ALG I und weitere Optionen haben."
+      }
+    ],
+    "opportunities": [
+      {
+        "label": "Weiterbildung / Bildungsgutschein mitdenken",
+        "description": "Wenn ein Neustart ansteht, kann eine geförderte Weiterbildung eine echte Anschlussoption sein."
+      }
+    ],
+    "documents": [
+      "Entwurf Aufhebungsvertrag",
+      "Arbeitsvertrag",
+      "Lohnunterlagen",
+      "Notizen zu Gesprächen mit Arbeitgeber"
+    ],
+    "advisorQuestions": [
+      "Welche Auswirkungen hat dieser Aufhebungsvertrag auf ALG I?",
+      "Welche Fristen oder Meldungen muss ich jetzt unbedingt einhalten?",
+      "Welche Unterlagen sollte ich für die Agentur oder Beratung bereithalten?"
+    ],
+    "disclaimers": [
+      "Dieser Plan ersetzt keine individuelle Rechtsberatung.",
+      "Ob eine Kündigung oder Vereinbarung im Einzelfall wirksam ist, muss gesondert geprüft werden.",
+      "Sperrzeit-, Ruhens- und Abfindungsfragen hängen stark vom konkreten Fall ab."
+    ]
+  }
+}

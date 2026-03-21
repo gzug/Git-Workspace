@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Kündigungs-Kompass Question Schema",
+  "description": "Struktur für adaptive Fragen im MVP des Kündigungs-Kompass.",
+  "type": "object",
+  "required": ["questions"],
+  "properties": {
+    "questions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/question"
+      }
+    }
+  },
+  "$defs": {
+    "option": {
+      "type": "object",
+      "required": ["value", "label"],
+      "properties": {
+        "value": { "type": "string" },
+        "label": { "type": "string" },
+        "helpText": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "question": {
+      "type": "object",
+      "required": ["id", "label", "type", "required", "category"],
+      "properties": {
+        "id": { "type": "string" },
+        "label": { "type": "string" },
+        "helpText": { "type": "string" },
+        "type": {
+          "type": "string",
+          "enum": ["singleSelect", "multiSelect", "date", "boolean", "text", "number"]
+        },
+        "options": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/option" }
+        },
+        "required": { "type": "boolean" },
+        "visibilityCondition": {
+          "type": "object",
+          "properties": {
+            "field": { "type": "string" },
+            "operator": { "type": "string", "enum": ["equals", "notEquals", "includes", "exists"] },
+            "value": {}
+          },
+          "additionalProperties": false
+        },
+        "category": {
+          "type": "string",
+          "enum": ["entry", "employment", "contract", "agency", "goals", "documents", "special-case"]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "example": {
+    "questions": [
+      {
+        "id": "case_type",
+        "label": "Was trifft aktuell auf dich zu?",
+        "helpText": "Damit wir die richtigen Sofortmaßnahmen und Risiken priorisieren können.",
+        "type": "singleSelect",
+        "options": [
+          { "value": "termination_received", "label": "Ich habe eine Kündigung erhalten" },
+          { "value": "settlement_offered", "label": "Mir wurde ein Aufhebungsvertrag angeboten" },
+          { "value": "both", "label": "Beides spielt gerade eine Rolle" }
+        ],
+        "required": true,
+        "category": "entry"
+      },
+      {
+        "id": "termination_received_date",
+        "label": "Wann hast du das Schreiben erhalten?",
+        "helpText": "Der Zugang ist für Fristen wichtig.",
+        "type": "date",
+        "required": true,
+        "visibilityCondition": { "field": "case_type", "operator": "includes", "value": "termination" },
+        "category": "entry"
+      },
+      {
+        "id": "employment_end_date",
+        "label": "Wann soll das Arbeitsverhältnis enden?",
+        "helpText": "Das hilft bei Fristen, Meldungen und Priorisierung.",
+        "type": "date",
+        "required": true,
+        "category": "employment"
+      },
+      {
+        "id": "already_registered_as_jobseeker",
+        "label": "Hast du dich schon arbeitssuchend gemeldet?",
+        "helpText": "Das ist oft einer der wichtigsten ersten Schritte.",
+        "type": "boolean",
+        "required": true,
+        "category": "agency"
+      },
+      {
+        "id": "settlement_available",
+        "label": "Liegt dir ein Aufhebungsvertrag oder Entwurf vor?",
+        "helpText": "Aufhebungsverträge brauchen oft besondere Vorsicht.",
+        "type": "boolean",
+        "required": true,
+        "category": "contract"
+      },
+      {
+        "id": "release_status",
+        "label": "Bist du freigestellt?",
+        "helpText": "Freistellung kann für Organisation und weitere Schritte relevant sein.",
+        "type": "singleSelect",
+        "options": [
+          { "value": "no", "label": "Nein" },
+          { "value": "yes_revocable", "label": "Ja, widerruflich" },
+          { "value": "yes_irrevocable", "label": "Ja, unwiderruflich" },
+          { "value": "unknown", "label": "Ich bin unsicher" }
+        ],
+        "required": true,
+        "category": "contract"
+      },
+      {
+        "id": "tenure_bucket",
+        "label": "Wie lange warst du ungefähr im Unternehmen?",
+        "helpText": "Das kann für Einordnung und nächste Schritte relevant sein.",
+        "type": "singleSelect",
+        "options": [
+          { "value": "lt_6m", "label": "Unter 6 Monate" },
+          { "value": "6m_2y", "label": "6 Monate bis 2 Jahre" },
+          { "value": "2y_5y", "label": "2 bis 5 Jahre" },
+          { "value": "gt_5y", "label": "Mehr als 5 Jahre" }
+        ],
+        "required": true,
+        "category": "employment"
+      },
+      {
+        "id": "goals",
+        "label": "Was ist dir jetzt am wichtigsten?",
+        "helpText": "Mehrere Antworten möglich.",
+        "type": "multiSelect",
+        "options": [
+          { "value": "avoid_missing_deadlines", "label": "Keine Fristen verpassen" },
+          { "value": "protect_alg1", "label": "ALG I absichern" },
+          { "value": "review_settlement", "label": "Aufhebungsvertrag besser einordnen" },
+          { "value": "understand_compensation", "label": "Abfindung / finanzielle Spielräume verstehen" },
+          { "value": "explore_training", "label": "Weiterbildung / Bildungsgutschein prüfen" },
+          { "value": "prepare_for_lawyer_or_union", "label": "Auf Anwalt / Gewerkschaft vorbereiten" }
+        ],
+        "required": true,
+        "category": "goals"
+      },
+      {
+        "id": "documents_secured",
+        "label": "Welche Unterlagen hast du bereits gesichert?",
+        "helpText": "Das hilft bei der Vorbereitung auf Gespräche und nächste Schritte.",
+        "type": "multiSelect",
+        "options": [
+          { "value": "termination_letter", "label": "Kündigungsschreiben" },
+          { "value": "settlement_draft", "label": "Aufhebungsvertrag / Entwurf" },
+          { "value": "employment_contract", "label": "Arbeitsvertrag" },
+          { "value": "salary_docs", "label": "Lohnunterlagen" },
+          { "value": "work_certificate_info", "label": "Infos zu Zeugnis / Resturlaub / Freistellung" }
+        ],
+        "required": false,
+        "category": "documents"
+      }
+    ]
+  }
+}

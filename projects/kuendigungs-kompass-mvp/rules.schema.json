@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Kündigungs-Kompass Rules Schema",
+  "description": "Einfache Regelstruktur für Prioritäten, Warnungen, Fristen und Chancen im MVP.",
+  "type": "object",
+  "required": ["rules"],
+  "properties": {
+    "rules": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/rule" }
+    }
+  },
+  "$defs": {
+    "condition": {
+      "type": "object",
+      "required": ["field", "operator", "value"],
+      "properties": {
+        "field": { "type": "string" },
+        "operator": { "type": "string", "enum": ["equals", "notEquals", "includes", "ltDaysToDate", "exists"] },
+        "value": {}
+      },
+      "additionalProperties": false
+    },
+    "effect": {
+      "type": "object",
+      "required": ["type", "payload"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["riskFlag", "deadlineHint", "nextStep", "warning", "opportunityFlag", "disclaimerFlag"]
+        },
+        "payload": { "type": "object" }
+      },
+      "additionalProperties": false
+    },
+    "rule": {
+      "type": "object",
+      "required": ["id", "conditions", "effects", "severity", "tags"],
+      "properties": {
+        "id": { "type": "string" },
+        "conditions": { "type": "array", "items": { "$ref": "#/$defs/condition" } },
+        "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
+        "severity": { "type": "string", "enum": ["critical", "high", "medium", "low"] },
+        "tags": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    }
+  },
+  "example": {
+    "rules": [
+      {
+        "id": "jobseeker_registration_missing",
+        "conditions": [
+          { "field": "already_registered_as_jobseeker", "operator": "equals", "value": false }
+        ],
+        "effects": [
+          {
+            "type": "riskFlag",
+            "payload": {
+              "id": "registration_delay_risk",
+              "label": "Melde-Frist prüfen",
+              "description": "Die arbeitssuchend-Meldung gehört oft zu den ersten kritischen Schritten."
+            }
+          },
+          {
+            "type": "nextStep",
+            "payload": {
+              "priority": 1,
+              "label": "Arbeitsuchendmeldung sofort prüfen oder nachholen",
+              "why": "Versäumte Meldungen können später Nachteile auslösen."
+            }
+          }
+        ],
+        "severity": "critical",
+        "tags": ["agentur", "frist", "alg1"]
+      },
+      {
+        "id": "termination_received_recently",
+        "conditions": [
+          { "field": "case_type", "operator": "includes", "value": "termination" },
+          { "field": "termination_received_date", "operator": "exists", "value": true }
+        ],
+        "effects": [
+          {
+            "type": "deadlineHint",
+            "payload": {
+              "id": "termination_deadline_check",
+              "label": "3-Wochen-Frist prüfen",
+              "description": "Wenn die Kündigung angegriffen werden soll, ist die Frist regelmäßig sehr kurz."
+            }
+          },
+          {
+            "type": "disclaimerFlag",
+            "payload": {
+              "id": "no_validity_assessment",
+              "label": "Keine Einzelfallprüfung der Wirksamkeit",
+              "description": "Ob die Kündigung wirksam ist, muss im Einzelfall geprüft werden."
+            }
+          }
+        ],
+        "severity": "high",
+        "tags": ["kuendigung", "frist", "arbeitsrecht"]
+      },
+      {
+        "id": "settlement_risk",
+        "conditions": [
+          { "field": "settlement_available", "operator": "equals", "value": true }
+        ],
+        "effects": [
+          {
+            "type": "warning",
+            "payload": {
+              "id": "do_not_sign_immediately",
+              "label": "Nicht vorschnell unterschreiben",
+              "description": "Ein Aufhebungsvertrag kann relevante Auswirkungen auf ALG I und weitere Optionen haben."
+            }
+          },
+          {
+            "type": "riskFlag",
+            "payload": {
+              "id": "settlement_alg1_risk",
+              "label": "ALG-I-Risiko prüfen",
+              "description": "Bei Aufhebungsverträgen sind Sperrzeit- und Ruhensfragen besonders wichtig."
+            }
+          }
+        ],
+        "severity": "critical",
+        "tags": ["aufhebungsvertrag", "alg1", "sperrzeit"]
+      },
+      {
+        "id": "release_detected",
+        "conditions": [
+          { "field": "release_status", "operator": "notEquals", "value": "no" }
+        ],
+        "effects": [
+          {
+            "type": "warning",
+            "payload": {
+              "id": "release_not_end_of_contract",
+              "label": "Freistellung ist nicht automatisch das Ende",
+              "description": "Auch bei Freistellung bleiben Meldungen, Fristen und Unterlagen wichtig."
+            }
+          }
+        ],
+        "severity": "medium",
+        "tags": ["freistellung", "organisation"]
+      },
+      {
+        "id": "training_interest",
+        "conditions": [
+          { "field": "goals", "operator": "includes", "value": "explore_training" }
+        ],
+        "effects": [
+          {
+            "type": "opportunityFlag",
+            "payload": {
+              "id": "training_path",
+              "label": "Weiterbildung früh mitdenken",
+              "description": "Weiterbildung und Bildungsgutschein können eine relevante Anschlussoption sein."
+            }
+          },
+          {
+            "type": "nextStep",
+            "payload": {
+              "priority": 4,
+              "label": "Fragen für die Agentur zu Weiterbildung und Bildungsgutschein vorbereiten",
+              "why": "So gehen Förderoptionen nicht im Stress unter."
+            }
+          }
+        ],
+        "severity": "medium",
+        "tags": ["weiterbildung", "foerderung"]
+      },
+      {
+        "id": "documents_missing",
+        "conditions": [
+          { "field": "documents_secured", "operator": "exists", "value": true }
+        ],
+        "effects": [
+          {
+            "type": "nextStep",
+            "payload": {
+              "priority": 2,
+              "label": "Wichtige Unterlagen bündeln",
+              "why": "Saubere Unterlagen helfen bei Gesprächen mit Agentur, Anwalt oder Gewerkschaft."
+            }
+          }
+        ],
+        "severity": "medium",
+        "tags": ["dokumente", "vorbereitung"]
+      }
+    ]
+  }
+}

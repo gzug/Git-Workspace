@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ClawSell Studio</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell compact-layout">
+      <aside class="sidebar compact-sidebar">
+        <div class="brand-card glass compact-brand">
+          <div class="brand-mark" aria-hidden="true"><span>✦</span></div>
+          <div>
+            <div class="eyebrow">resell photo editor</div>
+            <h1>ClawSell Studio</h1>
+            <p>Fotos, Titel, Texte und Preisbriefing an einem Ort.</p>
+          </div>
+        </div>
+
+        <section class="panel glass tight-panel">
+          <div class="section-title-row compact-title"><h2>Projekt</h2></div>
+          <label class="button primary upload-button wide compact-btn">
+            Bilder auswählen
+            <input id="fileInput" type="file" accept="image/*" multiple hidden />
+          </label>
+          <div class="action-stack compact-stack two-col-stack">
+            <button id="selectAllBtn" class="button compact-btn" disabled>Alle sichtbaren auswählen</button>
+            <button id="clearSelectionBtn" class="button compact-btn" disabled>Auswahl aufheben</button>
+            <button id="downloadAllBtn" class="button success compact-btn" disabled>Sichtbare speichern</button>
+            <button id="resetBtn" class="button compact-btn" disabled>Reset</button>
+          </div>
+        </section>
+
+        <section class="panel glass tight-panel">
+          <div class="section-title-row compact-title"><h2>Ansicht</h2></div>
+          <div class="format-filter-row compact-row">
+            <label class="format-chip compact-chip"><input id="filter34" type="checkbox" checked /><span>3:4</span></label>
+            <label class="format-chip compact-chip"><input id="filter43" type="checkbox" checked /><span>4:3</span></label>
+          </div>
+          <div class="view-toggle-row compact-row two-col-stack">
+            <button id="previewModeCompare" class="button compact-btn active">Vorher/Nachher</button>
+            <button id="previewModeAfterOnly" class="button compact-btn">Nur Nachher</button>
+          </div>
+          <div class="meta-list compact-meta" id="metaSummary">
+            <div><span>Status</span><strong>Keine Bilder geladen</strong></div>
+          </div>
+        </section>
+
+        <details class="panel glass tight-panel" open>
+          <summary class="summary-head">Presets & Regler</summary>
+          <div class="preset-grid compact-preset-grid top-gap">
+            <button class="button compact-btn preset-btn" data-preset="natural">Natürlich</button>
+            <button class="button compact-btn preset-btn" data-preset="bright">Hell & Clean</button>
+            <button class="button compact-btn preset-btn" data-preset="depth">Mehr Tiefe</button>
+            <button class="button compact-btn preset-btn" data-preset="jewelry">Jewelry Pop</button>
+          </div>
+          <div class="control-grid micro-control-grid top-gap">
+            <label class="control micro-control"><span>Helligkeit</span><input id="brightness" type="range" min="50" max="150" value="100" /><strong id="brightnessValue">100%</strong></label>
+            <label class="control micro-control"><span>Kontrast</span><input id="contrast" type="range" min="50" max="150" value="100" /><strong id="contrastValue">100%</strong></label>
+            <label class="control micro-control"><span>Schatten</span><input id="shadows" type="range" min="-50" max="50" value="0" /><strong id="shadowsValue">0</strong></label>
+            <label class="control micro-control"><span>Farbe</span><input id="saturation" type="range" min="50" max="150" value="100" /><strong id="saturationValue">100%</strong></label>
+            <label class="control micro-control"><span>Wärme</span><input id="warmth" type="range" min="-50" max="50" value="0" /><strong id="warmthValue">0</strong></label>
+            <label class="control micro-control"><span>Schärfe</span><input id="sharpness" type="range" min="0" max="100" value="0" /><strong id="sharpnessValue">0</strong></label>
+            <label class="control micro-control"><span>Schwarzpunkt</span><input id="blackPoint" type="range" min="0" max="50" value="0" /><strong id="blackPointValue">0</strong></label>
+          </div>
+        </details>
+
+        <details class="panel glass tight-panel form-panel" open>
+          <summary class="summary-head">Resell Briefing</summary>
+          <form id="resellForm" class="resell-form top-gap">
+            <div class="form-group">
+              <label>Plattformen</label>
+              <div class="check-grid two-col">
+                <label><input type="checkbox" name="platforms" value="vinted" checked /> Vinted</label>
+                <label><input type="checkbox" name="platforms" value="kleinanzeigen" checked /> Kleinanzeigen</label>
+              </div>
+            </div>
+
+            <div class="form-group two-fields">
+              <div>
+                <label for="listingCategory">Oberkategorie</label>
+                <select id="listingCategory">
+                  <option value="auto" selected>Auto erkennen</option>
+                  <option value="fashion">Fashion / Wearables</option>
+                  <option value="tech">Technik / Geräte</option>
+                  <option value="home">Haushalt / Home / Möbel</option>
+                  <option value="sport">Sport / Outdoor</option>
+                  <option value="media">Medien / Bücher / Spiele</option>
+                  <option value="kids">Kinder / Schule / Kreativ</option>
+                  <option value="other">Sonstiges / generisch</option>
+                </select>
+              </div>
+              <div>
+                <label for="productTypeCustom">Produkttyp</label>
+                <input id="productTypeCustom" type="text" placeholder="z. B. Halskette / Powerbank / Buch / Klettergurt" />
+              </div>
+            </div>
+
+            <div class="form-group two-fields">
+              <div>
+                <label for="brand">Marke</label>
+                <input id="brand" type="text" placeholder="z. B. keine Marke / Zara / Nike" />
+              </div>
+              <div>
+                <label for="model">Modell / Titel / Variante</label>
+                <input id="model" type="text" placeholder="z. B. Ankh Cross Pendant / 20.000 mAh / Der Steppenwolf" />
+              </div>
+            </div>
+
+            <div class="form-group two-fields">
+              <div>
+                <label for="color">Farbe</label>
+                <input id="color" type="text" placeholder="z. B. Silber / Schwarz / Blau" />
+              </div>
+              <div>
+                <label for="material">Material</label>
+                <input id="material" type="text" placeholder="z. B. Leder / Kunststoff / Papier" />
+              </div>
+            </div>
+
+            <div class="form-group two-fields">
+              <div>
+                <label for="size">Größe / Maße</label>
+                <input id="size" type="text" placeholder="z. B. 50 cm / 42 / 120×60 cm" />
+              </div>
+              <div>
+                <label for="specs">Specs / Kapazität / Autor</label>
+                <input id="specs" type="text" placeholder="z. B. 20.000 mAh / USB-C / Hermann Hesse" />
+              </div>
+            </div>
+
+            <div class="form-group two-fields">
+              <div>
+                <label for="completeness">Vollständigkeit / Set-Inhalt</label>
+                <input id="completeness" type="text" placeholder="z. B. vollständig / 3 Teile / ohne OVP" />
+              </div>
+              <div>
+                <label>Zielgruppe</label>
+                <div class="check-grid two-col">
+                  <label><input type="radio" name="targetGroup" value="Unisex" checked /> Unisex</label>
+                  <label><input type="radio" name="targetGroup" value="Herren" /> Herren</label>
+                  <label><input type="radio" name="targetGroup" value="Damen" /> Damen</label>
+                  <label><input type="radio" name="targetGroup" value="Sonstiges" /> Sonstiges</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Zustand</label>
+              <div class="check-grid two-col">
+                <label><input type="radio" name="condition" value="Neu" /> Neu</label>
+                <label><input type="radio" name="condition" value="Wie neu" checked /> Wie neu</label>
+                <label><input type="radio" name="condition" value="Sehr gut" /> Sehr gut</label>
+                <label><input type="radio" name="condition" value="Gut" /> Gut</label>
+                <label><input type="radio" name="condition" value="Gebraucht" /> Gebraucht</label>
+              </div>
+            </div>
+
+            <div class="form-group two-fields">
+              <div>
+                <label for="defects">Mängel</label>
+                <input id="defects" type="text" placeholder="z. B. keine / leichte Gebrauchsspuren" />
+              </div>
+              <div>
+                <label for="delivery">Lieferumfang</label>
+                <input id="delivery" type="text" placeholder="z. B. 1x Kette, 1x Anhänger" />
+              </div>
+            </div>
+
+            <div class="form-group two-fields">
+              <div>
+                <label>Versand möglich</label>
+                <div class="check-grid two-col">
+                  <label><input type="radio" name="shipping" value="ja" checked /> Ja</label>
+                  <label><input type="radio" name="shipping" value="nein" /> Nein</label>
+                </div>
+              </div>
+              <div>
+                <label for="priceFeeling">Preisgefühl / Wunschpreis</label>
+                <input id="priceFeeling" type="text" placeholder="z. B. 10–20 €" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="keywords">Besondere Suchbegriffe</label>
+              <input id="keywords" type="text" placeholder="z. B. Iced Out Chain, Ankh Cross, Rope Chain" />
+            </div>
+
+            <div class="form-group">
+              <label for="extraInfo">Zusätzliche Infos</label>
+              <textarea id="extraInfo" rows="4" placeholder="Alles, was in Titel, Texten, Preisrange oder Vergleichsrecherche berücksichtigt werden soll."></textarea>
+            </div>
+
+            <div class="action-stack compact-stack">
+              <button id="generateBriefBtn" type="button" class="button primary compact-btn">Texte generieren</button>
+            </div>
+          </form>
+        </details>
+      </aside>
+
+      <main class="main-stage">
+        <section class="hero glass">
+          <div>
+            <div class="eyebrow">workspace</div>
+            <h2>Produktbilder im Batch bearbeiten</h2>
+            <p id="statusText">Noch keine Bilder geladen.</p>
+          </div>
+          <div class="hero-hint-list">
+            <span>Leertaste: Vorschau</span>
+            <span>Doppelklick: groß öffnen</span>
+            <span>Klick: Auswahl</span>
+          </div>
+        </section>
+
+        <section class="panel glass generated-output-panel split-output-panel">
+          <div class="section-title-row compact-title"><h2>Generierte Titel & Texte</h2></div>
+          <div class="output-toolbar">
+            <button id="copyVintedBtn" class="button compact-btn">Vinted kopieren</button>
+            <button id="copyKaBtn" class="button compact-btn">Kleinanzeigen kopieren</button>
+            <button id="nextProductBtn" class="button compact-btn">Nächstes Produkt</button>
+          </div>
+          <div class="generated-grid">
+            <div class="generated-card">
+              <h3>Vinted</h3>
+              <label>Titel</label>
+              <textarea id="vintedTitleOutput" rows="3" placeholder="Hier erscheint der Vinted-Titel."></textarea>
+              <label>Beschreibung</label>
+              <textarea id="vintedTextOutput" rows="8" placeholder="Hier erscheint die Vinted-Beschreibung."></textarea>
+            </div>
+            <div class="generated-card">
+              <h3>Kleinanzeigen</h3>
+              <label>Titel</label>
+              <textarea id="kaTitleOutput" rows="3" placeholder="Hier erscheint der Kleinanzeigen-Titel."></textarea>
+              <label>Beschreibung</label>
+              <textarea id="kaTextOutput" rows="8" placeholder="Hier erscheint die Kleinanzeigen-Beschreibung."></textarea>
+            </div>
+          </div>
+        </section>
+
+        <main id="imageGrid" class="image-grid empty">
+          <div class="empty-state glass">
+            <div class="empty-logo">✦</div>
+            <h3>Bereit für den ersten Batch</h3>
+            <p>Lade mehrere bereits formatierte Produktbilder hoch und bearbeite sie global oder gezielt über die Auswahl.</p>
+          </div>
+        </main>
+      </main>
+    </div>
+
+    <div id="lightbox" class="lightbox hidden">
+      <div class="lightbox-backdrop"></div>
+      <div class="lightbox-content">
+        <div class="lightbox-topbar">
+          <div>
+            <div class="eyebrow">quick look</div>
+            <h2 id="lightboxTitle">Bildvorschau</h2>
+            <p id="lightboxMeta">Leertaste öffnet/schließt · Doppelklick öffnet direkt</p>
+          </div>
+          <div class="topbar-actions">
+            <button id="reverseSearchBtn" class="button">Reverse Search</button>
+            <select id="cropRatioSelect" class="button selectlike">
+              <option value="free">Freies Crop</option>
+              <option value="3:4">3:4</option>
+              <option value="4:3">4:3</option>
+            </select>
+            <button id="toggleCropBtn" class="button">Crop-Modus</button>
+            <button id="applyCropBtn" class="button success" disabled>Crop anwenden</button>
+            <button id="resetCropBtn" class="button" disabled>Crop zurücksetzen</button>
+            <button id="duplicateBtn" class="button">Duplizieren</button>
+            <button id="removeBtn" class="button danger">Entfernen</button>
+            <button id="closeLightboxBtn" class="button">Schließen</button>
+          </div>
+        </div>
+        <div class="lightbox-canvas-wrap">
+          <canvas id="lightboxCanvas"></canvas>
+          <div id="cropOverlay" class="crop-overlay hidden">
+            <div id="cropRect" class="crop-rect">
+              <span class="crop-handle tl" data-handle="tl"></span>
+              <span class="crop-handle tr" data-handle="tr"></span>
+              <span class="crop-handle bl" data-handle="bl"></span>
+              <span class="crop-handle br" data-handle="br"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

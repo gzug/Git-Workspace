@@ -3,7 +3,10 @@
   "title": "Kündigungs-Kompass Question Schema V2",
   "description": "Flow-orientierte Fragestruktur für den operativen MVP des Kündigungs-Kompass. Fokus: Nutzerführung, Fristen, Risiken, Sofortmaßnahmen und belastbare Entscheidungssynthese.",
   "type": "object",
-  "required": ["flowVersion", "questions"],
+  "required": [
+    "flowVersion",
+    "questions"
+  ],
   "properties": {
     "flowVersion": {
       "type": "string",
@@ -20,26 +23,49 @@
   "$defs": {
     "option": {
       "type": "object",
-      "required": ["value", "label"],
+      "required": [
+        "value",
+        "label"
+      ],
       "properties": {
-        "value": { "type": "string" },
-        "label": { "type": "string" },
-        "helpText": { "type": "string" },
+        "value": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "helpText": {
+          "type": "string"
+        },
         "tags": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         }
       },
       "additionalProperties": false
     },
     "condition": {
       "type": "object",
-      "required": ["field", "operator", "value"],
+      "required": [
+        "field",
+        "operator",
+        "value"
+      ],
       "properties": {
-        "field": { "type": "string" },
+        "field": {
+          "type": "string"
+        },
         "operator": {
           "type": "string",
-          "enum": ["equals", "notEquals", "includes", "notIncludes", "exists"]
+          "enum": [
+            "equals",
+            "notEquals",
+            "includes",
+            "notIncludes",
+            "exists"
+          ]
         },
         "value": {}
       },
@@ -58,7 +84,9 @@
         "summaryUse"
       ],
       "properties": {
-        "id": { "type": "string" },
+        "id": {
+          "type": "string"
+        },
         "stage": {
           "type": "string",
           "enum": [
@@ -84,36 +112,70 @@
             "goals"
           ]
         },
-        "label": { "type": "string" },
-        "helpText": { "type": "string" },
+        "label": {
+          "type": "string"
+        },
+        "helpText": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
-          "enum": ["singleSelect", "multiSelect", "date", "boolean", "text", "number"]
+          "enum": [
+            "singleSelect",
+            "multiSelect",
+            "date",
+            "boolean",
+            "text",
+            "number"
+          ]
         },
-        "required": { "type": "boolean" },
+        "required": {
+          "type": "boolean"
+        },
         "options": {
           "type": "array",
-          "items": { "$ref": "#/$defs/option" }
+          "items": {
+            "$ref": "#/$defs/option"
+          }
         },
         "askIf": {
           "type": "array",
-          "items": { "$ref": "#/$defs/condition" }
+          "items": {
+            "$ref": "#/$defs/condition"
+          }
         },
         "decisionRole": {
           "type": "string",
-          "enum": ["entry-gate", "deadline-driver", "risk-driver", "supporting-context", "goal-signal"]
+          "enum": [
+            "entry-gate",
+            "deadline-driver",
+            "risk-driver",
+            "supporting-context",
+            "goal-signal"
+          ]
         },
         "summaryUse": {
           "type": "array",
           "items": {
             "type": "string",
-            "enum": ["headline", "situation", "next-steps", "deadlines", "risks", "advisor-questions"]
+            "enum": [
+              "headline",
+              "situation",
+              "next-steps",
+              "deadlines",
+              "risks",
+              "advisor-questions"
+            ]
           },
           "minItems": 1,
           "uniqueItems": true
         },
-        "redFlagIfMissing": { "type": "boolean" },
-        "notes": { "type": "string" }
+        "redFlagIfMissing": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string"
+        }
       },
       "additionalProperties": false
     }
@@ -129,14 +191,30 @@
         "helpText": "Damit wir zuerst die richtige Logik für Fristen, Risiken und Sofortmaßnahmen aktivieren.",
         "type": "singleSelect",
         "options": [
-          { "value": "termination_received", "label": "Ich habe eine schriftliche Kündigung erhalten" },
-          { "value": "termination_announced_only", "label": "Eine Kündigung wurde angekündigt, aber ich habe noch nichts Schriftliches" },
-          { "value": "settlement_offered", "label": "Mir wurde ein Aufhebungsvertrag / Abwicklungsvertrag angeboten" },
-          { "value": "multiple", "label": "Mehreres davon spielt gerade eine Rolle" }
+          {
+            "value": "termination_received",
+            "label": "Ich habe eine schriftliche Kündigung erhalten"
+          },
+          {
+            "value": "termination_announced_only",
+            "label": "Eine Kündigung wurde angekündigt, aber ich habe noch nichts Schriftliches"
+          },
+          {
+            "value": "settlement_offered",
+            "label": "Mir wurde ein Aufhebungsvertrag / Abwicklungsvertrag angeboten"
+          },
+          {
+            "value": "multiple",
+            "label": "Mehreres davon spielt gerade eine Rolle"
+          }
         ],
         "required": true,
         "decisionRole": "entry-gate",
-        "summaryUse": ["headline", "situation", "next-steps"]
+        "summaryUse": [
+          "headline",
+          "situation",
+          "next-steps"
+        ]
       },
       {
         "id": "termination_access_date",
@@ -147,11 +225,23 @@
         "type": "date",
         "required": true,
         "askIf": [
-          { "field": "case_entry", "operator": "includes", "value": "termination_received" },
-          { "field": "case_entry", "operator": "notEquals", "value": "termination_announced_only" }
+          {
+            "field": "case_entry",
+            "operator": "includes",
+            "value": "termination_received"
+          },
+          {
+            "field": "case_entry",
+            "operator": "notEquals",
+            "value": "termination_announced_only"
+          }
         ],
         "decisionRole": "deadline-driver",
-        "summaryUse": ["headline", "deadlines", "next-steps"],
+        "summaryUse": [
+          "headline",
+          "deadlines",
+          "next-steps"
+        ],
         "redFlagIfMissing": true
       },
       {
@@ -163,7 +253,11 @@
         "type": "date",
         "required": true,
         "decisionRole": "deadline-driver",
-        "summaryUse": ["situation", "deadlines", "next-steps"],
+        "summaryUse": [
+          "situation",
+          "deadlines",
+          "next-steps"
+        ],
         "redFlagIfMissing": true
       },
       {
@@ -175,8 +269,55 @@
         "type": "boolean",
         "required": true,
         "decisionRole": "deadline-driver",
-        "summaryUse": ["headline", "deadlines", "next-steps", "risks"],
+        "summaryUse": [
+          "headline",
+          "deadlines",
+          "next-steps",
+          "risks"
+        ],
         "redFlagIfMissing": true
+      },
+      {
+        "id": "already_unemployed_now",
+        "stage": "deadline-check",
+        "category": "agency",
+        "label": "Ist dein Arbeitsverhältnis schon beendet und bist du aktuell arbeitslos?",
+        "helpText": "Damit wir die Arbeitslosmeldung als separates Kurzmodul nur dann aktivieren, wenn sie wirklich schon dran ist.",
+        "type": "boolean",
+        "required": true,
+        "decisionRole": "deadline-driver",
+        "summaryUse": [
+          "situation",
+          "deadlines",
+          "next-steps",
+          "risks"
+        ],
+        "redFlagIfMissing": true
+      },
+      {
+        "id": "unemployment_registered",
+        "stage": "deadline-check",
+        "category": "agency",
+        "label": "Hast du dich schon arbeitslos gemeldet?",
+        "helpText": "Diese Meldung ist nicht dasselbe wie die Arbeitsuchendmeldung und wird nur relevant, wenn du bereits arbeitslos bist oder dein Arbeitsverhältnis jetzt endet.",
+        "type": "boolean",
+        "required": true,
+        "askIf": [
+          {
+            "field": "already_unemployed_now",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "decisionRole": "deadline-driver",
+        "summaryUse": [
+          "headline",
+          "deadlines",
+          "next-steps",
+          "risks"
+        ],
+        "redFlagIfMissing": true,
+        "notes": "Kleines Zusatzmodul: nur fallbezogen einblenden, um den Core-Flow nicht aufzublähen."
       },
       {
         "id": "agreement_present",
@@ -187,7 +328,12 @@
         "type": "boolean",
         "required": true,
         "decisionRole": "risk-driver",
-        "summaryUse": ["headline", "situation", "risks", "next-steps"]
+        "summaryUse": [
+          "headline",
+          "situation",
+          "risks",
+          "next-steps"
+        ]
       },
       {
         "id": "agreement_already_signed",
@@ -198,10 +344,19 @@
         "type": "boolean",
         "required": true,
         "askIf": [
-          { "field": "agreement_present", "operator": "equals", "value": true }
+          {
+            "field": "agreement_present",
+            "operator": "equals",
+            "value": true
+          }
         ],
         "decisionRole": "risk-driver",
-        "summaryUse": ["headline", "situation", "risks", "next-steps"],
+        "summaryUse": [
+          "headline",
+          "situation",
+          "risks",
+          "next-steps"
+        ],
         "redFlagIfMissing": true
       },
       {
@@ -212,14 +367,30 @@
         "helpText": "Freistellung ändert nicht automatisch alle Pflichten, ist aber für Einordnung und Organisation relevant.",
         "type": "singleSelect",
         "options": [
-          { "value": "no", "label": "Nein" },
-          { "value": "yes_revocable", "label": "Ja, widerruflich" },
-          { "value": "yes_irrevocable", "label": "Ja, unwiderruflich" },
-          { "value": "unknown", "label": "Ich bin unsicher" }
+          {
+            "value": "no",
+            "label": "Nein"
+          },
+          {
+            "value": "yes_revocable",
+            "label": "Ja, widerruflich"
+          },
+          {
+            "value": "yes_irrevocable",
+            "label": "Ja, unwiderruflich"
+          },
+          {
+            "value": "unknown",
+            "label": "Ich bin unsicher"
+          }
         ],
         "required": true,
         "decisionRole": "supporting-context",
-        "summaryUse": ["situation", "risks", "advisor-questions"]
+        "summaryUse": [
+          "situation",
+          "risks",
+          "advisor-questions"
+        ]
       },
       {
         "id": "special_protection_indicator",
@@ -229,16 +400,38 @@
         "helpText": "Zum Beispiel Schwangerschaft, Schwerbehinderung, Betriebsrat, Elternzeit oder Unsicherheit dazu.",
         "type": "multiSelect",
         "options": [
-          { "value": "pregnancy_or_maternity", "label": "Schwangerschaft / Mutterschutz" },
-          { "value": "severe_disability", "label": "Schwerbehinderung oder Gleichstellung" },
-          { "value": "works_council_role", "label": "Betriebsrat / ähnliche Funktion" },
-          { "value": "parental_leave", "label": "Elternzeit / Pflege / ähnliche Schutzlage" },
-          { "value": "none_known", "label": "Nichts davon bekannt" },
-          { "value": "unsure", "label": "Ich bin unsicher" }
+          {
+            "value": "pregnancy_or_maternity",
+            "label": "Schwangerschaft / Mutterschutz"
+          },
+          {
+            "value": "severe_disability",
+            "label": "Schwerbehinderung oder Gleichstellung"
+          },
+          {
+            "value": "works_council_role",
+            "label": "Betriebsrat / ähnliche Funktion"
+          },
+          {
+            "value": "parental_leave",
+            "label": "Elternzeit / Pflege / ähnliche Schutzlage"
+          },
+          {
+            "value": "none_known",
+            "label": "Nichts davon bekannt"
+          },
+          {
+            "value": "unsure",
+            "label": "Ich bin unsicher"
+          }
         ],
         "required": true,
         "decisionRole": "risk-driver",
-        "summaryUse": ["headline", "risks", "advisor-questions"]
+        "summaryUse": [
+          "headline",
+          "risks",
+          "advisor-questions"
+        ]
       },
       {
         "id": "documents_secured",
@@ -248,16 +441,37 @@
         "helpText": "Mehrere Antworten möglich. Das dient vor allem Vorbereitung und Beratungsgespräch.",
         "type": "multiSelect",
         "options": [
-          { "value": "termination_letter", "label": "Kündigungsschreiben" },
-          { "value": "agreement_draft", "label": "Aufhebungs-/Abwicklungsvertrag oder Entwurf" },
-          { "value": "employment_contract", "label": "Arbeitsvertrag" },
-          { "value": "salary_docs", "label": "Lohnunterlagen" },
-          { "value": "release_or_vacation_info", "label": "Infos zu Freistellung / Urlaub / Restansprüchen" },
-          { "value": "none_yet", "label": "Noch nichts davon" }
+          {
+            "value": "termination_letter",
+            "label": "Kündigungsschreiben"
+          },
+          {
+            "value": "agreement_draft",
+            "label": "Aufhebungs-/Abwicklungsvertrag oder Entwurf"
+          },
+          {
+            "value": "employment_contract",
+            "label": "Arbeitsvertrag"
+          },
+          {
+            "value": "salary_docs",
+            "label": "Lohnunterlagen"
+          },
+          {
+            "value": "release_or_vacation_info",
+            "label": "Infos zu Freistellung / Urlaub / Restansprüchen"
+          },
+          {
+            "value": "none_yet",
+            "label": "Noch nichts davon"
+          }
         ],
         "required": false,
         "decisionRole": "supporting-context",
-        "summaryUse": ["next-steps", "advisor-questions"]
+        "summaryUse": [
+          "next-steps",
+          "advisor-questions"
+        ]
       },
       {
         "id": "primary_goal",
@@ -267,15 +481,34 @@
         "helpText": "Das priorisiert den Ergebnistext, nicht die Rechtslage.",
         "type": "singleSelect",
         "options": [
-          { "value": "protect_deadlines", "label": "Keine Fristen verpassen" },
-          { "value": "protect_alg1", "label": "ALG I möglichst absichern" },
-          { "value": "review_agreement", "label": "Aufhebungsvertrag besser einordnen" },
-          { "value": "prepare_advice", "label": "Gut vorbereitet in Beratung / Anwalt / Gewerkschaft gehen" },
-          { "value": "plan_next_step", "label": "Schnell einen klaren Handlungsplan bekommen" }
+          {
+            "value": "protect_deadlines",
+            "label": "Keine Fristen verpassen"
+          },
+          {
+            "value": "protect_alg1",
+            "label": "ALG I möglichst absichern"
+          },
+          {
+            "value": "review_agreement",
+            "label": "Aufhebungsvertrag besser einordnen"
+          },
+          {
+            "value": "prepare_advice",
+            "label": "Gut vorbereitet in Beratung / Anwalt / Gewerkschaft gehen"
+          },
+          {
+            "value": "plan_next_step",
+            "label": "Schnell einen klaren Handlungsplan bekommen"
+          }
         ],
         "required": true,
         "decisionRole": "goal-signal",
-        "summaryUse": ["headline", "next-steps", "advisor-questions"]
+        "summaryUse": [
+          "headline",
+          "next-steps",
+          "advisor-questions"
+        ]
       }
     ]
   }

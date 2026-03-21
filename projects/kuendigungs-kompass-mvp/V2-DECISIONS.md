@@ -82,12 +82,14 @@
 - Pauschale Aussagen zur Wirksamkeit einer Kündigung.
 - Konkrete Rechtsfolgen bereits unterschriebener Verträge ohne Einzelfallprüfung.
 
-## Empfehlung für den nächsten Block
+## Anschlussblock umgesetzt
 
-1. **Arbeitslosmeldung** sauber als eigenes, aber kurzes Modul ergänzen.
-2. **Result-Texte / Copy-Layer** auf Basis des V2-Schemas schreiben.
-3. **Beispieldatensätze** für 3 Kernfälle anlegen:
-   - Kündigung erhalten, Frist offen
-   - Aufhebungsvertrag vorliegend, noch nicht unterschrieben
-   - Sonderfall / Schutzindikator → Eskalation
-4. Danach erst technische Mapping-Logik oder UI diskutieren.
+### Ergänzt
+- **Arbeitslosmeldung** als eigenes, kleines Zusatzmodul im Frage-/Regellayer ergänzt, damit die Trennung zur Arbeitsuchendmeldung operativ sichtbar bleibt, ohne den Core-Flow aufzublähen.
+- **Result-Copy-Layer** als separates Artefakt vorbereitet.
+- **3 Referenzfälle** mit realistischen Beispielantworten und Soll-Outputs dokumentiert.
+
+### Operative Bewertung
+- Das bestehende **V2-Result-Schema reicht** für diese Fälle aus.
+- Nötig war nur eine **kleine Nachschärfung im Frage-/Regellayer**, nicht im Result-Schema selbst.
+- Nächster sinnvoller Schritt ist jetzt eher **Mapping-/Rendering-Logik** als weiteres Schema-Design.

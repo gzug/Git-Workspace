@@ -3,7 +3,10 @@
   "title": "Kündigungs-Kompass Rules Schema V2",
   "description": "Regelstruktur für den operativen MVP mit expliziter Trennung zwischen belastbaren Aussagen, vorsichtigen Prüfhinweisen und vorerst nicht zu verwendenden Aussagen.",
   "type": "object",
-  "required": ["rulesVersion", "rules"],
+  "required": [
+    "rulesVersion",
+    "rules"
+  ],
   "properties": {
     "rulesVersion": {
       "type": "string",
@@ -11,16 +14,24 @@
     },
     "rules": {
       "type": "array",
-      "items": { "$ref": "#/$defs/rule" }
+      "items": {
+        "$ref": "#/$defs/rule"
+      }
     }
   },
   "additionalProperties": false,
   "$defs": {
     "condition": {
       "type": "object",
-      "required": ["field", "operator", "value"],
+      "required": [
+        "field",
+        "operator",
+        "value"
+      ],
       "properties": {
-        "field": { "type": "string" },
+        "field": {
+          "type": "string"
+        },
         "operator": {
           "type": "string",
           "enum": [
@@ -40,7 +51,10 @@
     },
     "effect": {
       "type": "object",
-      "required": ["type", "payload"],
+      "required": [
+        "type",
+        "payload"
+      ],
       "properties": {
         "type": {
           "type": "string",
@@ -58,24 +72,55 @@
         },
         "payload": {
           "type": "object",
-          "required": ["id", "label", "statementClass"],
+          "required": [
+            "id",
+            "label",
+            "statementClass"
+          ],
           "properties": {
-            "id": { "type": "string" },
-            "label": { "type": "string" },
-            "description": { "type": "string" },
-            "why": { "type": "string" },
-            "priority": { "type": "integer", "minimum": 1, "maximum": 10 },
-            "timing": { "type": "string" },
+            "id": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "why": {
+              "type": "string"
+            },
+            "priority": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10
+            },
+            "timing": {
+              "type": "string"
+            },
             "statementClass": {
               "type": "string",
-              "enum": ["mvp-reliable", "cautious-check", "do-not-use-yet"]
+              "enum": [
+                "mvp-reliable",
+                "cautious-check",
+                "do-not-use-yet"
+              ]
             },
             "evidenceSource": {
               "type": "string",
-              "enum": ["official", "statute", "mixed", "internal-policy"]
+              "enum": [
+                "official",
+                "statute",
+                "mixed",
+                "internal-policy"
+              ]
             },
-            "audienceNote": { "type": "string" },
-            "escalateIf": { "type": "string" }
+            "audienceNote": {
+              "type": "string"
+            },
+            "escalateIf": {
+              "type": "string"
+            }
           },
           "additionalProperties": false
         }
@@ -95,38 +140,70 @@
         "tags"
       ],
       "properties": {
-        "id": { "type": "string" },
+        "id": {
+          "type": "string"
+        },
         "stage": {
           "type": "string",
-          "enum": ["triage", "deadline", "contract", "risk", "synthesis"]
+          "enum": [
+            "triage",
+            "deadline",
+            "contract",
+            "risk",
+            "synthesis"
+          ]
         },
         "conditions": {
           "type": "array",
-          "items": { "$ref": "#/$defs/condition" },
+          "items": {
+            "$ref": "#/$defs/condition"
+          },
           "minItems": 1
         },
         "effects": {
           "type": "array",
-          "items": { "$ref": "#/$defs/effect" },
+          "items": {
+            "$ref": "#/$defs/effect"
+          },
           "minItems": 1
         },
         "severity": {
           "type": "string",
-          "enum": ["critical", "high", "medium", "low"]
+          "enum": [
+            "critical",
+            "high",
+            "medium",
+            "low"
+          ]
         },
         "outcomeType": {
           "type": "string",
-          "enum": ["deadline-protection", "alg1-risk", "contract-risk", "special-protection", "preparation", "opportunity"]
+          "enum": [
+            "deadline-protection",
+            "alg1-risk",
+            "contract-risk",
+            "special-protection",
+            "preparation",
+            "opportunity"
+          ]
         },
         "ruleClass": {
           "type": "string",
-          "enum": ["mvp-reliable", "cautious-check", "do-not-use-yet"]
+          "enum": [
+            "mvp-reliable",
+            "cautious-check",
+            "do-not-use-yet"
+          ]
         },
         "tags": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
-        "notes": { "type": "string" }
+        "notes": {
+          "type": "string"
+        }
       },
       "additionalProperties": false
     }
@@ -138,7 +215,11 @@
         "id": "jobseeker-registration-missing",
         "stage": "deadline",
         "conditions": [
-          { "field": "jobseeker_registered", "operator": "equals", "value": false }
+          {
+            "field": "jobseeker_registered",
+            "operator": "equals",
+            "value": false
+          }
         ],
         "effects": [
           {
@@ -167,13 +248,101 @@
         "severity": "critical",
         "outcomeType": "deadline-protection",
         "ruleClass": "mvp-reliable",
-        "tags": ["agentur", "frist", "alg1"]
+        "tags": [
+          "agentur",
+          "frist",
+          "alg1"
+        ]
+      },
+      {
+        "id": "unemployment-registration-missing",
+        "stage": "deadline",
+        "conditions": [
+          {
+            "field": "already_unemployed_now",
+            "operator": "equals",
+            "value": true
+          },
+          {
+            "field": "unemployment_registered",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "effects": [
+          {
+            "type": "deadlineAlert",
+            "payload": {
+              "id": "unemployment-registration-deadline",
+              "label": "Arbeitslosmeldung sofort prüfen oder nachholen",
+              "description": "Die Arbeitslosmeldung ist eine eigene Pflicht und soll spätestens am ersten Tag der Arbeitslosigkeit erfolgt sein. Wenn das noch offen ist, jetzt direkt handeln.",
+              "timing": "sofort",
+              "statementClass": "mvp-reliable",
+              "evidenceSource": "official"
+            }
+          },
+          {
+            "type": "immediateAction",
+            "payload": {
+              "id": "complete-unemployment-registration",
+              "label": "Arbeitslosmeldung als separaten Schritt direkt anstoßen",
+              "why": "Arbeitsuchendmeldung und Arbeitslosmeldung sind nicht dasselbe. Für Leistungsbezug und Start der Arbeitslosigkeit muss die separate Meldung geprüft werden.",
+              "priority": 1,
+              "statementClass": "mvp-reliable",
+              "evidenceSource": "official"
+            }
+          }
+        ],
+        "severity": "critical",
+        "outcomeType": "deadline-protection",
+        "ruleClass": "mvp-reliable",
+        "tags": [
+          "agentur",
+          "arbeitslosmeldung",
+          "frist",
+          "alg1"
+        ]
+      },
+      {
+        "id": "jobseeker-vs-unemployment-registration",
+        "stage": "synthesis",
+        "conditions": [
+          {
+            "field": "jobseeker_registered",
+            "operator": "exists",
+            "value": true
+          }
+        ],
+        "effects": [
+          {
+            "type": "disclaimer",
+            "payload": {
+              "id": "agency-registration-distinction",
+              "label": "Arbeitsuchendmeldung ersetzt nicht Arbeitslosmeldung",
+              "description": "Beide Meldungen sind fachlich getrennt. Im MVP soll diese Unterscheidung explizit sichtbar bleiben.",
+              "statementClass": "mvp-reliable",
+              "evidenceSource": "official"
+            }
+          }
+        ],
+        "severity": "medium",
+        "outcomeType": "deadline-protection",
+        "ruleClass": "mvp-reliable",
+        "tags": [
+          "agentur",
+          "arbeitsuchendmeldung",
+          "arbeitslosmeldung"
+        ]
       },
       {
         "id": "termination-lawsuit-window",
         "stage": "deadline",
         "conditions": [
-          { "field": "termination_access_date", "operator": "exists", "value": true }
+          {
+            "field": "termination_access_date",
+            "operator": "exists",
+            "value": true
+          }
         ],
         "effects": [
           {
@@ -201,14 +370,26 @@
         "severity": "critical",
         "outcomeType": "deadline-protection",
         "ruleClass": "mvp-reliable",
-        "tags": ["kuendigung", "arbeitsgericht", "frist"]
+        "tags": [
+          "kuendigung",
+          "arbeitsgericht",
+          "frist"
+        ]
       },
       {
         "id": "agreement-not-signed-yet",
         "stage": "contract",
         "conditions": [
-          { "field": "agreement_present", "operator": "equals", "value": true },
-          { "field": "agreement_already_signed", "operator": "equals", "value": false }
+          {
+            "field": "agreement_present",
+            "operator": "equals",
+            "value": true
+          },
+          {
+            "field": "agreement_already_signed",
+            "operator": "equals",
+            "value": false
+          }
         ],
         "effects": [
           {
@@ -235,13 +416,21 @@
         "severity": "critical",
         "outcomeType": "alg1-risk",
         "ruleClass": "mvp-reliable",
-        "tags": ["aufhebungsvertrag", "abwicklungsvertrag", "alg1"]
+        "tags": [
+          "aufhebungsvertrag",
+          "abwicklungsvertrag",
+          "alg1"
+        ]
       },
       {
         "id": "agreement-already-signed",
         "stage": "risk",
         "conditions": [
-          { "field": "agreement_already_signed", "operator": "equals", "value": true }
+          {
+            "field": "agreement_already_signed",
+            "operator": "equals",
+            "value": true
+          }
         ],
         "effects": [
           {
@@ -259,13 +448,20 @@
         "severity": "high",
         "outcomeType": "contract-risk",
         "ruleClass": "cautious-check",
-        "tags": ["signed", "beratung"]
+        "tags": [
+          "signed",
+          "beratung"
+        ]
       },
       {
         "id": "release-does-not-end-duties",
         "stage": "risk",
         "conditions": [
-          { "field": "release_status", "operator": "notEquals", "value": "no" }
+          {
+            "field": "release_status",
+            "operator": "notEquals",
+            "value": "no"
+          }
         ],
         "effects": [
           {
@@ -282,13 +478,20 @@
         "severity": "medium",
         "outcomeType": "preparation",
         "ruleClass": "mvp-reliable",
-        "tags": ["freistellung", "organisation"]
+        "tags": [
+          "freistellung",
+          "organisation"
+        ]
       },
       {
         "id": "special-protection-indicator",
         "stage": "risk",
         "conditions": [
-          { "field": "special_protection_indicator", "operator": "notIncludes", "value": "none_known" }
+          {
+            "field": "special_protection_indicator",
+            "operator": "notIncludes",
+            "value": "none_known"
+          }
         ],
         "effects": [
           {
@@ -315,13 +518,21 @@
         "severity": "high",
         "outcomeType": "special-protection",
         "ruleClass": "cautious-check",
-        "tags": ["sonderfall", "schutz", "red-flag"]
+        "tags": [
+          "sonderfall",
+          "schutz",
+          "red-flag"
+        ]
       },
       {
         "id": "documents-missing",
         "stage": "triage",
         "conditions": [
-          { "field": "documents_secured", "operator": "includes", "value": "none_yet" }
+          {
+            "field": "documents_secured",
+            "operator": "includes",
+            "value": "none_yet"
+          }
         ],
         "effects": [
           {
@@ -338,13 +549,20 @@
         "severity": "medium",
         "outcomeType": "preparation",
         "ruleClass": "mvp-reliable",
-        "tags": ["dokumente", "vorbereitung"]
+        "tags": [
+          "dokumente",
+          "vorbereitung"
+        ]
       },
       {
         "id": "training-opportunity",
         "stage": "synthesis",
         "conditions": [
-          { "field": "primary_goal", "operator": "equals", "value": "plan_next_step" }
+          {
+            "field": "primary_goal",
+            "operator": "equals",
+            "value": "plan_next_step"
+          }
         ],
         "effects": [
           {
@@ -361,13 +579,20 @@
         "severity": "low",
         "outcomeType": "opportunity",
         "ruleClass": "cautious-check",
-        "tags": ["weiterbildung", "bildungsgutschein"]
+        "tags": [
+          "weiterbildung",
+          "bildungsgutschein"
+        ]
       },
       {
         "id": "do-not-use-compensation-promise",
         "stage": "synthesis",
         "conditions": [
-          { "field": "agreement_present", "operator": "exists", "value": true }
+          {
+            "field": "agreement_present",
+            "operator": "exists",
+            "value": true
+          }
         ],
         "effects": [
           {
@@ -384,7 +609,10 @@
         "severity": "low",
         "outcomeType": "contract-risk",
         "ruleClass": "do-not-use-yet",
-        "tags": ["abfindung", "scope-guard"]
+        "tags": [
+          "abfindung",
+          "scope-guard"
+        ]
       }
     ]
   }

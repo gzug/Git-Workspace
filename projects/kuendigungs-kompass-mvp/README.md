@@ -7,6 +7,8 @@ Dieses Verzeichnis enthält die erste Datenbasis für den MVP des **Kündigungs-
 - `questions.schema.json` – Struktur und Beispiel-Fragen für den 2–3-Minuten-Fragebogen
 - `rules.schema.json` – einfache Regelbasis für Risiken, Fristen, Warnhinweise, Chancen und nächste Schritte
 - `result.schema.json` – Struktur für die persönliche Auswertung und den priorisierten Plan
+- `REFERENZFAELLE.md` – 3 Kernfälle mit Beispielantworten und Soll-Output
+- `RESULT-COPY.md` – Copy-/Antwortbausteine je Primary Track
 
 ## Wie die Dateien zusammenspielen
 

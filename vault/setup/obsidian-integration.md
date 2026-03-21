@@ -7,10 +7,15 @@ Es ist **nicht** das primäre Betriebsgehirn des Agenten und **nicht** eine zwei
 
 ## Geltungsbereich
 
+Der **gesamte Workspace** ist der Obsidian-Vault.
+Das ist bewusst so gewählt: Mensch und Agent arbeiten auf denselben Dateien.
+
 Sinnvoll in Obsidian:
 - `vault/` → Runbooks, kuratiertes Wissen, Entscheidungen, Setup
 - `memory/notes/` → thematische Arbeitsnotizen
-- optional lesend/editierend: `MEMORY.md` und `memory/daily/`
+- `MEMORY.md` → kuratiertes Langzeitgedächtnis
+- `memory/daily/` → Tagesverlauf und Wiedereinstieg
+- `projects/` → Einstieg über Projekt-Hubs und operative Artefakte
 
 Bewusst nicht "obsidianisieren":
 - Agenten-Betriebslogik
@@ -20,11 +25,30 @@ Bewusst nicht "obsidianisieren":
 
 ## Minimaler Setup-Stand
 
-- Workspace ist als lokaler Obsidian-Vault registriert
+- gesamter Workspace ist als lokaler Obsidian-Vault registriert
 - `.obsidian/app.json` vorhanden
 - Attachments landen unter `vault/attachments`
+- `HOME.md` ist die empfohlene Startansicht
 - Skill `obsidian` ist aktiviert
 - `obsidian-cli` ist installiert
+
+## Empfohlene Nutzung
+
+### Startpunkt
+- `HOME.md` öffnen
+- von dort in `MEMORY.md`, heutige Daily Note, Runbooks oder aktive Projekte springen
+
+### Favoriten
+- `HOME.md`
+- `MEMORY.md`
+- aktuelle Daily Note
+- `vault/runbooks/README.md`
+- aktives Projekt-Hub
+
+### Sidebar
+- Dateibaum sichtbar
+- Suche griffbereit
+- Favoriten/Starred für die Kernnoten
 
 ## Getestete Kernfunktionen
 
@@ -44,15 +68,6 @@ Bewusst nicht "obsidianisieren":
 Obsidian ist hier vor allem:
 - Lese- und Navigationsoberfläche für Y.
 - Kurationshilfe für strukturierte Markdown-Inhalte
-- gute Oberfläche für `vault/`-Inhalte, Runbooks, Entscheidungen und Setup-Notizen
-
-Bewusst nicht als Standardziel in Obsidian pflegen:
-- `memory/daily/`
-- operative Zwischenstände in `memory/notes/`
-- `projects/` als Arbeitsartefakte
-- Agenten-/Scheduler-/Script-Logik
-
-Der Agent arbeitet weiter primär dateibasiert.
-wn-Inhalte
+- gute Oberfläche für `vault/`, `MEMORY.md`, Daily Notes und Projekt-Hubs
 
 Der Agent arbeitet weiter primär dateibasiert.

@@ -8,8 +8,11 @@ source: curated
 # Vault Index
 
 ## Start
+- [Home](../HOME.md)
 - [Setup](setup/openclaw-setup.md)
 - [Workspace Map](setup/workspace-map.md)
+- [Obsidian-Integration](setup/obsidian-integration.md)
+- [Obsidian Startansicht](setup/obsidian-startansicht.md)
 - [Housekeeper Spec](setup/housekeeper-spec.md)
 - [Runbooks](runbooks/README.md)
 - [Agent Operations](runbooks/agent-operations.md)

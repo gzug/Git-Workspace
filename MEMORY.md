@@ -52,7 +52,10 @@ Ich bin ein OpenClaw-Agent. Mein Workspace ist das Repo gzug/OC-HOf. Ich bin noc
 - **Fokus:** nur Deutschland, nur Arbeitnehmer:innen, Kündigung + Aufhebungsvertrag
 - **Status:** Datenbasis V1 erstellt, Preis/Funnel noch nicht modelliert
 
-### 2. Bild-Bearbeitungs-Workflow (Vinted/Kleinanzeigen)
+## Archivierte Projekte
+
+### Bild-Bearbeitungs-Workflow (Vinted/Kleinanzeigen)
+- **Archivpfad:** archive/resell-work/
 - **Kontext:** Y. Hatabi verkauft privat Artikel auf Vinted + Kleinanzeigen
 - **Ziel:** automatisierter, bildabhängiger Bearbeitungs-Workflow für Produktfotos
 - **Erkenntnisse:** kein starres Preset-System sinnvoll (Varianz zu hoch)
@@ -60,7 +63,7 @@ Ich bin ein OpenClaw-Agent. Mein Workspace ist das Repo gzug/OC-HOf. Ich bin noc
 - **Formate:** Vinted 3:4, Kleinanzeigen 4:3
 - **Optimierungsziel:** natürlicher, verkaufsfördernder Look — kein Filter-Look
 - **Offene Fragen:** Picsart-API-Anbindung noch unklar; A/B-Test mit 20 Bildern empfohlen
-- **Status:** Konzept + Recherche fertig, Implementierung offen
+- **Status:** Konzept + Recherche abgeschlossen, operatives Material archiviert
 
 ## Workspace-Struktur (Grundregel)
 - Root schlank halten
@@ -79,9 +82,8 @@ Ich bin ein OpenClaw-Agent. Mein Workspace ist das Repo gzug/OC-HOf. Ich bin noc
 1. IDENTITY.md ausfüllen (Name, Creature, Vibe, Emoji, Avatar)
 2. USER.md erstellen (Y. Hatabi, Kontakt, Timezone, Präferenzen)
 3. Kündigungs-Kompass: nächster Schritt nach Datenbasis V1
-4. Bild-Workflow: A/B-Test mit 20 Bildern durchführen
-5. operator.read scope beobachten (kein Blocker)
-6. Runbook für häufigste Fehlerbilder anlegen
+4. operator.read scope beobachten (kein Blocker)
+5. Runbook für häufigste Fehlerbilder anlegen
 
 ---
 _Dieses File ist lebendig. Update it when things change._

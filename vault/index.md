@@ -19,6 +19,13 @@ source: curated
 ## Wichtig im Root
 - `AGENTS.md`
 - `SOUL.md`
+- `USER.md`
+- `IDENTITY.md`
 - `HEARTBEAT.md`
-- `ROUTING_RULES.md`
 - `MEMORY.md`
+
+## Aktiver Fokus
+- `projects/kuendigungs-kompass-mvp/`
+
+## Archiv-Hinweis
+- älteres Resell-/Bild-Workflow-Material liegt unter `archive/resell-work/`

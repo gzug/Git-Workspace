@@ -92,4 +92,5 @@
 ### Operative Bewertung
 - Das bestehende **V2-Result-Schema reicht** für diese Fälle aus.
 - Nötig war nur eine **kleine Nachschärfung im Frage-/Regellayer**, nicht im Result-Schema selbst.
-- Der nächste sinnvolle Schritt war **Mapping-/Rendering-Logik** statt weiterem Schema-Design; dafür liegt jetzt ein eigener Spec-Block vor.
+- Mapping-/Rendering-Logik liegt jetzt als eigener Spec-Block vor.
+- Zusätzlich liegen nun **Golden Outputs** für die Kernfälle vor, damit spätere Umsetzung gegen feste Sollbilder geprüft werden kann.

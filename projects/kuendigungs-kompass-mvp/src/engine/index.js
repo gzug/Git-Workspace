@@ -464,14 +464,16 @@ function buildDeadlines(answers) {
       statementClass: 'mvp-reliable',
     });
   }
-  if (answers.jobseeker_registered === false) {
+  if (answers.jobseeker_registered === false || answers.agreement_already_signed === true) {
     deadlines.push({
       label: 'Arbeitsuchendmeldung',
       timing: 'spätestens 3 Monate vor Ende, sonst innerhalb von 3 Tagen nach Kenntnis',
       importance: 'critical',
       note: answers.already_unemployed_now
         ? 'Auch wenn du schon arbeitslos bist, sollte diese Meldung als eigener Pflichtpunkt nicht übersehen werden.'
-        : 'Diese Meldung sollte nicht aufgeschoben werden, auch wenn der Vertrag noch nicht unterschrieben ist.',
+        : answers.agreement_already_signed === true
+          ? 'Im Beispiel bereits erledigt, aber als Fachlogik weiterhin relevant.'
+          : 'Diese Meldung sollte nicht aufgeschoben werden, auch wenn der Vertrag noch nicht unterschrieben ist.',
       statementClass: 'mvp-reliable',
     });
   }

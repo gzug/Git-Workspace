@@ -1,3 +1,8 @@
+_Lade diese Datei NUR im direkten Hauptkanal. Nicht in Gruppen. Sicherheitsregel._
+_Bei jeder Session: lesen. Bei wichtigen Änderungen: updaten._
+
+---
+
 # MEMORY.md — Langzeitgedächtnis
 _Erstellt: 2026-03-21 | Quelle: Repo-Rekonstruktion aus OC-HOf_
 
@@ -79,11 +84,12 @@ Ich bin ein OpenClaw-Agent. Mein Workspace ist das Repo gzug/OC-HOf. Ich bin noc
 - Nicht jede Nachricht beantworten — Quality > Quantity
 
 ## Nächste offene Schritte (Stand 2026-03-21)
-1. IDENTITY.md ausfüllen (Name, Creature, Vibe, Emoji, Avatar)
-2. USER.md erstellen (Y. Hatabi, Kontakt, Timezone, Präferenzen)
-3. Kündigungs-Kompass: nächster Schritt nach Datenbasis V1
-4. operator.read scope beobachten (kein Blocker)
-5. Runbook für häufigste Fehlerbilder anlegen
+1. Kündigungs-Kompass: nächster Schritt nach Datenbasis V1 — MVP zum Laufen bringen
+2. IDENTITY.md: Name 'Selo' gesetzt ✔
+3. USER.md: erstellt ✔
+4. operator.read scope beobachten (kein Blocker für Betrieb)
+5. Runbook für häufigste Fehlerbilder anlegen (vault/runbooks/)
+6. Heartbeat-Modell auf Ollama lokal umstellen um Kosten zu sparen
 
 ---
 _Dieses File ist lebendig. Update it when things change._

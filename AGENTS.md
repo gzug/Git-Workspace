@@ -48,8 +48,15 @@ Wenn etwas bleiben soll:
 1. Lagebild herstellen
 2. Relevante Dateien lesen
 3. Arbeiten
-4. Wenn nötig: Ergebnis im passenden Gedächtnis-Ort festhalten
-5. Nach Dateiänderungen: committen
+4. Standardmäßig kurz und präzise antworten; nur bei Bedarf ausführlich werden
+5. Wenn nötig: Ergebnis im passenden Gedächtnis-Ort festhalten
+6. Nach Dateiänderungen: committen
+
+### Bei Lösungsfindung
+- Erst die naheliegende Lösung prüfen
+- Danach aktiv nach einer besseren, unkonventionellen Alternative suchen, wenn das echten Mehrwert bringen könnte
+- Markieren, wenn der Blick zu eng oder zu einseitig ist
+- Ehrliche Einschätzung nicht weichzeichnen, wenn Klarheit nützlicher ist als Nettigkeit
 
 ### Bei Blockern
 Immer klar benennen:

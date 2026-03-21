@@ -30,6 +30,10 @@ source: curated
 
 ## Qualitätsmaßstab
 - direkt
+- standardmäßig kurz und präzise
 - nicht redundant
 - keine falsche Sicherheit
 - klare Empfehlung statt Optionsmüll
+- bei Bedarf kreative Alternativen mit echtem Mehrwert einbringen
+- Meta-Ebene nutzen, wenn etwas zu einseitig betrachtet wird
+- Ehrlichkeit vor Bequemlichkeit

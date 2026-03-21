@@ -201,17 +201,20 @@ Der fachliche Dokumentationsstand ist aktuell **sicher belastbar**. Der technisc
 ### 1. Noch kein final integrierter UI-/API-Anschluss
 Der Projektstand ist stark in Logik und Spezifikation, aber noch nicht als echtes Produkt-Interface verdrahtet.
 
-### 2. Render-Snapshots für Endnutzertexte fehlen noch
-Es gibt strukturierte Result-Fixtures, aber noch keine systematischen **textuellen Expected Outputs** pro View:
+### 2. Render-Tests sind da, aber noch nicht final als textuelle Golden Snapshots ausgebaut
+Es gibt jetzt harte Render-Assertions für:
 - short
 - standard
 - advice
 
-### 3. Technischer Code-Stand muss gegen Doku stabil gehalten werden
-Da parallel bereits technische Dateien existieren, muss beim nächsten Block geprüft werden:
-- passt Runtime wirklich zu den neuen 6 Fixture-Paaren?
-- deckt `test-fixtures.js` schon alle Fixtures ab?
-- stimmt die aktuelle Track-Wahl mit den dokumentierten Golden Outputs überein?
+Was noch fehlt, sind echte **textuelle Golden Outputs pro View**, falls später stärker auf Copy-Stabilität getestet werden soll.
+
+### 3. Technischer Code-Stand muss weiter gegen Doku stabil gehalten werden
+Ein wichtiger Drift wurde bereits sichtbar gemacht und bereinigt:
+- `test-fixtures.js` deckt jetzt alle 6 Fixture-Paare ab
+- der Mehrfachfall (`06-mehrere-eingaenge-gleichzeitig`) wurde in der Engine explizit nachgezogen
+
+Trotzdem bleibt dieser Bereich sensibel, weil Mehrfachfälle und Sonderlagen schnell wieder auseinanderlaufen können.
 
 ### 4. Keine tiefe Datumslogik
 Fristen sind aktuell inhaltlich priorisiert und textlich beschrieben, aber noch nicht als konkrete Datumsberechnung mit Sonderregeln modelliert.
@@ -241,15 +244,20 @@ Das ist bewusst so und aktuell richtig.
 - Input-Fixtures für End-to-End-Paare angelegt
 - 3 zusätzliche Edge-Case-Fixtures ergänzt
 - Projektstatus jetzt auf Gesamtstand aktualisiert
+- Mini-Testkonzept dokumentiert (`TEST-CONCEPT.md`)
+- Execution Board angelegt (`EXECUTION-BOARD.md`)
+- `test-fixtures.js` auf alle 6 Fixture-Paare erweitert
+- Render-Assertions für `short`, `standard` und `advice` ergänzt
+- Engine für den Mehrfachfall `06-mehrere-eingaenge-gleichzeitig` nachgeschärft
 
 ### Mein aktueller offener Todo-Bereich
 
 #### Priorität 1
-- **Runtime/Engine gegen die 6 Fixture-Paare hart prüfen**
-- `test-fixtures.js` auf den vollständigen Fixture-Stand bringen, falls Pair 6 oder neue Checks noch fehlen
+- **Datumslogik-MVP definieren und in die Engine schneiden**
+- festlegen, welche Fristen für den ersten Launch konkret berechnet statt nur textlich beschrieben werden
 
 #### Priorität 2
-- **textuelle Render-Snapshots** definieren für:
+- optional echte **textuelle Golden Snapshots** definieren für:
   - Short View
   - Standard View
   - Advice View
@@ -268,10 +276,10 @@ Das ist bewusst so und aktuell richtig.
 
 ## Empfohlene nächste Reihenfolge
 
-1. bestehenden Code-/Engine-Stand kurz gegen Dokumentation prüfen
-2. Fixture-Tests auf alle 6 Paare ziehen
-3. Render-Snapshots für Short / Standard / Advice ergänzen
-4. erst dann Adapter oder UI-Anschluss
+1. Datumslogik-MVP für kritische Fristen definieren
+2. danach optional textuelle Golden Snapshots pro View ergänzen
+3. erst dann Adapter oder UI-Anschluss
+4. UI-Polish bewusst hinter Test- und Integrationsstabilität halten
 
 Das ist der sauberste Weg, um Drift zu vermeiden.
 

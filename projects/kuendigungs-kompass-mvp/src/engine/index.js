@@ -39,6 +39,24 @@ function daysToDate(dateString, now = new Date()) {
   return Math.ceil(ms / (1000 * 60 * 60 * 24));
 }
 
+function addDays(dateString, days) {
+  if (!dateString) return null;
+  const target = new Date(dateString);
+  if (Number.isNaN(target.getTime())) return null;
+  target.setDate(target.getDate() + days);
+  return target;
+}
+
+function formatDateDE(date) {
+  if (!(date instanceof Date) || Number.isNaN(date.getTime())) return null;
+  return new Intl.DateTimeFormat('de-DE', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    timeZone: 'Europe/Berlin',
+  }).format(date);
+}
+
 function matchesCondition(condition, answers, now = new Date()) {
   const actual = answers[condition.field];
   switch (condition.operator) {
@@ -231,6 +249,16 @@ function buildDocumentChecklist(answers) {
   return dedupeBy(items, (item) => item.label);
 }
 
+function isOverlappingMultiRiskCase(answers) {
+  const indicators = answers.special_protection_indicator || [];
+  const hasSpecialIndicator = indicators.some((x) => x !== 'none_known');
+  return answers.case_entry === 'multiple'
+    && Boolean(answers.termination_access_date)
+    && answers.agreement_present === true
+    && answers.agreement_already_signed !== true
+    && hasSpecialIndicator;
+}
+
 function buildAdvisorQuestions(answers, track) {
   if (track === 'contract-do-not-sign') {
     return [
@@ -240,6 +268,13 @@ function buildAdvisorQuestions(answers, track) {
     ];
   }
   if (track === 'special-case-review') {
+    if (isOverlappingMultiRiskCase(answers)) {
+      return [
+        'Welche Reihenfolge ist in meinem Fall wirklich die richtige: Vertrag, Klagefrist, Agentur oder Schutzstatus?',
+        'Welche Risiken entstehen, wenn ich jetzt falsch priorisiere?',
+        'Welche Unterlagen fehlen noch für eine belastbare Prüfung?'
+      ];
+    }
     if (answers.agreement_already_signed) {
       return [
         'Welche unmittelbaren Folgen hat die bereits erfolgte Unterschrift?',
@@ -359,7 +394,32 @@ function buildTopActions(answers, effects, track) {
   }
 
   if (track === 'special-case-review') {
-    if (answers.agreement_already_signed) {
+    if (isOverlappingMultiRiskCase(answers)) {
+      actions.push({
+        priority: 1,
+        label: 'Nichts vorschnell unterschreiben',
+        why: 'Der Vertrag ist noch offen und könnte deine Lage zusätzlich verschärfen.',
+        timing: 'sofort',
+        statementClass: 'mvp-reliable',
+        _severity: 'critical',
+      });
+      actions.push({
+        priority: 2,
+        label: '3-Wochen-Frist und Agentur-Meldung parallel absichern',
+        why: 'Hier laufen mehrere kritische Themen gleichzeitig und keines sollte isoliert liegen bleiben.',
+        timing: 'heute',
+        statementClass: 'mvp-reliable',
+        _severity: 'critical',
+      });
+      actions.push({
+        priority: 3,
+        label: 'Sonderfall individuell prüfen lassen',
+        why: 'Die unklare Schutzlage macht pauschale Standardlogik zu riskant.',
+        timing: 'sehr zeitnah',
+        statementClass: 'cautious-check',
+        _severity: 'high',
+      });
+    } else if (answers.agreement_already_signed) {
       actions.push({
         priority: 1,
         label: 'Unterzeichneten Vertrag sofort individuell prüfen lassen',
@@ -478,13 +538,18 @@ function buildDeadlines(answers) {
     });
   }
   if (answers.termination_access_date) {
+    const lawsuitDeadline = addDays(answers.termination_access_date, 21);
+    const formattedLawsuitDeadline = formatDateDE(lawsuitDeadline);
+    const baseNote = (answers.special_protection_indicator || []).some((x) => x !== 'none_known')
+      ? 'Der mögliche Sonderfall ändert nichts daran, dass die Frist nicht liegen bleiben sollte.'
+      : 'Der MVP prüft nicht die Erfolgsaussicht, sondern markiert die Frist als priorisiert.';
     deadlines.push({
       label: 'Kündigungsschutzklage prüfen',
-      timing: 'regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung',
+      timing: formattedLawsuitDeadline
+        ? `regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung (ausgehend vom angegebenen Zugangsdatum: bis ${formattedLawsuitDeadline})`
+        : 'regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung',
       importance: 'critical',
-      note: (answers.special_protection_indicator || []).some((x) => x !== 'none_known')
-        ? 'Der mögliche Sonderfall ändert nichts daran, dass die Frist nicht liegen bleiben sollte.'
-        : 'Der MVP prüft nicht die Erfolgsaussicht, sondern markiert die Frist als priorisiert.',
+      note: baseNote,
       statementClass: 'mvp-reliable',
     });
   }
@@ -530,7 +595,26 @@ function buildRiskFlags(answers, track) {
   }
 
   if (track === 'special-case-review') {
-    if (answers.agreement_already_signed) {
+    if (isOverlappingMultiRiskCase(answers)) {
+      riskFlags.push({
+        label: 'Sperrzeit-/Ruhensrisiko bei möglicher Vertragsmitwirkung',
+        description: 'Ein noch nicht unterschriebener Vertrag kann zusätzliche Risiken beim Arbeitslosengeld auslösen.',
+        severity: 'critical',
+        statementClass: 'mvp-reliable',
+      });
+      riskFlags.push({
+        label: 'Möglicher Sonderfall / unklare Schutzlage',
+        description: 'Solange unklar ist, ob ein besonderer Schutz greift, sollte der Fall nicht als Standardfall behandelt werden.',
+        severity: 'high',
+        statementClass: 'cautious-check',
+      });
+      riskFlags.push({
+        label: 'Mehrfachdruck erhöht Fehlentscheidungsrisiko',
+        description: 'Wenn Kündigung, Vertrag und Schutzfragen gleichzeitig auftauchen, steigt das Risiko falscher Priorisierung.',
+        severity: 'high',
+        statementClass: 'cautious-check',
+      });
+    } else if (answers.agreement_already_signed) {
       riskFlags.push({
         label: 'Vertrag bereits unterschrieben',
         description: 'Damit verschiebt sich der Fokus von allgemeiner Warnung auf Folgen, Fristen und individuelle Prüfung.',
@@ -589,6 +673,12 @@ function buildRedFlags(answers, evaluation, track) {
       whyEscalated: 'Der MVP soll hier nicht mit pauschalen Aussagen arbeiten, weil die konkrete Folgenlage individuell geprüft werden muss.',
       recommendedEscalation: 'Qualifizierte individuelle Prüfung mit Anwalt, Gewerkschaft oder passender Beratungsstelle',
     });
+  } else if (isOverlappingMultiRiskCase(answers)) {
+    flags.push({
+      label: 'Überlagerter Mehrfachfall mit möglichem Sonderfall',
+      whyEscalated: 'Mehrere Risikotreiber laufen gleichzeitig. Der MVP sollte hier priorisieren, aber nicht so tun, als sei der Fall vollständig standardisierbar.',
+      recommendedEscalation: 'Qualifizierte individuelle Prüfung mit Anwalt, Gewerkschaft oder passender Beratungsstelle',
+    });
   } else if (track === 'special-case-review' || indicators.some((x) => x !== 'none_known')) {
     flags.push({
       label: 'Möglicher besonderer Schutz oder Sonderfall',
@@ -616,7 +706,9 @@ function selectPrimaryTrack(rawAnswers, evaluation = evaluateRules(rawAnswers)) 
   if (hasSpecialIndicator || answers.agreement_already_signed || evaluation.missingFields.some((x) => x.redFlagIfMissing)) {
     const reasoning = answers.agreement_already_signed
       ? 'Weil der Vertrag bereits unterschrieben ist, ist der Standardhinweis \"nicht unterschreiben\" nicht mehr ausreichend. Jetzt stehen Folgenanalyse, Fristen und individuelle Prüfung im Vordergrund.'
-      : 'Weil hier neben der Kündigungsfrist auch ein möglicher Schutzstatus oder Sonderfall im Raum steht, wäre Standardlogik zu grob und eine individuelle Prüfung vorrangig.';
+      : isOverlappingMultiRiskCase(answers)
+        ? 'Weil sich Fristdruck, Vertragsrisiko und unklare Schutzlage gleichzeitig überlagern, darf der MVP hier nicht nur eine Standard-Track-Logik fahren.'
+        : 'Weil hier neben der Kündigungsfrist auch ein möglicher Schutzstatus oder Sonderfall im Raum steht, wäre Standardlogik zu grob und eine individuelle Prüfung vorrangig.';
     return {
       primaryTrack: 'special-case-review',
       reasoning,
@@ -688,6 +780,14 @@ function buildCaseSnapshot(answers, track) {
     };
   }
   if (track === 'special-case-review') {
+    if (isOverlappingMultiRiskCase(answers)) {
+      return {
+        headline: 'Dein Fall hat mehrere gleichzeitige Risikotreiber',
+        situation: 'Es liegen gleichzeitig eine schriftliche Kündigung, ein noch nicht unterschriebener Vertrag und ein unklarer Sonderfallindikator vor.',
+        riskLevel: 'high',
+        primaryGoal: answers.primary_goal,
+      };
+    }
     return {
       headline: 'Dein Fall sollte nicht als Standardfall behandelt werden',
       situation: 'Du hast eine schriftliche Kündigung erhalten und es gibt Hinweise auf einen möglichen Sonderfall oder besonderen Schutz, der gesondert geprüft werden sollte.',
@@ -737,6 +837,13 @@ function buildDisclaimers(answers, track) {
     ];
   }
   if (track === 'special-case-review') {
+    if (isOverlappingMultiRiskCase(answers)) {
+      return [
+        'Der MVP ersetzt keine individuelle Rechtsberatung.',
+        'Bei mehreren gleichzeitigen Risikotreibern soll der MVP priorisieren, aber keine Scheinsicherheit erzeugen.',
+        'Arbeitsuchendmeldung und Arbeitslosmeldung sind nicht dasselbe.'
+      ];
+    }
     return [
       'Der MVP ersetzt keine individuelle Rechtsberatung.',
       'Ob tatsächlich ein besonderer Schutz greift, muss im Einzelfall geprüft werden.',

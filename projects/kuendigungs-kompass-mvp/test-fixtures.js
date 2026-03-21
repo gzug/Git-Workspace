@@ -10,6 +10,7 @@ const PAIRS = [
   ['examples/inputs/03-kuendigung-sonderfall.input.json', 'examples/03-kuendigung-sonderfall.result.json'],
   ['examples/inputs/04-vertrag-bereits-unterschrieben.input.json', 'examples/04-vertrag-bereits-unterschrieben.result.json'],
   ['examples/inputs/05-kuendigung-nur-angekuendigt.input.json', 'examples/05-kuendigung-nur-angekuendigt.result.json'],
+  ['examples/inputs/06-mehrere-eingaenge-gleichzeitig.input.json', 'examples/06-mehrere-eingaenge-gleichzeitig.result.json'],
 ];
 
 function readJson(relativePath) {
@@ -47,10 +48,32 @@ for (const [inputPath, expectedPath] of PAIRS) {
     assert.ok(!strings(actual.disclaimers).some((x) => /Abfindungswahrscheinlichkeiten|Erfolgswahrscheinlichkeit/.test(x)));
     assert.ok(Array.isArray(actual.statementLedger.notUsedYet));
 
-    for (const view of ['short', 'standard', 'advice']) {
-      const rendered = renderResult(actual, view);
+    const shortRendered = renderResult(actual, 'short');
+    const standardRendered = renderResult(actual, 'standard');
+    const adviceRendered = renderResult(actual, 'advice');
+
+    for (const rendered of [shortRendered, standardRendered, adviceRendered]) {
       assert.ok(typeof rendered === 'string' && rendered.length > 20);
+      assert.ok(!/do-not-use-yet|Erfolgswahrscheinlichkeit|Abfindungswahrscheinlichkeiten/.test(rendered));
     }
+
+    assert.ok(shortRendered.includes(`Dein Fokus jetzt: ${actual.caseSnapshot.headline}`));
+    assert.ok(shortRendered.includes(`Wichtigster nächster Schritt: ${actual.topActions[0]?.label}`));
+
+    assert.ok(standardRendered.indexOf('Nächste Schritte:') > -1);
+    assert.ok(standardRendered.indexOf('Fristen:') > standardRendered.indexOf('Nächste Schritte:'));
+    if (actual.riskFlags.length > 0) {
+      assert.ok(standardRendered.indexOf('Risiken:') > standardRendered.indexOf('Fristen:'));
+    }
+    if (actual.redFlags.length > 0) {
+      assert.ok(standardRendered.indexOf('Red Flags:') > standardRendered.indexOf('Risiken:'));
+    }
+    assert.ok(standardRendered.indexOf('Unterlagen:') > standardRendered.indexOf('Fristen:'));
+    assert.ok(standardRendered.indexOf('Hinweise:') > standardRendered.indexOf('Unterlagen:'));
+
+    assert.ok(adviceRendered.includes(`Warum dieser Fokus: ${actual.synthesisDecision.reasoning}`));
+    assert.ok(adviceRendered.indexOf('Fragen für Beratung:') > adviceRendered.indexOf('Unterlagen:'));
+    assert.ok(adviceRendered.indexOf('Hinweise:') > adviceRendered.indexOf('Fragen für Beratung:'));
 
     console.log(`PASS ${name}`);
   } catch (error) {

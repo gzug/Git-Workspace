@@ -68,7 +68,7 @@ Die Hauptlücken liegen aktuell in **vollständiger Testhärtung**, **konkreter 
 **Ziel:** Ergebnis für echte Nutzer verständlich und vertrauenswürdig machen.
 
 ### Task 2.1 — Ergebnisstruktur V1 finalisieren
-- Status: offen
+- Status: in Arbeit
 - Priorität: P0
 - Done-When:
   - Headline, Einordnung, To-dos, Fristen, Risiken, Unterlagen und Disclaimer sind final geordnet

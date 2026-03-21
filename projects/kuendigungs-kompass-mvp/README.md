@@ -9,6 +9,7 @@ Dieses Verzeichnis enthält die erste Datenbasis für den MVP des **Kündigungs-
 - `result.schema.json` – Struktur für die persönliche Auswertung und den priorisierten Plan
 - `REFERENZFAELLE.md` – 3 Kernfälle mit Beispielantworten und Soll-Output
 - `RESULT-COPY.md` – Copy-/Antwortbausteine je Primary Track
+- `RESULT-MAPPING.md` – Mapping-Logik von Rules zu Result-Output
 
 ## Wie die Dateien zusammenspielen
 

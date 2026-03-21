@@ -1,10 +1,14 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Kündigungs-Kompass Question Schema",
-  "description": "Struktur für adaptive Fragen im MVP des Kündigungs-Kompass.",
+  "title": "Kündigungs-Kompass Question Schema V2",
+  "description": "Flow-orientierte Fragestruktur für den operativen MVP des Kündigungs-Kompass. Fokus: Nutzerführung, Fristen, Risiken, Sofortmaßnahmen und belastbare Entscheidungssynthese.",
   "type": "object",
-  "required": ["questions"],
+  "required": ["flowVersion", "questions"],
   "properties": {
+    "flowVersion": {
+      "type": "string",
+      "const": "v2"
+    },
     "questions": {
       "type": "array",
       "items": {
@@ -12,6 +16,7 @@
       }
     }
   },
+  "additionalProperties": false,
   "$defs": {
     "option": {
       "type": "object",
@@ -19,95 +24,192 @@
       "properties": {
         "value": { "type": "string" },
         "label": { "type": "string" },
-        "helpText": { "type": "string" }
+        "helpText": { "type": "string" },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "condition": {
+      "type": "object",
+      "required": ["field", "operator", "value"],
+      "properties": {
+        "field": { "type": "string" },
+        "operator": {
+          "type": "string",
+          "enum": ["equals", "notEquals", "includes", "notIncludes", "exists"]
+        },
+        "value": {}
       },
       "additionalProperties": false
     },
     "question": {
       "type": "object",
-      "required": ["id", "label", "type", "required", "category"],
+      "required": [
+        "id",
+        "stage",
+        "category",
+        "label",
+        "type",
+        "required",
+        "decisionRole",
+        "summaryUse"
+      ],
       "properties": {
         "id": { "type": "string" },
+        "stage": {
+          "type": "string",
+          "enum": [
+            "entry",
+            "triage",
+            "deadline-check",
+            "contract-check",
+            "risk-check",
+            "supporting-context",
+            "goals"
+          ]
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "case",
+            "timing",
+            "agency",
+            "contract",
+            "employment",
+            "protection",
+            "documents",
+            "goals"
+          ]
+        },
         "label": { "type": "string" },
         "helpText": { "type": "string" },
         "type": {
           "type": "string",
           "enum": ["singleSelect", "multiSelect", "date", "boolean", "text", "number"]
         },
+        "required": { "type": "boolean" },
         "options": {
           "type": "array",
           "items": { "$ref": "#/$defs/option" }
         },
-        "required": { "type": "boolean" },
-        "visibilityCondition": {
-          "type": "object",
-          "properties": {
-            "field": { "type": "string" },
-            "operator": { "type": "string", "enum": ["equals", "notEquals", "includes", "exists"] },
-            "value": {}
-          },
-          "additionalProperties": false
+        "askIf": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/condition" }
         },
-        "category": {
+        "decisionRole": {
           "type": "string",
-          "enum": ["entry", "employment", "contract", "agency", "goals", "documents", "special-case"]
-        }
+          "enum": ["entry-gate", "deadline-driver", "risk-driver", "supporting-context", "goal-signal"]
+        },
+        "summaryUse": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["headline", "situation", "next-steps", "deadlines", "risks", "advisor-questions"]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "redFlagIfMissing": { "type": "boolean" },
+        "notes": { "type": "string" }
       },
       "additionalProperties": false
     }
   },
   "example": {
+    "flowVersion": "v2",
     "questions": [
       {
-        "id": "case_type",
-        "label": "Was trifft aktuell auf dich zu?",
-        "helpText": "Damit wir die richtigen Sofortmaßnahmen und Risiken priorisieren können.",
+        "id": "case_entry",
+        "stage": "entry",
+        "category": "case",
+        "label": "Was passt gerade am ehesten zu deiner Situation?",
+        "helpText": "Damit wir zuerst die richtige Logik für Fristen, Risiken und Sofortmaßnahmen aktivieren.",
         "type": "singleSelect",
         "options": [
-          { "value": "termination_received", "label": "Ich habe eine Kündigung erhalten" },
-          { "value": "settlement_offered", "label": "Mir wurde ein Aufhebungsvertrag angeboten" },
-          { "value": "both", "label": "Beides spielt gerade eine Rolle" }
+          { "value": "termination_received", "label": "Ich habe eine schriftliche Kündigung erhalten" },
+          { "value": "termination_announced_only", "label": "Eine Kündigung wurde angekündigt, aber ich habe noch nichts Schriftliches" },
+          { "value": "settlement_offered", "label": "Mir wurde ein Aufhebungsvertrag / Abwicklungsvertrag angeboten" },
+          { "value": "multiple", "label": "Mehreres davon spielt gerade eine Rolle" }
         ],
         "required": true,
-        "category": "entry"
+        "decisionRole": "entry-gate",
+        "summaryUse": ["headline", "situation", "next-steps"]
       },
       {
-        "id": "termination_received_date",
-        "label": "Wann hast du das Schreiben erhalten?",
-        "helpText": "Der Zugang ist für Fristen wichtig.",
+        "id": "termination_access_date",
+        "stage": "deadline-check",
+        "category": "timing",
+        "label": "Wann ist dir die schriftliche Kündigung zugegangen?",
+        "helpText": "Der Zugang ist für die sehr kurze Klagefrist zentral.",
         "type": "date",
         "required": true,
-        "visibilityCondition": { "field": "case_type", "operator": "includes", "value": "termination" },
-        "category": "entry"
+        "askIf": [
+          { "field": "case_entry", "operator": "includes", "value": "termination_received" },
+          { "field": "case_entry", "operator": "notEquals", "value": "termination_announced_only" }
+        ],
+        "decisionRole": "deadline-driver",
+        "summaryUse": ["headline", "deadlines", "next-steps"],
+        "redFlagIfMissing": true
       },
       {
         "id": "employment_end_date",
-        "label": "Wann soll das Arbeitsverhältnis enden?",
-        "helpText": "Das hilft bei Fristen, Meldungen und Priorisierung.",
+        "stage": "deadline-check",
+        "category": "timing",
+        "label": "Zu welchem Datum soll dein Arbeitsverhältnis enden?",
+        "helpText": "Wichtig für Meldungen bei der Agentur für Arbeit und die Gesamtpriorisierung.",
         "type": "date",
         "required": true,
-        "category": "employment"
+        "decisionRole": "deadline-driver",
+        "summaryUse": ["situation", "deadlines", "next-steps"],
+        "redFlagIfMissing": true
       },
       {
-        "id": "already_registered_as_jobseeker",
+        "id": "jobseeker_registered",
+        "stage": "triage",
+        "category": "agency",
         "label": "Hast du dich schon arbeitssuchend gemeldet?",
-        "helpText": "Das ist oft einer der wichtigsten ersten Schritte.",
+        "helpText": "Diese Meldung gehört oft zu den ersten kritischen Schritten.",
         "type": "boolean",
         "required": true,
-        "category": "agency"
+        "decisionRole": "deadline-driver",
+        "summaryUse": ["headline", "deadlines", "next-steps", "risks"],
+        "redFlagIfMissing": true
       },
       {
-        "id": "settlement_available",
-        "label": "Liegt dir ein Aufhebungsvertrag oder Entwurf vor?",
-        "helpText": "Aufhebungsverträge brauchen oft besondere Vorsicht.",
+        "id": "agreement_present",
+        "stage": "contract-check",
+        "category": "contract",
+        "label": "Liegt dir ein Aufhebungs- oder Abwicklungsvertrag vor?",
+        "helpText": "Schon ein Entwurf reicht, damit wir die Risikologik aktivieren.",
         "type": "boolean",
         "required": true,
-        "category": "contract"
+        "decisionRole": "risk-driver",
+        "summaryUse": ["headline", "situation", "risks", "next-steps"]
+      },
+      {
+        "id": "agreement_already_signed",
+        "stage": "risk-check",
+        "category": "contract",
+        "label": "Wurde der Vertrag schon unterschrieben?",
+        "helpText": "Das verändert die Handlungsspielräume deutlich.",
+        "type": "boolean",
+        "required": true,
+        "askIf": [
+          { "field": "agreement_present", "operator": "equals", "value": true }
+        ],
+        "decisionRole": "risk-driver",
+        "summaryUse": ["headline", "situation", "risks", "next-steps"],
+        "redFlagIfMissing": true
       },
       {
         "id": "release_status",
+        "stage": "supporting-context",
+        "category": "contract",
         "label": "Bist du freigestellt?",
-        "helpText": "Freistellung kann für Organisation und weitere Schritte relevant sein.",
+        "helpText": "Freistellung ändert nicht automatisch alle Pflichten, ist aber für Einordnung und Organisation relevant.",
         "type": "singleSelect",
         "options": [
           { "value": "no", "label": "Nein" },
@@ -116,52 +218,64 @@
           { "value": "unknown", "label": "Ich bin unsicher" }
         ],
         "required": true,
-        "category": "contract"
+        "decisionRole": "supporting-context",
+        "summaryUse": ["situation", "risks", "advisor-questions"]
       },
       {
-        "id": "tenure_bucket",
-        "label": "Wie lange warst du ungefähr im Unternehmen?",
-        "helpText": "Das kann für Einordnung und nächste Schritte relevant sein.",
-        "type": "singleSelect",
-        "options": [
-          { "value": "lt_6m", "label": "Unter 6 Monate" },
-          { "value": "6m_2y", "label": "6 Monate bis 2 Jahre" },
-          { "value": "2y_5y", "label": "2 bis 5 Jahre" },
-          { "value": "gt_5y", "label": "Mehr als 5 Jahre" }
-        ],
-        "required": true,
-        "category": "employment"
-      },
-      {
-        "id": "goals",
-        "label": "Was ist dir jetzt am wichtigsten?",
-        "helpText": "Mehrere Antworten möglich.",
+        "id": "special_protection_indicator",
+        "stage": "risk-check",
+        "category": "protection",
+        "label": "Gibt es Anzeichen für einen besonderen Schutz oder heiklen Sonderfall?",
+        "helpText": "Zum Beispiel Schwangerschaft, Schwerbehinderung, Betriebsrat, Elternzeit oder Unsicherheit dazu.",
         "type": "multiSelect",
         "options": [
-          { "value": "avoid_missing_deadlines", "label": "Keine Fristen verpassen" },
-          { "value": "protect_alg1", "label": "ALG I absichern" },
-          { "value": "review_settlement", "label": "Aufhebungsvertrag besser einordnen" },
-          { "value": "understand_compensation", "label": "Abfindung / finanzielle Spielräume verstehen" },
-          { "value": "explore_training", "label": "Weiterbildung / Bildungsgutschein prüfen" },
-          { "value": "prepare_for_lawyer_or_union", "label": "Auf Anwalt / Gewerkschaft vorbereiten" }
+          { "value": "pregnancy_or_maternity", "label": "Schwangerschaft / Mutterschutz" },
+          { "value": "severe_disability", "label": "Schwerbehinderung oder Gleichstellung" },
+          { "value": "works_council_role", "label": "Betriebsrat / ähnliche Funktion" },
+          { "value": "parental_leave", "label": "Elternzeit / Pflege / ähnliche Schutzlage" },
+          { "value": "none_known", "label": "Nichts davon bekannt" },
+          { "value": "unsure", "label": "Ich bin unsicher" }
         ],
         "required": true,
-        "category": "goals"
+        "decisionRole": "risk-driver",
+        "summaryUse": ["headline", "risks", "advisor-questions"]
       },
       {
         "id": "documents_secured",
-        "label": "Welche Unterlagen hast du bereits gesichert?",
-        "helpText": "Das hilft bei der Vorbereitung auf Gespräche und nächste Schritte.",
+        "stage": "supporting-context",
+        "category": "documents",
+        "label": "Welche Unterlagen hast du schon gesichert?",
+        "helpText": "Mehrere Antworten möglich. Das dient vor allem Vorbereitung und Beratungsgespräch.",
         "type": "multiSelect",
         "options": [
           { "value": "termination_letter", "label": "Kündigungsschreiben" },
-          { "value": "settlement_draft", "label": "Aufhebungsvertrag / Entwurf" },
+          { "value": "agreement_draft", "label": "Aufhebungs-/Abwicklungsvertrag oder Entwurf" },
           { "value": "employment_contract", "label": "Arbeitsvertrag" },
           { "value": "salary_docs", "label": "Lohnunterlagen" },
-          { "value": "work_certificate_info", "label": "Infos zu Zeugnis / Resturlaub / Freistellung" }
+          { "value": "release_or_vacation_info", "label": "Infos zu Freistellung / Urlaub / Restansprüchen" },
+          { "value": "none_yet", "label": "Noch nichts davon" }
         ],
         "required": false,
-        "category": "documents"
+        "decisionRole": "supporting-context",
+        "summaryUse": ["next-steps", "advisor-questions"]
+      },
+      {
+        "id": "primary_goal",
+        "stage": "goals",
+        "category": "goals",
+        "label": "Was ist jetzt dein wichtigstes Ziel?",
+        "helpText": "Das priorisiert den Ergebnistext, nicht die Rechtslage.",
+        "type": "singleSelect",
+        "options": [
+          { "value": "protect_deadlines", "label": "Keine Fristen verpassen" },
+          { "value": "protect_alg1", "label": "ALG I möglichst absichern" },
+          { "value": "review_agreement", "label": "Aufhebungsvertrag besser einordnen" },
+          { "value": "prepare_advice", "label": "Gut vorbereitet in Beratung / Anwalt / Gewerkschaft gehen" },
+          { "value": "plan_next_step", "label": "Schnell einen klaren Handlungsplan bekommen" }
+        ],
+        "required": true,
+        "decisionRole": "goal-signal",
+        "summaryUse": ["headline", "next-steps", "advisor-questions"]
       }
     ]
   }

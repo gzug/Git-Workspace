@@ -1,22 +1,39 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Kündigungs-Kompass Rules Schema",
-  "description": "Einfache Regelstruktur für Prioritäten, Warnungen, Fristen und Chancen im MVP.",
+  "title": "Kündigungs-Kompass Rules Schema V2",
+  "description": "Regelstruktur für den operativen MVP mit expliziter Trennung zwischen belastbaren Aussagen, vorsichtigen Prüfhinweisen und vorerst nicht zu verwendenden Aussagen.",
   "type": "object",
-  "required": ["rules"],
+  "required": ["rulesVersion", "rules"],
   "properties": {
+    "rulesVersion": {
+      "type": "string",
+      "const": "v2"
+    },
     "rules": {
       "type": "array",
       "items": { "$ref": "#/$defs/rule" }
     }
   },
+  "additionalProperties": false,
   "$defs": {
     "condition": {
       "type": "object",
       "required": ["field", "operator", "value"],
       "properties": {
         "field": { "type": "string" },
-        "operator": { "type": "string", "enum": ["equals", "notEquals", "includes", "ltDaysToDate", "exists"] },
+        "operator": {
+          "type": "string",
+          "enum": [
+            "equals",
+            "notEquals",
+            "includes",
+            "notIncludes",
+            "exists",
+            "ltDaysToDate",
+            "lteDaysToDate",
+            "gtDaysToDate"
+          ]
+        },
         "value": {}
       },
       "additionalProperties": false
@@ -27,108 +44,226 @@
       "properties": {
         "type": {
           "type": "string",
-          "enum": ["riskFlag", "deadlineHint", "nextStep", "warning", "opportunityFlag", "disclaimerFlag"]
+          "enum": [
+            "immediateAction",
+            "deadlineAlert",
+            "riskFlag",
+            "warning",
+            "opportunityFlag",
+            "documentPrompt",
+            "advisorQuestion",
+            "disclaimer",
+            "manualReview"
+          ]
         },
-        "payload": { "type": "object" }
+        "payload": {
+          "type": "object",
+          "required": ["id", "label", "statementClass"],
+          "properties": {
+            "id": { "type": "string" },
+            "label": { "type": "string" },
+            "description": { "type": "string" },
+            "why": { "type": "string" },
+            "priority": { "type": "integer", "minimum": 1, "maximum": 10 },
+            "timing": { "type": "string" },
+            "statementClass": {
+              "type": "string",
+              "enum": ["mvp-reliable", "cautious-check", "do-not-use-yet"]
+            },
+            "evidenceSource": {
+              "type": "string",
+              "enum": ["official", "statute", "mixed", "internal-policy"]
+            },
+            "audienceNote": { "type": "string" },
+            "escalateIf": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
       },
       "additionalProperties": false
     },
     "rule": {
       "type": "object",
-      "required": ["id", "conditions", "effects", "severity", "tags"],
+      "required": [
+        "id",
+        "stage",
+        "conditions",
+        "effects",
+        "severity",
+        "outcomeType",
+        "ruleClass",
+        "tags"
+      ],
       "properties": {
         "id": { "type": "string" },
-        "conditions": { "type": "array", "items": { "$ref": "#/$defs/condition" } },
-        "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
-        "severity": { "type": "string", "enum": ["critical", "high", "medium", "low"] },
-        "tags": { "type": "array", "items": { "type": "string" } }
+        "stage": {
+          "type": "string",
+          "enum": ["triage", "deadline", "contract", "risk", "synthesis"]
+        },
+        "conditions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/condition" },
+          "minItems": 1
+        },
+        "effects": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/effect" },
+          "minItems": 1
+        },
+        "severity": {
+          "type": "string",
+          "enum": ["critical", "high", "medium", "low"]
+        },
+        "outcomeType": {
+          "type": "string",
+          "enum": ["deadline-protection", "alg1-risk", "contract-risk", "special-protection", "preparation", "opportunity"]
+        },
+        "ruleClass": {
+          "type": "string",
+          "enum": ["mvp-reliable", "cautious-check", "do-not-use-yet"]
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "notes": { "type": "string" }
       },
       "additionalProperties": false
     }
   },
   "example": {
+    "rulesVersion": "v2",
     "rules": [
       {
-        "id": "jobseeker_registration_missing",
+        "id": "jobseeker-registration-missing",
+        "stage": "deadline",
         "conditions": [
-          { "field": "already_registered_as_jobseeker", "operator": "equals", "value": false }
+          { "field": "jobseeker_registered", "operator": "equals", "value": false }
         ],
         "effects": [
           {
-            "type": "riskFlag",
+            "type": "deadlineAlert",
             "payload": {
-              "id": "registration_delay_risk",
-              "label": "Melde-Frist prüfen",
-              "description": "Die arbeitssuchend-Meldung gehört oft zu den ersten kritischen Schritten."
+              "id": "jobseeker-registration-deadline",
+              "label": "Arbeitsuchendmeldung sofort prüfen oder nachholen",
+              "description": "Die Arbeitsuchendmeldung soll in der Regel spätestens 3 Monate vor Ende des Arbeitsverhältnisses erfolgen; erfährst du später davon, binnen 3 Tagen.",
+              "timing": "sofort",
+              "statementClass": "mvp-reliable",
+              "evidenceSource": "official"
             }
           },
           {
-            "type": "nextStep",
+            "type": "immediateAction",
             "payload": {
+              "id": "complete-jobseeker-registration",
+              "label": "Meldung direkt online, telefonisch oder mit Termin anstoßen",
+              "why": "Zu späte Meldungen können finanzielle Nachteile beim späteren Arbeitslosengeld auslösen.",
               "priority": 1,
-              "label": "Arbeitsuchendmeldung sofort prüfen oder nachholen",
-              "why": "Versäumte Meldungen können später Nachteile auslösen."
+              "statementClass": "mvp-reliable",
+              "evidenceSource": "official"
             }
           }
         ],
         "severity": "critical",
+        "outcomeType": "deadline-protection",
+        "ruleClass": "mvp-reliable",
         "tags": ["agentur", "frist", "alg1"]
       },
       {
-        "id": "termination_received_recently",
+        "id": "termination-lawsuit-window",
+        "stage": "deadline",
         "conditions": [
-          { "field": "case_type", "operator": "includes", "value": "termination" },
-          { "field": "termination_received_date", "operator": "exists", "value": true }
+          { "field": "termination_access_date", "operator": "exists", "value": true }
         ],
         "effects": [
           {
-            "type": "deadlineHint",
+            "type": "deadlineAlert",
             "payload": {
-              "id": "termination_deadline_check",
-              "label": "3-Wochen-Frist prüfen",
-              "description": "Wenn die Kündigung angegriffen werden soll, ist die Frist regelmäßig sehr kurz."
+              "id": "three-week-lawsuit-window",
+              "label": "3-Wochen-Frist für Kündigungsschutzklage prüfen",
+              "description": "Wer die Unwirksamkeit einer schriftlichen Kündigung geltend machen will, muss regelmäßig innerhalb von 3 Wochen nach Zugang Klage erheben.",
+              "timing": "sehr kurzfristig",
+              "statementClass": "mvp-reliable",
+              "evidenceSource": "statute"
             }
           },
           {
-            "type": "disclaimerFlag",
+            "type": "disclaimer",
             "payload": {
-              "id": "no_validity_assessment",
-              "label": "Keine Einzelfallprüfung der Wirksamkeit",
-              "description": "Ob die Kündigung wirksam ist, muss im Einzelfall geprüft werden."
+              "id": "no-validity-assessment",
+              "label": "Keine Wirksamkeitsprüfung im Tool",
+              "description": "Ob die Kündigung im Einzelfall wirksam oder angreifbar ist, leistet der MVP nicht.",
+              "statementClass": "mvp-reliable",
+              "evidenceSource": "internal-policy"
             }
           }
         ],
-        "severity": "high",
-        "tags": ["kuendigung", "frist", "arbeitsrecht"]
+        "severity": "critical",
+        "outcomeType": "deadline-protection",
+        "ruleClass": "mvp-reliable",
+        "tags": ["kuendigung", "arbeitsgericht", "frist"]
       },
       {
-        "id": "settlement_risk",
+        "id": "agreement-not-signed-yet",
+        "stage": "contract",
         "conditions": [
-          { "field": "settlement_available", "operator": "equals", "value": true }
+          { "field": "agreement_present", "operator": "equals", "value": true },
+          { "field": "agreement_already_signed", "operator": "equals", "value": false }
         ],
         "effects": [
           {
             "type": "warning",
             "payload": {
-              "id": "do_not_sign_immediately",
+              "id": "do-not-sign-immediately",
               "label": "Nicht vorschnell unterschreiben",
-              "description": "Ein Aufhebungsvertrag kann relevante Auswirkungen auf ALG I und weitere Optionen haben."
+              "description": "Aufhebungs- oder Abwicklungsverträge können erhebliche Folgen für Arbeitslosengeld und Verhandlungsspielraum haben.",
+              "statementClass": "mvp-reliable",
+              "evidenceSource": "official"
             }
           },
           {
             "type": "riskFlag",
             "payload": {
-              "id": "settlement_alg1_risk",
-              "label": "ALG-I-Risiko prüfen",
-              "description": "Bei Aufhebungsverträgen sind Sperrzeit- und Ruhensfragen besonders wichtig."
+              "id": "alg1-block-risk",
+              "label": "Sperrzeit-/Ruhensrisiko prüfen",
+              "description": "Bei Vertragsbeendigungen mit eigener Mitwirkung können Auswirkungen auf das Arbeitslosengeld entstehen.",
+              "statementClass": "mvp-reliable",
+              "evidenceSource": "official"
             }
           }
         ],
         "severity": "critical",
-        "tags": ["aufhebungsvertrag", "alg1", "sperrzeit"]
+        "outcomeType": "alg1-risk",
+        "ruleClass": "mvp-reliable",
+        "tags": ["aufhebungsvertrag", "abwicklungsvertrag", "alg1"]
       },
       {
-        "id": "release_detected",
+        "id": "agreement-already-signed",
+        "stage": "risk",
+        "conditions": [
+          { "field": "agreement_already_signed", "operator": "equals", "value": true }
+        ],
+        "effects": [
+          {
+            "type": "manualReview",
+            "payload": {
+              "id": "signed-agreement-review",
+              "label": "Vertrag ist bereits unterschrieben: Fall nicht mehr nur als Standardfall behandeln",
+              "description": "Jetzt stehen Folgenanalyse, Fristen und individuelle Beratung stärker im Vordergrund als ein allgemeiner Nicht-unterschreiben-Hinweis.",
+              "statementClass": "cautious-check",
+              "evidenceSource": "mixed",
+              "escalateIf": "Unterschrift ist erfolgt, aber Folgen oder Anfechtbarkeit sind unklar"
+            }
+          }
+        ],
+        "severity": "high",
+        "outcomeType": "contract-risk",
+        "ruleClass": "cautious-check",
+        "tags": ["signed", "beratung"]
+      },
+      {
+        "id": "release-does-not-end-duties",
+        "stage": "risk",
         "conditions": [
           { "field": "release_status", "operator": "notEquals", "value": "no" }
         ],
@@ -136,58 +271,120 @@
           {
             "type": "warning",
             "payload": {
-              "id": "release_not_end_of_contract",
-              "label": "Freistellung ist nicht automatisch das Ende",
-              "description": "Auch bei Freistellung bleiben Meldungen, Fristen und Unterlagen wichtig."
+              "id": "release-is-not-everything",
+              "label": "Freistellung beendet nicht automatisch alle To-dos",
+              "description": "Auch bei Freistellung bleiben Meldungen, Fristen und Unterlagenthemen relevant.",
+              "statementClass": "mvp-reliable",
+              "evidenceSource": "official"
             }
           }
         ],
         "severity": "medium",
+        "outcomeType": "preparation",
+        "ruleClass": "mvp-reliable",
         "tags": ["freistellung", "organisation"]
       },
       {
-        "id": "training_interest",
+        "id": "special-protection-indicator",
+        "stage": "risk",
         "conditions": [
-          { "field": "goals", "operator": "includes", "value": "explore_training" }
+          { "field": "special_protection_indicator", "operator": "notIncludes", "value": "none_known" }
+        ],
+        "effects": [
+          {
+            "type": "riskFlag",
+            "payload": {
+              "id": "special-protection-red-flag",
+              "label": "Möglicher Sonderkündigungsschutz / heikler Sonderfall",
+              "description": "Hier sollte der MVP nicht normalisieren, sondern auf erhöhte Vorsicht und individuelle Prüfung umschalten.",
+              "statementClass": "mvp-reliable",
+              "evidenceSource": "official"
+            }
+          },
+          {
+            "type": "manualReview",
+            "payload": {
+              "id": "special-protection-check",
+              "label": "Sonderfall gesondert prüfen lassen",
+              "description": "Ob tatsächlich ein besonderer Schutz greift, muss im Einzelfall verifiziert werden.",
+              "statementClass": "cautious-check",
+              "evidenceSource": "mixed"
+            }
+          }
+        ],
+        "severity": "high",
+        "outcomeType": "special-protection",
+        "ruleClass": "cautious-check",
+        "tags": ["sonderfall", "schutz", "red-flag"]
+      },
+      {
+        "id": "documents-missing",
+        "stage": "triage",
+        "conditions": [
+          { "field": "documents_secured", "operator": "includes", "value": "none_yet" }
+        ],
+        "effects": [
+          {
+            "type": "documentPrompt",
+            "payload": {
+              "id": "secure-core-documents",
+              "label": "Kernunterlagen sofort bündeln",
+              "description": "Mindestens Kündigung / Vertrag / Entwurf / Lohnunterlagen sichern, damit Beratung und Behördenwege sauber vorbereitet sind.",
+              "statementClass": "mvp-reliable",
+              "evidenceSource": "internal-policy"
+            }
+          }
+        ],
+        "severity": "medium",
+        "outcomeType": "preparation",
+        "ruleClass": "mvp-reliable",
+        "tags": ["dokumente", "vorbereitung"]
+      },
+      {
+        "id": "training-opportunity",
+        "stage": "synthesis",
+        "conditions": [
+          { "field": "primary_goal", "operator": "equals", "value": "plan_next_step" }
         ],
         "effects": [
           {
             "type": "opportunityFlag",
             "payload": {
-              "id": "training_path",
-              "label": "Weiterbildung früh mitdenken",
-              "description": "Weiterbildung und Bildungsgutschein können eine relevante Anschlussoption sein."
-            }
-          },
-          {
-            "type": "nextStep",
-            "payload": {
-              "priority": 4,
-              "label": "Fragen für die Agentur zu Weiterbildung und Bildungsgutschein vorbereiten",
-              "why": "So gehen Förderoptionen nicht im Stress unter."
+              "id": "training-opportunity-check",
+              "label": "Weiterbildung nur als Anschlusschance, nicht als Kernversprechen",
+              "description": "Ein Bildungsgutschein setzt individuelle Voraussetzungen und Beratung voraus. Für den MVP nur als Option nachrangig markieren.",
+              "statementClass": "cautious-check",
+              "evidenceSource": "official"
             }
           }
         ],
-        "severity": "medium",
-        "tags": ["weiterbildung", "foerderung"]
+        "severity": "low",
+        "outcomeType": "opportunity",
+        "ruleClass": "cautious-check",
+        "tags": ["weiterbildung", "bildungsgutschein"]
       },
       {
-        "id": "documents_missing",
+        "id": "do-not-use-compensation-promise",
+        "stage": "synthesis",
         "conditions": [
-          { "field": "documents_secured", "operator": "exists", "value": true }
+          { "field": "agreement_present", "operator": "exists", "value": true }
         ],
         "effects": [
           {
-            "type": "nextStep",
+            "type": "disclaimer",
             "payload": {
-              "priority": 2,
-              "label": "Wichtige Unterlagen bündeln",
-              "why": "Saubere Unterlagen helfen bei Gesprächen mit Agentur, Anwalt oder Gewerkschaft."
+              "id": "no-compensation-promise",
+              "label": "Keine Abfindungswahrscheinlichkeiten oder Rechenversprechen ausgeben",
+              "description": "Der MVP soll keine belastbare Erwartung zu Abfindungshöhe oder Durchsetzbarkeit suggerieren.",
+              "statementClass": "do-not-use-yet",
+              "evidenceSource": "internal-policy"
             }
           }
         ],
-        "severity": "medium",
-        "tags": ["dokumente", "vorbereitung"]
+        "severity": "low",
+        "outcomeType": "contract-risk",
+        "ruleClass": "do-not-use-yet",
+        "tags": ["abfindung", "scope-guard"]
       }
     ]
   }

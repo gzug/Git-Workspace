@@ -1,137 +1,297 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Kündigungs-Kompass Result Schema",
-  "description": "Struktur für den personalisierten Output des MVP.",
+  "title": "Kündigungs-Kompass Result Schema V2",
+  "description": "Ergebnisstruktur für den operativen MVP mit Synthese-Entscheidung, klarer Priorisierung und Red-Flag-/Aussagensicherheitsebene.",
   "type": "object",
-  "required": ["summary", "topPriorities", "deadlines", "warnings", "opportunities", "documents", "advisorQuestions", "disclaimers"],
+  "required": [
+    "resultVersion",
+    "caseSnapshot",
+    "synthesisDecision",
+    "topActions",
+    "deadlines",
+    "riskFlags",
+    "redFlags",
+    "documentChecklist",
+    "advisorQuestions",
+    "opportunities",
+    "disclaimers",
+    "statementLedger"
+  ],
   "properties": {
-    "summary": {
+    "resultVersion": {
+      "type": "string",
+      "const": "v2"
+    },
+    "caseSnapshot": {
       "type": "object",
       "required": ["headline", "situation", "riskLevel"],
       "properties": {
         "headline": { "type": "string" },
         "situation": { "type": "string" },
-        "riskLevel": { "type": "string", "enum": ["low", "medium", "high"] }
-      }
+        "riskLevel": { "type": "string", "enum": ["low", "medium", "high"] },
+        "primaryGoal": { "type": "string" }
+      },
+      "additionalProperties": false
     },
-    "topPriorities": {
+    "synthesisDecision": {
+      "type": "object",
+      "required": ["primaryTrack", "reasoning", "confidenceClass"],
+      "properties": {
+        "primaryTrack": {
+          "type": "string",
+          "enum": [
+            "deadline-first",
+            "alg1-risk-first",
+            "contract-do-not-sign",
+            "special-case-review",
+            "prepare-advice"
+          ]
+        },
+        "reasoning": { "type": "string" },
+        "confidenceClass": {
+          "type": "string",
+          "enum": ["mvp-reliable", "cautious-check"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "topActions": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["priority", "label", "why"],
+        "required": ["priority", "label", "why", "statementClass"],
         "properties": {
-          "priority": { "type": "integer" },
+          "priority": { "type": "integer", "minimum": 1 },
           "label": { "type": "string" },
-          "why": { "type": "string" }
-        }
+          "why": { "type": "string" },
+          "timing": { "type": "string" },
+          "statementClass": {
+            "type": "string",
+            "enum": ["mvp-reliable", "cautious-check"]
+          }
+        },
+        "additionalProperties": false
       }
     },
     "deadlines": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["label", "timing", "importance"],
+        "required": ["label", "timing", "importance", "statementClass"],
         "properties": {
           "label": { "type": "string" },
           "timing": { "type": "string" },
           "importance": { "type": "string", "enum": ["critical", "high", "medium"] },
-          "note": { "type": "string" }
-        }
+          "note": { "type": "string" },
+          "statementClass": {
+            "type": "string",
+            "enum": ["mvp-reliable", "cautious-check"]
+          }
+        },
+        "additionalProperties": false
       }
     },
-    "warnings": {
+    "riskFlags": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["label", "description"],
+        "required": ["label", "description", "severity", "statementClass"],
         "properties": {
           "label": { "type": "string" },
-          "description": { "type": "string" }
-        }
+          "description": { "type": "string" },
+          "severity": { "type": "string", "enum": ["critical", "high", "medium", "low"] },
+          "statementClass": {
+            "type": "string",
+            "enum": ["mvp-reliable", "cautious-check"]
+          }
+        },
+        "additionalProperties": false
       }
     },
-    "opportunities": {
+    "redFlags": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["label", "description"],
+        "required": ["label", "whyEscalated"],
         "properties": {
           "label": { "type": "string" },
-          "description": { "type": "string" }
-        }
+          "whyEscalated": { "type": "string" },
+          "recommendedEscalation": { "type": "string" }
+        },
+        "additionalProperties": false
       }
     },
-    "documents": {
+    "documentChecklist": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "object",
+        "required": ["label", "reason"],
+        "properties": {
+          "label": { "type": "string" },
+          "reason": { "type": "string" },
+          "status": { "type": "string", "enum": ["already-secured", "secure-now", "optional"] }
+        },
+        "additionalProperties": false
+      }
     },
     "advisorQuestions": {
       "type": "array",
       "items": { "type": "string" }
     },
+    "opportunities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["label", "description", "statementClass"],
+        "properties": {
+          "label": { "type": "string" },
+          "description": { "type": "string" },
+          "statementClass": {
+            "type": "string",
+            "enum": ["mvp-reliable", "cautious-check"]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
     "disclaimers": {
       "type": "array",
       "items": { "type": "string" }
+    },
+    "statementLedger": {
+      "type": "object",
+      "required": ["mvpReliable", "cautiousChecks", "notUsedYet"],
+      "properties": {
+        "mvpReliable": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "cautiousChecks": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "notUsedYet": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
     }
   },
+  "additionalProperties": false,
   "example": {
-    "summary": {
+    "resultVersion": "v2",
+    "caseSnapshot": {
       "headline": "Jetzt zuerst Fristen und ALG-I-Risiken absichern",
-      "situation": "Du hast einen Aufhebungsvertrag vorliegen und bist noch nicht arbeitssuchend gemeldet.",
-      "riskLevel": "high"
+      "situation": "Dir liegt ein Aufhebungsvertrag vor, du hast noch nicht arbeitssuchend gemeldet und die schriftliche Kündigung ist zeitkritisch zu prüfen.",
+      "riskLevel": "high",
+      "primaryGoal": "protect_alg1"
     },
-    "topPriorities": [
+    "synthesisDecision": {
+      "primaryTrack": "alg1-risk-first",
+      "reasoning": "Weil ein unterschriftsnaher Vertrag und eine fehlende Arbeitsuchendmeldung zusammen die dringlichsten Nachteile auslösen können.",
+      "confidenceClass": "mvp-reliable"
+    },
+    "topActions": [
       {
         "priority": 1,
         "label": "Arbeitsuchendmeldung sofort prüfen oder nachholen",
-        "why": "Frühe Meldung gehört zu den wichtigsten ersten Schritten."
+        "why": "Das ist eine der ersten kritischen Pflichten und kann finanzielle Nachteile beeinflussen.",
+        "timing": "sofort",
+        "statementClass": "mvp-reliable"
       },
       {
         "priority": 2,
         "label": "Aufhebungsvertrag nicht vorschnell unterschreiben",
-        "why": "Vor einer Unterschrift sollten ALG-I-Risiken und weitere Folgen besser eingeordnet werden."
+        "why": "Vor einer Unterschrift sollten Folgen für Arbeitslosengeld und weitere Optionen sauber geprüft werden.",
+        "timing": "vor jeder Unterschrift",
+        "statementClass": "mvp-reliable"
       },
       {
         "priority": 3,
-        "label": "Unterlagen und offene Fragen bündeln",
-        "why": "So gehst du besser vorbereitet in Gespräche mit Agentur, Anwalt oder Gewerkschaft."
+        "label": "Unterlagen und Fragen für Beratung bündeln",
+        "why": "Das verkürzt den Weg zur belastbaren Einordnung des Einzelfalls.",
+        "timing": "heute",
+        "statementClass": "mvp-reliable"
       }
     ],
     "deadlines": [
       {
         "label": "Arbeitsuchendmeldung",
-        "timing": "sofort prüfen",
+        "timing": "spätestens 3 Monate vor Ende, sonst innerhalb von 3 Tagen nach Kenntnis",
         "importance": "critical",
-        "note": "Je nach Zeitpunkt des Wissens kann die Frist sehr kurz sein."
+        "note": "Die Arbeitsuchendmeldung ersetzt nicht die Arbeitslosmeldung.",
+        "statementClass": "mvp-reliable"
+      },
+      {
+        "label": "Kündigungsschutzklage prüfen",
+        "timing": "regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung",
+        "importance": "critical",
+        "statementClass": "mvp-reliable"
       }
     ],
-    "warnings": [
+    "riskFlags": [
       {
-        "label": "Nicht sofort unterschreiben",
-        "description": "Ein Aufhebungsvertrag kann spürbare Folgen für ALG I und weitere Optionen haben."
+        "label": "Sperrzeit-/Ruhensrisiko bei einvernehmlicher Beendigung",
+        "description": "Wenn du an der Beendigung mitwirkst, kann das Folgen für Arbeitslosengeld haben.",
+        "severity": "critical",
+        "statementClass": "mvp-reliable"
       }
+    ],
+    "redFlags": [
+      {
+        "label": "Möglicher Sonderkündigungsschutz",
+        "whyEscalated": "Es gibt Hinweise auf einen besonders geschützten Status oder einen heiklen Sonderfall.",
+        "recommendedEscalation": "Individuelle Prüfung mit qualifizierter Beratung"
+      }
+    ],
+    "documentChecklist": [
+      {
+        "label": "Kündigungsschreiben",
+        "reason": "Zugang, Datum und Formulierung sind für Fristen zentral.",
+        "status": "secure-now"
+      },
+      {
+        "label": "Aufhebungs-/Abwicklungsvertrag oder Entwurf",
+        "reason": "Nur so lassen sich konkrete Folgen und Formulierungen einordnen.",
+        "status": "secure-now"
+      },
+      {
+        "label": "Arbeitsvertrag",
+        "reason": "Relevant für Ausgangslage und Beratung.",
+        "status": "secure-now"
+      }
+    ],
+    "advisorQuestions": [
+      "Welche unmittelbaren Folgen hat dieser Vertrag oder diese Kündigung für mein Arbeitslosengeld?",
+      "Welche Fristen laufen ab Zugang der Kündigung oder ab Kenntnis des Endes meines Arbeitsverhältnisses?",
+      "Gibt es in meinem Fall Anzeichen für einen besonderen Schutz oder einen Sonderfall?"
     ],
     "opportunities": [
       {
-        "label": "Weiterbildung / Bildungsgutschein mitdenken",
-        "description": "Wenn ein Neustart ansteht, kann eine geförderte Weiterbildung eine echte Anschlussoption sein."
+        "label": "Weiterbildung später als Anschlussoption prüfen",
+        "description": "Ein Bildungsgutschein ist möglich, aber nur bei erfüllten Voraussetzungen und nach Beratung.",
+        "statementClass": "cautious-check"
       }
     ],
-    "documents": [
-      "Entwurf Aufhebungsvertrag",
-      "Arbeitsvertrag",
-      "Lohnunterlagen",
-      "Notizen zu Gesprächen mit Arbeitgeber"
-    ],
-    "advisorQuestions": [
-      "Welche Auswirkungen hat dieser Aufhebungsvertrag auf ALG I?",
-      "Welche Fristen oder Meldungen muss ich jetzt unbedingt einhalten?",
-      "Welche Unterlagen sollte ich für die Agentur oder Beratung bereithalten?"
-    ],
     "disclaimers": [
-      "Dieser Plan ersetzt keine individuelle Rechtsberatung.",
-      "Ob eine Kündigung oder Vereinbarung im Einzelfall wirksam ist, muss gesondert geprüft werden.",
-      "Sperrzeit-, Ruhens- und Abfindungsfragen hängen stark vom konkreten Fall ab."
-    ]
+      "Der MVP ersetzt keine individuelle Rechtsberatung.",
+      "Das Tool priorisiert Fristen, Risiken und Sofortmaßnahmen, prüft aber nicht die Wirksamkeit im Einzelfall.",
+      "Abfindung, Sperrzeit, Ruhen und Sonderkündigungsschutz hängen stark vom konkreten Fall ab."
+    ],
+    "statementLedger": {
+      "mvpReliable": [
+        "Arbeitsuchendmeldung spätestens 3 Monate vorher, sonst innerhalb von 3 Tagen nach Kenntnis.",
+        "3-Wochen-Frist für die Kündigungsschutzklage ab Zugang der schriftlichen Kündigung regelmäßig relevant.",
+        "Aufhebungs-/Abwicklungsverträge können ALG-I-Risiken auslösen."
+      ],
+      "cautiousChecks": [
+        "Freistellungsdetails und besondere Schutzlagen gesondert prüfen.",
+        "Bildungsgutschein nur als Option nach Beratung darstellen."
+      ],
+      "notUsedYet": [
+        "Keine Abfindungserwartung oder Erfolgswahrscheinlichkeit versprechen."
+      ]
+    }
   }
 }

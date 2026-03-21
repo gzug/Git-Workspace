@@ -1,0 +1,18 @@
+{
+  "case_entry": "termination_received",
+  "termination_access_date": "2026-03-18",
+  "employment_end_date": "2026-03-20",
+  "jobseeker_registered": false,
+  "already_unemployed_now": true,
+  "unemployment_registered": false,
+  "agreement_present": false,
+  "release_status": "no",
+  "special_protection_indicator": [
+    "none_known"
+  ],
+  "documents_secured": [
+    "termination_letter",
+    "employment_contract"
+  ],
+  "primary_goal": "protect_deadlines"
+}

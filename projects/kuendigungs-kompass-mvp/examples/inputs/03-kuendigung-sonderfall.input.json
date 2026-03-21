@@ -1,0 +1,19 @@
+{
+  "case_entry": "termination_received",
+  "termination_access_date": "2026-03-19",
+  "employment_end_date": "2026-06-30",
+  "jobseeker_registered": true,
+  "already_unemployed_now": false,
+  "agreement_present": false,
+  "release_status": "unknown",
+  "special_protection_indicator": [
+    "pregnancy_or_maternity",
+    "unsure"
+  ],
+  "documents_secured": [
+    "termination_letter",
+    "employment_contract",
+    "salary_docs"
+  ],
+  "primary_goal": "prepare_advice"
+}

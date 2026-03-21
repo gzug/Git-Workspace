@@ -1,0 +1,18 @@
+{
+  "case_entry": "settlement_offered",
+  "employment_end_date": "2026-05-31",
+  "jobseeker_registered": false,
+  "already_unemployed_now": false,
+  "agreement_present": true,
+  "agreement_already_signed": false,
+  "release_status": "yes_irrevocable",
+  "special_protection_indicator": [
+    "none_known"
+  ],
+  "documents_secured": [
+    "agreement_draft",
+    "employment_contract",
+    "salary_docs"
+  ],
+  "primary_goal": "protect_alg1"
+}

@@ -4,9 +4,18 @@ Diese JSON-Dateien sind die maschinenlesbaren Golden Outputs für den Kündigung
 
 ## Dateien
 
+### Expected Results
 - `01-kuendigung-arbeitslosmeldung-offen.result.json`
 - `02-aufhebungsvertrag-nicht-unterschrieben.result.json`
 - `03-kuendigung-sonderfall.result.json`
+
+### Inputs
+- `inputs/01-kuendigung-arbeitslosmeldung-offen.input.json`
+- `inputs/02-aufhebungsvertrag-nicht-unterschrieben.input.json`
+- `inputs/03-kuendigung-sonderfall.input.json`
+
+### Pairing
+- `PAIRS.md`
 
 ## Zweck
 

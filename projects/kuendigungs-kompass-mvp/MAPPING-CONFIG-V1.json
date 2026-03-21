@@ -1,0 +1,142 @@
+{
+  "version": "v1",
+  "effectToResultBlock": {
+    "immediateAction": "topActions",
+    "deadlineAlert": "deadlines",
+    "riskFlag": "riskFlags",
+    "warning": "contextual",
+    "manualReview": "redFlags",
+    "documentPrompt": "documentChecklist",
+    "advisorQuestion": "advisorQuestions",
+    "opportunityFlag": "opportunities",
+    "disclaimer": "disclaimers"
+  },
+  "warningRouting": {
+    "do-not-sign-immediately": "topActions",
+    "release-is-not-everything": "riskFlags"
+  },
+  "trackPriority": [
+    "special-case-review",
+    "contract-do-not-sign",
+    "alg1-risk-first",
+    "deadline-first",
+    "prepare-advice"
+  ],
+  "trackSelection": {
+    "special-case-review": {
+      "ifAny": [
+        "manualReview:special-protection-check",
+        "manualReview:signed-agreement-review",
+        "answer:special_protection_indicator:notOnlyNoneKnown",
+        "missing:redFlagRequired"
+      ]
+    },
+    "contract-do-not-sign": {
+      "ifAll": [
+        "answer:agreement_present:true",
+        "answer:agreement_already_signed:false"
+      ],
+      "unlessAny": [
+        "manualReview:special-protection-check"
+      ]
+    },
+    "alg1-risk-first": {
+      "ifAny": [
+        "answer:jobseeker_registered:false",
+        "answer:unemployment_registered:false",
+        "riskFlag:alg1-block-risk",
+        "goal:protect_alg1"
+      ]
+    },
+    "deadline-first": {
+      "ifAny": [
+        "deadlineAlert:jobseeker-registration-deadline",
+        "deadlineAlert:unemployment-registration-deadline",
+        "deadlineAlert:three-week-lawsuit-window",
+        "goal:protect_deadlines"
+      ]
+    },
+    "prepare-advice": {
+      "fallback": true
+    }
+  },
+  "severityToDeadlineImportance": {
+    "critical": "critical",
+    "high": "high",
+    "medium": "medium",
+    "low": "medium"
+  },
+  "severityToTimingFallback": {
+    "critical": "sofort",
+    "high": "heute",
+    "medium": "zeitnah",
+    "low": "mit einplanen"
+  },
+  "renderViews": {
+    "short": {
+      "blocks": [
+        "headline",
+        "topAction:1",
+        "criticalDeadline:1",
+        "riskFlag:1"
+      ]
+    },
+    "standard": {
+      "blocks": [
+        "headline",
+        "classification",
+        "topActions:3",
+        "deadlines:all",
+        "riskFlags:3",
+        "redFlags:all",
+        "documentChecklist:all",
+        "disclaimers:3"
+      ]
+    },
+    "advice": {
+      "blocks": [
+        "headline",
+        "reasoning",
+        "topActions:all",
+        "deadlines:all",
+        "redFlags:all",
+        "documentChecklist:all",
+        "advisorQuestions:5",
+        "disclaimers:3"
+      ]
+    }
+  },
+  "documentChecklistBaseline": {
+    "termination": [
+      "termination_letter",
+      "employment_contract"
+    ],
+    "agreement": [
+      "agreement_draft",
+      "employment_contract"
+    ],
+    "pay_or_claims_context": [
+      "salary_docs"
+    ],
+    "release_context": [
+      "release_or_vacation_info"
+    ]
+  },
+  "guardrails": {
+    "suppressStatementClasses": [
+      "do-not-use-yet"
+    ],
+    "prioritize": [
+      "topActions",
+      "deadlines",
+      "riskFlags",
+      "redFlags"
+    ],
+    "neverSay": [
+      "sicher Arbeitslosengeld ohne Sperre",
+      "die Kündigung ist unwirksam",
+      "Anspruch auf Abfindung in Höhe von X",
+      "Freistellung bedeutet, dass nichts mehr zu tun ist"
+    ]
+  }
+}

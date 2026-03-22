@@ -1,89 +1,85 @@
 # Kündigungs-Kompass MVP — Mini-Testkonzept
 
-Stand: 2026-03-21
+Stand: 2026-03-22
+Status: aktiv
 
 ## Ziel
-Die Tests sollen **Logik-Drift früh sichtbar machen**, ohne bei jeder kleinen Copy-Änderung unnötig rot zu werden.
+Tests sollen **Logik-Drift früh sichtbar machen**, ohne bei kleinen Copy-Änderungen unnötig rot zu werden.
 
-## 1. Was strikt stabil sein muss
-Diese Felder gelten als **logikkritisch** und sollen in Fixture-Tests hart geprüft werden:
+## Was strikt stabil sein muss
+Diese Bereiche gelten als logikkritisch:
+1. `synthesisDecision.primaryTrack`
+2. Guardrails bei Red Flags, Verträgen und unsicheren Fristen
+3. erste Priorität in `topActions`
+4. kritische `deadlines`
+5. Trennung `riskFlags` vs `redFlags`
+6. kein verbotener Nutzeroutput zu Abfindung, Wirksamkeit, Klageerfolg, sicherer Sperrzeit
+7. kein Klagefrist-Datum ohne belastbares Zugangsdatum
 
-1. `resultVersion`
-2. `synthesisDecision.primaryTrack`
-3. `caseSnapshot.headline`
-4. Kernreihenfolge der `topActions` (mindestens erste Aktion, bei kritischen Fällen die ersten 2–3)
-5. Labels der kritischen `deadlines`
-6. Trennung `riskFlags` vs `redFlags`
-7. Guardrails:
-   - keine `do-not-use-yet`-Aussagen im normalen Nutzertext
-   - keine verbotenen Aussagen zu Abfindung, garantierter Wirksamkeit oder sicheren Erfolgswahrscheinlichkeiten
-
-## 2. Was flexibel bleiben darf
-Diese Bereiche dürfen sich sprachlich ändern, ohne automatisch als Logikfehler zu gelten:
-
-- längere `why`-/Beschreibungstexte
-- Detailformulierungen in `disclaimers`
+## Was flexibler bleiben darf
+- längere Beschreibungstexte
+- Detailformulierungen in Disclaimer/Grenztexten
 - nichtkritische Reihenfolge untergeordneter Dokumente
-- Ledger-Texte, solange die Klassenlogik intakt bleibt
+- Copy-Feinschliff ohne Logikänderung
 
-## 3. Was als echter Logikfehler zählt
-Ein Test soll als **fachlich rot** gelten, wenn mindestens eines davon passiert:
-
-- der `primaryTrack` kippt ungewollt
-- die falsche erste Priorität in `topActions` erscheint
-- kritische Deadlines verschwinden oder inhaltlich falsch gruppiert werden
-- Red Flags zu Risk Flags verwässern oder umgekehrt
+## Was als echter Logikfehler zählt
+Ein Test ist fachlich rot, wenn:
+- `primaryTrack` ungewollt kippt
+- To-do #1 ungewollt kippt
+- kritische Frist verschwindet oder falsch erscheint
+- Sonderfall nicht eskaliert
+- Aufhebungsvertrag wie Kündigung behandelt wird
+- fehlender Input zu stiller Scheinsicherheit führt
 - Guardrails im Nutzeroutput brechen
 
-## 4. Fixture-Teststrategie
-### Stufe A — strukturstabile Assertions
-Für jedes Golden Pair prüfen:
-- `resultVersion`
+## Testarten
+### Struktur-Assertions
+Prüfen:
 - `primaryTrack`
-- `headline`
-- erste `topAction`
-- Deadline-Labels
-- Red-Flag-Labels
+- wichtige Block-Existenz oder Block-Abwesenheit
+- TopAction #1
+- Fristdatum vorhanden / nicht vorhanden
+- Red-Flag-/Eskalationsblock vorhanden
 
-### Stufe B — fallbezogene Zusatzassertions
-Je Fall können zusätzliche Prüfungen definiert werden, wenn genau dort die Produktlogik hängt.
+### Snapshot-Tests
+Geeignet für:
+- Fristen-Outputs
+- zentrale Mehrfachfälle
+- Track-spezifische Renderstruktur
+- Guardrail-sensitive Blöcke
 
-Beispiele:
-- Trennung von Arbeitsuchend- und Arbeitslosmeldung
-- Sonderfall-Eskalation trotz laufender Klagefrist
-- Vertragswarnung vor allgemeiner ALG-I-Logik
-- Mehrfachfall priorisiert nicht zu grob auf Standard-Sonderfall zurück
+### Manuelle Reviews
+Bleiben sinnvoll für:
+- Tonalität
+- Blockreihenfolge-Feinschliff
+- Layout-/Copy-Wahrnehmung
 
-## 5. Render-Teststrategie
-Jeder View (`short`, `standard`, `advice`) bekommt Mindestregeln:
+## Mindest-Assertions mit Hebel
+- Red Flag → Eskalationsblock vorhanden
+- Aufhebungsvertrag → kein Klagefrist-Block
+- valides Zugangsdatum → Klagefrist-Datum vorhanden
+- unknown Zugangsdatum → kein Klagefrist-Datum
+- Klagefrist-Datum > Zugangsdatum
+- Disclaimer/Grenzblock nicht leer
 
+## Render-Mindestregeln
 ### `short`
 - enthält Headline
-- enthält wichtigsten nächsten Schritt
-- enthält erste kritische Deadline, wenn vorhanden
-- bleibt kurz und ohne Ledger-Ausgabe
+- enthält To-do #1
+- enthält erste kritische Frist, wenn vorhanden
 
 ### `standard`
-- Reihenfolge bleibt: Headline → Einordnung → TopActions → Deadlines → Risiken → RedFlags → Unterlagen → Hinweise
+- Reihenfolge bleibt: Headline → TopActions → Deadlines → Risks → RedFlags → Unterlagen → Hinweise
 - `do-not-use-yet` taucht nicht auf
-- Red Flags nur wenn vorhanden
 
 ### `advice`
-- enthält `synthesisDecision.reasoning`
-- enthält Fragen für Beratung
-- priorisiert Fristen und Eskalation vor Nebeninformationen
+- enthält Begründung / Beratungsfragen nur nachrangig zu Fristen und Eskalation
 
-## 6. Pair-6-Sonderregel
-Der Mehrfachfall (`06-mehrere-eingaenge-gleichzeitig`) ist aktuell ein **Drift-Indikator**.
+## Pair-6-Sonderregel
+Der Mehrfachfall bleibt Drift-Indikator.
+Er darf nicht still aus dem Testfokus fallen.
 
-Das Paar darf nicht stillschweigend ignoriert werden.
-Für Pair 6 gilt:
-- es muss im Testlauf enthalten sein
-- die Abweichung zwischen Fixture und Engine muss explizit entschieden werden
-- danach entweder Engine oder Fixture an die beschlossene Logik anpassen
-
-## 7. Done-When für Block 1 Testhärtung
-- alle dokumentierten Golden Pairs laufen automatisch
-- Pair 6 ist nicht mehr außerhalb des Testlaufs
-- Render-Tests decken alle Views ab
-- relevante Änderungen an Track, TopActions oder Deadlines machen mindestens einen Test rot
+## Done-When
+- alle Golden Pairs laufen automatisch
+- Routing-, Frist- und Guardrail-Drift macht mindestens einen Test rot
+- Copy-Feinschliff macht nicht unnötig fachliche Tests kaputt

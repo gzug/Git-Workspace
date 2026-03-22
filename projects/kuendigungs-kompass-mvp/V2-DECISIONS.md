@@ -1,96 +1,52 @@
-# Kündigungs-Kompass MVP — V2 Decisions
+# Kündigungs-Kompass MVP — Leitentscheidungen
 
-## Was entschieden wurde
+Stand: 2026-03-22
+Status: aktiv
 
-1. **Flow-V2 ist deadline-first statt feature-first.**
-   Der MVP startet nicht mehr mit breitem Kontext, sondern mit den wenigen Fragen, die sofort Fristen, ALG-I-Risiken und Vertragsgefahren aktivieren.
+## Zweck
+Diese Datei hält nur die **noch geltenden Leitentscheidungen** fest, die für Mapping, Rendering, Guardrails und Launch-Reife wichtig sind.
 
-2. **Regeln werden in drei Aussageklassen getrennt.**
-   - `mvp-reliable` = belastbar genug für den MVP
-   - `cautious-check` = nur als vorsichtiger Prüfhinweis
-   - `do-not-use-yet` = vorerst nicht in Nutzerkommunikation ausspielen
+## Geltende Kernentscheidungen
+1. **Deadline-first statt feature-first.**
+   Der MVP priorisiert Fristen, Meldungen, Guardrails und nächste Schritte vor Tiefe, Feature-Fläche oder Conversion.
 
-3. **Die Synthese bekommt einen expliziten Entscheidungsanker.**
-   Das Ergebnis soll nicht nur sammeln, sondern einen `primaryTrack` festlegen, z. B. `deadline-first`, `alg1-risk-first`, `special-case-review`.
+2. **Sonderfälle werden eskaliert, nicht „mitgelöst“.**
+   Red Flags und Schutzindikatoren erzeugen Eskalation oder konservative Prüfung statt Pseudo-Sicherheit.
 
-4. **Abfindung/Conversion bleiben außerhalb des Kernmodells.**
-   Kein Scope-Drift in Richtung Verhandlungssimulation, Erfolgsversprechen oder Funnel-Logik.
+3. **Basis muss vollständig handlungsfähig bleiben.**
+   Fristen, To-do #1, Eskalationshinweise und Grenzbenennung gehören in die Basis — nie hinter Upgrade.
 
-5. **Sonderfälle werden nicht „mitgelöst“, sondern eskaliert.**
-   Hinweise auf besonderen Schutz, unterschriebene Verträge oder unklare Schutzlagen erzeugen Red Flags bzw. Manual Review statt Pseudo-Sicherheit.
+4. **Upgrade ergänzt Werkzeuge, nicht Basis-Wahrheit.**
+   Saubere Upgrade-Kandidaten sind Export, personalisierte Dokumente, strukturierte Beratungsvorbereitung und spätere Erinnerungsfunktionen.
 
-## Offene Risiken
+5. **Unknown ist sicherer als Raten.**
+   Fehlende oder unsichere Inputs dürfen keine stillen `nein`-Defaults oder Standard-Tracks erzeugen, wenn daraus schädliches Fehlrouting entsteht.
 
-- **Arbeitslosmeldung vs. Arbeitsuchendmeldung** ist fachlich wichtig, aber im aktuellen Frageset nur indirekt modelliert. Für den nächsten Block sauber ergänzen, ohne den Flow aufzublähen.
-- **Freistellung** ist für den MVP nur grob als Kontext erfasst. Detaillogik zu widerruflich/unwiderruflich, Urlaub, Anrechnung etc. bewusst noch nicht modelliert.
-- **Sonderkündigungsschutz** ist nur als Indikator erfasst, nicht als verlässliche Rechtsprüfung.
-- **Abwicklungsvertrag vs. Aufhebungsvertrag** wird operativ zusammengeführt. Für spätere Präzision kann die Unterscheidung relevant werden.
-- **Bildungsgutschein** bleibt bewusst nachrangig. Nur Chance, kein Kernversprechen.
+6. **Keine Scheingenauigkeit bei juristisch riskanten Aussagen.**
+   Keine sichere Aussage zu Wirksamkeit, Abfindung, Sperrzeit, Klageerfolg oder vergleichbaren Einzelfallthemen.
 
-## Neues V2-Datenmodell
+7. **Track-Explosion vermeiden.**
+   Eigene Tracks nur bei fundamental anderer Fristenlogik oder primärer Handlungskette; alles andere sind Bausteine, Flags oder Guardrails.
 
-### questions.schema.json
-- `flowVersion`
-- Fragen mit `stage`, `category`, `decisionRole`, `summaryUse`, `askIf`, optional `redFlagIfMissing`
-- Flow-Stufen: `entry`, `triage`, `deadline-check`, `contract-check`, `risk-check`, `supporting-context`, `goals`
+## Derzeit relevante offene Spannungen
+- Arbeitslosmeldung vs. Arbeitsuchendmeldung muss logisch und sprachlich sauber getrennt bleiben.
+- Feiertags-/Wochenendlogik nur dort automatisieren, wo sie konservativ belastbar ist.
+- Aufhebungsvertrag bereits unterschrieben bleibt vorerst Baustein-Variante statt dritter Volltrack.
+- Freistellung bleibt in V1 relevant, aber nicht tief ausmodelliert.
 
-### rules.schema.json
-- `rulesVersion`
-- Regeln mit `stage`, `outcomeType`, `ruleClass`
-- Effects mit `statementClass` und `evidenceSource`
-- Neue Wirkungstypen: `immediateAction`, `deadlineAlert`, `manualReview`, `documentPrompt`, `advisorQuestion`
+## Nicht wieder aufreißen ohne guten Grund
+- Fristdaten als Basis-Pflicht
+- Eskalations-Block bei Red Flag als Basis-Pflicht
+- keine Frist- oder Angst-Dringlichkeit als Upsell-Druckmittel
+- keine KSchG-/Sperrzeit-/Abfindungs-Scheinsicherheit
+- keine technischen Begriffe wie `primaryTrack`, `riskLevel`, `incomplete` in der UI
 
-### result.schema.json
-- `resultVersion`
-- `caseSnapshot`
-- `synthesisDecision` als explizite Leitentscheidung
-- getrennte Blöcke für `topActions`, `deadlines`, `riskFlags`, `redFlags`, `documentChecklist`
-- `statementLedger` trennt belastbar / vorsichtiger Prüfhinweis / vorerst nicht verwenden
+## Aktive Prüfkriterien für neue Entscheidungen
+Eine neue Produktentscheidung ist nur sinnvoll, wenn sie mindestens eines davon verbessert:
+- Routing-Sicherheit
+- Fristen-Sicherheit
+- Guardrail-Klarheit
+- Launch-Reife
+- echte Handlungsfähigkeit der Basis
 
-## Änderungen an den drei Dateien
-
-### questions.schema.json
-- von einfacher Fragenliste auf **flow-orientierte Entscheidungsfragen** umgebaut
-- Fokus auf: schriftliche Kündigung, Zugang, Enddatum, Arbeitsuchendmeldung, Vertragslage, Unterschrift, Sonderfallindikatoren, Unterlagen, Primärziel
-- Conversion-/Nice-to-have-Fragen bewusst nicht aufgenommen
-
-### rules.schema.json
-- von generischen Effekten auf **steuerbare V2-Entscheidungslogik** erweitert
-- explizit modelliert: Fristschutz, ALG-I-Risiko, Vertragswarnung, Sonderfall-Eskalation, Dokumentenprompt, Opportunity nur vorsichtig
-- `do-not-use-yet` für Abfindungsversprechen als Guardrail eingebaut
-
-### result.schema.json
-- von Listen-Output auf **entscheidungsorientiertes Ergebnisbild** umgestellt
-- zentrale Neuerung: `synthesisDecision`
-- zusätzliche Red-Flag-Ebene und Aussage-Ledger für fachliche Hygiene
-
-## Fachliche Kernprüfung / Red-Flag-Prüfung zentraler Aussagen
-
-### Belastbar für MVP
-- **Arbeitsuchendmeldung:** möglichst sofort, spätestens 3 Monate vor Ende des Arbeitsverhältnisses; bei später Kenntnis innerhalb von 3 Tagen. Quelle: Bundesagentur für Arbeit.
-- **Arbeitsuchendmeldung ersetzt nicht Arbeitslosmeldung.** Quelle: Bundesagentur für Arbeit.
-- **Kündigungsschutzklage:** regelmäßig 3 Wochen ab Zugang der schriftlichen Kündigung. Quelle: § 4 KSchG; bestätigt auch auf BA-Seite.
-- **Mitwirkung an der Beendigung (z. B. Aufhebungsvertrag) kann Folgen für Arbeitslosengeld / Sperrzeit haben.** Quelle: Bundesagentur für Arbeit.
-
-### Vorsichtiger Prüfhinweis
-- **Freistellung ändert nicht automatisch alle Pflichten**, aber die konkrete Rechtsfolge hängt am Einzelfall.
-- **Besonderer Schutz / Sonderkündigungsschutz** darf nur als Eskalationshinweis laufen, nicht als Feststellung.
-- **Bildungsgutschein** nur als mögliche Anschlusschance; Voraussetzungen sind individuell und beratungsgebunden.
-
-### Vorerst nicht verwenden
-- Abfindungshöhen, Erfolgswahrscheinlichkeiten oder Verhandlungschancen.
-- Pauschale Aussagen zur Wirksamkeit einer Kündigung.
-- Konkrete Rechtsfolgen bereits unterschriebener Verträge ohne Einzelfallprüfung.
-
-## Anschlussblock umgesetzt
-
-### Ergänzt
-- **Arbeitslosmeldung** als eigenes, kleines Zusatzmodul im Frage-/Regellayer ergänzt, damit die Trennung zur Arbeitsuchendmeldung operativ sichtbar bleibt, ohne den Core-Flow aufzublähen.
-- **Result-Copy-Layer** als separates Artefakt vorbereitet.
-- **3 Referenzfälle** mit realistischen Beispielantworten und Soll-Outputs dokumentiert.
-
-### Operative Bewertung
-- Das bestehende **V2-Result-Schema reicht** für diese Fälle aus.
-- Nötig war nur eine **kleine Nachschärfung im Frage-/Regellayer**, nicht im Result-Schema selbst.
-- Mapping-/Rendering-Logik liegt jetzt als eigener Spec-Block vor.
-- Zusätzlich liegen nun **Golden Outputs** für die Kernfälle vor, damit spätere Umsetzung gegen feste Sollbilder geprüft werden kann.
+Wenn sie nur mehr Text, mehr Feature-Fläche oder mehr Komplexität bringt, ist sie in V1 verdächtig.

@@ -59,6 +59,20 @@ Reines „könnte man mal delegieren“ reicht nicht als Abschluss.
 - Snapshot-/Fixture-Vorbereitung
 - andere einfache oder bürokratische Nebenarbeit
 
+## CleanUp-Schnittstelle
+Wenn `CleanUp` eingesetzt wird, soll der Main-Agent die Zusammenarbeit so schneiden, dass CleanUp vor allem übernimmt:
+- Intake und Vorsortierung statt finaler Produktentscheidung
+- Typisierung: Recht / Produkt / UX / Layout / Ops / Test
+- Härtegrad-Sortierung: zwingend / stark / plausibel / prüfen
+- MVP-Wirkung: Routing / Frist / Guardrail / Engine / CTA / Copy / UI / Doku / Fixture / Backlog
+- ultrakurzes Nutzer-Feedback
+- strukturierte Deltas statt Rohzusammenfassungen
+
+Ziel:
+- weniger Nachsortieren im Main-Agenten
+- weniger Mischpunkte
+- schnellere Integration in aktive Projektarbeit
+
 ## Delegationsgrenze
 - Keine Unschärfe delegieren.
 - Keine Kernentscheidungen delegieren, nur weil sie lästig sind.

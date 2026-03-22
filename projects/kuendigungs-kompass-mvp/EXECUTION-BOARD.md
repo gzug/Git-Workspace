@@ -159,3 +159,26 @@ Die Hauptlücken liegen aktuell in **vollständiger Testhärtung**, **konkreter 
 2. Monitoring-/Telemetry-Felder an den späteren UI/API-Anschluss andockbar halten
 3. Render-Snapshots gezielt ausbauen, wo Copy-Stabilität kritisch ist
 4. UI-Polish weiter hinter Stabilität halten
+
+---
+
+## Steuerformat
+### Now
+- KSchG-Wochenendlogik und konservative Feiertagshinweise sauber in Engine / Doku / Fixtures ziehen
+
+### Next
+- Arbeitslosmeldung vs. Arbeitsuchendmeldung logisch und sprachlich final trennen
+- Snapshot-Abdeckung gezielt auf 2–3 Drift-Anker ausbauen
+
+### Risks
+- Main-Agent bleibt zu stark im Executor-Modus statt früh genug zu delegieren
+- Drift zwischen Research, Doku, Fixtures und Runtime kann bei Launch-Hardening wieder wachsen
+- Tunnelmodus kann Delegations- und Review-Chancen zu spät sichtbar machen
+
+### Delegated
+- Research-Intake und Batch-Verdichtung an `CleanUp` vorgesehen
+- Drift-/Integritätsprüfungen können mit `skills/driftguard/` vorbereitet werden
+- klar geschnittene spätere Coding-Blöcke können an `skills/dev-coding-agent/` gehen
+
+### Waiting
+- weitere Research-Batches von Y. für Feinschliff und Gegenprüfung

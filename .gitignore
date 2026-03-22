@@ -1,0 +1,10 @@
+# Local editor / workspace state
+.obsidian/
+.clawhub/
+
+# Skill install metadata
+skills/*/.clawhub/
+skills/*/_meta.json
+
+# Personal scratch / inbox
+01_Zwischenablage.md

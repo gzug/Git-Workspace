@@ -1,52 +1,94 @@
-# Kündigungs-Kompass – MVP-Struktur
+# Kündigungs-Kompass MVP
 
-Dieses Verzeichnis enthält die erste Datenbasis für den MVP des **Kündigungs-Kompass**.
+Der Kündigungs-Kompass ist ein MVP für Menschen in Deutschland nach **Kündigung** oder bei **Aufhebungsvertrag**.
+Er soll **Fristen priorisieren, typische Fehler vermeiden, Risiken sichtbar machen und nächste Schritte ordnen** — ohne Rechtsberatung zu simulieren.
 
-## Dateien
+## Aktueller Stand
+Das Projekt hat bereits einen echten Runtime-Pfad:
 
-- `questions.schema.json` – Struktur und Beispiel-Fragen für den 2–3-Minuten-Fragebogen
-- `rules.schema.json` – einfache Regelbasis für Risiken, Fristen, Warnhinweise, Chancen und nächste Schritte
-- `result.schema.json` – Struktur für die persönliche Auswertung und den priorisierten Plan
-- `REFERENZFAELLE.md` – 3 Kernfälle mit Beispielantworten und Soll-Output
-- `RESULT-COPY.md` – Copy-/Antwortbausteine je Primary Track
-- `RESULT-MAPPING.md` – Mapping-Logik von Rules zu Result-Output
-- `GOLDEN-OUTPUTS.md` – vollständige Soll-Ergebnisse für Kernfälle
-- `examples/` – maschinenlesbare JSON-Fixtures der Golden Outputs inkl. Input-/Result-Paaren
+```text
+Fragebogen-Flow
+→ Input-Normalisierung
+→ Engine / Regel- und Priorisierungslogik
+→ Projektion nach Produktstufe
+→ Rendering zur Ergebnisansicht
+```
 
-## Wie die Dateien zusammenspielen
+Die operative Ergebnisansicht läuft über:
+- `src/runtime/buildQuestionnaireResultView.js`
 
-1. Der Nutzer beantwortet adaptive Fragen aus `questions.schema.json`.
-2. Die Antworten werden gegen Regeln aus `rules.schema.json` ausgewertet.
-3. Daraus entsteht ein personalisierter Output in der Form von `result.schema.json`.
-4. `src/runtime/buildQuestionnaireResultView.js` verbindet Flow, Normalisierung, Engine, Produktstufe und Rendering zu einem nutzbaren Ergebniszustand.
+Der Runtime-Layer kennt kontrollierte Zustände wie:
+- `ready`
+- `incomplete`
+- `render-fallback`
+- `error`
 
-## Produktlogik im MVP
-
-Der MVP soll **keine Rechtsberatung** simulieren, sondern:
-
+## Produktprinzipien
+Der MVP soll:
 - Sofortmaßnahmen sichtbar machen
 - kritische Fristen priorisieren
-- typische Fehler verhindern
-- relevante Chancen wie Weiterbildung oder Förderthemen markieren
-- auf Beratungsgespräche vorbereiten
+- Scheingenauigkeit vermeiden
+- Sonderfälle eskalieren statt weichzeichnen
+- Beratung vorbereiten, aber nicht ersetzen
 
-## Beispiel-Flow
+Der MVP soll **nicht**:
+- Rechtsberatung simulieren
+- Wirksamkeit oder Klageerfolg prognostizieren
+- Abfindung oder ALG-Höhe scheingenau berechnen
+- in Conversion-/Feature-Fläche ausufern
 
-### Fall
-Nutzer hat einen **Aufhebungsvertrag** vorliegen und ist **noch nicht arbeitssuchend gemeldet**.
+## Produktstufen
+- **Preview** → Orientierung + Blockstruktur + erste konkrete Sofortmaßnahme
+- **Base** → vollständige handlungsfähige Basis-Auswertung
+- **Upgrade** → Tiefe, Werkzeuge, Verhandlungshilfe, Export, spätere Zusatzhilfen
 
-### Erwartete Logik
-- `questions` erfassen Vertragslage, Meldestatus, Enddatum und Ziele.
-- `rules` setzen einen **kritischen Risikoflag** für vorschnelle Unterschrift und einen **Sofortschritt** für die Meldung.
-- `result` priorisiert:
-  1. Arbeitsuchendmeldung prüfen/nachholen
-  2. Aufhebungsvertrag nicht vorschnell unterschreiben
-  3. Unterlagen und Fragen für Agentur / Anwalt / Gewerkschaft vorbereiten
+Wichtig:
+- Alle gesetzlichen Fristen, primären To-dos und Risiko-/Eskalationshinweise bleiben in der Basis.
+- Upgrade ergänzt Tiefe und Werkzeuge; es ersetzt keine Basis-Information.
 
-## Annahmen dieser V1
+## Projektstruktur
+### Zentrale Projektdateien
+- `EXECUTION-BOARD.md` → aktiver Arbeitsfokus, Risiken, Delegation, Waiting
+- `PROJECT-STATUS.md` → kuratierter Gesamtstatus
+- `FLOW-CONTRACT-V1.md` → Flow- und Fragebogenlogik
+- `DATE-LOGIC-MVP.md` → Datums- und Fristenlogik
+- `LAUNCH-HARDENING-V1.md` → Launch-Härtung
+- `E2E-REALITY-CHECK-V1.md` → Pflichtfälle / Reality Check
+- `MONITORING-ANALYTICS-V1.md` → Monitoring-Minimum
+- `SOFT-LAUNCH-CHECKLIST-V1.md` → Go/No-Go / Rollback
 
-- Fokus nur auf Deutschland
-- Fokus nur auf Arbeitnehmer:innen
-- MVP deckt Kündigung erhalten und Aufhebungsvertrag angeboten ab
-- komplexe Sonderfälle werden nur als Prüfhinweis markiert
-- Preis-/Funnel-Logik ist bewusst noch nicht in diesen Dateien modelliert
+### Technische Kernbereiche
+- `src/runtime/`
+- `src/adapters/`
+- `src/engine/`
+- `src/flow/`
+
+### Prüfbasis
+- `examples/PAIRS.md`
+- `examples/inputs/`
+- `examples/render-snapshots/`
+- `test-fixtures.js`
+- `test-normalize-input.js`
+- `test-product-tiers.js`
+- `test-render-product-tiers.js`
+- `test-questionnaire-flow.js`
+
+## Aktueller Engpass
+Nicht neue Features.
+Der aktuelle Engpass ist **Launch Hardening**:
+- Fristenlogik konservativ stabilisieren
+- Arbeitslosmeldung vs. Arbeitsuchendmeldung sauber trennen
+- Snapshot-/Drift-Abdeckung ausbauen
+- Sonderfall-/Unknown-/Pflichtfeldlogik schärfen
+- UI/API erst danach weiterziehen
+
+## Wiedereinstieg
+Wenn du neu oder nach Pause ins Projekt gehst, lies zuerst:
+1. `EXECUTION-BOARD.md`
+2. `PROJECT-STATUS.md`
+3. `FLOW-CONTRACT-V1.md`
+4. `DATE-LOGIC-MVP.md`
+5. danach nur die für den aktuellen Block relevanten Dateien
+
+## Leitgedanke
+Der Kündigungs-Kompass ist nur dann launch-reif, wenn **Routing, Guardrails, Fallbacks und Fristenlogik belastbar sind** — nicht schon dann, wenn der Happy Path hübsch aussieht.

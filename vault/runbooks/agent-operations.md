@@ -10,12 +10,20 @@ source: curated
 ## Standardablauf pro Aufgabe
 1. Lagebild herstellen
 2. Relevante Dateien lesen
-3. Vor dem nächsten größeren Block aktiv prüfen, was delegierbar, schneidbar oder an Support-Agents abgebbar ist
+3. Vor jedem größeren Block aktiv prüfen, was delegierbar, schneidbar oder an Support-Agents abgebbar ist
 4. Arbeiten
 5. Ergebnis knapp und klar liefern
 6. Mini-Review pro Block festhalten: Fortschritt, Reibung, Delegierbares, nächster Engpass
-7. Falls dauerhaft relevant: in Memory/Vault festhalten
-8. Nach Dateiänderungen committen
+7. Rückfluss aus dem Mini-Review prüfen und nötige Folgeaktion auslösen
+8. Falls dauerhaft relevant: in den richtigen Wissensort oder die richtige Projektdatei festhalten
+9. Nach Dateiänderungen committen
+
+## Harte Trigger
+- **Vor jedem Block mit spürbarem Arbeitsvolumen**: Delegationscheck durchführen
+- **Nach jedem relevanten Arbeitsblock**: Mini-Review festhalten
+- **Nach jeder Dateiänderung mit Projektwirkung**: kurz prüfen, ob zusätzlich Daily, Note, Projektartefakt, Runbook oder MEMORY angepasst werden muss
+- **Bei wiederkehrender Reibung**: prüfen, ob daraus eine Regel, ein Runbook-Eintrag oder eine Delegationschance werden sollte
+- **Bei unklarer Tragweite**: nicht raten, sondern konservativ markieren oder eskalieren
 
 ## Pflicht-Mini-Review pro Arbeitsblock
 Am Ende jedes relevanten Arbeitsblocks kurz diese vier Punkte festhalten:
@@ -30,18 +38,33 @@ Ziel:
 - Wiederanlaufkosten senken
 - Engpässe sichtbarer machen, bevor sie eskalieren
 
+## Rückfluss aus dem Mini-Review
+- **Fortschritt** → bei Projektrelevanz in passendem Projektartefakt oder Daily festhalten
+- **Reibung** → wenn wiederkehrend: in Note oder Runbook verdichten, nicht im Tagesverlauf versickern lassen
+- **Delegierbares** → aktiv auf Support-Agent, Skill oder klaren Teilauftrag prüfen
+- **Nächster Engpass** → wenn projektkritisch: im Execution Board, Backlog oder nächstem Arbeitsblock sichtbar machen
+
 ## Wohin kommt was?
-- Tageslog / Zwischenstand → `memory/daily/`
-- Themennotiz / Recherche → `memory/notes/`
-- Dauerhafte Wahrheit → `MEMORY.md`
-- Wiederkehrender Ablauf → `vault/runbooks/`
-- Aktive Projektarbeit → `projects/`
-- Inaktive Arbeit → `archive/`
+- **`memory/daily/`** → Tagesverlauf, Zwischenstände, Blockabschlüsse, kurze Fortschritts-/Blocker-Logs
+- **`memory/notes/`** → thematische Verdichtung, Research-Intake, Sammelnotizen, wiederkehrende Reibungen
+- **`MEMORY.md`** → nur kuratierte, stabile Wahrheit mit Dauerwert
+- **`vault/runbooks/`** → wiederkehrende Arbeitsregeln, Prozesse, Checklisten, Betriebswissen
+- **`projects/`** → alles, was die operative Projektarbeit direkt steuert oder konkretisiert
+- **`archive/`** → inaktive oder abgeschlossene Arbeit
+
+## Ablage-Entscheidungsregel
+- Verlauf oder kurzer Zwischenstand → `memory/daily/`
+- Verdichtung, Thema oder Research-Sammlung → `memory/notes/`
+- Dauerhafte, stabile Erkenntnis → `MEMORY.md`
+- Wiederholbarer Prozess oder Regel → `vault/runbooks/`
+- Direkte Arbeitssteuerung / Spezifikation / Priorität → passende Datei unter `projects/`
+- Im Zweifel: nicht das prestigeträchtigste, sondern das operativ passendste Zuhause wählen
 
 ## Blocker-Format
 - Ursache
 - Auswirkung
 - Nächster Schritt
+- Selbst lösen / delegieren / eskalieren
 
 ## Qualitätsmaßstab
 - direkt
@@ -49,6 +72,9 @@ Ziel:
 - nicht redundant
 - keine falsche Sicherheit
 - klare Empfehlung statt Optionsmüll
+- keine drei Optionen ohne Priorisierung, wenn eine klare Empfehlung möglich ist
+- kein unnötiger Kontext, wenn die nächste sinnvolle Handlung schon klar ist
+- Unsicherheit benennen, aber knapp und handlungsnah
 - bei Bedarf kreative Alternativen mit echtem Mehrwert einbringen
 - Meta-Ebene nutzen, wenn etwas zu einseitig betrachtet wird
 - Ehrlichkeit vor Bequemlichkeit

@@ -1,0 +1,28 @@
+Jetzt zuerst: Fristen und Meldungen im Blick behalten
+
+Du hast eine schriftliche Kündigung erhalten. Jetzt kommt es darauf an, dass keine Frist und keine Meldung durchrutscht.
+
+Nächste Schritte:
+- Arbeitslosmeldung sofort prüfen oder nachholen — Wenn du bereits arbeitslos bist, ist das ein eigener zeitkritischer Schritt gegenüber der Agentur für Arbeit.
+- Arbeitsuchendmeldung ebenfalls sofort prüfen oder nachholen — Die Arbeitsuchendmeldung ist fachlich getrennt von der Arbeitslosmeldung und sollte nicht offen bleiben.
+- 3-Wochen-Frist für Kündigungsschutzklage sofort einordnen — Nach Zugang einer schriftlichen Kündigung läuft regelmäßig eine sehr kurze Frist, die du nicht versehentlich verstreichen lassen solltest.
+
+Fristen:
+- Arbeitslosmeldung: spätestens am ersten Tag der Arbeitslosigkeit; wenn noch offen, jetzt sofort prüfen (Die Arbeitslosmeldung ist ein eigener Schritt und nicht dasselbe wie die Arbeitsuchendmeldung.)
+- Arbeitsuchendmeldung: spätestens 3 Monate vor Ende, sonst innerhalb von 3 Tagen nach Kenntnis (Auch wenn du schon arbeitslos bist, sollte diese Meldung als eigener Pflichtpunkt nicht übersehen werden.)
+- Kündigungsschutzklage prüfen: regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung (ausgehend vom angegebenen Zugangsdatum: bis 08.04.2026) (Der MVP prüft nicht die Erfolgsaussicht, sondern markiert die Frist als priorisiert. Mögliche Landesfeiertage werden im MVP nicht automatisch berechnet und sollten vorsichtshalber separat geprüft werden.)
+
+Risiken:
+- Offene Arbeitsuchendmeldung kann Nachteile auslösen — Wenn die frühe Arbeitsuchendmeldung offen bleibt, steigt das Risiko unnötiger Probleme im weiteren ALG-I-Prozess.
+- Offene Arbeitslosmeldung kann den Leistungsstart erschweren — Wenn du bereits arbeitslos bist und diese separate Meldung offen bleibt, können unnötige Probleme beim weiteren ALG-I-Prozess entstehen.
+- Kurze Klagefrist kann unbemerkt verstreichen — Nach Zugang einer schriftlichen Kündigung sollte die 3-Wochen-Frist nicht aus dem Blick geraten.
+
+Unterlagen:
+- Kündigungsschreiben (already-secured) — Zugang und Datum sind für die Fristprüfung zentral.
+- Arbeitsvertrag (already-secured) — Hilft bei Beratung und Einordnung der Ausgangslage.
+- Lohnunterlagen (secure-now) — Hilfreich für Agentur-Themen und Beratungsvorbereitung.
+
+Hinweise:
+- Arbeitsuchendmeldung = früher eigener Schritt bei bekanntem Ende; Arbeitslosmeldung = separater Schritt ab tatsächlicher Arbeitslosigkeit.
+- Der MVP ersetzt keine individuelle Rechtsberatung.
+- Das Tool bewertet keine Erfolgsaussichten einer Kündigungsschutzklage im Einzelfall.

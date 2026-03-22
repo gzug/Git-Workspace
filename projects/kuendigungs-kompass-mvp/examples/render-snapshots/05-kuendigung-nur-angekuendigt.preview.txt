@@ -1,0 +1,4 @@
+Dein Fokus jetzt: Gut vorbereitet in den nächsten Schritt gehen
+Wichtigster nächster Schritt: Arbeitsuchendmeldung jetzt prüfen oder nachholen
+Kritische Frist: Arbeitsuchendmeldung — spätestens 3 Monate vor Ende, sonst innerhalb von 3 Tagen nach Kenntnis
+Hinweis: Ohne schriftliche Kündigung soll der MVP keine Klagefrist fingieren.

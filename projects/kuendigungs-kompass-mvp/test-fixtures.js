@@ -21,6 +21,14 @@ function labels(items = []) {
   return items.map((item) => item.label);
 }
 
+function compactDeadlines(items = []) {
+  return items.map((item) => ({
+    label: item.label,
+    timing: item.timing,
+    note: item.note,
+  }));
+}
+
 function strings(items = []) {
   return items.map((item) => typeof item === 'string' ? item : JSON.stringify(item));
 }
@@ -34,6 +42,8 @@ for (const [inputPath, expectedPath] of PAIRS) {
   const name = path.basename(expectedPath);
   const actualDeadlineLabels = labels(actual.deadlines);
   const expectedDeadlineLabels = labels(expected.deadlines);
+  const actualDeadlineDetails = compactDeadlines(actual.deadlines);
+  const expectedDeadlineDetails = compactDeadlines(expected.deadlines);
   const actualRedFlags = labels(actual.redFlags);
   const expectedRedFlags = labels(expected.redFlags);
 
@@ -43,7 +53,10 @@ for (const [inputPath, expectedPath] of PAIRS) {
     assert.equal(actual.caseSnapshot.headline, expected.caseSnapshot.headline);
     assert.equal(actual.topActions[0]?.label, expected.topActions[0]?.label);
     assert.deepEqual(actualDeadlineLabels, expectedDeadlineLabels);
+    assert.deepEqual(actualDeadlineDetails, expectedDeadlineDetails);
     assert.deepEqual(actualRedFlags, expectedRedFlags);
+    assert.deepEqual(actual.disclaimers, expected.disclaimers);
+    assert.deepEqual(labels(actual.riskFlags), labels(expected.riskFlags));
 
     assert.ok(!strings(actual.disclaimers).some((x) => /Abfindungswahrscheinlichkeiten|Erfolgswahrscheinlichkeit/.test(x)));
     assert.ok(Array.isArray(actual.statementLedger.notUsedYet));
@@ -61,19 +74,69 @@ for (const [inputPath, expectedPath] of PAIRS) {
     assert.ok(shortRendered.includes(`Wichtigster nächster Schritt: ${actual.topActions[0]?.label}`));
 
     assert.ok(standardRendered.indexOf('Nächste Schritte:') > -1);
-    assert.ok(standardRendered.indexOf('Fristen:') > standardRendered.indexOf('Nächste Schritte:'));
+    const stepsIndex = standardRendered.indexOf('Nächste Schritte:');
+    const deadlinesIndex = standardRendered.indexOf('Fristen:');
+    const risksIndex = standardRendered.indexOf('Risiken:');
+    const redFlagsIndex = standardRendered.indexOf('Red Flags:');
+    const documentsIndex = standardRendered.indexOf('Unterlagen:');
+
+    if (actual.deadlines.length > 0) {
+      assert.ok(deadlinesIndex > stepsIndex);
+    } else {
+      assert.equal(deadlinesIndex, -1);
+    }
     if (actual.riskFlags.length > 0) {
-      assert.ok(standardRendered.indexOf('Risiken:') > standardRendered.indexOf('Fristen:'));
+      assert.ok(risksIndex > (deadlinesIndex > -1 ? deadlinesIndex : stepsIndex));
     }
     if (actual.redFlags.length > 0) {
-      assert.ok(standardRendered.indexOf('Red Flags:') > standardRendered.indexOf('Risiken:'));
+      assert.ok(redFlagsIndex > (risksIndex > -1 ? risksIndex : stepsIndex));
     }
-    assert.ok(standardRendered.indexOf('Unterlagen:') > standardRendered.indexOf('Fristen:'));
+    assert.ok(documentsIndex > (redFlagsIndex > -1 ? redFlagsIndex : (risksIndex > -1 ? risksIndex : (deadlinesIndex > -1 ? deadlinesIndex : stepsIndex))));
     assert.ok(standardRendered.indexOf('Hinweise:') > standardRendered.indexOf('Unterlagen:'));
 
     assert.ok(adviceRendered.includes(`Warum dieser Fokus: ${actual.synthesisDecision.reasoning}`));
     assert.ok(adviceRendered.indexOf('Fragen für Beratung:') > adviceRendered.indexOf('Unterlagen:'));
     assert.ok(adviceRendered.indexOf('Hinweise:') > adviceRendered.indexOf('Fragen für Beratung:'));
+
+    if (name.startsWith('01-')) {
+      assert.ok(actualDeadlineLabels.includes('Arbeitslosmeldung'));
+      assert.ok(actualDeadlineLabels.includes('Arbeitsuchendmeldung'));
+      assert.ok(actual.riskFlags.some((item) => item.label === 'Offene Arbeitsuchendmeldung kann Nachteile auslösen'));
+      assert.ok(actual.riskFlags.some((item) => item.label === 'Offene Arbeitslosmeldung kann den Leistungsstart erschweren'));
+    }
+
+    if (name.startsWith('02-')) {
+      assert.equal(actual.synthesisDecision.primaryTrack, 'contract-do-not-sign');
+      assert.ok(!actualDeadlineLabels.includes('Kündigungsschutzklage prüfen'));
+      assert.ok(!standardRendered.includes('Kündigungsschutzklage prüfen'));
+      assert.ok(!actualDeadlineLabels.includes('Arbeitslosmeldung'));
+      assert.equal(actual.topActions[0]?.label, 'Aufhebungsvertrag nicht vorschnell unterschreiben');
+      assert.ok(actual.disclaimers[0].includes('Arbeitsuchendmeldung = früher eigener Schritt'));
+    }
+
+    if (name.startsWith('03-')) {
+      assert.equal(actual.synthesisDecision.primaryTrack, 'special-case-review');
+      assert.ok(actual.redFlags.length > 0);
+      assert.ok(standardRendered.includes('Red Flags:'));
+      assert.ok(standardRendered.indexOf('Red Flags:') > standardRendered.indexOf('Risiken:'));
+      assert.ok(standardRendered.indexOf('Red Flags:') < standardRendered.indexOf('Unterlagen:'));
+      assert.ok(actualDeadlineLabels.includes('Kündigungsschutzklage prüfen'));
+    }
+
+    if (name.startsWith('04-')) {
+      assert.equal(actual.synthesisDecision.primaryTrack, 'special-case-review');
+      assert.equal(actual.deadlines.length, 0);
+      assert.ok(!standardRendered.includes('Arbeitsuchendmeldung:'));
+      assert.ok(actual.redFlags.some((item) => item.label === 'Bereits unterschriebener Beendigungsvertrag'));
+    }
+
+    if (name.startsWith('05-')) {
+      assert.equal(actual.synthesisDecision.primaryTrack, 'prepare-advice');
+      assert.ok(!actualDeadlineLabels.includes('Kündigungsschutzklage prüfen'));
+      assert.ok(!standardRendered.includes('Kündigungsschutzklage prüfen'));
+      assert.ok(actual.disclaimers.some((item) => item.includes('keine Klagefrist fingieren')));
+      assert.equal(actual.topActions[0]?.label, 'Arbeitsuchendmeldung jetzt prüfen oder nachholen');
+    }
 
     console.log(`PASS ${name}`);
   } catch (error) {

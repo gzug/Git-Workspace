@@ -53,14 +53,20 @@
       "label": "Kündigungsschutzklage prüfen",
       "timing": "regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung (ausgehend vom angegebenen Zugangsdatum: bis 08.04.2026)",
       "importance": "critical",
-      "note": "Der MVP prüft nicht die Erfolgsaussicht, sondern markiert die Frist als priorisiert.",
+      "note": "Der MVP prüft nicht die Erfolgsaussicht, sondern markiert die Frist als priorisiert. Mögliche Landesfeiertage werden im MVP nicht automatisch berechnet und sollten vorsichtshalber separat geprüft werden.",
       "statementClass": "mvp-reliable"
     }
   ],
   "riskFlags": [
     {
-      "label": "Verspätete Agentur-Meldungen können Nachteile auslösen",
-      "description": "Wenn Arbeitsuchend- oder Arbeitslosmeldung offen bleiben, steigt das Risiko unnötiger Probleme im weiteren ALG-I-Prozess.",
+      "label": "Offene Arbeitsuchendmeldung kann Nachteile auslösen",
+      "description": "Wenn die frühe Arbeitsuchendmeldung offen bleibt, steigt das Risiko unnötiger Probleme im weiteren ALG-I-Prozess.",
+      "severity": "critical",
+      "statementClass": "mvp-reliable"
+    },
+    {
+      "label": "Offene Arbeitslosmeldung kann den Leistungsstart erschweren",
+      "description": "Wenn du bereits arbeitslos bist und diese separate Meldung offen bleibt, können unnötige Probleme beim weiteren ALG-I-Prozess entstehen.",
       "severity": "critical",
       "statementClass": "mvp-reliable"
     },
@@ -96,7 +102,7 @@
   ],
   "opportunities": [],
   "disclaimers": [
-    "Die Arbeitsuchendmeldung ersetzt nicht die Arbeitslosmeldung.",
+    "Arbeitsuchendmeldung = früher eigener Schritt bei bekanntem Ende; Arbeitslosmeldung = separater Schritt ab tatsächlicher Arbeitslosigkeit.",
     "Der MVP ersetzt keine individuelle Rechtsberatung.",
     "Das Tool bewertet keine Erfolgsaussichten einer Kündigungsschutzklage im Einzelfall."
   ],

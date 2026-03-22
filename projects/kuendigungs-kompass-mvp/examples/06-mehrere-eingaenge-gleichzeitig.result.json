@@ -44,9 +44,9 @@
     },
     {
       "label": "Kündigungsschutzklage prüfen",
-      "timing": "regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung (ausgehend vom angegebenen Zugangsdatum: bis 11.04.2026)",
+      "timing": "regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung (ausgehend vom angegebenen Zugangsdatum: bis 13.04.2026)",
       "importance": "critical",
-      "note": "Der mögliche Sonderfall ändert nichts daran, dass die Frist nicht liegen bleiben sollte.",
+      "note": "Der mögliche Sonderfall ändert nichts daran, dass die Frist nicht liegen bleiben sollte. Fällt das rechnerische Fristende auf Samstag oder Sonntag, sollte der nächste Werktag mitgeprüft werden. Mögliche Landesfeiertage werden im MVP nicht automatisch berechnet und sollten vorsichtshalber separat geprüft werden.",
       "statementClass": "mvp-reliable"
     }
   ],
@@ -113,7 +113,7 @@
   "disclaimers": [
     "Der MVP ersetzt keine individuelle Rechtsberatung.",
     "Bei mehreren gleichzeitigen Risikotreibern soll der MVP priorisieren, aber keine Scheinsicherheit erzeugen.",
-    "Arbeitsuchendmeldung und Arbeitslosmeldung sind nicht dasselbe."
+    "Arbeitsuchendmeldung = früher eigener Schritt bei bekanntem Ende; Arbeitslosmeldung = separater Schritt ab tatsächlicher Arbeitslosigkeit."
   ],
   "statementLedger": {
     "mvpReliable": [

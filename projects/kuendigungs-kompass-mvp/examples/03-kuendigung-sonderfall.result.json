@@ -39,7 +39,7 @@
       "label": "Kündigungsschutzklage prüfen",
       "timing": "regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung (ausgehend vom angegebenen Zugangsdatum: bis 09.04.2026)",
       "importance": "critical",
-      "note": "Der mögliche Sonderfall ändert nichts daran, dass die Frist nicht liegen bleiben sollte.",
+      "note": "Der mögliche Sonderfall ändert nichts daran, dass die Frist nicht liegen bleiben sollte. Mögliche Landesfeiertage werden im MVP nicht automatisch berechnet und sollten vorsichtshalber separat geprüft werden.",
       "statementClass": "mvp-reliable"
     }
   ],

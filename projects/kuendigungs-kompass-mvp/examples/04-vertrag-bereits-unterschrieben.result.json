@@ -34,15 +34,7 @@
       "statementClass": "mvp-reliable"
     }
   ],
-  "deadlines": [
-    {
-      "label": "Arbeitsuchendmeldung",
-      "timing": "spätestens 3 Monate vor Ende, sonst innerhalb von 3 Tagen nach Kenntnis",
-      "importance": "critical",
-      "note": "Im Beispiel bereits erledigt, aber als Fachlogik weiterhin relevant.",
-      "statementClass": "mvp-reliable"
-    }
-  ],
+  "deadlines": [],
   "riskFlags": [
     {
       "label": "Vertrag bereits unterschrieben",

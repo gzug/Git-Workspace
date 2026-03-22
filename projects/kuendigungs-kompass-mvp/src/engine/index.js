@@ -47,6 +47,25 @@ function addDays(dateString, days) {
   return target;
 }
 
+function shiftWeekendForward(date) {
+  if (!(date instanceof Date) || Number.isNaN(date.getTime())) return null;
+  const shifted = new Date(date.getTime());
+  const day = shifted.getDay();
+  if (day === 6) shifted.setDate(shifted.getDate() + 2);
+  if (day === 0) shifted.setDate(shifted.getDate() + 1);
+  return shifted;
+}
+
+function buildLawsuitDeadlineInfo(dateString) {
+  const rawDeadline = addDays(dateString, 21);
+  if (!rawDeadline) return { date: null, shiftedForWeekend: false };
+  const shiftedDeadline = shiftWeekendForward(rawDeadline);
+  return {
+    date: shiftedDeadline,
+    shiftedForWeekend: shiftedDeadline.getTime() !== rawDeadline.getTime(),
+  };
+}
+
 function formatDateDE(date) {
   if (!(date instanceof Date) || Number.isNaN(date.getTime())) return null;
   return new Intl.DateTimeFormat('de-DE', {
@@ -524,32 +543,37 @@ function buildDeadlines(answers) {
       statementClass: 'mvp-reliable',
     });
   }
-  if (answers.jobseeker_registered === false || answers.agreement_already_signed === true) {
+  if (answers.jobseeker_registered === false) {
     deadlines.push({
       label: 'Arbeitsuchendmeldung',
       timing: 'spätestens 3 Monate vor Ende, sonst innerhalb von 3 Tagen nach Kenntnis',
       importance: 'critical',
       note: answers.already_unemployed_now
         ? 'Auch wenn du schon arbeitslos bist, sollte diese Meldung als eigener Pflichtpunkt nicht übersehen werden.'
-        : answers.agreement_already_signed === true
-          ? 'Im Beispiel bereits erledigt, aber als Fachlogik weiterhin relevant.'
-          : 'Diese Meldung sollte nicht aufgeschoben werden, auch wenn der Vertrag noch nicht unterschrieben ist.',
+        : 'Diese Meldung sollte nicht aufgeschoben werden, auch wenn der Vertrag noch nicht unterschrieben ist.',
       statementClass: 'mvp-reliable',
     });
   }
   if (answers.termination_access_date) {
-    const lawsuitDeadline = addDays(answers.termination_access_date, 21);
-    const formattedLawsuitDeadline = formatDateDE(lawsuitDeadline);
-    const baseNote = (answers.special_protection_indicator || []).some((x) => x !== 'none_known')
-      ? 'Der mögliche Sonderfall ändert nichts daran, dass die Frist nicht liegen bleiben sollte.'
-      : 'Der MVP prüft nicht die Erfolgsaussicht, sondern markiert die Frist als priorisiert.';
+    const lawsuitDeadline = buildLawsuitDeadlineInfo(answers.termination_access_date);
+    const formattedLawsuitDeadline = formatDateDE(lawsuitDeadline.date);
+    const noteParts = [];
+    if ((answers.special_protection_indicator || []).some((x) => x !== 'none_known')) {
+      noteParts.push('Der mögliche Sonderfall ändert nichts daran, dass die Frist nicht liegen bleiben sollte.');
+    } else {
+      noteParts.push('Der MVP prüft nicht die Erfolgsaussicht, sondern markiert die Frist als priorisiert.');
+    }
+    if (lawsuitDeadline.shiftedForWeekend) {
+      noteParts.push('Fällt das rechnerische Fristende auf Samstag oder Sonntag, sollte der nächste Werktag mitgeprüft werden.');
+    }
+    noteParts.push('Mögliche Landesfeiertage werden im MVP nicht automatisch berechnet und sollten vorsichtshalber separat geprüft werden.');
     deadlines.push({
       label: 'Kündigungsschutzklage prüfen',
       timing: formattedLawsuitDeadline
         ? `regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung (ausgehend vom angegebenen Zugangsdatum: bis ${formattedLawsuitDeadline})`
         : 'regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung',
       importance: 'critical',
-      note: baseNote,
+      note: noteParts.join(' '),
       statementClass: 'mvp-reliable',
     });
   }
@@ -561,12 +585,22 @@ function buildRiskFlags(answers, track) {
   const special = (answers.special_protection_indicator || []).some((x) => x !== 'none_known');
 
   if (track === 'deadline-first') {
-    riskFlags.push({
-      label: 'Verspätete Agentur-Meldungen können Nachteile auslösen',
-      description: 'Wenn Arbeitsuchend- oder Arbeitslosmeldung offen bleiben, steigt das Risiko unnötiger Probleme im weiteren ALG-I-Prozess.',
-      severity: 'critical',
-      statementClass: 'mvp-reliable',
-    });
+    if (answers.jobseeker_registered === false) {
+      riskFlags.push({
+        label: 'Offene Arbeitsuchendmeldung kann Nachteile auslösen',
+        description: 'Wenn die frühe Arbeitsuchendmeldung offen bleibt, steigt das Risiko unnötiger Probleme im weiteren ALG-I-Prozess.',
+        severity: 'critical',
+        statementClass: 'mvp-reliable',
+      });
+    }
+    if (answers.already_unemployed_now && answers.unemployment_registered === false) {
+      riskFlags.push({
+        label: 'Offene Arbeitslosmeldung kann den Leistungsstart erschweren',
+        description: 'Wenn du bereits arbeitslos bist und diese separate Meldung offen bleibt, können unnötige Probleme beim weiteren ALG-I-Prozess entstehen.',
+        severity: 'critical',
+        statementClass: 'mvp-reliable',
+      });
+    }
     if (answers.termination_access_date) {
       riskFlags.push({
         label: 'Kurze Klagefrist kann unbemerkt verstreichen',
@@ -815,16 +849,18 @@ function buildOpportunities(answers, track) {
 }
 
 function buildDisclaimers(answers, track) {
+  const agencySeparationDisclaimer = 'Arbeitsuchendmeldung = früher eigener Schritt bei bekanntem Ende; Arbeitslosmeldung = separater Schritt ab tatsächlicher Arbeitslosigkeit.';
+
   if (track === 'contract-do-not-sign') {
     return [
-      'Arbeitsuchendmeldung und Arbeitslosmeldung sind nicht dasselbe.',
+      agencySeparationDisclaimer,
       'Der MVP ersetzt keine individuelle Rechtsberatung.',
       'Abfindung, Sperrzeit und Ruhen hängen stark vom konkreten Einzelfall ab.'
     ];
   }
   if (track === 'deadline-first') {
     return [
-      'Die Arbeitsuchendmeldung ersetzt nicht die Arbeitslosmeldung.',
+      agencySeparationDisclaimer,
       'Der MVP ersetzt keine individuelle Rechtsberatung.',
       'Das Tool bewertet keine Erfolgsaussichten einer Kündigungsschutzklage im Einzelfall.'
     ];
@@ -841,7 +877,7 @@ function buildDisclaimers(answers, track) {
       return [
         'Der MVP ersetzt keine individuelle Rechtsberatung.',
         'Bei mehreren gleichzeitigen Risikotreibern soll der MVP priorisieren, aber keine Scheinsicherheit erzeugen.',
-        'Arbeitsuchendmeldung und Arbeitslosmeldung sind nicht dasselbe.'
+        agencySeparationDisclaimer
       ];
     }
     return [
@@ -853,7 +889,7 @@ function buildDisclaimers(answers, track) {
   return [
     'Ohne schriftliche Kündigung soll der MVP keine Klagefrist fingieren.',
     'Der MVP ersetzt keine individuelle Rechtsberatung.',
-    'Arbeitsuchendmeldung und Arbeitslosmeldung sind nicht dasselbe.'
+    agencySeparationDisclaimer
   ];
 }
 

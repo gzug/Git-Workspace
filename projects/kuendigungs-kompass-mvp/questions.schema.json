@@ -265,7 +265,7 @@
         "stage": "triage",
         "category": "agency",
         "label": "Hast du dich schon arbeitssuchend gemeldet?",
-        "helpText": "Diese Meldung gehört oft zu den ersten kritischen Schritten.",
+        "helpText": "Das ist der frühe eigene Schritt bei bekanntem Ende des Arbeitsverhältnisses — nicht dasselbe wie die spätere Arbeitslosmeldung.",
         "type": "boolean",
         "required": true,
         "decisionRole": "deadline-driver",

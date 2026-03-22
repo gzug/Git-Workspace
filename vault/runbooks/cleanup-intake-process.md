@@ -137,6 +137,18 @@ Ehrlichkeit schlägt Vollständigkeits-Show.
 7. nur bei direkter Relevanz einen Board-Hinweis ableiten
 8. keine finale Integration selbst vornehmen
 
+## Rückstandsregel für ältere Batches
+Wenn frühere Research-Verdichtungen noch nach dem alten, weicheren Muster angelegt wurden, soll CleanUp sie bei sinnvoller Gelegenheit erneut durchgehen und nach dem neuen Schema nachschärfen — aber nur dort, wo das noch echten Effekt hat.
+
+Priorität bei der Nachbearbeitung:
+1. Einträge mit Routing-, Frist- oder Guardrail-Wirkung
+2. Einträge mit Mischpunkten aus Recht / Produkt / UX / Layout
+3. Einträge mit zu vielen offenen Unsicherheiten oder zu schwacher Empfehlung
+4. Einträge, die für aktuelle Projektarbeit ohnehin wieder angefasst werden
+
+Nicht nachbearbeiten nur der Vollständigkeit halber.
+Nur dort nachziehen, wo weniger Reibung, klarere Integration oder geringeres Fehlrisiko entsteht.
+
 ## Übergabeschnittstelle an den Main-Agenten
 CleanUp liefert bevorzugt:
 - wenige saubere Punkte statt breite Zusammenfassungen

@@ -34,3 +34,14 @@ Regeln:
 5. CTA / Copy
 6. UI / Layout
 7. Doku / Backlog
+
+## Nachbearbeitungsauftrag
+Ältere Einträge, die noch vor dem engeren Intake-Schema entstanden sind, sollen bei echtem Mehrwert nachgezogen werden.
+
+Vor allem nachziehen, wenn:
+- Typ / Härtegrad / MVP-Wirkung noch fehlen
+- Mischpunkte die Integration bremsen
+- Routing-, Frist- oder Guardrail-Relevanz im alten Format zu unscharf ist
+- aktuelle Projektarbeit denselben Punkt ohnehin wieder berührt
+
+Nicht nachziehen, wenn es nur Kosmetik wäre.

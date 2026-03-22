@@ -1,6 +1,6 @@
 # Kündigungs-Kompass MVP — E2E-Realitätscheck V1
 
-Stand: 2026-03-21
+Stand: 2026-03-22
 
 ## Ziel
 Den gesamten Pfad **vom Rohinput bis zur nutzbaren Ergebnisansicht** unter realistischen MVP-Bedingungen gegenzuprüfen.
@@ -13,23 +13,20 @@ Den gesamten Pfad **vom Rohinput bis zur nutzbaren Ergebnisansicht** unter reali
 5. Rendering / Fallback
 6. Monitoring-taugliche Metadaten
 
----
-
 ## Pflichtfälle
-
 ### 1. Kündigung + Arbeitslosmeldung offen
 Erwartung:
 - `ready`
 - Track `deadline-first`
 - kritische Deadline vorhanden
-- Agentur-Meldung bleibt sichtbar getrennt
+- Arbeitsuchend- und Arbeitslosmeldung bleiben logisch getrennt
 
 ### 2. Aufhebungsvertrag noch nicht unterschrieben
 Erwartung:
 - `ready`
 - Track `contract-do-not-sign`
-- keine weichgespülte Standard-Beruhigung
 - Vertragsrisiko vor Nice-to-have
+- kein weichgespülter Standardpfad
 
 ### 3. Kündigung + Sonderfallindikator
 Erwartung:
@@ -48,12 +45,13 @@ Erwartung:
 Erwartung:
 - `ready`
 - keine künstliche 3-Wochen-Panik
-- Fokus auf Vorbereitung / frühe Agentur-Themen
+- Arbeitsuchendmeldung / Vorbereitung sichtbar
+- Schriftform-Hinweis statt Scheinsicherheit
 
 ### 6. Mehrfachfall
 Erwartung:
 - `ready`
-- mehrerer Risikotreiber sichtbar
+- mehrere Risikotreiber sichtbar
 - keine pseudo-klare Einspurigkeit
 
 ### 7. Unvollständige Eingabe
@@ -61,6 +59,7 @@ Erwartung:
 - `incomplete`
 - fehlende Fragen konkret benannt
 - nächster Screen bestimmbar
+- Teilergebnis nur dort, wo fachlich vertretbar
 
 ### 8. Unbekannte Produktstufe
 Erwartung:
@@ -80,9 +79,30 @@ Erwartung:
 - klarer Error-Code
 - kein stilles Weiterrechnen
 
----
+## Zusätzliche Drift-Kritikfälle
+Diese Pfade sind für Launch-Reife besonders wichtig:
+- belastbares Zugangsdatum → konkretes Klagefrist-Datum
+- unsicheres/fehlendes Zugangsdatum → kein falsches konkretes Datum
+- Wochenende am Fristende → saubere Verschiebung
+- möglicher Landesfeiertag → Prüfhinweis statt stiller automatischer Verschiebung
+- Red Flag aktiv + fehlende Detailantwort → konservativer Eskalationspfad
+
+## Testarten nach Risiko
+### Snapshot-geeignet
+- Fristen-Outputs
+- zentrale Renderblöcke mit stabiler Copy-Struktur
+- Mehrfachfälle mit Guardrail-Reihenfolge
+
+### Assertion-geeignet
+- Track-Wahl
+- Fallback-Zustände
+- Warning-Setzung
+- Tier-Fallbacks
+- konditionale Bausteinaktivierung
 
 ## Done-When
 - diese Fälle sind durch Testcode oder klar reproduzierbare Demo-Aufrufe abgedeckt
+- Routing-kritische Pfade wurden bewusst gesehen
 - Ergebniszustände und Fehlermodi sind stabil
-- Runtime, Doku und Fixtures laufen nicht auseinander
+- Doku, Fixtures und Runtime laufen nicht auseinander
+- Drift-anfällige Datums- und Red-Flag-Fälle sind nicht nur implizit, sondern aktiv abgesichert

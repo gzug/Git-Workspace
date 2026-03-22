@@ -1,87 +1,102 @@
 # Kündigungs-Kompass MVP — Flow Contract V1
 
-Stand: 2026-03-21
-Status: Block 3 Anschlussdokument
+Stand: 2026-03-22
+Status: aktives Anschlussdokument
 
 ## Ziel
 Den Übergang vom Frageschema zu einem echten Fragebogen-Flow und von dort zur Ergebnisansicht so definieren, dass Frontend-/Funnel-Arbeit ohne neue Grundsatzdebatten starten kann.
 
----
+## Leitprinzipien
+- kein freies Formular, sondern klar geführter adaptiver Flow
+- so wenig Fragen wie möglich, so viele wie für korrektes Routing nötig
+- Fragen nur dann vertiefen, wenn sie Routing, Guardrails oder Scheingenauigkeit beeinflussen
+- keine frühen sensiblen oder fachlich unklaren Fragen ohne klaren Nutzen
+- Ergebnis soll zuerst Orientierung und nächste Schritte geben, nicht Vollständigkeit demonstrieren
 
-## 1. Flow-Grundsatz
-Der erste Live-Flow soll **kein freies Formular**, sondern ein klar geführter, adaptiver Entscheidungsflow sein.
+## Flow-Regeln für V1
+### Pflicht-Nachfrage nur wenn falsches Ergebnis schlimmer wäre als unvollständiges Ergebnis
+Pflichtfelder nur dann erzwingen, wenn ohne sie ein falscher Track oder ein gefährlich falsches Ergebnis entstehen würde.
 
-Leitlinie:
-- erst die wenigen hochrelevanten Fragen
-- dann nur fallbezogene Vertiefung
-- keine unnötigen Zusatzfragen vor kritischen Fristen und Risiken
+### Adaptive Nachfrage nur bei Routing-Konsequenz oder Sicherheitsgewinn
+Eine Nachfrage ist nur gerechtfertigt, wenn sie:
+- Track-Routing ändert
+- einen Kern-Baustein aktiviert/deaktiviert
+- scheingenauen Output verhindert
 
----
+### Unsicherheit sichtbar erlauben
+Bei nicht-trivialen Feldern soll, wo sinnvoll, eine `unsicher`-Option möglich sein statt Nutzer zu Falschantworten zu zwingen.
 
-## 2. Stage-Reihenfolge aus dem Frageschema
-Die Stages aus `questions.schema.json` geben die richtige Arbeitsreihenfolge bereits vor:
+## Zielbild für Launch V1
+**Maximal 4 Screens** mit klar sichtbarer Fortschrittsanzeige.
+Eine Frage bzw. ein eng zusammengehöriges Thema pro Screen.
 
-1. `entry`
-2. `triage`
-3. `deadline-check`
-4. `contract-check`
-5. `risk-check`
-6. `supporting-context`
-7. `goals`
+## Empfohlener Mindest-Flow für Launch V1
+### Screen 1 — Vertragstyp / Einstieg
+Pflicht:
+- `case_entry` / Vertragstyp
+  - Kündigung erhalten
+  - Aufhebungsvertrag angeboten, noch nicht unterschrieben
+  - Aufhebungsvertrag bereits unterschrieben
 
-### Praktische Bedeutung
-- **entry / triage / deadline-check** sind der harte Kern
-- **contract-check / risk-check** nur dann vertiefen, wenn fallrelevant
-- **supporting-context / goals** erst danach
+Erwartung am Start:
+- 1 Satz Erwartungsrahmen: wenige Fragen, danach Fristen und nächste Schritte
+- sichtbare Fortschrittsanzeige
 
----
-
-## 3. Mindest-Flow für Launch V1
-### Screen 1 — Einstieg
-- `case_entry`
-
-### Screen 2 — Zeitkritische Basis
-- `termination_access_date` (wenn fallrelevant)
+### Screen 2 — Schlüsseldaten
+Pflicht oder track-kritisch:
+- `termination_access_date` bei Kündigung
+  - mit Inline-Erklärung: Tag des Erhalts, nicht Briefdatum
+  - Option `Datum unbekannt` zulassen
 - `employment_end_date`
+  - als „Wann endet dein Arbeitsverhältnis?“ formulieren
+
+Fallabhängig:
+- `agreement_already_signed` nur wenn Aufhebungsvertrag-Track nicht schon in Screen 1 festgelegt ist
+- `release_status` / Freistellung nur wenn relevant
+- `release_date` nur nach bestätigter Freistellung
+
+### Screen 3 — Red Flags / Schutz / Routing-relevante Kontexte
+Pflicht nur bei Routing-Relevanz:
+- `special_protection_indicator`
+- wenn Red Flag aktiv: Nachfrage nach Typ
+  - Schwangerschaft
+  - Elternzeit
+  - Schwerbehinderung
+  - Betriebsrat
+  - unsicher / anderes prüfen
+
+Zusätzlich hier oder am Ende von Screen 2, wenn noch nicht erhoben:
+- Betriebsgröße
+- Betriebszugehörigkeit
+
+Diese beiden Felder dürfen für V1 unvollständig bleiben, wenn der Rest korrekt berechenbar ist.
+
+### Screen 4 — Abschluss / verbleibende notwendige Kontexte
+Nur noch fallrelevante Restfragen:
 - `jobseeker_registered`
 - `already_unemployed_now`
-- `unemployment_registered` (nur wenn relevant)
+- `unemployment_registered` nur wenn relevant
+- `documents_secured` nur wenn für Output sinnvoll
+- `primary_goal` nur wenn der Flow nicht unnötig verlängert wird
 
-### Screen 3 — Vertragslage
-- `agreement_present`
-- `agreement_already_signed` (nur wenn relevant)
-- `release_status`
+Wenn der Output ohne diese Felder korrekt genug bleibt, nicht künstlich aufblasen.
 
-### Screen 4 — Risikolage
-- `special_protection_indicator`
+## Datumsfelder — UI-Regeln
+- **Zugangsdatum** und **Briefdatum** nie vermischen
+- kein eigenes Feld für Briefdatum in V1
+- keine Freitext-Datumsfelder, wenn vermeidbar
+- Date-Picker oder klar getrennte Tages-/Monats-/Jahres-Eingabe
+- Erklärung direkt am Feld, nicht in Tooltip verstecken
 
-### Screen 5 — Vorbereitung
-- `documents_secured`
-- `primary_goal`
+## Bool-Felder — Regel
+Ja/Nein nur dann, wenn Nutzer die Frage ohne Fachwissen sicher beantworten können.
+Sonst Auswahloptionen oder `unsicher`.
 
-Damit bleibt der Flow kurz genug, aber fachlich brauchbar.
+Nicht als Nutzerfrage stellen:
+- „Gilt KSchG für dich?“
+- andere fachlich abgeleitete Zustände, die das Produkt selbst berechnen kann
 
----
-
-## 4. Regeln für Frontend-/Funnel-Umsetzung
-### Muss können
-- `askIf` respektieren
-- Pflichtfelder sichtbar markieren
-- Red-Flag-relevante Pflichtfelder nicht still überspringen
-- leere Antworten sauber behandeln
-- Folgefragen erst anzeigen, wenn sie wirklich relevant sind
-
-### Darf nicht passieren
-- alle Fragen auf einer langen Seite ohne Priorisierung
-- Vertragsfragen ohne vorhandenen Vertrag zeigen
-- Arbeitslosmeldungsfrage immer zeigen, obwohl sie nur bedingt relevant ist
-- Sonderfallfragen in harmloser Optik verstecken
-
----
-
-## 5. Ergebnis-Flow nach Abschluss
-Nach dem letzten Screen:
-
+## Ergebnis-Flow nach Abschluss
 ```text
 Fragebogen fertig
 → normalizeQuestionnaireInput
@@ -91,41 +106,48 @@ Fragebogen fertig
 → Ergebnisansicht
 ```
 
-### Ergebnisansicht für Launch V1
-- zunächst text-/blockorientiert
-- keine komplexe visuelle Produktarchitektur nötig
-- Priorität auf Klarheit der Reihenfolge, nicht auf Design-Spielereien
+## Ergebnisprinzipien für Launch V1
+- zuerst Orientierung und To-do #1
+- Fristen vor Erklärtext
+- Risiken nach To-dos
+- Unterlagen nach Fristen/To-dos
+- Beratungsfragen nur fallabhängig
+- Disclaimer/Hinweise nie dominant
 
----
-
-## 6. Minimaler Ergebnis-Switch nach Produktstufe
+## Preview / Base / Upgrade
 ### Preview
-- direkt nach Fragebogenabschluss als Vorschau oder Pre-Purchase-View nutzbar
+- Orientierung + Blockstruktur + erste konkrete Sofortmaßnahme
+- kein künstlich abgeschnittenes Basis-Ergebnis
 
 ### Base
-- Hauptauswertung nach Kauf/Freischaltung
+- vollständige handlungsfähige Basis-Auswertung
+- alle gesetzlichen Fristen, primären To-dos und Risiko-/Eskalationshinweise sichtbar
 
 ### Upgrade
-- zusätzliche Beratungs-/Entscheidungsvorbereitung
+- Tiefe, Werkzeuge, Export, Verhandlungshilfe, spätere Zusatzhilfen
+- nie zurückgehaltene Basisinformationen
 
----
-
-## 7. Fehler- und Abbruchlogik
+## Fehler- und Abbruchlogik
 ### Wenn ein Pflichtfeld fehlt
 - nicht stumm weiterrechnen
-- klar anzeigen, was fehlt
-- bei Red-Flag-Feldern keine harmlose Weiterleitung
+- feldspezifisch sagen, was fehlt
+- unvollständiges Teilergebnis bevorzugen, wenn Rest korrekt ist
+
+### Wenn Nutzer unsicher ist
+- konservativ markieren
+- lieber Unvollständigkeits-Marker als falsche Sicherheit
 
 ### Wenn Nutzer abbricht
-- später eventuell Resume sinnvoll
-- für V1 aber kein Muss
+- Resume ist V2-Kandidat
+- V1 soll künftige lokale Persistenz nicht verbauen
 
 ### Wenn Input technisch kaputt ist
 - lieber klarer Fehlerzustand als still falsches Result
+- technische Zustände nicht in UI durchreichen
 
----
-
-## 8. Done-When
-- der Fragebogen-Flow ist als Reihenfolge und Entscheidungslogik klar
+## Done-When
 - Frontend/Funnel kann Screens bauen, ohne neue Produktlogik zu erfinden
+- Routing-kritische Fragen sind explizit
+- unnötige oder zu frühe Fragen sind aus dem harten Kern entfernt
 - Ergebnisansicht kann direkt an den bestehenden Adapterpfad andocken
+- der Flow schützt vor Fachbegriff-Abbruch, Scheingenauigkeit und unnötiger Tiefe

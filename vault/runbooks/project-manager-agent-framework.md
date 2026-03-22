@@ -15,13 +15,21 @@ Der Main-Agent trägt Führung, Priorisierung, Integrationsentscheidungen und di
 Support-Agents entlasten ihn bei sauber geschnittenen, klar delegationsfähigen Aufgaben.
 
 ## Delegationsroutine
-- Der Main-Agent hält in regelmäßigen Abständen kurz inne.
+- Der Main-Agent hält nicht nur „regelmäßig“, sondern an klaren Triggern kurz inne.
 - Er geht seine offenen Todos bewusst durch.
 - Vor jedem neuen größeren Block prüft er ausdrücklich: Was davon sollte ich nicht selbst machen, wenn ich Fokus, Tempo und Integrationsqualität halten will?
 - Er prüft aktiv, welche Aufgaben an Support-Agents wie `CleanUp` abgegeben werden können.
 - Er achtet besonders auf wiederkehrende einfache, bürokratische, verdichtende, strukturierende oder pflegende Arbeit, von der er sich langfristig freimachen kann.
 - Er nutzt Delegation nicht nur als Notfallmaßnahme bei Überlast, sondern als bewussten Hebel zur Fokuswahrung.
 - Erst Aufgabe sauber schneiden, dann delegieren; keine Unschärfe auslagern.
+
+## Harte Trigger für Delegationsprüfung
+Eine Delegationsprüfung ist fällig:
+- vor jedem neuen größeren Arbeitsblock
+- wenn dieselbe Nebenarbeit oder Reibung mehrfach auftaucht
+- wenn ein Task klar parallelisierbar ist
+- wenn Koordinationsarmut droht, weil der Main-Agent zu viel selbst zieht
+- wenn ein Support-Agent einen wiederkehrenden Kleintask verlässlich übernehmen könnte
 
 ## Vorab-Check vor jedem größeren Block
 Vor Start eines neuen größeren Arbeitsblocks beantwortet der Main-Agent intern knapp:
@@ -30,6 +38,16 @@ Vor Start eines neuen größeren Arbeitsblocks beantwortet der Main-Agent intern
 - Was würde mich unnötig in Ausführung statt Steuerung ziehen?
 - Welcher Support-Agent könnte klar und risikoarm entlasten?
 - Welche Teile muss ich bewusst selbst behalten?
+- Arbeite ich damit am größten Engpass oder nur am naheliegendsten Task?
+
+## Pflicht-Ausgang jeder Delegationsprüfung
+Jede Delegationsprüfung endet in genau einer klaren Einordnung pro relevanter Teilaufgabe:
+- **selbst**
+- **delegiert**
+- **später delegierbar**
+- **nicht delegierbar**
+
+Reines „könnte man mal delegieren“ reicht nicht als Abschluss.
 
 ## Was aktiv auf Delegierbarkeit geprüft werden soll
 - Research-Intake und -Verdichtung
@@ -47,9 +65,37 @@ Vor Start eines neuen größeren Arbeitsblocks beantwortet der Main-Agent intern
 - Erst Aufgabe sauber schneiden, dann zuweisen.
 - Wenn Delegation mehr Koordination als Entlastung erzeugt, war sie schlecht geschnitten.
 
+## Engpass-Prinzip
+Der Main-Agent arbeitet primär am größten Engpass für:
+- Projektfortschritt
+- Risikoabsicherung
+- Integrationsfähigkeit
+- Entscheidungsqualität
+
+Nicht der interessanteste Task gewinnt.
+Nicht der bequemste Task gewinnt.
+Nicht der schon geöffnete Task gewinnt.
+Der größte Hebel gewinnt.
+
 ## Langfristige Entlastung
 Der Main-Agent soll aktiv beobachten, welche wiederkehrenden kleinen Aufgabentypen entstehen, und prüfen, ob Support-Agents dafür sinnvoll eingelernt oder strukturell vorgesehen werden sollten.
 Ziel ist, langfristig Fokus auf Kernlogik, Integrationsentscheidungen, Risikoabwägungen und Projektfortschritt zu sichern.
+
+### Lernschwelle für wiederkehrende Aufgaben
+Wenn ein einfacher oder bürokratischer Aufgabentyp mehrfach wiederkehrt, aktiv prüfen:
+- kann `CleanUp` das übernehmen?
+- braucht es dafür ein kleines Runbook oder eine feste Routine?
+- lohnt sich ein Skill oder ein wiederverwendbares Support-Muster?
+- entsteht ohne Struktur immer wieder derselbe Kontextverlust?
+
+Wiederkehrung allein reicht nicht für blinde Auslagerung.
+Aber wiederkehrende Reibung ohne Lernschritt ist verschwendete Kapazität.
+
+## Sichtbarkeitsregel
+- Projektkritische Delegationen, Risiken oder Engpässe gehören in sichtbare Projektsteuerung wie das Execution Board.
+- Kleine interne Entlastung, Vorsortierung oder Hygiene muss nicht jedes Mal breit sichtbar gemacht werden.
+- Nicht jede Delegationsidee braucht Sichtbarkeit.
+- Jede echte Abgabe mit Projektwirkung braucht Klarheit darüber, wer woran arbeitet oder worauf gewartet wird.
 
 ## Kontinuierliche Selbstanalyse
 - Der Main-Agent analysiert die eigene Performance, Effizienz, Stärken, Schwächen, Arbeitsprozesse und wiederkehrenden Reibungen fortlaufend mit.

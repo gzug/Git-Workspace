@@ -6,5 +6,9 @@
 skills/*/.clawhub/
 skills/*/_meta.json
 
+# Keep actual skill implementation files tracked
+!skills/driftguard/scripts/
+!skills/driftguard/scripts/**
+
 # Personal scratch / inbox
 01_Zwischenablage.md

@@ -48,6 +48,9 @@ Fokus auf **Stabilität, Runbook und wiederholbare Arbeitsroutinen** statt auf n
 - Monitoring und wiederkehrende Checks sollen standardmäßig **still** laufen und nur dann melden, wenn ein Fehler, Drift oder fehlgeschlagene Automatik Aufmerksamkeit braucht.
 - Backup-Strategie vorerst pragmatisch: lokales Backup-Staging auf dem Mac mini unter `/Users/shashko/Backups/mac-mini/`, externe/cloud Ablage erfolgt manuell durch Y.
 - Wenn ich Recherche- oder Nebenaufgaben an Y. delegiere, soll ich sie standardmäßig als **fertige, eng geführte Prompts** übergeben — inklusive Ziel, Scope, Quellenhygiene, gewünschtem Output-Format und klarer Struktur, damit die Rückgabe direkt in die Projektarbeit übersetzbar ist.
+- Main arbeitet idealerweise als **Orchestrator zuerst**, nicht als Alles-selbst-Executor; Delegation soll früh geprüft und sauber geschnitten werden.
+- `CleanUp` ist als Entlastungsrolle für Research-Intake, Verdichtung und leichte Hygiene vorgesehen; der Main-Agent soll Rohmaterial nicht unnötig selbst tragen.
+- Heartbeat- und Monitoring-Logik sollen nur bei klarem Risiko, Drift, Blocker oder echtem Hebel aktiv melden — nicht bei bloßen Ideen oder schwachen Hygiene-Funden.
 
 ## Aktive Projektlage
 
@@ -55,7 +58,8 @@ Fokus auf **Stabilität, Runbook und wiederholbare Arbeitsroutinen** statt auf n
 - **Pfad:** `projects/kuendigungs-kompass-mvp/`
 - **Ziel:** Sofortmaßnahmen, Fristen, Fehlervermeidung und Chancen für Menschen nach Kündigung oder Aufhebungsvertrag
 - **Rahmen:** Deutschland, Arbeitnehmer:innen, kein Rechtsberater-Ersatz
-- **Status:** Datenbasis V1 steht; MVP muss operativ zum Laufen gebracht werden
+- **Status:** Blöcke 1–3 (Core Stabilization, Product Output, Integration) sind im Wesentlichen durch; aktiver Schwerpunkt ist Block 4 **Launch Hardening**.
+- **Aktueller Fokus:** konservative Fristenlogik, Arbeitslosmeldung vs. Arbeitsuchendmeldung sauber trennen, Snapshot-/Drift-Abdeckung ausbauen, Sonderfall-/Pflichtfeld-/Unknown-Logik nachschärfen — erst danach UI/API- und Soft-Launch-Schicht weiterziehen.
 
 ## Archivierte Projektlage
 
@@ -73,11 +77,20 @@ Fokus auf **Stabilität, Runbook und wiederholbare Arbeitsroutinen** statt auf n
 - `memory/daily/` für Tagesverläufe
 - `memory/notes/` für Themenarbeit
 
-## Nächste offene Schritte (Stand 2026-03-21)
-1. Kündigungs-Kompass operativ zum Laufen bringen
-2. Runbook für häufige Fehlerbilder in `vault/runbooks/` anlegen
-3. `operator.read` beobachten — kein akuter Blocker, aber Diagnosezugriff eingeschränkt
-4. Memory-Pflege konsequent von Daily → MEMORY kuratieren
+## Aktuelle Risiken und Fokusgrenzen
+- Drift zwischen Research, Doku, Fixtures und Runtime bleibt beim Kündigungs-Kompass ein zentrales Risiko.
+- Scheingenauigkeit bei Fristen, KSchG-Aussagen, Abfindung, Sperrzeit oder Erfolgsprognosen aktiv vermeiden.
+- Launch-Reife bedeutet nicht Happy-Path allein, sondern belastbare Routing-Logik, Guardrails, getestete Fallbacks und definierte Ops-Reaktion.
+- Nicht wieder breit neu konzipieren, wenn der aktive Tunnel konservative Launch-Härtung verlangt.
+
+## Nächste offene Schritte (Stand 2026-03-22)
+1. KSchG-Wochenendlogik und konservative Feiertagshinweise sauber in Engine, Doku und Fixtures ziehen
+2. Arbeitslosmeldung vs. Arbeitsuchendmeldung logisch und sprachlich final trennen
+3. Snapshot-/Drift-Abdeckung gezielt auf repräsentative Fälle ausbauen
+4. Sonderfall-/Pflichtfeld-/Unknown-Logik produktseitig schärfen, ohne Scope-Explosion
+5. Danach UI/API-Anschluss und Soft-Launch-Reife weiterziehen
+6. `operator.read` beobachten — kein akuter Blocker, aber Diagnosezugriff eingeschränkt
+7. Memory-Pflege konsequent von Daily → MEMORY kuratieren
 
 ---
 _Dieses File ist kuratiert. Weniger, aber stabiler, ist besser._

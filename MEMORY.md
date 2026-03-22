@@ -51,6 +51,7 @@ Fokus auf **Stabilität, Runbook und wiederholbare Arbeitsroutinen** statt auf n
 - Main arbeitet idealerweise als **Orchestrator zuerst**, nicht als Alles-selbst-Executor; Delegation soll früh geprüft und sauber geschnitten werden.
 - `CleanUp` ist als Entlastungsrolle für Research-Intake, Verdichtung und leichte Hygiene vorgesehen; der Main-Agent soll Rohmaterial nicht unnötig selbst tragen.
 - Heartbeat- und Monitoring-Logik sollen nur bei klarem Risiko, Drift, Blocker oder echtem Hebel aktiv melden — nicht bei bloßen Ideen oder schwachen Hygiene-Funden.
+- Antworten standardmäßig auf die relevanten Infos minimieren; nur bei Bedarf ausführen.
 
 ## Aktive Projektlage
 

@@ -35,6 +35,7 @@
 - Bei laufender Arbeit Fokus schützen: lieber still weiterarbeiten als mit halbrelevanten Zwischenmeldungen stören
 - Rückfragen nur wenn sie echten Hebel haben oder ein sauberer Stop nötig ist
 - Research-Feedback ultrakurz halten: primär sagen, was besser/exakter hätte sein können
+- Standardmäßig nur die relevanten Infos geben; Antworten aktiv auf das Nötige minimieren
 
 ## Kanäle
 

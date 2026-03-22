@@ -15,6 +15,9 @@
 - Mag direkte Kritik und klare Empfehlungen
 - Schätzt Eigeninitiative bei Recherche und Hintergrundarbeit
 - Schreibt oft spätabends oder morgens
+- Bevorzugt unter Unsicherheit eher belastbare, konservative Empfehlungen als schöne Vollständigkeit
+- Will Priorisierung statt Optionsmüll, wenn eine Richtung klar sinnvoller ist
+- Schätzt Entlastung durch gute Delegation, Skills und Agents — aber nur wenn sie sauber begründet ist und messbar Reibung rausnimmt
 
 ## Aktuelle Prioritäten
 
@@ -28,6 +31,10 @@
 - Kein Bullshit, kein Auf-der-Stelle-Treten
 - Privat bleibt privat
 - Nichts aus dem Workspace ungefragt in Gruppen posten
+- Kleine Fortschrittsupdates nur bei echtem Fortschritt oder relevantem Zwischenstand
+- Bei laufender Arbeit Fokus schützen: lieber still weiterarbeiten als mit halbrelevanten Zwischenmeldungen stören
+- Rückfragen nur wenn sie echten Hebel haben oder ein sauberer Stop nötig ist
+- Research-Feedback ultrakurz halten: primär sagen, was besser/exakter hätte sein können
 
 ## Kanäle
 
@@ -39,6 +46,9 @@
 - Standardfall: präzise Empfehlung + nächster sinnvoller Schritt
 - Bei mehreren Optionen: klar priorisieren
 - Bei Blockern: nicht beschönigen, sondern benennen
+- Ergebnisse möglichst in direkt anschlussfähiger Form liefern statt breit zu erklären
+- In laufenden Projektphasen eher operativ verdichten als akademisch ausführen
+- Fokus, Ruhe und Durchzug sind wichtiger als sichtbare Beschäftigung
 
 ---
 _Update dieses File wenn sich Projekte, Kanäle oder Präferenzen ändern._

@@ -33,7 +33,7 @@ function runCase(name) {
   const upgrade = projectResultForTier(result, { tier: 'upgrade' });
 
   const previewText = renderProductResult(preview, { tier: 'preview' });
-  assert.ok(previewText.includes(`Dein Fokus jetzt: ${result.caseSnapshot.headline}`));
+  assert.ok(previewText.startsWith(result.caseSnapshot.headline));
   assert.ok(previewText.includes(`Wichtigster nächster Schritt: ${result.topActions[0].label}`));
   assert.ok(!previewText.includes('Unterlagen:'));
   assert.ok(!previewText.includes('Fragen für Beratung:'));

@@ -24,7 +24,7 @@ function formatDocumentStatus(status) {
 
 function renderPreview(projected) {
   const lines = [];
-  lines.push(`Dein Fokus jetzt: ${projected.caseSnapshot.headline}`);
+  lines.push(projected.caseSnapshot.headline);
   if (projected.topAction) lines.push(`Wichtigster nächster Schritt: ${projected.topAction.label}`);
   if (projected.deadline) {
     lines.push(`Kritische Frist: ${projected.deadline.label} — ${projected.deadline.timing}`);

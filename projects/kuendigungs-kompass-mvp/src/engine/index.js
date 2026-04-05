@@ -471,30 +471,57 @@ function buildTopActions(answers, effects, track) {
 
   if (track === 'special-case-review') {
     if (isOverlappingMultiRiskCase(answers)) {
-      actions.push({
-        priority: 1,
-        label: 'Vor der Unterschrift kurz innehalten',
-        why: 'Dieser Vertrag ist gerade der Punkt, der am meisten beeinflusst, wie es weitergeht.',
-        timing: 'sofort',
-        statementClass: 'mvp-reliable',
-        _severity: 'critical',
-      });
-      actions.push({
-        priority: 2,
-        label: '3-Wochen-Frist und Agentur-Meldungen parallel im Blick behalten',
-        why: 'Hier laufen mehrere wichtige Themen gleichzeitig und sollten zusammen eingeordnet werden.',
-        timing: 'heute',
-        statementClass: 'mvp-reliable',
-        _severity: 'critical',
-      });
-      actions.push({
-        priority: 3,
-        label: 'Besonderheiten individuell prüfen lassen',
-        why: 'Dein Fall hat Merkmale, die über eine typische Kündigung hinausgehen und individuell geprüft werden sollten.',
-        timing: 'sehr zeitnah',
-        statementClass: 'cautious-check',
-        _severity: 'high',
-      });
+      if (answers.termination_access_date) {
+        actions.push({
+          priority: 1,
+          label: '3-Wochen-Frist für Kündigungsschutzklage sofort prüfen',
+          why: 'Wenn diese kurze Frist läuft, sollte sie im Mehrfachfall nicht hinter Vertrags- oder Sonderfallthemen zurückfallen.',
+          timing: 'heute',
+          statementClass: 'mvp-reliable',
+          _severity: 'critical',
+        });
+        actions.push({
+          priority: 2,
+          label: 'Vor der Unterschrift kurz innehalten',
+          why: 'Solange noch nichts unterschrieben ist, sollte der Vertrag nicht vorschnell zusätzlichen Druck erzeugen.',
+          timing: 'sofort',
+          statementClass: 'mvp-reliable',
+          _severity: 'critical',
+        });
+        actions.push({
+          priority: 3,
+          label: 'Besonderheiten individuell prüfen lassen',
+          why: 'Dein Fall hat Merkmale, die über eine typische Kündigung hinausgehen und individuell geprüft werden sollten.',
+          timing: 'sehr zeitnah',
+          statementClass: 'cautious-check',
+          _severity: 'high',
+        });
+      } else {
+        actions.push({
+          priority: 1,
+          label: 'Vor der Unterschrift kurz innehalten',
+          why: 'Dieser Vertrag ist gerade der Punkt, der am meisten beeinflusst, wie es weitergeht.',
+          timing: 'sofort',
+          statementClass: 'mvp-reliable',
+          _severity: 'critical',
+        });
+        actions.push({
+          priority: 2,
+          label: '3-Wochen-Frist und Agentur-Meldungen parallel im Blick behalten',
+          why: 'Hier laufen mehrere wichtige Themen gleichzeitig und sollten zusammen eingeordnet werden.',
+          timing: 'heute',
+          statementClass: 'mvp-reliable',
+          _severity: 'critical',
+        });
+        actions.push({
+          priority: 3,
+          label: 'Besonderheiten individuell prüfen lassen',
+          why: 'Dein Fall hat Merkmale, die über eine typische Kündigung hinausgehen und individuell geprüft werden sollten.',
+          timing: 'sehr zeitnah',
+          statementClass: 'cautious-check',
+          _severity: 'high',
+        });
+      }
     } else if (answers.agreement_already_signed) {
       actions.push({
         priority: 1,

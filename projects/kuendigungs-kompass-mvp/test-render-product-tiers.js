@@ -125,14 +125,16 @@ function runCase(name) {
   }
 
   if (name === '06-mehrere-eingaenge-gleichzeitig') {
+    assert.ok(baseText.includes('Als Erstes:\n- 3-Wochen-Frist für Kündigungsschutzklage sofort prüfen'));
     assert.ok(baseText.includes('bis 13.04.2026'));
     assert.ok(baseText.includes('Fällt das rechnerische Fristende auf Samstag oder Sonntag'));
     assert.ok(baseText.includes('Wenn ein Landesfeiertag in Frage kommt, sollte das Fristende vorsichtshalber zusätzlich geprüft werden.'));
     assert.ok(baseText.includes('Anwalt, Gewerkschaft oder passender Beratungsstelle'));
     assert.ok(upgradeText.includes('Anwalt, Gewerkschaft oder passender Beratungsstelle'));
+    assert.ok(previewText.includes('Wichtigster nächster Schritt: 3-Wochen-Frist für Kündigungsschutzklage sofort prüfen'));
     assert.ok(previewText.includes('Besonders wichtig: Überlagerter Mehrfachfall mit möglichem Sonderfall'));
     assert.ok(previewText.includes('Sinnvoll jetzt: Qualifizierte individuelle Prüfung mit Anwalt, Gewerkschaft oder passender Beratungsstelle'));
-    assert.ok(previewText.includes('Reihenfolge jetzt: zuerst nichts vorschnell unterschreiben und die Frist nicht aus dem Blick verlieren, danach die heiklen Punkte sauber prüfen lassen.'));
+    assert.ok(previewText.includes('Reihenfolge jetzt: zuerst die Frist sichern, danach den heiklen Sonderfall sauber prüfen lassen.'));
   }
 
   if (name === '07-angekuendigt-alg1-risiko') {

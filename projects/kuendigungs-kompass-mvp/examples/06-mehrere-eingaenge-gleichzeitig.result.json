@@ -14,16 +14,16 @@
   "topActions": [
     {
       "priority": 1,
-      "label": "Vor der Unterschrift kurz innehalten",
-      "why": "Dieser Vertrag ist gerade der Punkt, der am meisten beeinflusst, wie es weitergeht.",
-      "timing": "sofort",
+      "label": "3-Wochen-Frist für Kündigungsschutzklage sofort prüfen",
+      "why": "Wenn diese kurze Frist läuft, sollte sie im Mehrfachfall nicht hinter Vertrags- oder Sonderfallthemen zurückfallen.",
+      "timing": "heute",
       "statementClass": "mvp-reliable"
     },
     {
       "priority": 2,
-      "label": "3-Wochen-Frist und Agentur-Meldungen parallel im Blick behalten",
-      "why": "Hier laufen mehrere wichtige Themen gleichzeitig und sollten zusammen eingeordnet werden.",
-      "timing": "heute",
+      "label": "Vor der Unterschrift kurz innehalten",
+      "why": "Solange noch nichts unterschrieben ist, sollte der Vertrag nicht vorschnell zusätzlichen Druck erzeugen.",
+      "timing": "sofort",
       "statementClass": "mvp-reliable"
     },
     {

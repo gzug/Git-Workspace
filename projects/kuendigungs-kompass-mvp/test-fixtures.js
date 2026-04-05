@@ -147,6 +147,11 @@ for (const [inputPath, expectedPath] of PAIRS) {
       assert.ok(!standardRendered.includes('Vertrag noch nicht unterschrieben'));
     }
 
+    if (name.startsWith('06-')) {
+      assert.equal(actual.topActions[0]?.label, '3-Wochen-Frist für Kündigungsschutzklage sofort prüfen');
+      assert.equal(actual.topActions[1]?.label, 'Vor der Unterschrift kurz innehalten');
+    }
+
     if (name.startsWith('07-')) {
       assert.equal(actual.synthesisDecision.primaryTrack, 'alg1-risk-first');
       assert.equal(actual.caseSnapshot.headline, 'Jetzt zuerst sicherstellen, dass dein Arbeitslosengeld nicht in Gefahr gerät');

@@ -1,6 +1,20 @@
 _Lade diese Datei NUR im direkten Hauptkanal. Nicht in Gruppen. Sicherheitsregel._
 _Bei jeder Session: lesen. Bei wichtigen Änderungen: updaten._
 
+## Update-Trigger
+Diese Datei updaten wenn:
+- ein Modell seinen Status ändert (aktiv / freigegeben / deprecated)
+- ein Projekt in einen neuen Block eintritt oder abgeschlossen wird
+- eine operative Entscheidung getroffen wird, die morgen noch gilt
+- ein Blocker entsteht oder sich auflöst
+
+Nicht updaten für:
+- tägliche Fortschritte
+- Chat-Verlauf
+- Rohlogs
+
+Diese Dinge gehören in `memory/daily/`.
+
 ---
 
 # MEMORY.md — Langzeitgedächtnis
@@ -103,7 +117,7 @@ Fokus auf **Stabilität, Runbook und wiederholbare Arbeitsroutinen** statt auf n
 - Scheingenauigkeit bei Fristen, KSchG-Aussagen, Abfindung, Sperrzeit oder Erfolgsprognosen aktiv vermeiden.
 - Launch-Reife bedeutet nicht Happy-Path allein, sondern belastbare Routing-Logik, Guardrails, getestete Fallbacks.
 - Nicht wieder breit neu konzipieren, wenn der aktive Tunnel konservative Launch-Härtung verlangt.
-- GPT-5.4 OAuth-Token: neu eingerichtet 25.03.2026 — bei erneutem 401-Fehler sofort `openclaw onboard` wiederholen.
+- GPT-5.4 OAuth/Auth-Probleme nicht als Memory-Risiko behandeln, sondern über Runbook lösen: `vault/runbooks/openclaw-auth.md`
 
 ## Historische Blocker
 - Der frühere Setup-Blocker vom 2026-03-25 (`openclaw sandbox build`, Auth-Profil-Kopie, OAuth-Reonboarding) ist **seit 2026-04-05 nicht mehr aktuell** und darf nicht mehr als aktiver KRITISCH-Block gelesen werden.

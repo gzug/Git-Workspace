@@ -47,6 +47,21 @@ function addDays(dateString, days) {
   return target;
 }
 
+function subtractMonthsClamped(dateString, months) {
+  if (!dateString) return null;
+  const source = new Date(dateString);
+  if (Number.isNaN(source.getTime())) return null;
+
+  const sourceYear = source.getFullYear();
+  const sourceMonth = source.getMonth();
+  const sourceDay = source.getDate();
+  const targetMonthIndex = sourceMonth - months;
+  const monthAnchor = new Date(sourceYear, targetMonthIndex, 1);
+  const lastDayOfTargetMonth = new Date(monthAnchor.getFullYear(), monthAnchor.getMonth() + 1, 0).getDate();
+
+  return new Date(monthAnchor.getFullYear(), monthAnchor.getMonth(), Math.min(sourceDay, lastDayOfTargetMonth));
+}
+
 function shiftWeekendForward(date) {
   if (!(date instanceof Date) || Number.isNaN(date.getTime())) return null;
   const shifted = new Date(date.getTime());
@@ -586,9 +601,16 @@ function buildDeadlines(answers) {
     });
   }
   if (answers.jobseeker_registered === false) {
+    const employmentEndDate = answers.employment_end_date ? new Date(answers.employment_end_date) : null;
+    const jobseekerDeadline = subtractMonthsClamped(answers.employment_end_date, 3);
+    const hasEmploymentEndDate = employmentEndDate instanceof Date && !Number.isNaN(employmentEndDate.getTime());
+    const timing = hasEmploymentEndDate && jobseekerDeadline
+      ? `bei Ende am ${formatDateDE(employmentEndDate)} grundsätzlich bis ${formatDateDE(jobseekerDeadline)}; falls dir das Ende erst später bekannt wurde, regelmäßig innerhalb von 3 Tagen nach Kenntnis`
+      : 'spätestens 3 Monate vor Ende, sonst innerhalb von 3 Tagen nach Kenntnis';
+
     deadlines.push({
       label: 'Arbeitsuchendmeldung',
-      timing: 'spätestens 3 Monate vor Ende, sonst innerhalb von 3 Tagen nach Kenntnis',
+      timing,
       importance: 'critical',
       note: answers.already_unemployed_now
         ? 'Auch wenn du schon arbeitslos bist, sollte diese Meldung als eigener Pflichtpunkt nicht übersehen werden.'

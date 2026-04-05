@@ -57,7 +57,7 @@ function run() {
   assert.ok(agencyRiskLabels.includes('Offene Arbeitslosmeldung kann den Leistungsstart erschweren'));
   assert.ok(agencyRiskLabels.includes('Offene Arbeitsuchendmeldung kann Nachteile auslösen'));
   assert.ok(agencyRendered.includes('Arbeitslosmeldung: spätestens am ersten Tag der Arbeitslosigkeit; wenn noch offen, jetzt sofort prüfen'));
-  assert.ok(agencyRendered.includes('Arbeitsuchendmeldung: spätestens 3 Monate vor Ende, sonst innerhalb von 3 Tagen nach Kenntnis'));
+  assert.ok(agencyRendered.includes('Arbeitsuchendmeldung: bei Ende am 20.03.2026 grundsätzlich bis 20.12.2025; falls dir das Ende erst später bekannt wurde, regelmäßig innerhalb von 3 Tagen nach Kenntnis'));
   assert.ok(!agencyRendered.includes('Agentur-Meldungen:'));
 
   const incompleteView = buildQuestionnaireResultView({

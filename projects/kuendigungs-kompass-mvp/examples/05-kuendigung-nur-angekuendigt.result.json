@@ -37,7 +37,7 @@
   "deadlines": [
     {
       "label": "Arbeitsuchendmeldung",
-      "timing": "spätestens 3 Monate vor Ende, sonst innerhalb von 3 Tagen nach Kenntnis",
+      "timing": "bei Ende am 30.06.2026 grundsätzlich bis 30.03.2026; falls dir das Ende erst später bekannt wurde, regelmäßig innerhalb von 3 Tagen nach Kenntnis",
       "importance": "critical",
       "note": "Diese Meldung sollte nicht aufgeschoben werden, auch wenn die Beendigung bisher nur angekündigt ist oder noch Unterlagen fehlen.",
       "statementClass": "mvp-reliable"

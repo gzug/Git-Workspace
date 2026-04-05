@@ -90,7 +90,8 @@ function runCase(name) {
     assert.ok(!baseText.includes('Kündigungsschutzklage prüfen:'));
     assert.ok(!previewText.includes('Kündigungsschutzklage prüfen'));
     assert.ok(!baseText.includes('Arbeitslosmeldung:'));
-    assert.ok(previewText.includes('Arbeitsuchendmeldung —'));
+    assert.ok(previewText.includes('Arbeitsuchendmeldung — bei Ende am 31.05.2026 grundsätzlich bis 28.02.2026'));
+    assert.ok(baseText.includes('bei Ende am 31.05.2026 grundsätzlich bis 28.02.2026'));
     assert.ok(baseText.includes('Aufhebungsvertrag nicht vorschnell unterschreiben'));
   }
 
@@ -117,6 +118,8 @@ function runCase(name) {
     assert.ok(!baseText.includes('Kündigungsschutzklage prüfen:'));
     assert.ok(!previewText.includes('Kündigungsschutzklage prüfen'));
     assert.ok(baseText.includes('Arbeitsuchendmeldung:'));
+    assert.ok(baseText.includes('bei Ende am 30.06.2026 grundsätzlich bis 30.03.2026'));
+    assert.ok(previewText.includes('Arbeitsuchendmeldung — bei Ende am 30.06.2026 grundsätzlich bis 30.03.2026'));
     assert.ok(baseText.includes('Ohne schriftliche Kündigung sollte jetzt noch keine Klagefrist angenommen werden.'));
     assert.ok(previewText.includes('Ohne schriftliche Kündigung sollte jetzt noch keine Klagefrist angenommen werden.'));
   }
@@ -135,7 +138,9 @@ function runCase(name) {
   if (name === '07-angekuendigt-alg1-risiko') {
     assert.ok(previewText.includes('Arbeitslosengeld nicht in Gefahr gerät'));
     assert.ok(previewText.includes('Die Arbeitsuchendmeldung ist der frühe Schritt'));
+    assert.ok(previewText.includes('Arbeitsuchendmeldung — bei Ende am 31.05.2026 grundsätzlich bis 28.02.2026'));
     assert.ok(baseText.includes('Arbeitsuchendmeldung:'));
+    assert.ok(baseText.includes('bei Ende am 31.05.2026 grundsätzlich bis 28.02.2026'));
     assert.ok(baseText.includes('Offene Arbeitsuchendmeldung kann sich später beim Arbeitslosengeld auswirken'));
     assert.ok(!baseText.includes('Gut vorbereitet in den nächsten Schritt gehen'));
     assert.ok(upgradeText.includes('ALG-I-Risiken'));

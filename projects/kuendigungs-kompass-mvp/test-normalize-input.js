@@ -78,6 +78,13 @@ function run() {
   assert.equal(crossFieldGuardrails.agreement_present, true);
   assert.equal(crossFieldGuardrails.agreement_already_signed, true);
 
+  const staleAgencyFlag = normalizeQuestionnaireInput({
+    already_unemployed_now: false,
+    unemployment_registered: true,
+  });
+  assert.equal(staleAgencyFlag.already_unemployed_now, false);
+  assert.equal(staleAgencyFlag.unemployment_registered, null);
+
   const irrelevantAgreementFlag = normalizeQuestionnaireInput({
     agreement_present: false,
     agreement_already_signed: false,

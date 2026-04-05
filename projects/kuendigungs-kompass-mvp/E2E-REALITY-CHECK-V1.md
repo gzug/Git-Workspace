@@ -90,6 +90,7 @@ Diese Pfade sind für Launch-Reife besonders wichtig:
 - widersprüchliche Multi-Select-Kombinationen (`none_known` + echter Sonderfall, `none_yet` + konkrete Unterlagen) → konservativ entkoppeln statt still gemischt weiterzurechnen
 - angekündigte Kündigung + versehentlich gesetztes Zugangsdatum → keine künstliche Klagefrist rechnen
 - bereits unterschriebener Vertrag → Vertragsstatus intern konsistent halten, auch wenn Rohinput widersprüchlich kommt
+- Arbeitslosmeldungs-Flag ohne echte aktuelle Arbeitslosigkeit → als irrelevanten Altwert neutralisieren statt mitschleppen
 
 ## Testarten nach Risiko
 ### Snapshot-geeignet

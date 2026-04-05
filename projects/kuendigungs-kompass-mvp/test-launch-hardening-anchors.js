@@ -183,6 +183,25 @@ function run() {
   assert.equal(signedAgreementView.result.synthesisDecision.primaryTrack, 'special-case-review');
   assert.ok(signedAgreementView.result.documentChecklist.some((item) => item.label === 'Unterzeichneter Vertrag'));
 
+  const staleAgencyView = buildQuestionnaireResultView({
+    case_entry: 'termination_received',
+    termination_access_date: '2026-03-21',
+    employment_end_date: '2026-04-30',
+    jobseeker_registered: false,
+    already_unemployed_now: false,
+    unemployment_registered: true,
+    agreement_present: false,
+    release_status: 'no',
+    special_protection_indicator: ['none_known'],
+    documents_secured: ['termination_letter'],
+    primary_goal: 'protect_deadlines',
+  }, { tier: 'base' });
+
+  assert.equal(staleAgencyView.status, 'ready');
+  assert.equal(staleAgencyView.normalizedInput.unemployment_registered, null);
+  assert.ok(!staleAgencyView.result.deadlines.some((item) => item.label === 'Arbeitslosmeldung'));
+  assert.ok(!staleAgencyView.rendered.includes('Arbeitslosmeldung:'));
+
   console.log('All launch hardening anchor tests passed.');
 }
 

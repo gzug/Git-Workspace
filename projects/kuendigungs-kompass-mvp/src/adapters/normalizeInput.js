@@ -79,6 +79,10 @@ function applyCrossFieldGuardrails(normalized) {
     normalized.termination_access_date = null;
   }
 
+  if (normalized.already_unemployed_now !== true) {
+    normalized.unemployment_registered = null;
+  }
+
   if (normalized.agreement_already_signed === true) {
     normalized.agreement_present = true;
   }

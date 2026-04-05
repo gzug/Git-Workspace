@@ -592,7 +592,9 @@ function buildDeadlines(answers) {
       importance: 'critical',
       note: answers.already_unemployed_now
         ? 'Auch wenn du schon arbeitslos bist, sollte diese Meldung als eigener Pflichtpunkt nicht übersehen werden.'
-        : 'Diese Meldung sollte nicht aufgeschoben werden, auch wenn der Vertrag noch nicht unterschrieben ist.',
+        : answers.agreement_present === true
+          ? 'Diese Meldung sollte nicht aufgeschoben werden, auch wenn der Vertrag noch nicht unterschrieben ist.'
+          : 'Diese Meldung sollte nicht aufgeschoben werden, auch wenn die Beendigung bisher nur angekündigt ist oder noch Unterlagen fehlen.',
       statementClass: 'mvp-reliable',
     });
   }

@@ -116,6 +116,7 @@ for (const [inputPath, expectedPath] of PAIRS) {
       assert.ok(!actualDeadlineLabels.includes('Arbeitslosmeldung'));
       assert.equal(actual.topActions[0]?.label, 'Aufhebungsvertrag nicht vorschnell unterschreiben');
       assert.ok(actual.disclaimers[0].includes('Arbeitsuchendmeldung = früher eigener Schritt'));
+      assert.ok(actual.deadlines.some((item) => item.label === 'Arbeitsuchendmeldung' && item.note.includes('Vertrag noch nicht unterschrieben')));
     }
 
     if (name.startsWith('03-')) {
@@ -140,6 +141,8 @@ for (const [inputPath, expectedPath] of PAIRS) {
       assert.ok(!standardRendered.includes('Kündigungsschutzklage prüfen'));
       assert.ok(actual.disclaimers.some((item) => item.includes('keine Klagefrist angenommen')));
       assert.equal(actual.topActions[0]?.label, 'Arbeitsuchendmeldung jetzt prüfen oder nachholen');
+      assert.ok(actual.deadlines.some((item) => item.label === 'Arbeitsuchendmeldung' && item.note.includes('Beendigung bisher nur angekündigt')));
+      assert.ok(!standardRendered.includes('Vertrag noch nicht unterschrieben'));
     }
 
     if (name.startsWith('07-')) {
@@ -148,7 +151,9 @@ for (const [inputPath, expectedPath] of PAIRS) {
       assert.ok(actualDeadlineLabels.includes('Arbeitsuchendmeldung'));
       assert.ok(!actualDeadlineLabels.includes('Kündigungsschutzklage prüfen'));
       assert.ok(actual.riskFlags.some((item) => item.label === 'Offene Arbeitsuchendmeldung kann sich später beim Arbeitslosengeld auswirken'));
+      assert.ok(actual.deadlines.some((item) => item.label === 'Arbeitsuchendmeldung' && item.note.includes('Beendigung bisher nur angekündigt')));
       assert.ok(!standardRendered.includes('Gut vorbereitet in den nächsten Schritt gehen'));
+      assert.ok(!standardRendered.includes('Vertrag noch nicht unterschrieben'));
       assert.ok(!adviceRendered.includes('Welche Schritte sollte ich jetzt schon vorbereiten, obwohl noch nichts Schriftliches vorliegt?'));
     }
 

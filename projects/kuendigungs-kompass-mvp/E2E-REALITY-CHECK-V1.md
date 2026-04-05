@@ -92,6 +92,8 @@ Diese Pfade sind für Launch-Reife besonders wichtig:
 - Fristen-Outputs
 - zentrale Renderblöcke mit stabiler Copy-Struktur
 - Mehrfachfälle mit Guardrail-Reihenfolge
+- Trennung von Arbeitsuchendmeldung vs. Arbeitslosmeldung bei offenen Agentur-Schritten
+- konservative Unknown-/Pflichtfeld-Fälle mit sichtbarer Unsicherheitsbegründung
 
 ### Assertion-geeignet
 - Track-Wahl

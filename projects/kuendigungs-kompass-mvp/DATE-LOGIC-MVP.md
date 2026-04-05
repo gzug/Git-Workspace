@@ -39,6 +39,32 @@ Stattdessen:
 - wenn sicher ableitbar → konkrete Frist
 - sonst → relative Formulierung + klarer nächster Schritt
 
+### Aktivierungslogik: Arbeitsuchendmeldung vs. Arbeitslosmeldung
+Diese beiden Meldungen dürfen weder logisch noch sprachlich ineinanderlaufen.
+
+#### Arbeitsuchendmeldung aktivieren, wenn:
+- das Ende des Arbeitsverhältnisses bekannt oder absehbar ist
+- die Meldung noch nicht erledigt ist
+- der Fall nicht nur deshalb „unauffällig“ wirkt, weil die spätere Arbeitslosmeldung noch nicht fällig ist
+
+Regel:
+- wenn die Frist sicher ableitbar ist → als eigener Deadline-/To-do-Block
+- wenn die Frist nicht sicher ableitbar ist → trotzdem als eigener Schritt sichtbar halten, aber mit relativer Formulierung statt scheinpräzisem Datum
+
+#### Arbeitslosmeldung aktivieren, wenn:
+- das Arbeitsverhältnis bereits beendet ist oder die Person bereits arbeitslos ist
+- die Arbeitslosmeldung noch nicht erledigt ist
+
+Regel:
+- als eigener zeitkritischer Schritt behandeln
+- nicht durch eine vorhandene oder fehlende Arbeitsuchendmeldung ersetzen
+- nur dann mit konkretem Datum arbeiten, wenn die Datengrundlage dafür belastbar ist
+
+#### Harte Trennregel
+- Arbeitsuchendmeldung != Arbeitslosmeldung
+- wenn beide offen sind, dürfen auch beide sichtbar sein
+- wenn nur eine von beiden relevant ist, darf die andere nicht aus Gewohnheit mitgerendert werden
+
 ### Sperrzeit / Abfindung / Wirksamkeit / Klageerfolg
 Nicht berechnen.
 Nur konservative Hinweise oder explizite Grenzbenennung.

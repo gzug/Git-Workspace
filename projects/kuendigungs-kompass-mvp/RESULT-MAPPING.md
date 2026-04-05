@@ -67,6 +67,8 @@ Regeln:
 - valide Fristdaten nur bei belastbarer Datengrundlage
 - fehlendes/unsicheres Zugangsdatum → kein scheinpräzises Klagefrist-Datum
 - Arbeitsuchend- und Arbeitslosmeldung logisch getrennt halten
+- Arbeitsuchendmeldung nie als stiller Ersatz für Arbeitslosmeldung rendern
+- wenn beide offen und relevant sind, dürfen beide sichtbar werden; keine künstliche Zusammenführung
 
 ### `riskFlags`
 Quellen:

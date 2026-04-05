@@ -83,6 +83,7 @@ function run() {
     termination_access_date: '2026-03-18',
   });
   assert.equal(irrelevantTerminationAccess.termination_access_date, null);
+  assert.equal(irrelevantTerminationAccess.agreement_present, true);
 
   const staleAgencyFlag = normalizeQuestionnaireInput({
     already_unemployed_now: false,

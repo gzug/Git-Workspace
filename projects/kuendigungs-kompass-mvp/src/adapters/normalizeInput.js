@@ -84,6 +84,10 @@ function applyCrossFieldGuardrails(normalized) {
     normalized.unemployment_registered = null;
   }
 
+  if (normalized.case_entry === 'settlement_offered') {
+    normalized.agreement_present = true;
+  }
+
   if (normalized.agreement_already_signed === true) {
     normalized.agreement_present = true;
   }

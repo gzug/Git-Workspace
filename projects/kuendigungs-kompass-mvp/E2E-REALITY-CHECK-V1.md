@@ -92,6 +92,7 @@ Diese Pfade sind für Launch-Reife besonders wichtig:
 - bereits unterschriebener Vertrag → Vertragsstatus intern konsistent halten, auch wenn Rohinput widersprüchlich kommt
 - Arbeitslosmeldungs-Flag ohne echte aktuelle Arbeitslosigkeit → als irrelevanten Altwert neutralisieren statt mitschleppen
 - reiner Vertragsfall ohne Kündigungs-Einstieg → kein stiller Klagefrist-Pfad nur wegen mitgeliefertem Zugangsdatum
+- `settlement_offered` ohne konsistenten Vertragsstatus → nicht in einen falschen Ready-Pfad rutschen, sondern Unterschriftsstatus sauber nachfordern
 
 ## Testarten nach Risiko
 ### Snapshot-geeignet

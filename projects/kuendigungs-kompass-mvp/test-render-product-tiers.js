@@ -82,7 +82,7 @@ function runCase(name) {
     assert.ok(baseText.includes('Arbeitsuchendmeldung:'));
     assert.ok(baseText.includes('Kündigungsschutzklage prüfen:'));
     assert.ok(previewText.includes('Wichtigster nächster Schritt: 3-Wochen-Frist für Kündigungsschutzklage sofort einordnen'));
-    assert.ok(previewText.includes('Kündigungsschutzklage prüfen — regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung'));
+    assert.ok(previewText.includes('Kritische Frist: Kündigungsschutzklage — bis 08.04.2026'));
     assert.ok(!previewText.includes('Kritische Frist: Arbeitslosmeldung'));
   }
 
@@ -90,7 +90,8 @@ function runCase(name) {
     assert.ok(!baseText.includes('Kündigungsschutzklage prüfen:'));
     assert.ok(!previewText.includes('Kündigungsschutzklage prüfen'));
     assert.ok(!baseText.includes('Arbeitslosmeldung:'));
-    assert.ok(previewText.includes('Arbeitsuchendmeldung — bei Ende am 31.05.2026 grundsätzlich bis 28.02.2026'));
+    assert.ok(previewText.includes('Kritische Frist: Arbeitsuchendmeldung — grundsätzlich bis 28.02.2026'));
+    assert.ok(previewText.includes('Wenn dir das Ende erst später bekannt wurde, gilt regelmäßig die 3-Tage-Regel.'));
     assert.ok(baseText.includes('bei Ende am 31.05.2026 grundsätzlich bis 28.02.2026'));
     assert.ok(baseText.includes('Aufhebungsvertrag nicht vorschnell unterschreiben'));
   }
@@ -102,7 +103,7 @@ function runCase(name) {
     assert.ok(baseText.includes('Anwalt, Gewerkschaft oder passender Beratungsstelle'));
     assert.ok(previewText.includes('Besonders wichtig: Möglicher besonderer Schutz oder Sonderfall'));
     assert.ok(previewText.includes('Sinnvoll jetzt: Qualifizierte individuelle Prüfung mit Anwalt, Gewerkschaft oder passender Beratungsstelle'));
-    assert.ok(previewText.includes('Kündigungsschutzklage prüfen —'));
+    assert.ok(previewText.includes('Kritische Frist: Kündigungsschutzklage — bis 09.04.2026'));
     assert.ok(previewText.includes('Reihenfolge jetzt: zuerst die Frist sichern, danach den heiklen Sonderfall sauber prüfen lassen.'));
   }
 
@@ -119,7 +120,8 @@ function runCase(name) {
     assert.ok(!previewText.includes('Kündigungsschutzklage prüfen'));
     assert.ok(baseText.includes('Arbeitsuchendmeldung:'));
     assert.ok(baseText.includes('bei Ende am 30.06.2026 grundsätzlich bis 30.03.2026'));
-    assert.ok(previewText.includes('Arbeitsuchendmeldung — bei Ende am 30.06.2026 grundsätzlich bis 30.03.2026'));
+    assert.ok(previewText.includes('Kritische Frist: Arbeitsuchendmeldung — grundsätzlich bis 30.03.2026'));
+    assert.ok(previewText.includes('Wenn dir das Ende erst später bekannt wurde, gilt regelmäßig die 3-Tage-Regel.'));
     assert.ok(baseText.includes('Ohne schriftliche Kündigung sollte jetzt noch keine Klagefrist angenommen werden.'));
     assert.ok(previewText.includes('Ohne schriftliche Kündigung sollte jetzt noch keine Klagefrist angenommen werden.'));
   }
@@ -134,13 +136,15 @@ function runCase(name) {
     assert.ok(previewText.includes('Wichtigster nächster Schritt: 3-Wochen-Frist für Kündigungsschutzklage sofort prüfen'));
     assert.ok(previewText.includes('Besonders wichtig: Überlagerter Mehrfachfall mit möglichem Sonderfall'));
     assert.ok(previewText.includes('Sinnvoll jetzt: Qualifizierte individuelle Prüfung mit Anwalt, Gewerkschaft oder passender Beratungsstelle'));
+    assert.ok(previewText.includes('Kritische Frist: Kündigungsschutzklage — bis 13.04.2026'));
     assert.ok(previewText.includes('Reihenfolge jetzt: zuerst die Frist sichern, danach den heiklen Sonderfall sauber prüfen lassen.'));
   }
 
   if (name === '07-angekuendigt-alg1-risiko') {
     assert.ok(previewText.includes('Arbeitslosengeld nicht in Gefahr gerät'));
     assert.ok(previewText.includes('Die Arbeitsuchendmeldung ist der frühe Schritt'));
-    assert.ok(previewText.includes('Arbeitsuchendmeldung — bei Ende am 31.05.2026 grundsätzlich bis 28.02.2026'));
+    assert.ok(previewText.includes('Kritische Frist: Arbeitsuchendmeldung — grundsätzlich bis 28.02.2026'));
+    assert.ok(previewText.includes('Wenn dir das Ende erst später bekannt wurde, gilt regelmäßig die 3-Tage-Regel.'));
     assert.ok(baseText.includes('Arbeitsuchendmeldung:'));
     assert.ok(baseText.includes('bei Ende am 31.05.2026 grundsätzlich bis 28.02.2026'));
     assert.ok(baseText.includes('Offene Arbeitsuchendmeldung kann sich später beim Arbeitslosengeld auswirken'));

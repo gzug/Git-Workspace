@@ -42,6 +42,28 @@ function buildPreviewPriorityHint(projected) {
   return 'Reihenfolge jetzt: zuerst nichts vorschnell unterschreiben und die Frist nicht aus dem Blick verlieren, danach die heiklen Punkte sauber prüfen lassen.';
 }
 
+function buildPreviewDeadlineLines(deadline) {
+  if (!deadline) return [];
+
+  if (/Kündigungsschutzklage/.test(deadline.label)) {
+    const match = deadline.timing.match(/bis (\d{2}\.\d{2}\.\d{4})/);
+    if (match) return [`Kritische Frist: Kündigungsschutzklage — bis ${match[1]}`];
+  }
+
+  if (/Arbeitsuchendmeldung/.test(deadline.label)) {
+    const match = deadline.timing.match(/bis (\d{2}\.\d{2}\.\d{4})/);
+    if (match) {
+      const lines = [`Kritische Frist: Arbeitsuchendmeldung — grundsätzlich bis ${match[1]}`];
+      if (/3 Tagen nach Kenntnis/.test(deadline.timing)) {
+        lines.push('Wenn dir das Ende erst später bekannt wurde, gilt regelmäßig die 3-Tage-Regel.');
+      }
+      return lines;
+    }
+  }
+
+  return [`Kritische Frist: ${deadline.label} — ${deadline.timing}`];
+}
+
 function renderPreview(projected) {
   const lines = [];
   lines.push(projected.caseSnapshot.headline);
@@ -55,7 +77,7 @@ function renderPreview(projected) {
   }
 
   if (projected.deadline) {
-    lines.push(`Kritische Frist: ${projected.deadline.label} — ${projected.deadline.timing}`);
+    lines.push(...buildPreviewDeadlineLines(projected.deadline));
   } else if (!projected.redFlag && projected.riskFlag) {
     lines.push(`Wichtiges Risiko: ${projected.riskFlag.label}`);
   }

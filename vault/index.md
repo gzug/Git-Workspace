@@ -9,12 +9,9 @@ source: curated
 
 ## Start
 - [Home](../HOME.md)
-- [Setup](setup/openclaw-setup.md)
-- [Workspace Map](setup/workspace-map.md)
-- [Obsidian-Integration](setup/obsidian-integration.md)
-- [Obsidian Startansicht](setup/obsidian-startansicht.md)
-- [Housekeeper Spec](setup/housekeeper-spec.md)
 - [Runbooks](runbooks/README.md)
+- [OpenClaw Runbook](runbooks/openclaw.md)
+- [Workspace Policy](runbooks/workspace-policy.md)
 - [Agent Operations](runbooks/agent-operations.md)
 - [Decisions](decisions/README.md)
 - [Projects](projects/README.md)
@@ -33,3 +30,11 @@ source: curated
 
 ## Archiv-Hinweis
 - älteres Resell-/Bild-Workflow-Material liegt unter `archive/resell-work/`
+
+
+## Vault Root Files (Stand: 2026-03-25)
+- `STRATEGIC-BRIEF-2026-03-25.md` — Strategische Analyse Kündigungs-Kompass MVP
+- `TASK-MASTER-2026-03-25.md` — Sprint-Task-Master P0/P1/P2 mit Blockern
+- `DSGVO-CHECKLIST-V1.md` — DSGVO-Checkliste für Launch
+- `SECURITY-AUDIT-V1.md` — Security-Audit-Checkliste für Launch
+- `AEO-SEO-STRATEGY-V1.md` — AEO/GEO/SEO Strategie + Keyword-Map

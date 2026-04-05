@@ -1,37 +1,41 @@
 ---
-tags: [home, dashboard, obsidian]
+tags: [home, dashboard]
 status: active
 source: curated
 ---
 
 # Home
 
-Das ist die empfohlene Startansicht für Obsidian in diesem Workspace.
+Das ist die empfohlene Startansicht für diesen Workspace.
+_Zuletzt aktualisiert: 2026-04-05_
 
 ## Jetzt
+
 - [[MEMORY]]
-- [[memory/daily/2026-03-21]]
-- [[vault/index|Vault Index]]
-- [[vault/projects/kuendigungs-kompass|Projekt-Hub: Kündigungs-Kompass]]
+- [[memory/daily/2026-04-05]]
+- [[projects/kuendigungs-kompass-mvp/PROJECT-STATUS|Projektstatus: Kündigungs-Kompass]]
+- [[projects/kuendigungs-kompass-mvp/EXECUTION-PLAN-2026-04-05|Aktueller Ausführungsplan]]
 
-## Gedächtnis
+## Schnellzugriff
+
+### Dashboard
+- Nerve UI: http://localhost:3080
+- Gateway: http://127.0.0.1:18789
+
+### Gedächtnis
 - [[MEMORY]] → kuratiertes Langzeitgedächtnis
-- [[memory/daily/2026-03-21]] → heutiger Tagesstand
 - [[memory/notes]] → thematische Arbeitsnotizen
-- [[vault/inbox]] → unsortierte, neue Eingänge
 
-## Wissen & Betrieb
+### Wissen & Betrieb
 - [[vault/runbooks/README|Runbooks]]
-- [[vault/setup/obsidian-integration|Obsidian-Integration]]
-- [[vault/setup/workspace-map|Workspace Map]]
-- [[vault/setup/openclaw-setup|OpenClaw Setup]]
-- [[vault/decisions/README|Entscheidungen]]
+- [[vault/runbooks/openclaw|OpenClaw Runbook]]
+- [[TOOLS]] → lokale Infrastruktur-Doku
 
-## Aktive Arbeit
-- [[vault/projects/kuendigungs-kompass|Kündigungs-Kompass]]
+### Aktive Arbeit
 - [[projects/kuendigungs-kompass-mvp]]
 
 ## Praktische Nutzung
+
 ### Täglich
 1. heutige Daily Note öffnen
 2. MEMORY nur bei Bedarf querlesen
@@ -43,16 +47,14 @@ Das ist die empfohlene Startansicht für Obsidian in diesem Workspace.
 2. Dauerhaftes in `MEMORY.md` oder `vault/` kuratieren
 3. offene Inbox-Einträge einsortieren
 
-## Empfohlene linke Seitenleiste
+## Empfohlene Links
+
 - Favoriten / Starred:
   - `HOME.md`
   - `MEMORY.md`
-  - aktuelle Daily Note
-  - `vault/runbooks/README.md`
-  - Projekt-Hub des aktiven Projekts
-- Dateibaum sichtbar lassen
-- Suche dauerhaft griffbereit halten
-
-## Grundsatz
-Obsidian ist hier die menschliche Oberfläche auf denselben Dateien, mit denen auch der Agent arbeitet.
-Keine zweite Wahrheitsquelle. Kein Paralleluniversum.
+  - `HEARTBEAT.md`
+  - `projects/kuendigungs-kompass-mvp/`
+  - `vault/runbooks/`
+  - `vault/TASK-MASTER-2026-03-25.md`
+  - `vault/DSGVO-CHECKLIST-V1.md`
+  - `vault/SECURITY-AUDIT-V1.md`

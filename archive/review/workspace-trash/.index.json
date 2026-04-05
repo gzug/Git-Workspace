@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "items": {
+    ".trash/01_Zwischenablage 1--4c05b73e.md": {
+      "id": "d16f98c1",
+      "originalPath": "01_Zwischenablage 1.md",
+      "deletedAtMs": 1774413550209,
+      "type": "file"
+    },
+    ".trash/01_Zwischenablage--69038dc3.md": {
+      "id": "3e45342d",
+      "originalPath": "01_Zwischenablage.md",
+      "deletedAtMs": 1774413575655,
+      "type": "file"
+    },
+    ".trash/setup--0bb10c21": {
+      "id": "443ee3ad",
+      "originalPath": "vault/setup",
+      "deletedAtMs": 1774441231119,
+      "type": "directory"
+    }
+  }
+}

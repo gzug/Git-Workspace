@@ -98,8 +98,8 @@ function renderBase(projected) {
 
   pushActionSections(lines, projected.topActions);
   pushList(lines, 'Fristen', projected.deadlines, renderDeadlineItem);
-  pushList(lines, 'Risiken', projected.riskFlags, (item) => `${item.label} — ${item.description}`);
   pushList(lines, 'Besonders wichtig', projected.redFlags, renderRedFlagItem);
+  pushList(lines, 'Risiken', projected.riskFlags, (item) => `${item.label} — ${item.description}`);
   pushList(lines, 'Unterlagen', projected.documentChecklist, (item) => `${item.label} (${formatDocumentStatus(item.status)}) — ${item.reason}`);
   pushList(lines, 'Hinweise', projected.disclaimers, (item) => item);
 
@@ -115,8 +115,8 @@ function renderUpgrade(projected) {
 
   pushActionSections(lines, projected.topActions);
   pushList(lines, 'Fristen', projected.deadlines, renderDeadlineItem);
-  pushList(lines, 'Risiken', projected.riskFlags, (item) => `${item.label} — ${item.description}`);
   pushList(lines, 'Besonders wichtig', projected.redFlags, renderRedFlagItem);
+  pushList(lines, 'Risiken', projected.riskFlags, (item) => `${item.label} — ${item.description}`);
   pushList(lines, 'Unterlagen', projected.documentChecklist, (item) => `${item.label} (${formatDocumentStatus(item.status)}) — ${item.reason}`);
   pushList(lines, 'Fragen für Beratung', projected.advisorQuestions, (item) => item);
   pushList(lines, 'Chancen', projected.opportunities, (item) => `${item.label} — ${item.description}`);

@@ -88,13 +88,14 @@ for (const [inputPath, expectedPath] of PAIRS) {
     } else {
       assert.equal(deadlinesIndex, -1);
     }
-    if (actual.riskFlags.length > 0) {
-      assert.ok(risksIndex > (deadlinesIndex > -1 ? deadlinesIndex : stepsIndex));
-    }
     if (actual.redFlags.length > 0) {
-      assert.ok(redFlagsIndex > (risksIndex > -1 ? risksIndex : stepsIndex));
+      assert.ok(redFlagsIndex > (deadlinesIndex > -1 ? deadlinesIndex : stepsIndex));
+      if (actual.riskFlags.length > 0) assert.ok(redFlagsIndex < risksIndex);
     }
-    assert.ok(documentsIndex > (redFlagsIndex > -1 ? redFlagsIndex : (risksIndex > -1 ? risksIndex : (deadlinesIndex > -1 ? deadlinesIndex : stepsIndex))));
+    if (actual.riskFlags.length > 0) {
+      assert.ok(risksIndex > (redFlagsIndex > -1 ? redFlagsIndex : (deadlinesIndex > -1 ? deadlinesIndex : stepsIndex)));
+    }
+    assert.ok(documentsIndex > (risksIndex > -1 ? risksIndex : (redFlagsIndex > -1 ? redFlagsIndex : (deadlinesIndex > -1 ? deadlinesIndex : stepsIndex))));
     assert.ok(standardRendered.indexOf('Hinweise:') > standardRendered.indexOf('Unterlagen:'));
 
     assert.ok(adviceRendered.includes(`Warum dieser Fokus: ${actual.synthesisDecision.reasoning}`));
@@ -123,8 +124,8 @@ for (const [inputPath, expectedPath] of PAIRS) {
       assert.equal(actual.synthesisDecision.primaryTrack, 'special-case-review');
       assert.ok(actual.redFlags.length > 0);
       assert.ok(standardRendered.includes('Besonders wichtig:'));
-      assert.ok(standardRendered.indexOf('Besonders wichtig:') > standardRendered.indexOf('Risiken:'));
-      assert.ok(standardRendered.indexOf('Besonders wichtig:') < standardRendered.indexOf('Unterlagen:'));
+      assert.ok(standardRendered.indexOf('Besonders wichtig:') > standardRendered.indexOf('Fristen:'));
+      assert.ok(standardRendered.indexOf('Besonders wichtig:') < standardRendered.indexOf('Risiken:'));
       assert.ok(actualDeadlineLabels.includes('Kündigungsschutzklage prüfen'));
       assert.ok(standardRendered.includes('Anwalt, Gewerkschaft oder passender Beratungsstelle'));
     }

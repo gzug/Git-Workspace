@@ -98,6 +98,8 @@ function runCase(name) {
 
   if (name === '03-kuendigung-sonderfall') {
     assert.ok(baseText.includes('Besonders wichtig:'));
+    assert.ok(baseText.indexOf('Besonders wichtig:') > baseText.indexOf('Fristen:'));
+    assert.ok(baseText.indexOf('Besonders wichtig:') < baseText.indexOf('Risiken:'));
     assert.ok(baseText.includes('Möglicher besonderer Schutz oder Sonderfall'));
     assert.ok(baseText.includes('Kündigungsschutzklage prüfen:'));
     assert.ok(baseText.includes('Anwalt, Gewerkschaft oder passender Beratungsstelle'));

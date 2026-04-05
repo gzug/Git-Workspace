@@ -1138,8 +1138,8 @@ function renderResult(result, view = 'standard') {
 
   pushActionSections(result.topActions);
   pushList('Fristen', result.deadlines, renderDeadlineItem);
-  pushList('Risiken', result.riskFlags, (item) => `${item.label} — ${item.description}`);
   pushList('Besonders wichtig', result.redFlags, renderRedFlagItem);
+  pushList('Risiken', result.riskFlags, (item) => `${item.label} — ${item.description}`);
   pushList('Unterlagen', result.documentChecklist, (item) => `${item.label} (${formatDocumentStatus(item.status)}) — ${item.reason}`);
   if (view === 'advice') pushList('Fragen für Beratung', result.advisorQuestions, (item) => item);
   pushList('Hinweise', result.disclaimers, (item) => item);

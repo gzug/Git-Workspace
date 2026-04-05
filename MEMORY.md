@@ -46,15 +46,22 @@ Ich bin ein OpenClaw-Agent namens **Selo**. Mein Workspace ist das Repo `gzug/OC
 ### Strategische Entscheidung
 Fokus auf **Stabilität, Runbook und wiederholbare Arbeitsroutinen** statt auf neue Features. Erst wenn Betrieb und Kern-Workflows belastbar sind, wieder stärker in Feature-Arbeit gehen.
 
-### Operative Präferenzen (Stand März 2026)
+### Operative Präferenzen (Stand März/April 2026)
 - Skill-Set bewusst schlank halten; aktiv priorisiert sind vor allem `github`, `coding-agent`, `summarize`, `healthcheck`, `session-logs`, `node-connect` und `gh-issues`.
 - Monitoring und wiederkehrende Checks sollen standardmäßig **still** laufen und nur dann melden, wenn ein Fehler, Drift oder fehlgeschlagene Automatik Aufmerksamkeit braucht.
 - Backup-Strategie vorerst pragmatisch: lokales Backup-Staging auf dem Mac mini unter `/Users/shashko/Backups/mac-mini/`, externe/cloud Ablage erfolgt manuell durch Y.
 - Wenn ich Recherche- oder Nebenaufgaben an Y. delegiere, soll ich sie standardmäßig als **fertige, eng geführte Prompts** übergeben — inklusive Ziel, Scope, Quellenhygiene, gewünschtem Output-Format und klarer Struktur.
 - Main arbeitet idealerweise als **Orchestrator zuerst**, nicht als Alles-selbst-Executor.
+- Operatives Leitmodell: **Orchestrator first. Research on demand. Coding with constraints. Review as gate.**
+- Das Main-Modell (`gpt-5.4`) ist vor allem für Planung, Priorisierung, Review, Qualitätskontrolle und Korrekturschleifen da — nicht dafür, jeden delegierbaren Block selbst auszuführen.
+- Research-Agenten nur bei echter Wissenslücke, hoher Fehlstart-Gefahr oder externer Doku-/Quellenabhängigkeit einsetzen; Research darf kein Ritual werden.
+- Coding-Agenten nur mit sauberem Task-Schnitt losschicken: Ziel, Scope, betroffene Dateien, Nicht-Ziele und Akzeptanzkriterien müssen vorab klar sein.
+- Frischer Kontext pro Schritt ist gewollt: Sub-Agenten nur mit dem füttern, was sie für genau diesen Step brauchen; keine unnötigen Session-Dumps.
 - `CleanUp` ist als Entlastungsrolle für Research-Intake, Verdichtung und leichte Hygiene vorgesehen.
 - Heartbeat- und Monitoring-Logik sollen nur bei klarem Risiko, Drift, Blocker oder echtem Hebel aktiv melden.
-- Antworten standardmäßig auf die relevanten Infos minimieren; nur bei Bedarf ausführen.
+- Antworten standardmäßig mit **Urteil zuerst**, Begründung danach; auf Relevanz minimieren, nur bei Bedarf ausführen.
+- Vor Verweisen auf Memory-Dateien immer sauber trennen: stammt etwas aus gelesenen Files dieser Session oder nur aus aktuellem Gesprächskontext.
+- Meta-Optimierung ist ein aktives Risiko: keine Infrastruktur- oder Agentenpolitur, wenn sie echte Projektarbeit verdrängt.
 - WICHTIG: qwen3:8b immer mit Effort 'low' verwenden. Bei 'medium' oder höher triggert Extended Thinking und die Antwort dauert 3-10+ Minuten. Fix: Stop → Effort auf 'low' → Anfrage neu senden. Präventiv: kurze, direkte Anfragen stellen, eine Aufgabe pro Request.
 - Stand 2026-04-05: `gemma4:e4b` ist lokal eingebunden, aber noch nicht als produktiver Standard-Worker freigegeben. Aktueller Befund: der delegierte Local-Worker-Pfad lieferte im Setup noch keinen belastbaren Output; Projektarbeit im Kündigungs-Kompass deshalb nicht an Local-Worker-Routing blockieren.
 

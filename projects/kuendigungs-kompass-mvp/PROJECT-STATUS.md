@@ -1,6 +1,6 @@
 # Kündigungs-Kompass MVP — Projektstatus
 
-Stand: 2026-03-22
+Stand: 2026-04-05
 Status: aktiv
 
 ## Kurzstatus
@@ -80,10 +80,11 @@ Der nächste Hebel ist **konservative Launch-Härtung**:
 ## Wiedereinstieg: zuerst lesen
 1. `projects/kuendigungs-kompass-mvp/EXECUTION-BOARD.md`
 2. `projects/kuendigungs-kompass-mvp/PROJECT-STATUS.md`
-3. `projects/kuendigungs-kompass-mvp/FLOW-CONTRACT-V1.md`
-4. `projects/kuendigungs-kompass-mvp/DATE-LOGIC-MVP.md`
-5. `projects/kuendigungs-kompass-mvp/LAUNCH-HARDENING-V1.md`
-6. danach gezielt betroffene Projektdateien oder Runtime-Dateien
+3. `projects/kuendigungs-kompass-mvp/DOC-STRUCTURE-NOTES.md`
+4. `projects/kuendigungs-kompass-mvp/FLOW-CONTRACT-V1.md`
+5. `projects/kuendigungs-kompass-mvp/DATE-LOGIC-MVP.md`
+6. `projects/kuendigungs-kompass-mvp/LAUNCH-HARDENING-V1.md`
+7. danach gezielt betroffene Projektdateien oder Runtime-Dateien
 
 ## Kurzfazit
 Das Projekt ist fachlich und technisch weit genug, dass nicht neue Feature-Fläche der Engpass ist, sondern **Drift-Kontrolle, Guardrails und Launch-Reife**.

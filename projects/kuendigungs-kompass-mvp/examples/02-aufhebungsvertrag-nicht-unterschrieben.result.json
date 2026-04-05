@@ -85,7 +85,13 @@
     "Gibt es in diesem Entwurf Formulierungen, die ich besonders kritisch prüfen lassen sollte?",
     "Welche Alternative habe ich, wenn ich jetzt nicht unterschreibe?"
   ],
-  "opportunities": [],
+  "opportunities": [
+    {
+      "label": "Vor der Unterschrift ist oft noch mehr offen, als es gerade wirkt",
+      "description": "Solange noch nichts unterschrieben ist, bleiben Verhandlung, Prüfung und andere Wege meist eher offen als nachträglich.",
+      "statementClass": "cautious-check"
+    }
+  ],
   "disclaimers": [
     "Arbeitsuchendmeldung = früher eigener Schritt bei bekanntem Ende; Arbeitslosmeldung = separater Schritt ab tatsächlicher Arbeitslosigkeit.",
     "Für eine verbindliche rechtliche Einschätzung braucht es den Blick auf deinen Einzelfall.",

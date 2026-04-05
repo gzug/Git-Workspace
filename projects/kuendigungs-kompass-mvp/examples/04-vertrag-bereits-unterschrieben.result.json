@@ -83,7 +83,13 @@
     "Welche Fristen oder nächsten Schritte laufen jetzt trotzdem?",
     "Welche Punkte im Vertrag sind für ALG I oder weitere Ansprüche besonders kritisch?"
   ],
-  "opportunities": [],
+  "opportunities": [
+    {
+      "label": "Mit sauberer Prüfung lassen sich unnötige Fehler und verschenkte Chancen eher vermeiden",
+      "description": "Gerade in heiklen Fällen lohnt sich eine gute Einordnung, weil sie Fristen schützt und den Blick auf sinnvolle nächste Schritte offen hält.",
+      "statementClass": "cautious-check"
+    }
+  ],
   "disclaimers": [
     "Für eine verbindliche rechtliche Einschätzung braucht es den Blick auf deinen Einzelfall.",
     "Konkrete Rechtsfolgen eines bereits unterschriebenen Vertrags hängen stark vom Einzelfall ab.",

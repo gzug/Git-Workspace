@@ -100,7 +100,13 @@
     "Bis wann muss ich die 3-Wochen-Frist konkret gerechnet haben?",
     "Welche Unterlagen sollte ich für Agentur oder Beratung direkt bereithalten?"
   ],
-  "opportunities": [],
+  "opportunities": [
+    {
+      "label": "Wenn die Fristen sitzen, wird der Rest deutlich besser steuerbar",
+      "description": "Sind Meldungen und kurze Fristen sauber gesichert, entsteht oft wieder mehr Ruhe für Beratung, Verhandlung und die nächsten Entscheidungen.",
+      "statementClass": "cautious-check"
+    }
+  ],
   "disclaimers": [
     "Arbeitsuchendmeldung = früher eigener Schritt bei bekanntem Ende; Arbeitslosmeldung = separater Schritt ab tatsächlicher Arbeitslosigkeit.",
     "Für eine verbindliche rechtliche Einschätzung braucht es den Blick auf deinen Einzelfall.",

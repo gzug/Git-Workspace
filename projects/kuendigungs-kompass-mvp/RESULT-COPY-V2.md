@@ -58,6 +58,7 @@ Bevorzugen:
 - Unterschiede erklären, ohne Disclaimer-Stimme
 - Sprache, die Halt und Orientierung gibt, ohne kitschig oder seelsorgerisch zu werden
 - Zuversicht und Handlungsfähigkeit statt Druck, Pathos oder Selbstbeweihräucherung
+- Hoffnung über konkrete Optionen, nächste Züge und neuen Spielraum — nicht über Motivationssprüche
 
 ---
 
@@ -101,11 +102,13 @@ Ton:
 - etwas tiefer
 - immer noch klar
 - mehr Struktur, nicht bloß mehr Text
+- darf an passenden Stellen vorsichtigen Optimismus und neue Perspektiven sichtbar machen
 
 Muster:
 - „Warum dieser Fokus: ...“
 - „Nimm in das nächste Gespräch vor allem diese Punkte mit: ...“
 - „Für die Beratung ist jetzt vor allem wichtig: ...“
+- „Auch jetzt ist noch mehr steuerbar, als es gerade wirkt: ...“
 
 ---
 
@@ -220,4 +223,5 @@ Nicht übernommen würden Formulierungen, die:
 - Preview-, Basis- und Upgrade-Ton sind unterscheidbar, aber konsistent
 - jede Track-Familie hat kurze, belastbare Formulierungen
 - wiederkehrende Bausteine sind ruhiger und klarer formuliert
+- Chancen- oder Perspektiv-Sprache wirkt konkret und glaubwürdig statt motivierend-leer
 - Doku, Fixtures und Runtime verwenden denselben Copy-Grundton

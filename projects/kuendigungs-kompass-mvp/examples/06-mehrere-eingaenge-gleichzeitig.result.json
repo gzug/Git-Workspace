@@ -109,7 +109,13 @@
     "Welche Risiken entstehen, wenn ich jetzt falsch priorisiere?",
     "Welche Unterlagen fehlen noch für eine belastbare Prüfung?"
   ],
-  "opportunities": [],
+  "opportunities": [
+    {
+      "label": "Mit sauberer Prüfung lassen sich unnötige Fehler und verschenkte Chancen eher vermeiden",
+      "description": "Gerade in heiklen Fällen lohnt sich eine gute Einordnung, weil sie Fristen schützt und den Blick auf sinnvolle nächste Schritte offen hält.",
+      "statementClass": "cautious-check"
+    }
+  ],
   "disclaimers": [
     "Für eine verbindliche rechtliche Einschätzung braucht es den Blick auf deinen Einzelfall.",
     "Hier ist eine klare Reihenfolge wichtig, aber keine vorschnelle Scheinsicherheit.",

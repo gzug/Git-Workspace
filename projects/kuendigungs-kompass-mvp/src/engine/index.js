@@ -917,10 +917,42 @@ function buildCaseSnapshot(answers, track) {
 }
 
 function buildOpportunities(answers, track) {
+  if (track === 'deadline-first') {
+    return [{
+      label: 'Wenn die Fristen sitzen, wird der Rest deutlich besser steuerbar',
+      description: 'Sind Meldungen und kurze Fristen sauber gesichert, entsteht oft wieder mehr Ruhe für Beratung, Verhandlung und die nächsten Entscheidungen.',
+      statementClass: 'cautious-check',
+    }];
+  }
+
+  if (track === 'alg1-risk-first') {
+    return [{
+      label: 'Frühe Meldungen sichern dir Spielraum für die nächsten Schritte',
+      description: 'Wenn die Agentur-Themen früh sauber stehen, lässt sich der weitere Verlauf oft geordneter und mit weniger Druck angehen.',
+      statementClass: 'cautious-check',
+    }];
+  }
+
+  if (track === 'contract-do-not-sign') {
+    return [{
+      label: 'Vor der Unterschrift ist oft noch mehr offen, als es gerade wirkt',
+      description: 'Solange noch nichts unterschrieben ist, bleiben Verhandlung, Prüfung und andere Wege meist eher offen als nachträglich.',
+      statementClass: 'cautious-check',
+    }];
+  }
+
+  if (track === 'special-case-review') {
+    return [{
+      label: 'Mit sauberer Prüfung lassen sich unnötige Fehler und verschenkte Chancen eher vermeiden',
+      description: 'Gerade in heiklen Fällen lohnt sich eine gute Einordnung, weil sie Fristen schützt und den Blick auf sinnvolle nächste Schritte offen hält.',
+      statementClass: 'cautious-check',
+    }];
+  }
+
   if (track === 'prepare-advice' && answers.primary_goal === 'plan_next_step') {
     return [{
-      label: 'Weiteren nächsten Schritt strukturiert planen',
-      description: 'Wenn der Fall noch in Bewegung ist, kann eine saubere Vorbereitung sinnvoller sein als voreilige Detailschlüsse.',
+      label: 'Auch jetzt ist oft mehr vorbereitbar, als es im ersten Moment wirkt',
+      description: 'Wenn du Unterlagen, Fragen und Prioritäten sortierst, gehst du in die nächsten Schritte meist klarer und mit mehr Spielraum hinein.',
       statementClass: 'cautious-check',
     }];
   }

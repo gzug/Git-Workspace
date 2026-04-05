@@ -69,6 +69,7 @@ for (const [inputPath, expectedPath] of PAIRS) {
     for (const rendered of [shortRendered, standardRendered, adviceRendered]) {
       assert.ok(typeof rendered === 'string' && rendered.length > 20);
       assert.ok(!/do-not-use-yet|Erfolgswahrscheinlichkeit|Abfindungswahrscheinlichkeiten/.test(rendered));
+      assert.ok(!/\bMVP\b|\bTool\b/.test(rendered));
     }
 
     assert.ok(shortRendered.includes(`Dein Fokus jetzt: ${actual.caseSnapshot.headline}`));
@@ -135,7 +136,7 @@ for (const [inputPath, expectedPath] of PAIRS) {
       assert.equal(actual.synthesisDecision.primaryTrack, 'prepare-advice');
       assert.ok(!actualDeadlineLabels.includes('Kündigungsschutzklage prüfen'));
       assert.ok(!standardRendered.includes('Kündigungsschutzklage prüfen'));
-      assert.ok(actual.disclaimers.some((item) => item.includes('keine Klagefrist fingieren')));
+      assert.ok(actual.disclaimers.some((item) => item.includes('keine Klagefrist angenommen')));
       assert.equal(actual.topActions[0]?.label, 'Arbeitsuchendmeldung jetzt prüfen oder nachholen');
     }
 

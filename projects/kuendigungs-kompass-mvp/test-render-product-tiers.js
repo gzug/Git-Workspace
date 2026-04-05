@@ -59,6 +59,9 @@ function runCase(name) {
   assert.ok(!/statementLedger|do-not-use-yet/.test(previewText));
   assert.ok(!/statementLedger|do-not-use-yet/.test(baseText));
   assert.ok(!/statementLedger|do-not-use-yet/.test(upgradeText));
+  assert.ok(!/\bMVP\b|\bTool\b/.test(previewText));
+  assert.ok(!/\bMVP\b|\bTool\b/.test(baseText));
+  assert.ok(!/\bMVP\b|\bTool\b/.test(upgradeText));
 
   if (name === '01-kuendigung-arbeitslosmeldung-offen') {
     assert.ok(baseText.includes('Arbeitslosmeldung:'));
@@ -86,13 +89,13 @@ function runCase(name) {
     assert.ok(!baseText.includes('Kündigungsschutzklage prüfen:'));
     assert.ok(!previewText.includes('Kündigungsschutzklage prüfen'));
     assert.ok(baseText.includes('Arbeitsuchendmeldung:'));
-    assert.ok(baseText.includes('Ohne schriftliche Kündigung soll der MVP keine Klagefrist fingieren.'));
+    assert.ok(baseText.includes('Ohne schriftliche Kündigung sollte jetzt noch keine Klagefrist angenommen werden.'));
   }
 
   if (name === '06-mehrere-eingaenge-gleichzeitig') {
     assert.ok(baseText.includes('bis 13.04.2026'));
     assert.ok(baseText.includes('Fällt das rechnerische Fristende auf Samstag oder Sonntag'));
-    assert.ok(baseText.includes('Mögliche Landesfeiertage werden im MVP nicht automatisch berechnet'));
+    assert.ok(baseText.includes('Wenn ein Landesfeiertag in Frage kommt, sollte das Fristende vorsichtshalber zusätzlich geprüft werden.'));
   }
 
   if (name === '07-angekuendigt-alg1-risiko') {

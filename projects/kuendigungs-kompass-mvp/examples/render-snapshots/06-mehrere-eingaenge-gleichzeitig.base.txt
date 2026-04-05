@@ -1,4 +1,4 @@
-Dein Fall hat mehrere gleichzeitige Risikotreiber
+Bei dir greifen gerade mehrere wichtige Themen gleichzeitig ineinander
 
 Es liegen gleichzeitig eine schriftliche Kündigung, ein noch nicht unterschriebener Vertrag und ein unklarer Sonderfallindikator vor.
 
@@ -9,7 +9,7 @@ Nächste Schritte:
 
 Fristen:
 - Arbeitsuchendmeldung: spätestens 3 Monate vor Ende, sonst innerhalb von 3 Tagen nach Kenntnis (Diese Meldung sollte nicht aufgeschoben werden, auch wenn der Vertrag noch nicht unterschrieben ist.)
-- Kündigungsschutzklage prüfen: regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung (ausgehend vom angegebenen Zugangsdatum: bis 13.04.2026) (Der mögliche Sonderfall ändert nichts daran, dass die Frist nicht liegen bleiben sollte. Fällt das rechnerische Fristende auf Samstag oder Sonntag, sollte der nächste Werktag mitgeprüft werden. Mögliche Landesfeiertage werden im MVP nicht automatisch berechnet und sollten vorsichtshalber separat geprüft werden.)
+- Kündigungsschutzklage prüfen: regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung (ausgehend vom angegebenen Zugangsdatum: bis 13.04.2026) (Der mögliche Sonderfall ändert nichts daran, dass die Frist nicht liegen bleiben sollte. Fällt das rechnerische Fristende auf Samstag oder Sonntag, sollte der nächste Werktag mitgeprüft werden. Wenn ein Landesfeiertag in Frage kommt, sollte das Fristende vorsichtshalber zusätzlich geprüft werden.)
 
 Risiken:
 - Sperrzeit-/Ruhensrisiko bei möglicher Vertragsmitwirkung — Ein noch nicht unterschriebener Vertrag kann zusätzliche Risiken beim Arbeitslosengeld auslösen.
@@ -17,7 +17,7 @@ Risiken:
 - Mehrfachdruck erhöht Fehlentscheidungsrisiko — Wenn Kündigung, Vertrag und Schutzfragen gleichzeitig auftauchen, steigt das Risiko falscher Priorisierung.
 
 Red Flags:
-- Überlagerter Mehrfachfall mit möglichem Sonderfall — Mehrere Risikotreiber laufen gleichzeitig. Der MVP sollte hier priorisieren, aber nicht so tun, als sei der Fall vollständig standardisierbar.
+- Überlagerter Mehrfachfall mit möglichem Sonderfall — Hier laufen mehrere wichtige Themen gleichzeitig. Deshalb braucht dein Fall eine klare Priorisierung, aber keine vorschnelle Standardantwort.
 
 Unterlagen:
 - Aufhebungs-/Abwicklungsvertrag oder Entwurf (already-secured) — Nur mit dem konkreten Text lassen sich Risiken und offene Punkte sinnvoll prüfen.
@@ -27,6 +27,6 @@ Unterlagen:
 - Nachweise zum möglichen Schutzstatus (secure-now) — Falls vorhanden, helfen diese Unterlagen, den Sonderfall schneller individuell einzuordnen.
 
 Hinweise:
-- Der MVP ersetzt keine individuelle Rechtsberatung.
-- Bei mehreren gleichzeitigen Risikotreibern soll der MVP priorisieren, aber keine Scheinsicherheit erzeugen.
+- Für eine verbindliche rechtliche Einschätzung braucht es den Blick auf deinen Einzelfall.
+- Hier ist eine klare Reihenfolge wichtig, aber keine vorschnelle Scheinsicherheit.
 - Arbeitsuchendmeldung = früher eigener Schritt bei bekanntem Ende; Arbeitslosmeldung = separater Schritt ab tatsächlicher Arbeitslosigkeit.

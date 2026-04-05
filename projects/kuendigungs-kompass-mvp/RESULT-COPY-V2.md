@@ -21,6 +21,10 @@ Diese Version ergänzt den bestehenden Copy-Layer um **Produktstufen**, **Stress
 - ruhig, aber nicht weichgespült
 - hilfreich, aber nicht belehrend
 - priorisierend, nicht ausufernd
+- verständlich auch in Stress, Wut, Enttäuschung oder Unsicherheit
+- freundlich und zugewandt, ohne in Trost- oder Mitleidssprache abzudriften
+- seriös genug für Fristen, Verträge, Agentur-Themen und Abfindungsfragen
+- so, dass man sich begleitet fühlt, ohne dass der Text sich aufdrängt
 
 ### So soll es nicht klingen
 - alarmistisch
@@ -52,6 +56,8 @@ Bevorzugen:
 - konkrete Prioritäten statt diffuse Warnungen
 - ruhige Einordnung statt Alarm-Ton
 - Unterschiede erklären, ohne Disclaimer-Stimme
+- Sprache, die Halt und Orientierung gibt, ohne kitschig oder seelsorgerisch zu werden
+- Zuversicht und Handlungsfähigkeit statt Druck, Pathos oder Selbstbeweihräucherung
 
 ---
 

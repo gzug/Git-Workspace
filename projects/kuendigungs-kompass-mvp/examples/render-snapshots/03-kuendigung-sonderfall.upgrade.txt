@@ -8,14 +8,14 @@ Nächste Schritte:
 - Unterlagen für Beratung vollständig bündeln — Je klarer der Fall dokumentiert ist, desto schneller lässt sich der mögliche Schutzstatus einordnen.
 
 Fristen:
-- Kündigungsschutzklage prüfen: regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung (ausgehend vom angegebenen Zugangsdatum: bis 09.04.2026) (Der mögliche Sonderfall ändert nichts daran, dass die Frist nicht liegen bleiben sollte. Mögliche Landesfeiertage werden im MVP nicht automatisch berechnet und sollten vorsichtshalber separat geprüft werden.)
+- Kündigungsschutzklage prüfen: regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung (ausgehend vom angegebenen Zugangsdatum: bis 09.04.2026) (Der mögliche Sonderfall ändert nichts daran, dass die Frist nicht liegen bleiben sollte. Wenn ein Landesfeiertag in Frage kommt, sollte das Fristende vorsichtshalber zusätzlich geprüft werden.)
 
 Risiken:
 - Möglicher Sonderkündigungsschutz / heikler Sonderfall — Dein Fall hat Merkmale, die über eine typische Kündigung hinausgehen und individuell geprüft werden sollten.
 - Unsicherheit bei Schutzstatus erhöht das Fehlentscheidungsrisiko — Wenn die Schutzlage unklar ist, braucht es eher eine sorgfältige Einordnung als eine schnelle Standardantwort.
 
 Red Flags:
-- Möglicher besonderer Schutz oder Sonderfall — Es gibt Hinweise auf Schwangerschaft / Mutterschutz oder eine unklare Schutzlage, die der MVP nicht selbst verlässlich auflösen sollte.
+- Möglicher besonderer Schutz oder Sonderfall — Es gibt Hinweise auf Schwangerschaft / Mutterschutz oder eine unklare Schutzlage, die individuell geprüft werden sollte.
 
 Unterlagen:
 - Kündigungsschreiben (already-secured) — Zugang und Datum sind für die Fristprüfung zentral.
@@ -29,6 +29,6 @@ Fragen für Beratung:
 - Welche Unterlagen oder Nachweise sollte ich für die Prüfung direkt mitbringen?
 
 Hinweise:
-- Der MVP ersetzt keine individuelle Rechtsberatung.
+- Für eine verbindliche rechtliche Einschätzung braucht es den Blick auf deinen Einzelfall.
 - Ob tatsächlich ein besonderer Schutz greift, muss im Einzelfall geprüft werden.
-- Das Tool priorisiert Fristen und Eskalation, entscheidet aber keinen Sonderfall abschließend.
+- Hier geht es zuerst darum, Fristen zu sichern und den Sonderfall danach gezielt prüfen zu lassen.

@@ -19,6 +19,6 @@ Unterlagen:
 - Lohnunterlagen (secure-now) — Hilfreich für Agentur-Themen und Beratungsvorbereitung.
 
 Hinweise:
-- Ohne schriftliche Kündigung soll der MVP keine Klagefrist fingieren.
-- Der MVP ersetzt keine individuelle Rechtsberatung.
+- Ohne schriftliche Kündigung sollte jetzt noch keine Klagefrist angenommen werden.
+- Für eine verbindliche rechtliche Einschätzung braucht es den Blick auf deinen Einzelfall.
 - Arbeitsuchendmeldung = früher eigener Schritt bei bekanntem Ende; Arbeitslosmeldung = separater Schritt ab tatsächlicher Arbeitslosigkeit.

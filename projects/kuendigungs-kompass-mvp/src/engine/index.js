@@ -603,12 +603,12 @@ function buildDeadlines(answers) {
     if ((answers.special_protection_indicator || []).some((x) => x !== 'none_known')) {
       noteParts.push('Der mögliche Sonderfall ändert nichts daran, dass die Frist nicht liegen bleiben sollte.');
     } else {
-      noteParts.push('Der MVP prüft nicht die Erfolgsaussicht, sondern markiert die Frist als priorisiert.');
+      noteParts.push('Ob sich eine Kündigungsschutzklage in deinem Fall lohnt, muss individuell geprüft werden. Wichtig ist hier zuerst, dass die Frist nicht aus dem Blick gerät.');
     }
     if (lawsuitDeadline.shiftedForWeekend) {
       noteParts.push('Fällt das rechnerische Fristende auf Samstag oder Sonntag, sollte der nächste Werktag mitgeprüft werden.');
     }
-    noteParts.push('Mögliche Landesfeiertage werden im MVP nicht automatisch berechnet und sollten vorsichtshalber separat geprüft werden.');
+    noteParts.push('Wenn ein Landesfeiertag in Frage kommt, sollte das Fristende vorsichtshalber zusätzlich geprüft werden.');
     deadlines.push({
       label: 'Kündigungsschutzklage prüfen',
       timing: formattedLawsuitDeadline
@@ -763,19 +763,19 @@ function buildRedFlags(answers, evaluation, track) {
   if (track === 'special-case-review' && answers.agreement_already_signed) {
     flags.push({
       label: 'Bereits unterschriebener Beendigungsvertrag',
-      whyEscalated: 'Der MVP soll hier nicht mit pauschalen Aussagen arbeiten, weil die konkrete Folgenlage individuell geprüft werden muss.',
+      whyEscalated: 'Hier sollte nicht mit pauschalen Aussagen gearbeitet werden, weil die konkreten Folgen individuell geprüft werden müssen.',
       recommendedEscalation: 'Qualifizierte individuelle Prüfung mit Anwalt, Gewerkschaft oder passender Beratungsstelle',
     });
   } else if (isOverlappingMultiRiskCase(answers)) {
     flags.push({
       label: 'Überlagerter Mehrfachfall mit möglichem Sonderfall',
-      whyEscalated: 'Mehrere Risikotreiber laufen gleichzeitig. Der MVP sollte hier priorisieren, aber nicht so tun, als sei der Fall vollständig standardisierbar.',
+      whyEscalated: 'Hier laufen mehrere wichtige Themen gleichzeitig. Deshalb braucht dein Fall eine klare Priorisierung, aber keine vorschnelle Standardantwort.',
       recommendedEscalation: 'Qualifizierte individuelle Prüfung mit Anwalt, Gewerkschaft oder passender Beratungsstelle',
     });
   } else if (track === 'special-case-review' || indicators.some((x) => x !== 'none_known')) {
     flags.push({
       label: 'Möglicher besonderer Schutz oder Sonderfall',
-      whyEscalated: 'Es gibt Hinweise auf Schwangerschaft / Mutterschutz oder eine unklare Schutzlage, die der MVP nicht selbst verlässlich auflösen sollte.',
+      whyEscalated: 'Es gibt Hinweise auf Schwangerschaft / Mutterschutz oder eine unklare Schutzlage, die individuell geprüft werden sollte.',
       recommendedEscalation: 'Qualifizierte individuelle Prüfung mit Anwalt, Gewerkschaft oder passender Beratungsstelle',
     });
   }
@@ -800,7 +800,7 @@ function selectPrimaryTrack(rawAnswers, evaluation = evaluateRules(rawAnswers)) 
     const reasoning = answers.agreement_already_signed
       ? 'Weil der Vertrag bereits unterschrieben ist, ist der Standardhinweis \"nicht unterschreiben\" nicht mehr ausreichend. Jetzt stehen Folgenanalyse, Fristen und individuelle Prüfung im Vordergrund.'
       : isOverlappingMultiRiskCase(answers)
-        ? 'Weil sich Fristdruck, Vertragsrisiko und unklare Schutzlage gleichzeitig überlagern, darf der MVP hier nicht nur eine Standard-Track-Logik fahren.'
+        ? 'Weil sich Fristdruck, Vertragsrisiko und unklare Schutzlage gleichzeitig überlagern, braucht dein Fall hier mehr als eine schnelle Standard-Einordnung.'
         : 'Weil hier neben der Kündigungsfrist auch ein möglicher Schutzstatus oder Sonderfall im Raum steht, wäre Standardlogik zu grob und eine individuelle Prüfung vorrangig.';
     return {
       primaryTrack: 'special-case-review',
@@ -887,7 +887,7 @@ function buildCaseSnapshot(answers, track) {
   if (track === 'special-case-review' && answers.agreement_already_signed) {
     return {
       headline: 'Jetzt geht es um Folgen, Fristen und saubere Einordnung',
-      situation: 'Ein Aufhebungs- oder Abwicklungsvertrag wurde bereits unterschrieben. Damit ist dein Fall kein reiner Standard-Stopp-Fall mehr.',
+      situation: 'Ein Aufhebungs- oder Abwicklungsvertrag wurde bereits unterschrieben. Jetzt geht es nicht mehr ums Innehalten, sondern um die nächsten Schritte und die möglichen Folgen.',
       riskLevel: 'high',
       primaryGoal: answers.primary_goal,
     };
@@ -895,7 +895,7 @@ function buildCaseSnapshot(answers, track) {
   if (track === 'special-case-review') {
     if (isOverlappingMultiRiskCase(answers)) {
       return {
-        headline: 'Dein Fall hat mehrere gleichzeitige Risikotreiber',
+        headline: 'Bei dir greifen gerade mehrere wichtige Themen gleichzeitig ineinander',
         situation: 'Es liegen gleichzeitig eine schriftliche Kündigung, ein noch nicht unterschriebener Vertrag und ein unklarer Sonderfallindikator vor.',
         riskLevel: 'high',
         primaryGoal: answers.primary_goal,
@@ -933,48 +933,48 @@ function buildDisclaimers(answers, track) {
   if (track === 'contract-do-not-sign') {
     return [
       agencySeparationDisclaimer,
-      'Der MVP ersetzt keine individuelle Rechtsberatung.',
+      'Für eine verbindliche rechtliche Einschätzung braucht es den Blick auf deinen Einzelfall.',
       'Abfindung, Sperrzeit und Ruhen hängen stark vom konkreten Einzelfall ab.'
     ];
   }
   if (track === 'deadline-first') {
     return [
       agencySeparationDisclaimer,
-      'Der MVP ersetzt keine individuelle Rechtsberatung.',
-      'Das Tool bewertet keine Erfolgsaussichten einer Kündigungsschutzklage im Einzelfall.'
+      'Für eine verbindliche rechtliche Einschätzung braucht es den Blick auf deinen Einzelfall.',
+      'Ob eine Kündigungsschutzklage in deinem Fall sinnvoll ist, sollte individuell geprüft werden.'
     ];
   }
   if (track === 'alg1-risk-first') {
     return [
       agencySeparationDisclaimer,
-      'Der MVP ersetzt keine individuelle Rechtsberatung.',
+      'Für eine verbindliche rechtliche Einschätzung braucht es den Blick auf deinen Einzelfall.',
       'Ob und wie sich etwas auf dein Arbeitslosengeld auswirkt, hängt vom Einzelfall und vom weiteren Verlauf ab.'
     ];
   }
   if (track === 'special-case-review' && answers.agreement_already_signed) {
     return [
-      'Der MVP ersetzt keine individuelle Rechtsberatung.',
+      'Für eine verbindliche rechtliche Einschätzung braucht es den Blick auf deinen Einzelfall.',
       'Konkrete Rechtsfolgen eines bereits unterschriebenen Vertrags hängen stark vom Einzelfall ab.',
-      'Der MVP löst keine Anfechtungs- oder Wirksamkeitsprüfung.'
+      'Ob der Vertrag anfechtbar oder wirksam ist, muss gesondert geprüft werden.'
     ];
   }
   if (track === 'special-case-review') {
     if (isOverlappingMultiRiskCase(answers)) {
       return [
-        'Der MVP ersetzt keine individuelle Rechtsberatung.',
-        'Bei mehreren gleichzeitigen Risikotreibern soll der MVP priorisieren, aber keine Scheinsicherheit erzeugen.',
+        'Für eine verbindliche rechtliche Einschätzung braucht es den Blick auf deinen Einzelfall.',
+        'Hier ist eine klare Reihenfolge wichtig, aber keine vorschnelle Scheinsicherheit.',
         agencySeparationDisclaimer
       ];
     }
     return [
-      'Der MVP ersetzt keine individuelle Rechtsberatung.',
+      'Für eine verbindliche rechtliche Einschätzung braucht es den Blick auf deinen Einzelfall.',
       'Ob tatsächlich ein besonderer Schutz greift, muss im Einzelfall geprüft werden.',
-      'Das Tool priorisiert Fristen und Eskalation, entscheidet aber keinen Sonderfall abschließend.'
+      'Hier geht es zuerst darum, Fristen zu sichern und den Sonderfall danach gezielt prüfen zu lassen.'
     ];
   }
   return [
-    'Ohne schriftliche Kündigung soll der MVP keine Klagefrist fingieren.',
-    'Der MVP ersetzt keine individuelle Rechtsberatung.',
+    'Ohne schriftliche Kündigung sollte jetzt noch keine Klagefrist angenommen werden.',
+    'Für eine verbindliche rechtliche Einschätzung braucht es den Blick auf deinen Einzelfall.',
     agencySeparationDisclaimer
   ];
 }

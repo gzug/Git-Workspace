@@ -10,7 +10,7 @@ Nächste Schritte:
 Fristen:
 - Arbeitslosmeldung: spätestens am ersten Tag der Arbeitslosigkeit; wenn noch offen, jetzt sofort prüfen (Die Arbeitslosmeldung ist ein eigener Schritt und nicht dasselbe wie die Arbeitsuchendmeldung.)
 - Arbeitsuchendmeldung: spätestens 3 Monate vor Ende, sonst innerhalb von 3 Tagen nach Kenntnis (Auch wenn du schon arbeitslos bist, sollte diese Meldung als eigener Pflichtpunkt nicht übersehen werden.)
-- Kündigungsschutzklage prüfen: regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung (ausgehend vom angegebenen Zugangsdatum: bis 08.04.2026) (Der MVP prüft nicht die Erfolgsaussicht, sondern markiert die Frist als priorisiert. Mögliche Landesfeiertage werden im MVP nicht automatisch berechnet und sollten vorsichtshalber separat geprüft werden.)
+- Kündigungsschutzklage prüfen: regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung (ausgehend vom angegebenen Zugangsdatum: bis 08.04.2026) (Ob sich eine Kündigungsschutzklage in deinem Fall lohnt, muss individuell geprüft werden. Wichtig ist hier zuerst, dass die Frist nicht aus dem Blick gerät. Wenn ein Landesfeiertag in Frage kommt, sollte das Fristende vorsichtshalber zusätzlich geprüft werden.)
 
 Risiken:
 - Offene Arbeitsuchendmeldung kann Nachteile auslösen — Wenn die frühe Arbeitsuchendmeldung offen bleibt, steigt das Risiko unnötiger Probleme im weiteren ALG-I-Prozess.
@@ -24,5 +24,5 @@ Unterlagen:
 
 Hinweise:
 - Arbeitsuchendmeldung = früher eigener Schritt bei bekanntem Ende; Arbeitslosmeldung = separater Schritt ab tatsächlicher Arbeitslosigkeit.
-- Der MVP ersetzt keine individuelle Rechtsberatung.
-- Das Tool bewertet keine Erfolgsaussichten einer Kündigungsschutzklage im Einzelfall.
+- Für eine verbindliche rechtliche Einschätzung braucht es den Blick auf deinen Einzelfall.
+- Ob eine Kündigungsschutzklage in deinem Fall sinnvoll ist, sollte individuell geprüft werden.

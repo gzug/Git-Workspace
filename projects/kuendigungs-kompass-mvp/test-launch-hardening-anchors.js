@@ -39,7 +39,7 @@ function run() {
   assert.ok(lawsuitDeadline);
   assert.ok(lawsuitDeadline.timing.includes('13.04.2026'));
   assert.ok(lawsuitDeadline.note.includes('nächste Werktag mitgeprüft werden'));
-  assert.ok(lawsuitDeadline.note.includes('Landesfeiertage'));
+  assert.ok(lawsuitDeadline.note.includes('Landesfeiertag'));
   assert.ok(weekendRendered.includes('Kündigungsschutzklage prüfen: regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung (ausgehend vom angegebenen Zugangsdatum: bis 13.04.2026)'));
 
   const agencyResult = buildResult(agencyCase);

@@ -1,9 +1,9 @@
 function selectPreviewNote(result = {}) {
-  const firstOpportunity = result.opportunities?.[0]?.description || null;
-  if (firstOpportunity) return firstOpportunity;
-
   const disclaimers = result.disclaimers || [];
-  return disclaimers.find((item) => !/verbindliche rechtliche Einschätzung/.test(item)) || disclaimers[0] || null;
+  const usefulDisclaimer = disclaimers.find((item) => !/verbindliche rechtliche Einschätzung/.test(item)) || null;
+  if (usefulDisclaimer) return usefulDisclaimer;
+
+  return result.opportunities?.[0]?.description || null;
 }
 
 function firstCriticalDeadline(deadlines = []) {

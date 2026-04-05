@@ -106,6 +106,7 @@ function runCase(name) {
   if (name === '04-vertrag-bereits-unterschrieben') {
     assert.ok(previewText.includes('Besonders wichtig: Bereits unterschriebener Beendigungsvertrag'));
     assert.ok(previewText.includes('Sinnvoll jetzt: Qualifizierte individuelle Prüfung mit Anwalt, Gewerkschaft oder passender Beratungsstelle'));
+    assert.ok(previewText.includes('Konkrete Rechtsfolgen eines bereits unterschriebenen Vertrags hängen stark vom Einzelfall ab.'));
     assert.ok(baseText.includes('Anwalt, Gewerkschaft oder passender Beratungsstelle'));
     assert.ok(upgradeText.includes('Anwalt, Gewerkschaft oder passender Beratungsstelle'));
   }
@@ -115,6 +116,7 @@ function runCase(name) {
     assert.ok(!previewText.includes('Kündigungsschutzklage prüfen'));
     assert.ok(baseText.includes('Arbeitsuchendmeldung:'));
     assert.ok(baseText.includes('Ohne schriftliche Kündigung sollte jetzt noch keine Klagefrist angenommen werden.'));
+    assert.ok(previewText.includes('Ohne schriftliche Kündigung sollte jetzt noch keine Klagefrist angenommen werden.'));
   }
 
   if (name === '06-mehrere-eingaenge-gleichzeitig') {
@@ -129,6 +131,7 @@ function runCase(name) {
 
   if (name === '07-angekuendigt-alg1-risiko') {
     assert.ok(previewText.includes('Arbeitslosengeld nicht in Gefahr gerät'));
+    assert.ok(previewText.includes('Die Arbeitsuchendmeldung ist der frühe Schritt'));
     assert.ok(baseText.includes('Arbeitsuchendmeldung:'));
     assert.ok(baseText.includes('Offene Arbeitsuchendmeldung kann sich später beim Arbeitslosengeld auswirken'));
     assert.ok(!baseText.includes('Gut vorbereitet in den nächsten Schritt gehen'));

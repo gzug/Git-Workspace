@@ -24,7 +24,7 @@ _Dieses File beschreibt die konkrete Infrastruktur dieses Mac mini. Nur hier, ni
 ## Nerve UI
 
 - **URL:** `http://localhost:3080`
-- **Version:** V1.5.1
+- **Version:** V1.5.2
 - **Auth:** Token (gleicher Token wie Gateway)
 - **Browser:** Chrome (primär)
 
@@ -33,12 +33,12 @@ _Dieses File beschreibt die konkrete Infrastruktur dieses Mac mini. Nur hier, ni
 ### Primär
 - **openai-codex/gpt-5.4** via ChatGPT Pro OAuth
   - Token: wird über `openclaw onboard` verwaltet
-  - Bei 401: `openclaw onboard` erneut ausführen
+  - Bei 401/Auth-Problemen: Runbook `vault/runbooks/openclaw-auth.md` nutzen
 
 ### Fallback (lokal via Ollama)
-- **ollama/qwen3:8b** — aktiver Fallback
-- **ollama/gemma4:e4b** — neuer lokaler Worker für einfache Tasks / Vorarbeit
-- **ollama/qwen2.5-coder:7b** — Code-Fokus
+- **ollama/qwen3:8b** — aktiver Fallback / Heartbeat; immer mit Effort `low`
+- **ollama/gemma4:e4b** — lokaler Kandidat für einfache Tasks / Vorarbeit; aktuell nicht als produktiver Standard-Worker freigegeben
+- **ollama/qwen2.5-coder:7b** — Code-Fokus für klar eingegrenzte Vorarbeit
 - **nomic-embed-text:latest** — Memory-Embeddings
 - **Ollama-Endpoint:** `http://localhost:11434`
 
@@ -58,6 +58,7 @@ _Dieses File beschreibt die konkrete Infrastruktur dieses Mac mini. Nur hier, ni
 - **Sandbox:** off (Docker nicht installiert, bewusste Entscheidung)
 - **Gateway:** Loopback-only, kein externer Zugriff
 - **Tailscale:** deaktiviert
+- **Exec-Approval:** seit 2026-04-05 für trusted owner workflow gelockert (`tools.exec.ask=off`, `tools.exec.security=full`); Arbeitsregel bleibt trotzdem: keine destruktiven oder extern wirksamen Aktionen ohne klare Freigabe
 
 ## Nützliche Befehle
 
@@ -71,7 +72,7 @@ openclaw status
 # Logs live verfolgen
 openclaw logs --follow
 
-# GPT-Token erneuern (bei 401)
+# GPT-Auth erneuern (bei 401) — siehe auch vault/runbooks/openclaw-auth.md
 openclaw onboard
 
 # Config validieren
@@ -82,4 +83,4 @@ open http://localhost:3080
 ```
 
 ---
-_Zuletzt aktualisiert: 2026-03-25_
+_Zuletzt aktualisiert: 2026-04-05_

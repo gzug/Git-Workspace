@@ -1,5 +1,9 @@
-function shortDisclaimer(disclaimers = []) {
-  return disclaimers[0] || null;
+function selectPreviewNote(result = {}) {
+  const firstOpportunity = result.opportunities?.[0]?.description || null;
+  if (firstOpportunity) return firstOpportunity;
+
+  const disclaimers = result.disclaimers || [];
+  return disclaimers.find((item) => !/verbindliche rechtliche Einschätzung/.test(item)) || disclaimers[0] || null;
 }
 
 function firstCriticalDeadline(deadlines = []) {
@@ -19,7 +23,7 @@ function projectPreview(result) {
     topAction: result.topActions[0] || null,
     deadline: firstCriticalDeadline(result.deadlines),
     riskFlag: firstRisk(result.riskFlags),
-    disclaimer: shortDisclaimer(result.disclaimers),
+    disclaimer: selectPreviewNote(result),
   };
 }
 

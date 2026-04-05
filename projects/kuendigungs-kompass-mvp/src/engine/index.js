@@ -1053,6 +1053,21 @@ function renderResult(result, view = 'standard') {
     for (const item of items) lines.push(`- ${renderItem(item)}`);
     lines.push('');
   };
+  const pushActionSections = (actions = []) => {
+    if (!actions || actions.length === 0) return;
+
+    const [firstAction, ...restActions] = actions;
+    lines.push('Als Erstes:');
+    lines.push(`- ${firstAction.label} — ${firstAction.why}`);
+    lines.push('');
+
+    pushList('Danach', restActions, (item) => `${item.label} — ${item.why}`);
+  };
+  const formatDocumentStatus = (status) => {
+    if (status === 'already-secured') return 'schon gesichert';
+    if (status === 'secure-now') return 'jetzt sichern';
+    return status;
+  };
 
   if (view === 'short') {
     lines.push(`Dein Fokus jetzt: ${result.caseSnapshot.headline}`);
@@ -1073,11 +1088,11 @@ function renderResult(result, view = 'standard') {
     lines.push('');
   }
 
-  pushList('Nächste Schritte', result.topActions, (item) => `${item.label} — ${item.why}`);
+  pushActionSections(result.topActions);
   pushList('Fristen', result.deadlines, (item) => `${item.label}: ${item.timing}` + (item.note ? ` (${item.note})` : ''));
   pushList('Risiken', result.riskFlags, (item) => `${item.label} — ${item.description}`);
   pushList('Red Flags', result.redFlags, (item) => `${item.label} — ${item.whyEscalated}`);
-  pushList('Unterlagen', result.documentChecklist, (item) => `${item.label} (${item.status}) — ${item.reason}`);
+  pushList('Unterlagen', result.documentChecklist, (item) => `${item.label} (${formatDocumentStatus(item.status)}) — ${item.reason}`);
   if (view === 'advice') pushList('Fragen für Beratung', result.advisorQuestions, (item) => item);
   pushList('Hinweise', result.disclaimers, (item) => item);
 

@@ -70,13 +70,14 @@ for (const [inputPath, expectedPath] of PAIRS) {
       assert.ok(typeof rendered === 'string' && rendered.length > 20);
       assert.ok(!/do-not-use-yet|Erfolgswahrscheinlichkeit|Abfindungswahrscheinlichkeiten/.test(rendered));
       assert.ok(!/\bMVP\b|\bTool\b/.test(rendered));
+      assert.ok(!/already-secured|secure-now/.test(rendered));
     }
 
     assert.ok(shortRendered.includes(`Dein Fokus jetzt: ${actual.caseSnapshot.headline}`));
     assert.ok(shortRendered.includes(`Wichtigster nächster Schritt: ${actual.topActions[0]?.label}`));
 
-    assert.ok(standardRendered.indexOf('Nächste Schritte:') > -1);
-    const stepsIndex = standardRendered.indexOf('Nächste Schritte:');
+    assert.ok(standardRendered.indexOf('Als Erstes:') > -1);
+    const stepsIndex = standardRendered.indexOf('Als Erstes:');
     const deadlinesIndex = standardRendered.indexOf('Fristen:');
     const risksIndex = standardRendered.indexOf('Risiken:');
     const redFlagsIndex = standardRendered.indexOf('Red Flags:');
@@ -97,6 +98,7 @@ for (const [inputPath, expectedPath] of PAIRS) {
     assert.ok(standardRendered.indexOf('Hinweise:') > standardRendered.indexOf('Unterlagen:'));
 
     assert.ok(adviceRendered.includes(`Warum dieser Fokus: ${actual.synthesisDecision.reasoning}`));
+    assert.ok(adviceRendered.includes('Als Erstes:'));
     assert.ok(adviceRendered.indexOf('Fragen für Beratung:') > adviceRendered.indexOf('Unterlagen:'));
     assert.ok(adviceRendered.indexOf('Hinweise:') > adviceRendered.indexOf('Fragen für Beratung:'));
 

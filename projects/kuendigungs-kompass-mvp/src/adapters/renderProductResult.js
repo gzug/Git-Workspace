@@ -5,6 +5,23 @@ function pushList(lines, title, items, renderItem) {
   lines.push('');
 }
 
+function pushActionSections(lines, actions = []) {
+  if (!actions || actions.length === 0) return;
+
+  const [firstAction, ...restActions] = actions;
+  lines.push('Als Erstes:');
+  lines.push(`- ${firstAction.label} — ${firstAction.why}`);
+  lines.push('');
+
+  pushList(lines, 'Danach', restActions, (item) => `${item.label} — ${item.why}`);
+}
+
+function formatDocumentStatus(status) {
+  if (status === 'already-secured') return 'schon gesichert';
+  if (status === 'secure-now') return 'jetzt sichern';
+  return status;
+}
+
 function renderPreview(projected) {
   const lines = [];
   lines.push(`Dein Fokus jetzt: ${projected.caseSnapshot.headline}`);
@@ -14,7 +31,7 @@ function renderPreview(projected) {
   } else if (projected.riskFlag) {
     lines.push(`Wichtiges Risiko: ${projected.riskFlag.label}`);
   }
-  if (projected.disclaimer) lines.push(`Hinweis: ${projected.disclaimer}`);
+  if (projected.disclaimer) lines.push(`Wichtig dabei: ${projected.disclaimer}`);
   return lines.join('\n').trim();
 }
 
@@ -25,11 +42,11 @@ function renderBase(projected) {
   lines.push(projected.caseSnapshot.situation);
   lines.push('');
 
-  pushList(lines, 'Nächste Schritte', projected.topActions, (item) => `${item.label} — ${item.why}`);
+  pushActionSections(lines, projected.topActions);
   pushList(lines, 'Fristen', projected.deadlines, (item) => `${item.label}: ${item.timing}` + (item.note ? ` (${item.note})` : ''));
   pushList(lines, 'Risiken', projected.riskFlags, (item) => `${item.label} — ${item.description}`);
   pushList(lines, 'Red Flags', projected.redFlags, (item) => `${item.label} — ${item.whyEscalated}`);
-  pushList(lines, 'Unterlagen', projected.documentChecklist, (item) => `${item.label} (${item.status}) — ${item.reason}`);
+  pushList(lines, 'Unterlagen', projected.documentChecklist, (item) => `${item.label} (${formatDocumentStatus(item.status)}) — ${item.reason}`);
   pushList(lines, 'Hinweise', projected.disclaimers, (item) => item);
 
   return lines.join('\n').trim();
@@ -42,11 +59,11 @@ function renderUpgrade(projected) {
   lines.push(`Warum dieser Fokus: ${projected.synthesisDecision.reasoning}`);
   lines.push('');
 
-  pushList(lines, 'Nächste Schritte', projected.topActions, (item) => `${item.label} — ${item.why}`);
+  pushActionSections(lines, projected.topActions);
   pushList(lines, 'Fristen', projected.deadlines, (item) => `${item.label}: ${item.timing}` + (item.note ? ` (${item.note})` : ''));
   pushList(lines, 'Risiken', projected.riskFlags, (item) => `${item.label} — ${item.description}`);
   pushList(lines, 'Red Flags', projected.redFlags, (item) => `${item.label} — ${item.whyEscalated}`);
-  pushList(lines, 'Unterlagen', projected.documentChecklist, (item) => `${item.label} (${item.status}) — ${item.reason}`);
+  pushList(lines, 'Unterlagen', projected.documentChecklist, (item) => `${item.label} (${formatDocumentStatus(item.status)}) — ${item.reason}`);
   pushList(lines, 'Fragen für Beratung', projected.advisorQuestions, (item) => item);
   pushList(lines, 'Chancen', projected.opportunities, (item) => `${item.label} — ${item.description}`);
   pushList(lines, 'Hinweise', projected.disclaimers, (item) => item);

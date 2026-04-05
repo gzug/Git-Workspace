@@ -41,7 +41,8 @@ function runCase(name) {
 
   const baseText = renderProductResult(base, { tier: 'base' });
   assert.ok(baseText.startsWith(result.caseSnapshot.headline));
-  assert.ok(baseText.includes('Nächste Schritte:'));
+  assert.ok(baseText.includes('Als Erstes:'));
+  if (result.topActions.length > 1) assert.ok(baseText.includes('Danach:'));
   assert.ok(baseText.includes('Fristen:') || result.deadlines.length === 0);
   assert.ok(baseText.includes('Unterlagen:'));
   assert.ok(baseText.includes('Hinweise:'));
@@ -52,6 +53,8 @@ function runCase(name) {
 
   const upgradeText = renderProductResult(upgrade, { tier: 'upgrade' });
   assert.ok(upgradeText.includes(`Warum dieser Fokus: ${result.synthesisDecision.reasoning}`));
+  assert.ok(upgradeText.includes('Als Erstes:'));
+  if (result.topActions.length > 1) assert.ok(upgradeText.includes('Danach:'));
   assert.ok(upgradeText.includes('Fragen für Beratung:'));
   assert.ok(upgradeText.includes('Hinweise:'));
   assert.equal(upgradeText, readText(`${SNAPSHOT_DIR}/${name}.upgrade.txt`).trim());
@@ -62,6 +65,9 @@ function runCase(name) {
   assert.ok(!/\bMVP\b|\bTool\b/.test(previewText));
   assert.ok(!/\bMVP\b|\bTool\b/.test(baseText));
   assert.ok(!/\bMVP\b|\bTool\b/.test(upgradeText));
+  assert.ok(!/already-secured|secure-now/.test(previewText));
+  assert.ok(!/already-secured|secure-now/.test(baseText));
+  assert.ok(!/already-secured|secure-now/.test(upgradeText));
 
   if (name === '01-kuendigung-arbeitslosmeldung-offen') {
     assert.ok(baseText.includes('Arbeitslosmeldung:'));

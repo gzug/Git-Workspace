@@ -68,7 +68,7 @@ function run() {
   assert.equal(unknownTierView.status, 'ready');
   assert.equal(unknownTierView.tier, 'base');
   assert.ok(unknownTierView.warnings.some((warning) => warning.includes('Unknown tier "vip"')));
-  assert.ok(unknownTierView.rendered.includes('Nächste Schritte:'));
+  assert.ok(unknownTierView.rendered.includes('Als Erstes:'));
   assert.equal(unknownTierEvents.length, 1);
   assert.equal(unknownTierEvents[0].warningCount, 1);
   assert.equal(unknownTierEvents[0].tier, 'base');

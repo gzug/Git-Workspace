@@ -21,7 +21,7 @@ function run() {
   assert.equal(preview.caseSnapshot.headline, result.caseSnapshot.headline);
   assert.equal(preview.topAction.label, result.topActions[0].label);
   assert.equal(preview.deadline.label, result.deadlines[0].label);
-  assert.equal(preview.disclaimer, result.disclaimers[0]);
+  assert.equal(preview.disclaimer, result.opportunities[0].description);
   assert.equal(preview.riskFlag.label, result.riskFlags[0].label);
 
   const base = projectResultForTier(result, { tier: 'base' });

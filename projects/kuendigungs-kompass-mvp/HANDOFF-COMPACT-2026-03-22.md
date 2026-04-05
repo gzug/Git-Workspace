@@ -1,7 +1,11 @@
 # Kündigungs-Kompass MVP — Compact Handoff
 
 Stand: 2026-03-22
-Zweck: schneller Wiedereinstieg für Main-Agent, CleanUp oder Support-Agenten nach Pause, Reset oder Delegation.
+Status: historischer Zwischenstand
+Zweck: ältere Verdichtung einer früheren Arbeitswelle.
+
+**Wichtig:** Diese Datei ist **nicht** mehr der kanonische Wiedereinstieg.
+Für den aktuellen Projektstand immer zuerst `PROJECT-STATUS.md` lesen. Diese Datei dient nur noch als historische Kontextverdichtung.
 
 ---
 

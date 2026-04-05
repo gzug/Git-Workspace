@@ -11,7 +11,12 @@ function readJson(relativePath) {
 
 function run() {
   const completeInput = readJson('examples/inputs/01-kuendigung-arbeitslosmeldung-offen.input.json');
-  const readyView = buildQuestionnaireResultView(completeInput, { tier: 'upgrade' });
+
+  const readyEvents = [];
+  const readyView = buildQuestionnaireResultView(completeInput, {
+    tier: 'upgrade',
+    onEvent: (event) => readyEvents.push(event),
+  });
 
   assert.equal(readyView.status, 'ready');
   assert.equal(readyView.tier, 'upgrade');
@@ -23,36 +28,67 @@ function run() {
   assert.equal(readyView.telemetry.status, 'ready');
   assert.equal(readyView.telemetry.primaryTrack, 'deadline-first');
   assert.ok(typeof readyView.telemetry.generatedAt === 'string');
+  assert.equal(readyView.telemetry.flowAbandonment, null);
+  assert.equal(readyEvents.length, 1);
+  assert.deepEqual(readyEvents[0], readyView.telemetry);
 
+  const incompleteEvents = [];
   const incompleteView = buildQuestionnaireResultView({
     case_entry: 'termination_received',
     agreement_present: false,
     already_unemployed_now: false,
     release_status: 'no',
-  }, { tier: 'base' });
+  }, {
+    tier: 'base',
+    onEvent: (event) => incompleteEvents.push(event),
+  });
 
   assert.equal(incompleteView.status, 'incomplete');
   assert.equal(incompleteView.flowState.isComplete, false);
   assert.equal(incompleteView.flowState.nextScreen.id, 'time-critical-basics');
+  assert.equal(incompleteView.flowState.nextQuestionId, 'termination_access_date');
+  assert.equal(incompleteView.flowState.lastAnsweredQuestionId, 'case_entry');
   assert.ok(incompleteView.missingAnswers.some((item) => item.id === 'termination_access_date'));
   assert.ok(incompleteView.message.includes('Für die Auswertung fehlt noch:'));
   assert.equal(incompleteView.telemetry.status, 'incomplete');
   assert.ok(incompleteView.telemetry.missingAnswersCount >= 1);
+  assert.equal(incompleteView.telemetry.flowAbandonment.lastQuestionKey, 'case_entry');
+  assert.equal(incompleteView.telemetry.flowAbandonment.nextQuestionKey, 'termination_access_date');
+  assert.equal(incompleteView.telemetry.flowAbandonment.trackContext, null);
+  assert.equal(incompleteView.telemetry.flowAbandonment.hadRedFlag, true);
+  assert.equal(incompleteView.telemetry.flowAbandonment.hadKnownDeadlineDate, false);
+  assert.equal(incompleteEvents.length, 1);
+  assert.deepEqual(incompleteEvents[0], incompleteView.telemetry);
 
-  const unknownTierView = buildQuestionnaireResultView(completeInput, { tier: 'vip' });
+  const unknownTierEvents = [];
+  const unknownTierView = buildQuestionnaireResultView(completeInput, {
+    tier: 'vip',
+    onEvent: (event) => unknownTierEvents.push(event),
+  });
   assert.equal(unknownTierView.status, 'ready');
   assert.equal(unknownTierView.tier, 'base');
   assert.ok(unknownTierView.warnings.some((warning) => warning.includes('Unknown tier "vip"')));
   assert.ok(unknownTierView.rendered.includes('Nächste Schritte:'));
+  assert.equal(unknownTierEvents.length, 1);
+  assert.equal(unknownTierEvents[0].warningCount, 1);
+  assert.equal(unknownTierEvents[0].tier, 'base');
 
-  const invalidInputView = buildQuestionnaireResultView(null, { tier: 'base' });
+  const invalidInputEvents = [];
+  const invalidInputView = buildQuestionnaireResultView(null, {
+    tier: 'base',
+    onEvent: (event) => invalidInputEvents.push(event),
+  });
   assert.equal(invalidInputView.status, 'error');
   assert.equal(invalidInputView.error.code, 'invalid_input');
   assert.equal(invalidInputView.telemetry.status, 'error');
   assert.equal(invalidInputView.telemetry.errorCode, 'invalid_input');
+  assert.equal(invalidInputEvents.length, 1);
+  assert.deepEqual(invalidInputEvents[0], invalidInputView.telemetry);
 
+  const buildErrorEvents = [];
   const buildErrorView = buildQuestionnaireResultView(completeInput, {
     tier: 'base',
+    onEvent: (event) => buildErrorEvents.push(event),
     buildFn: () => {
       throw new Error('Synthetic build failure');
     },
@@ -65,9 +101,13 @@ function run() {
   assert.equal(buildErrorView.telemetry.errorCode, 'build_result_failed');
   assert.ok(buildErrorView.normalizedInput);
   assert.ok(buildErrorView.flowState);
+  assert.equal(buildErrorEvents.length, 1);
+  assert.deepEqual(buildErrorEvents[0], buildErrorView.telemetry);
 
+  const projectErrorEvents = [];
   const projectErrorView = buildQuestionnaireResultView(completeInput, {
     tier: 'base',
+    onEvent: (event) => projectErrorEvents.push(event),
     projectFn: () => {
       throw new Error('Synthetic project failure');
     },
@@ -81,9 +121,13 @@ function run() {
   assert.ok(projectErrorView.result);
   assert.ok(projectErrorView.normalizedInput);
   assert.ok(projectErrorView.flowState);
+  assert.equal(projectErrorEvents.length, 1);
+  assert.deepEqual(projectErrorEvents[0], projectErrorView.telemetry);
 
+  const renderFallbackEvents = [];
   const renderFallbackView = buildQuestionnaireResultView(completeInput, {
     tier: 'base',
+    onEvent: (event) => renderFallbackEvents.push(event),
     renderFn: () => {
       throw new Error('Synthetic render failure');
     },
@@ -96,6 +140,8 @@ function run() {
   assert.ok(renderFallbackView.projected);
   assert.equal(renderFallbackView.telemetry.status, 'render-fallback');
   assert.equal(renderFallbackView.telemetry.errorCode, 'render_failed');
+  assert.equal(renderFallbackEvents.length, 1);
+  assert.deepEqual(renderFallbackEvents[0], renderFallbackView.telemetry);
 
   console.log('All questionnaire result view tests passed.');
 }

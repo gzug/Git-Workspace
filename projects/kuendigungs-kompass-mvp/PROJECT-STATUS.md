@@ -59,6 +59,8 @@ Der Kündigungs-Kompass ist kein loses Konzept mehr, sondern ein **testbarer Run
 - `MONITORING-ANALYTICS-V1.md`
 - `SOFT-LAUNCH-CHECKLIST-V1.md`
 - telemetry-taugliche Summary-Felder im Runtime-Layer
+- kanonischer Runtime-Emissionspunkt vorhanden: `buildQuestionnaireResultView(..., { onEvent })` emittiert jetzt pro View genau ein strukturiertes `questionnaire_result_view_built`-Event
+- `incomplete` trägt zusätzlich anonymen Flow-Abbruchkontext (`lastQuestionKey`, `nextQuestionKey`, `trackContext`, `hadRedFlag`, `hadKnownDeadlineDate`) für Soft-Launch-Monitoring
 - erste Render-Snapshots für den Mehrfachfall
 - `test-launch-hardening-anchors.js` sichert jetzt 11 zentrale Drift-Anker: Wochenend-Klagefrist, Agentur-Meldungs-Trennung, `incomplete` statt falschem `ready`, Typed-Input-Guardrails gegen ungültige Datums-/Bool-Werte, widerspruchsarme Multi-Select-Normalisierung (`none_known` / `none_yet`), Cross-Field-Guardrails für angekündigte Kündigung ohne echte Zugangsfrist, konsistente Vertragsflags bei bereits unterschriebenem Vertrag, Neutralisierung irrelevanter Arbeitslosmeldungs-Flags außerhalb echter Arbeitslosigkeit, kein falscher Klagefrist-Pfad in reinen Vertragsfällen, semantisch konsistenter Vertrags-Einstieg bei `settlement_offered` sowie explizite statt nur vermutete Freistellungs-Logik bei Risiko-/Dokumentenblöcken
 
@@ -80,14 +82,14 @@ Der nächste Hebel ist **konservative Launch-Härtung**:
 - Guardrails schärfer
 
 ## Wiedereinstieg: zuerst lesen
-1. `projects/kuendigungs-kompass-mvp/EXECUTION-BOARD.md`
-2. `projects/kuendigungs-kompass-mvp/PROJECT-STATUS.md`
-3. `projects/kuendigungs-kompass-mvp/DOC-STRUCTURE-NOTES.md`
-4. `projects/kuendigungs-kompass-mvp/EXECUTION-PLAN-2026-04-05.md`
-5. `projects/kuendigungs-kompass-mvp/DATE-LOGIC-MVP.md`
-6. `projects/kuendigungs-kompass-mvp/SNAPSHOT-ANCHORS-V1.md`
-7. `projects/kuendigungs-kompass-mvp/LAUNCH-HARDENING-V1.md`
-8. danach gezielt betroffene Projektdateien oder Runtime-Dateien
+1. `projects/kuendigungs-kompass-mvp/PROJECT-STATUS.md`
+2. `projects/kuendigungs-kompass-mvp/EXECUTION-BOARD.md`
+3. danach nur blockrelevante Dateien, aktuell vor allem:
+   - `projects/kuendigungs-kompass-mvp/DATE-LOGIC-MVP.md`
+   - `projects/kuendigungs-kompass-mvp/SNAPSHOT-ANCHORS-V1.md`
+   - `projects/kuendigungs-kompass-mvp/MONITORING-ANALYTICS-V1.md`
+   - `projects/kuendigungs-kompass-mvp/LAUNCH-HARDENING-V1.md`
+4. `README.md` ist nur Intro; `HANDOFF-COMPACT-2026-03-22.md` ist historischer Kontext, kein Pflicht-Einstieg
 
 ## Kurzfazit
 Das Projekt ist fachlich und technisch weit genug, dass nicht neue Feature-Fläche der Engpass ist, sondern **Drift-Kontrolle, Guardrails und Launch-Reife**.

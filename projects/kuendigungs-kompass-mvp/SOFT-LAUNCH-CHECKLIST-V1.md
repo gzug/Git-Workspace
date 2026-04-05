@@ -34,6 +34,7 @@ Stand: 2026-03-22
 
 ### E. Monitoring
 - [ ] mindestens Status, Error-Code, Track und Warning-Count werden sichtbar
+- [ ] ein kanonischer Runtime-Emissionspunkt ist angeschlossen (`buildQuestionnaireResultView(..., { onEvent })`)
 - [ ] Render-Fallbacks sind auffindbar
 - [ ] Fehler verschwinden nicht still
 - [ ] anonyme Flow-Abbrüche können grob beobachtet werden
@@ -50,7 +51,7 @@ Stand: 2026-03-22
 - wiederholte `render-fallback`-Fälle
 - sichtbare Drift zwischen Fixture und Runtime
 - Sonderfälle landen in falschen Tracks
-- Fragebogen produziert unerwartet viele `incomplete`-Abbrüche
+- Fragebogen produziert unerwartet viele `incomplete`-Abbrüche oder häuft sich an denselben `nextQuestionKey`
 - unerklärliche `error`-Häufung
 
 ## Minimaler Rollback-Gedanke

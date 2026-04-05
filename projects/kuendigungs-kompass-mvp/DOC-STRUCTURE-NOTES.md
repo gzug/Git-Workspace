@@ -8,7 +8,8 @@ Diese Datei hält die aktuelle Arbeitslogik für die Projektdokumentation fest, 
 
 ## Aktuelle Einordnung
 ### Führend aktiv
-- `PROJECT-STATUS.md` → Projektlage, Fokus, Risiken, Wiedereinstieg
+- `PROJECT-STATUS.md` → kanonischer Einstieg; Projektlage, Fokus, Risiken, Wiedereinstieg
+- `README.md` → nur kurzes Projekt-Intro, keine konkurrierende Steuerdatei
 - `V2-DECISIONS.md` → geltende Leitentscheidungen
 - `RESULT-MAPPING.md` → operative Mapping-Logik
 - `REFERENZFAELLE.md` → fachliche Referenzfälle / Soll-Outputs

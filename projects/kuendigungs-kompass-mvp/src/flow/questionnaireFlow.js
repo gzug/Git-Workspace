@@ -120,20 +120,36 @@ function getNextIncompleteScreen(rawAnswers = {}) {
 }
 
 function getQuestionnaireFlowState(rawAnswers = {}) {
-  const screens = getLaunchV1Screens(rawAnswers);
+  const answers = normalizeAnswers(rawAnswers);
+  const screens = getLaunchV1Screens(answers);
   const nextScreen = screens.find((screen) => !screen.isCompleted) || null;
   const answeredQuestionIds = new Set();
+  let lastAnsweredQuestionId = null;
+  let breakReached = false;
 
   for (const screen of screens) {
     for (const question of screen.questions) {
-      if (isQuestionAnswered(question, rawAnswers)) answeredQuestionIds.add(question.id);
+      const answered = isQuestionAnswered(question, answers);
+      if (answered) answeredQuestionIds.add(question.id);
+
+      if (!breakReached) {
+        if (answered) {
+          lastAnsweredQuestionId = question.id;
+        } else {
+          breakReached = true;
+        }
+      }
     }
   }
+
+  const nextQuestion = nextScreen?.questions.find((question) => !isQuestionAnswered(question, answers)) || null;
 
   return {
     flowId: 'launch-v1',
     screens,
     nextScreen,
+    nextQuestionId: nextQuestion?.id || null,
+    lastAnsweredQuestionId,
     isComplete: nextScreen == null,
     answeredQuestionIds: Array.from(answeredQuestionIds),
   };

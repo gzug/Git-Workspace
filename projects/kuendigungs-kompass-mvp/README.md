@@ -83,12 +83,14 @@ Der aktuelle Engpass ist **Launch Hardening**:
 - UI/API erst danach weiterziehen
 
 ## Wiedereinstieg
-Wenn du neu oder nach Pause ins Projekt gehst, lies zuerst:
-1. `EXECUTION-BOARD.md`
-2. `PROJECT-STATUS.md`
-3. `FLOW-CONTRACT-V1.md`
-4. `DATE-LOGIC-MVP.md`
-5. danach nur die für den aktuellen Block relevanten Dateien
+Kanonischer Einstieg: **`PROJECT-STATUS.md`**.
+
+Wenn du neu oder nach Pause ins Projekt gehst, lies in dieser Reihenfolge:
+1. `PROJECT-STATUS.md`
+2. `EXECUTION-BOARD.md`
+3. danach nur die für den aktuellen Block relevanten Dateien, z. B. `DATE-LOGIC-MVP.md`, `RESULT-MAPPING.md`, `MONITORING-ANALYTICS-V1.md`
+
+`README.md` ist nur das kurze Projekt-Intro, nicht die führende Steuerdatei.
 
 ## Leitgedanke
 Der Kündigungs-Kompass ist nur dann launch-reif, wenn **Routing, Guardrails, Fallbacks und Fristenlogik belastbar sind** — nicht schon dann, wenn der Happy Path hübsch aussieht.

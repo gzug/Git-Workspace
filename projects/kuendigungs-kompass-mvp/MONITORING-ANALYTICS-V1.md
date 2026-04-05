@@ -26,6 +26,7 @@ Ein kleines, belastbares Beobachtungsmodell für den MVP schaffen — ohne direk
 - wie oft Render-Fallback auftritt
 - wie oft Red Flags auftreten
 - an welcher Frage der Flow am häufigsten abbricht
+- ob Abbrüche vor allem bei Red-Flag-nahen oder deadline-relevanten Konstellationen passieren
 
 ## Nicht Ziel von V1
 - individuelle Nutzerprofile
@@ -34,6 +35,12 @@ Ein kleines, belastbares Beobachtungsmodell für den MVP schaffen — ohne direk
 - überfeine Event-Zerlegung
 
 ## Empfohlenes Event-Schema
+### Kanonischer Runtime-Emissionspunkt
+Der MVP hat jetzt einen einzigen andockbaren Emissionspunkt im Runtime-Layer:
+- `buildQuestionnaireResultView(rawInput, { onEvent })`
+- pro gebautem View genau **ein** Event-Payload
+- aktueller Event-Name: `questionnaire_result_view_built`
+
 ### Event: `questionnaire_result_view_built`
 Felder:
 - `status`
@@ -47,16 +54,19 @@ Felder:
 - `deadlinesCount`
 - `redFlagsCount`
 - `errorCode`
+- `flowAbandonment` (`null` außer bei `incomplete`)
 
-### Event: `questionnaire_flow_abandoned`
+### `flowAbandonment` bei `incomplete`
 Nur anonym und minimal:
 - `lastQuestionKey`
+- `nextQuestionKey`
 - `trackContext` wenn ableitbar
 - `hadRedFlag`
 - `hadKnownDeadlineDate`
 
-### Event: `questionnaire_result_view_failed`
-Nur separat, wenn `status=error` im Haupt-Event nicht reicht.
+### Später optional
+- separates Event `questionnaire_flow_abandoned`, falls UI/API später lieber zwei Events statt eines kanonischen Payloads haben will
+- separates Event `questionnaire_result_view_failed`, falls `status=error` im Hauptevent operativ nicht reicht
 
 ## Interpretationsregeln
 - viele `incomplete` = Fragebogen oder Screen-Reihenfolge prüfen

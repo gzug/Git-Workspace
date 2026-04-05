@@ -22,12 +22,22 @@ function formatDocumentStatus(status) {
   return status;
 }
 
+function renderRedFlagItem(item) {
+  return `${item.label} — ${item.whyEscalated}`
+    + (item.recommendedEscalation ? ` Nächster sinnvoller Schritt: ${item.recommendedEscalation}.` : '');
+}
+
 function renderPreview(projected) {
   const lines = [];
   lines.push(projected.caseSnapshot.headline);
   if (projected.topAction) lines.push(`Wichtigster nächster Schritt: ${projected.topAction.label}`);
   if (projected.deadline) {
     lines.push(`Kritische Frist: ${projected.deadline.label} — ${projected.deadline.timing}`);
+  } else if (projected.redFlag) {
+    lines.push(`Besonders wichtig: ${projected.redFlag.label}`);
+    if (projected.redFlag.recommendedEscalation) {
+      lines.push(`Sinnvoll jetzt: ${projected.redFlag.recommendedEscalation}`);
+    }
   } else if (projected.riskFlag) {
     lines.push(`Wichtiges Risiko: ${projected.riskFlag.label}`);
   }
@@ -45,7 +55,7 @@ function renderBase(projected) {
   pushActionSections(lines, projected.topActions);
   pushList(lines, 'Fristen', projected.deadlines, (item) => `${item.label}: ${item.timing}` + (item.note ? ` (${item.note})` : ''));
   pushList(lines, 'Risiken', projected.riskFlags, (item) => `${item.label} — ${item.description}`);
-  pushList(lines, 'Besonders wichtig', projected.redFlags, (item) => `${item.label} — ${item.whyEscalated}`);
+  pushList(lines, 'Besonders wichtig', projected.redFlags, renderRedFlagItem);
   pushList(lines, 'Unterlagen', projected.documentChecklist, (item) => `${item.label} (${formatDocumentStatus(item.status)}) — ${item.reason}`);
   pushList(lines, 'Hinweise', projected.disclaimers, (item) => item);
 
@@ -62,7 +72,7 @@ function renderUpgrade(projected) {
   pushActionSections(lines, projected.topActions);
   pushList(lines, 'Fristen', projected.deadlines, (item) => `${item.label}: ${item.timing}` + (item.note ? ` (${item.note})` : ''));
   pushList(lines, 'Risiken', projected.riskFlags, (item) => `${item.label} — ${item.description}`);
-  pushList(lines, 'Besonders wichtig', projected.redFlags, (item) => `${item.label} — ${item.whyEscalated}`);
+  pushList(lines, 'Besonders wichtig', projected.redFlags, renderRedFlagItem);
   pushList(lines, 'Unterlagen', projected.documentChecklist, (item) => `${item.label} (${formatDocumentStatus(item.status)}) — ${item.reason}`);
   pushList(lines, 'Fragen für Beratung', projected.advisorQuestions, (item) => item);
   pushList(lines, 'Chancen', projected.opportunities, (item) => `${item.label} — ${item.description}`);

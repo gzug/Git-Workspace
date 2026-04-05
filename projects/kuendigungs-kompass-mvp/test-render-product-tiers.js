@@ -11,6 +11,7 @@ const CASES = [
   '01-kuendigung-arbeitslosmeldung-offen',
   '02-aufhebungsvertrag-nicht-unterschrieben',
   '03-kuendigung-sonderfall',
+  '04-vertrag-bereits-unterschrieben',
   '05-kuendigung-nur-angekuendigt',
   '06-mehrere-eingaenge-gleichzeitig',
   '07-angekuendigt-alg1-risiko',
@@ -91,7 +92,15 @@ function runCase(name) {
     assert.ok(baseText.includes('Besonders wichtig:'));
     assert.ok(baseText.includes('Möglicher besonderer Schutz oder Sonderfall'));
     assert.ok(baseText.includes('Kündigungsschutzklage prüfen:'));
+    assert.ok(baseText.includes('Anwalt, Gewerkschaft oder passender Beratungsstelle'));
     assert.ok(previewText.includes('Kündigungsschutzklage prüfen —'));
+  }
+
+  if (name === '04-vertrag-bereits-unterschrieben') {
+    assert.ok(previewText.includes('Besonders wichtig: Bereits unterschriebener Beendigungsvertrag'));
+    assert.ok(previewText.includes('Sinnvoll jetzt: Qualifizierte individuelle Prüfung mit Anwalt, Gewerkschaft oder passender Beratungsstelle'));
+    assert.ok(baseText.includes('Anwalt, Gewerkschaft oder passender Beratungsstelle'));
+    assert.ok(upgradeText.includes('Anwalt, Gewerkschaft oder passender Beratungsstelle'));
   }
 
   if (name === '05-kuendigung-nur-angekuendigt') {
@@ -105,6 +114,8 @@ function runCase(name) {
     assert.ok(baseText.includes('bis 13.04.2026'));
     assert.ok(baseText.includes('Fällt das rechnerische Fristende auf Samstag oder Sonntag'));
     assert.ok(baseText.includes('Wenn ein Landesfeiertag in Frage kommt, sollte das Fristende vorsichtshalber zusätzlich geprüft werden.'));
+    assert.ok(baseText.includes('Anwalt, Gewerkschaft oder passender Beratungsstelle'));
+    assert.ok(upgradeText.includes('Anwalt, Gewerkschaft oder passender Beratungsstelle'));
   }
 
   if (name === '07-angekuendigt-alg1-risiko') {

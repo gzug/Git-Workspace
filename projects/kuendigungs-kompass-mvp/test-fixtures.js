@@ -126,6 +126,7 @@ for (const [inputPath, expectedPath] of PAIRS) {
       assert.ok(standardRendered.indexOf('Besonders wichtig:') > standardRendered.indexOf('Risiken:'));
       assert.ok(standardRendered.indexOf('Besonders wichtig:') < standardRendered.indexOf('Unterlagen:'));
       assert.ok(actualDeadlineLabels.includes('Kündigungsschutzklage prüfen'));
+      assert.ok(standardRendered.includes('Anwalt, Gewerkschaft oder passender Beratungsstelle'));
     }
 
     if (name.startsWith('04-')) {
@@ -133,6 +134,7 @@ for (const [inputPath, expectedPath] of PAIRS) {
       assert.equal(actual.deadlines.length, 0);
       assert.ok(!standardRendered.includes('Arbeitsuchendmeldung:'));
       assert.ok(actual.redFlags.some((item) => item.label === 'Bereits unterschriebener Beendigungsvertrag'));
+      assert.ok(standardRendered.includes('Anwalt, Gewerkschaft oder passender Beratungsstelle'));
     }
 
     if (name.startsWith('05-')) {

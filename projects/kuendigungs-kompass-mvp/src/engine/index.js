@@ -1070,6 +1070,8 @@ function renderResult(result, view = 'standard') {
     if (status === 'secure-now') return 'jetzt sichern';
     return status;
   };
+  const renderRedFlagItem = (item) => `${item.label} — ${item.whyEscalated}`
+    + (item.recommendedEscalation ? ` Nächster sinnvoller Schritt: ${item.recommendedEscalation}.` : '');
 
   if (view === 'short') {
     lines.push(`Dein Fokus jetzt: ${result.caseSnapshot.headline}`);
@@ -1093,7 +1095,7 @@ function renderResult(result, view = 'standard') {
   pushActionSections(result.topActions);
   pushList('Fristen', result.deadlines, (item) => `${item.label}: ${item.timing}` + (item.note ? ` (${item.note})` : ''));
   pushList('Risiken', result.riskFlags, (item) => `${item.label} — ${item.description}`);
-  pushList('Besonders wichtig', result.redFlags, (item) => `${item.label} — ${item.whyEscalated}`);
+  pushList('Besonders wichtig', result.redFlags, renderRedFlagItem);
   pushList('Unterlagen', result.documentChecklist, (item) => `${item.label} (${formatDocumentStatus(item.status)}) — ${item.reason}`);
   if (view === 'advice') pushList('Fragen für Beratung', result.advisorQuestions, (item) => item);
   pushList('Hinweise', result.disclaimers, (item) => item);

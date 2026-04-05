@@ -14,6 +14,10 @@ function firstRisk(riskFlags = []) {
   return riskFlags[0] || null;
 }
 
+function firstRedFlag(redFlags = []) {
+  return redFlags[0] || null;
+}
+
 function projectPreview(result) {
   return {
     tier: 'preview',
@@ -23,6 +27,7 @@ function projectPreview(result) {
     topAction: result.topActions[0] || null,
     deadline: firstCriticalDeadline(result.deadlines),
     riskFlag: firstRisk(result.riskFlags),
+    redFlag: firstRedFlag(result.redFlags),
     disclaimer: selectPreviewNote(result),
   };
 }

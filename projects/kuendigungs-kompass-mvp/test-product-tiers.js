@@ -17,12 +17,13 @@ const result = buildResult(input);
 function run() {
   const preview = projectResultForTier(result, { tier: 'preview' });
   assert.equal(preview.tier, 'preview');
-  assert.deepEqual(Object.keys(preview).sort(), ['caseSnapshot', 'deadline', 'disclaimer', 'riskFlag', 'tier', 'topAction'].sort());
+  assert.deepEqual(Object.keys(preview).sort(), ['caseSnapshot', 'deadline', 'disclaimer', 'redFlag', 'riskFlag', 'tier', 'topAction'].sort());
   assert.equal(preview.caseSnapshot.headline, result.caseSnapshot.headline);
   assert.equal(preview.topAction.label, result.topActions[0].label);
   assert.equal(preview.deadline.label, result.deadlines[0].label);
   assert.equal(preview.disclaimer, result.opportunities[0].description);
   assert.equal(preview.riskFlag.label, result.riskFlags[0].label);
+  assert.equal(preview.redFlag.label, result.redFlags[0].label);
 
   const base = projectResultForTier(result, { tier: 'base' });
   assert.equal(base.tier, 'base');

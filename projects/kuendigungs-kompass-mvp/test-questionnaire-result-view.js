@@ -51,6 +51,37 @@ function run() {
   assert.equal(invalidInputView.telemetry.status, 'error');
   assert.equal(invalidInputView.telemetry.errorCode, 'invalid_input');
 
+  const buildErrorView = buildQuestionnaireResultView(completeInput, {
+    tier: 'base',
+    buildFn: () => {
+      throw new Error('Synthetic build failure');
+    },
+  });
+
+  assert.equal(buildErrorView.status, 'error');
+  assert.equal(buildErrorView.error.code, 'build_result_failed');
+  assert.equal(buildErrorView.error.message, 'Synthetic build failure');
+  assert.equal(buildErrorView.telemetry.status, 'error');
+  assert.equal(buildErrorView.telemetry.errorCode, 'build_result_failed');
+  assert.ok(buildErrorView.normalizedInput);
+  assert.ok(buildErrorView.flowState);
+
+  const projectErrorView = buildQuestionnaireResultView(completeInput, {
+    tier: 'base',
+    projectFn: () => {
+      throw new Error('Synthetic project failure');
+    },
+  });
+
+  assert.equal(projectErrorView.status, 'error');
+  assert.equal(projectErrorView.error.code, 'project_result_failed');
+  assert.equal(projectErrorView.error.message, 'Synthetic project failure');
+  assert.equal(projectErrorView.telemetry.status, 'error');
+  assert.equal(projectErrorView.telemetry.errorCode, 'project_result_failed');
+  assert.ok(projectErrorView.result);
+  assert.ok(projectErrorView.normalizedInput);
+  assert.ok(projectErrorView.flowState);
+
   const renderFallbackView = buildQuestionnaireResultView(completeInput, {
     tier: 'base',
     renderFn: () => {

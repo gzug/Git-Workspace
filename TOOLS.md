@@ -37,6 +37,7 @@ _Dieses File beschreibt die konkrete Infrastruktur dieses Mac mini. Nur hier, ni
 
 ### Fallback (lokal via Ollama)
 - **ollama/qwen3:8b** — aktiver Fallback
+- **ollama/gemma4:e4b** — neuer lokaler Worker für einfache Tasks / Vorarbeit
 - **ollama/qwen2.5-coder:7b** — Code-Fokus
 - **nomic-embed-text:latest** — Memory-Embeddings
 - **Ollama-Endpoint:** `http://localhost:11434`

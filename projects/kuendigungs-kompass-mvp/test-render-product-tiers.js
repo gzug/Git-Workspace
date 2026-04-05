@@ -79,7 +79,8 @@ function runCase(name) {
     assert.ok(baseText.includes('Arbeitslosmeldung:'));
     assert.ok(baseText.includes('Arbeitsuchendmeldung:'));
     assert.ok(baseText.includes('Kündigungsschutzklage prüfen:'));
-    assert.ok(previewText.includes('Arbeitslosmeldung —'));
+    assert.ok(previewText.includes('Kündigungsschutzklage prüfen — regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung'));
+    assert.ok(!previewText.includes('Kritische Frist: Arbeitslosmeldung'));
   }
 
   if (name === '02-aufhebungsvertrag-nicht-unterschrieben') {

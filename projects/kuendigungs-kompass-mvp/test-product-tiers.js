@@ -20,7 +20,7 @@ function run() {
   assert.deepEqual(Object.keys(preview).sort(), ['caseSnapshot', 'deadline', 'disclaimer', 'redFlag', 'riskFlag', 'tier', 'topAction'].sort());
   assert.equal(preview.caseSnapshot.headline, result.caseSnapshot.headline);
   assert.equal(preview.topAction.label, result.topActions[0].label);
-  assert.equal(preview.deadline.label, result.deadlines[0].label);
+  assert.equal(preview.deadline.label, 'Kündigungsschutzklage prüfen');
   assert.equal(preview.disclaimer, result.opportunities[0].description);
   assert.equal(preview.riskFlag.label, result.riskFlags[0].label);
   assert.equal(preview.redFlag.label, result.redFlags[0].label);

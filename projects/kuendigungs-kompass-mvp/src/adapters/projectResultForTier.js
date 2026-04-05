@@ -7,6 +7,9 @@ function selectPreviewNote(result = {}) {
 }
 
 function firstCriticalDeadline(deadlines = []) {
+  const lawsuitDeadline = deadlines.find((item) => /Kündigungsschutzklage/.test(item.label));
+  if (lawsuitDeadline) return lawsuitDeadline;
+
   return deadlines.find((item) => item.importance === 'critical') || deadlines[0] || null;
 }
 

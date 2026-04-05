@@ -1091,7 +1091,7 @@ function renderResult(result, view = 'standard') {
   pushActionSections(result.topActions);
   pushList('Fristen', result.deadlines, (item) => `${item.label}: ${item.timing}` + (item.note ? ` (${item.note})` : ''));
   pushList('Risiken', result.riskFlags, (item) => `${item.label} — ${item.description}`);
-  pushList('Red Flags', result.redFlags, (item) => `${item.label} — ${item.whyEscalated}`);
+  pushList('Besonders wichtig', result.redFlags, (item) => `${item.label} — ${item.whyEscalated}`);
   pushList('Unterlagen', result.documentChecklist, (item) => `${item.label} (${formatDocumentStatus(item.status)}) — ${item.reason}`);
   if (view === 'advice') pushList('Fragen für Beratung', result.advisorQuestions, (item) => item);
   pushList('Hinweise', result.disclaimers, (item) => item);

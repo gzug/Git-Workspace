@@ -80,7 +80,7 @@ for (const [inputPath, expectedPath] of PAIRS) {
     const stepsIndex = standardRendered.indexOf('Als Erstes:');
     const deadlinesIndex = standardRendered.indexOf('Fristen:');
     const risksIndex = standardRendered.indexOf('Risiken:');
-    const redFlagsIndex = standardRendered.indexOf('Red Flags:');
+    const redFlagsIndex = standardRendered.indexOf('Besonders wichtig:');
     const documentsIndex = standardRendered.indexOf('Unterlagen:');
 
     if (actual.deadlines.length > 0) {
@@ -121,9 +121,9 @@ for (const [inputPath, expectedPath] of PAIRS) {
     if (name.startsWith('03-')) {
       assert.equal(actual.synthesisDecision.primaryTrack, 'special-case-review');
       assert.ok(actual.redFlags.length > 0);
-      assert.ok(standardRendered.includes('Red Flags:'));
-      assert.ok(standardRendered.indexOf('Red Flags:') > standardRendered.indexOf('Risiken:'));
-      assert.ok(standardRendered.indexOf('Red Flags:') < standardRendered.indexOf('Unterlagen:'));
+      assert.ok(standardRendered.includes('Besonders wichtig:'));
+      assert.ok(standardRendered.indexOf('Besonders wichtig:') > standardRendered.indexOf('Risiken:'));
+      assert.ok(standardRendered.indexOf('Besonders wichtig:') < standardRendered.indexOf('Unterlagen:'));
       assert.ok(actualDeadlineLabels.includes('Kündigungsschutzklage prüfen'));
     }
 

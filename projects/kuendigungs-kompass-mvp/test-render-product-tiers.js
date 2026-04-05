@@ -62,6 +62,9 @@ function runCase(name) {
   assert.ok(!/statementLedger|do-not-use-yet/.test(previewText));
   assert.ok(!/statementLedger|do-not-use-yet/.test(baseText));
   assert.ok(!/statementLedger|do-not-use-yet/.test(upgradeText));
+  assert.ok(!/Red Flags/.test(previewText));
+  assert.ok(!/Red Flags/.test(baseText));
+  assert.ok(!/Red Flags/.test(upgradeText));
   assert.ok(!/\bMVP\b|\bTool\b/.test(previewText));
   assert.ok(!/\bMVP\b|\bTool\b/.test(baseText));
   assert.ok(!/\bMVP\b|\bTool\b/.test(upgradeText));
@@ -85,7 +88,7 @@ function runCase(name) {
   }
 
   if (name === '03-kuendigung-sonderfall') {
-    assert.ok(baseText.includes('Red Flags:'));
+    assert.ok(baseText.includes('Besonders wichtig:'));
     assert.ok(baseText.includes('Möglicher besonderer Schutz oder Sonderfall'));
     assert.ok(baseText.includes('Kündigungsschutzklage prüfen:'));
     assert.ok(previewText.includes('Kündigungsschutzklage prüfen —'));

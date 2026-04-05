@@ -1,40 +1,84 @@
-# TOOLS.md - Local Notes
+# TOOLS.md — Lokale Umgebung & Setup-Notizen
+_Dieses File beschreibt die konkrete Infrastruktur dieses Mac mini. Nur hier, nicht in Skills._
 
-Skills define _how_ tools work. This file is for _your_ specifics — the stuff that's unique to your setup.
+## Hauptsystem
 
-## What Goes Here
+- **Gerät:** Mac mini (Apple Silicon, arm64)
+- **Chip:** Apple M4
+- **Unified Memory:** 16 GB
+- **OS:** macOS 26.4
+- **Benutzer:** shashko
+- **Hostname:** Mac-mini-von-Shashko
+- **Node:** v24.12.0 via nvm
 
-Things like:
+## OpenClaw
 
-- Camera names and locations
-- SSH hosts and aliases
-- Preferred voices for TTS
-- Speaker/room names
-- Device nicknames
-- Anything environment-specific
+- **Version:** 2026.3.23-2
+- **Gateway:** `ws://127.0.0.1:18789` (Loopback only)
+- **Dashboard:** `http://127.0.0.1:18789/Users/shashko/.openclaw/workspace/`
+- **Config:** `~/.openclaw/openclaw.json`
+- **Workspace:** `~/.openclaw/workspace/` (dieses Repo)
+- **Gateway-Service:** LaunchAgent (`~/Library/LaunchAgents/ai.openclaw.gateway.plist`)
+- **Logs:** `/tmp/openclaw/openclaw-YYYY-MM-DD.log`
 
-## Examples
+## Nerve UI
 
-```markdown
-### Cameras
+- **URL:** `http://localhost:3080`
+- **Version:** V1.5.1
+- **Auth:** Token (gleicher Token wie Gateway)
+- **Browser:** Chrome (primär)
 
-- living-room → Main area, 180° wide angle
-- front-door → Entrance, motion-triggered
+## Modelle
 
-### SSH
+### Primär
+- **openai-codex/gpt-5.4** via ChatGPT Pro OAuth
+  - Token: wird über `openclaw onboard` verwaltet
+  - Bei 401: `openclaw onboard` erneut ausführen
 
-- home-server → 192.168.1.100, user: admin
+### Fallback (lokal via Ollama)
+- **ollama/qwen3:8b** — aktiver Fallback
+- **ollama/qwen2.5-coder:7b** — Code-Fokus
+- **nomic-embed-text:latest** — Memory-Embeddings
+- **Ollama-Endpoint:** `http://localhost:11434`
 
-### TTS
+## Kanäle
 
-- Preferred voice: "Nova" (warm, slightly British)
-- Default speaker: Kitchen HomePod
+- **Telegram:** @Selo_Abi_bot (läuft, Polling-Stalls beobachten)
+- **Tailscale:** deaktiviert
+- **WhatsApp/Discord/Signal:** nicht konfiguriert
+
+## Backups
+
+- **Lokal:** `/Users/shashko/Backups/mac-mini/` (manuell durch Y.)
+- **Cloud:** manuell, kein Automation-Setup
+
+## Sicherheit
+
+- **Sandbox:** off (Docker nicht installiert, bewusste Entscheidung)
+- **Gateway:** Loopback-only, kein externer Zugriff
+- **Tailscale:** deaktiviert
+
+## Nützliche Befehle
+
+```bash
+# Gateway neu starten
+openclaw gateway restart
+
+# Status überblick
+openclaw status
+
+# Logs live verfolgen
+openclaw logs --follow
+
+# GPT-Token erneuern (bei 401)
+openclaw onboard
+
+# Config validieren
+openclaw config validate
+
+# Nerve öffnen
+open http://localhost:3080
 ```
 
-## Why Separate?
-
-Skills are shared. Your setup is yours. Keeping them apart means you can update skills without losing your notes, and share skills without leaking your infrastructure.
-
 ---
-
-Add whatever helps you do your job. This is your cheat sheet.
+_Zuletzt aktualisiert: 2026-03-25_

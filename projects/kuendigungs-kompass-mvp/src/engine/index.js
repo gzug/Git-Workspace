@@ -1072,6 +1072,8 @@ function renderResult(result, view = 'standard') {
   };
   const renderRedFlagItem = (item) => `${item.label} — ${item.whyEscalated}`
     + (item.recommendedEscalation ? ` Nächster sinnvoller Schritt: ${item.recommendedEscalation}.` : '');
+  const renderDeadlineItem = (item) => `${item.label}: ${item.timing}`
+    + (item.note ? `\n  Hinweis: ${item.note}` : '');
 
   if (view === 'short') {
     lines.push(`Dein Fokus jetzt: ${result.caseSnapshot.headline}`);
@@ -1093,7 +1095,7 @@ function renderResult(result, view = 'standard') {
   }
 
   pushActionSections(result.topActions);
-  pushList('Fristen', result.deadlines, (item) => `${item.label}: ${item.timing}` + (item.note ? ` (${item.note})` : ''));
+  pushList('Fristen', result.deadlines, renderDeadlineItem);
   pushList('Risiken', result.riskFlags, (item) => `${item.label} — ${item.description}`);
   pushList('Besonders wichtig', result.redFlags, renderRedFlagItem);
   pushList('Unterlagen', result.documentChecklist, (item) => `${item.label} (${formatDocumentStatus(item.status)}) — ${item.reason}`);

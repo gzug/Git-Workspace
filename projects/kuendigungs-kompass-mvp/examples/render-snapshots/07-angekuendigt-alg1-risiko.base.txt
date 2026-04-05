@@ -10,7 +10,8 @@ Danach:
 - Sobald etwas Schriftliches kommt, den Fall direkt neu einordnen — Erst mit einer schriftlichen Kündigung werden Fristen wie die Kündigungsschutzklage konkret relevant.
 
 Fristen:
-- Arbeitsuchendmeldung: spätestens 3 Monate vor Ende, sonst innerhalb von 3 Tagen nach Kenntnis (Diese Meldung sollte nicht aufgeschoben werden, auch wenn die Beendigung bisher nur angekündigt ist oder noch Unterlagen fehlen.)
+- Arbeitsuchendmeldung: spätestens 3 Monate vor Ende, sonst innerhalb von 3 Tagen nach Kenntnis
+  Hinweis: Diese Meldung sollte nicht aufgeschoben werden, auch wenn die Beendigung bisher nur angekündigt ist oder noch Unterlagen fehlen.
 
 Risiken:
 - Offene Arbeitsuchendmeldung kann sich später beim Arbeitslosengeld auswirken — Wenn die frühe Arbeitsuchendmeldung offen bleibt, kann das den späteren ALG-I-Prozess unnötig belasten.

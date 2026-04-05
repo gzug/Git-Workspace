@@ -10,7 +10,8 @@ Danach:
 - Kernunterlagen schon jetzt sichern — Wenn sich die Lage zuspitzt, spart vorbereitete Dokumentation Zeit und Fehler.
 
 Fristen:
-- Arbeitsuchendmeldung: spätestens 3 Monate vor Ende, sonst innerhalb von 3 Tagen nach Kenntnis (Diese Meldung sollte nicht aufgeschoben werden, auch wenn die Beendigung bisher nur angekündigt ist oder noch Unterlagen fehlen.)
+- Arbeitsuchendmeldung: spätestens 3 Monate vor Ende, sonst innerhalb von 3 Tagen nach Kenntnis
+  Hinweis: Diese Meldung sollte nicht aufgeschoben werden, auch wenn die Beendigung bisher nur angekündigt ist oder noch Unterlagen fehlen.
 
 Risiken:
 - Frühe Agentur-Schritte könnten übersehen werden — Wer nur auf das schriftliche Kündigungsschreiben wartet, kann frühe To-dos bei der Agentur aus dem Blick verlieren.

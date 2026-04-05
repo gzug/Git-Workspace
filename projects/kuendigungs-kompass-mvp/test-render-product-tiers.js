@@ -45,6 +45,7 @@ function runCase(name) {
   assert.ok(baseText.includes('Als Erstes:'));
   if (result.topActions.length > 1) assert.ok(baseText.includes('Danach:'));
   assert.ok(baseText.includes('Fristen:') || result.deadlines.length === 0);
+  if (result.deadlines.some((item) => item.note)) assert.ok(baseText.includes('\n  Hinweis: '));
   assert.ok(baseText.includes('Unterlagen:'));
   assert.ok(baseText.includes('Hinweise:'));
   assert.ok(!baseText.includes('Warum dieser Fokus:'));
@@ -57,6 +58,7 @@ function runCase(name) {
   assert.ok(upgradeText.includes('Als Erstes:'));
   if (result.topActions.length > 1) assert.ok(upgradeText.includes('Danach:'));
   assert.ok(upgradeText.includes('Fragen für Beratung:'));
+  if (result.deadlines.some((item) => item.note)) assert.ok(upgradeText.includes('\n  Hinweis: '));
   assert.ok(upgradeText.includes('Hinweise:'));
   assert.equal(upgradeText, readText(`${SNAPSHOT_DIR}/${name}.upgrade.txt`).trim());
 

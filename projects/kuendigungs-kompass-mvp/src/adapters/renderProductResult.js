@@ -27,6 +27,11 @@ function renderRedFlagItem(item) {
     + (item.recommendedEscalation ? ` Nächster sinnvoller Schritt: ${item.recommendedEscalation}.` : '');
 }
 
+function renderDeadlineItem(item) {
+  return `${item.label}: ${item.timing}`
+    + (item.note ? `\n  Hinweis: ${item.note}` : '');
+}
+
 function renderPreview(projected) {
   const lines = [];
   lines.push(projected.caseSnapshot.headline);
@@ -57,7 +62,7 @@ function renderBase(projected) {
   lines.push('');
 
   pushActionSections(lines, projected.topActions);
-  pushList(lines, 'Fristen', projected.deadlines, (item) => `${item.label}: ${item.timing}` + (item.note ? ` (${item.note})` : ''));
+  pushList(lines, 'Fristen', projected.deadlines, renderDeadlineItem);
   pushList(lines, 'Risiken', projected.riskFlags, (item) => `${item.label} — ${item.description}`);
   pushList(lines, 'Besonders wichtig', projected.redFlags, renderRedFlagItem);
   pushList(lines, 'Unterlagen', projected.documentChecklist, (item) => `${item.label} (${formatDocumentStatus(item.status)}) — ${item.reason}`);
@@ -74,7 +79,7 @@ function renderUpgrade(projected) {
   lines.push('');
 
   pushActionSections(lines, projected.topActions);
-  pushList(lines, 'Fristen', projected.deadlines, (item) => `${item.label}: ${item.timing}` + (item.note ? ` (${item.note})` : ''));
+  pushList(lines, 'Fristen', projected.deadlines, renderDeadlineItem);
   pushList(lines, 'Risiken', projected.riskFlags, (item) => `${item.label} — ${item.description}`);
   pushList(lines, 'Besonders wichtig', projected.redFlags, renderRedFlagItem);
   pushList(lines, 'Unterlagen', projected.documentChecklist, (item) => `${item.label} (${formatDocumentStatus(item.status)}) — ${item.reason}`);

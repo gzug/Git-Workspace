@@ -59,6 +59,13 @@ Nicht viele Fälle snapshotten, sondern die wenigen, die echte Launch-Drift frü
 - `incomplete` oder konservativer Hinweis kippt nicht in einen zu glatten Ready-Pfad
 - nächster sinnvoller Schritt bleibt klar benannt
 
+## Umsetzung (Stand 2026-04-05)
+- Die drei Anker sind als Testblock in `test-launch-hardening-anchors.js` übersetzt.
+- Dort werden aktuell abgesichert:
+  - Wochenendverschiebung der Klagefrist mit sichtbarem Werktag-/Feiertagshinweis
+  - klare Trennung von Arbeitsuchendmeldung und Arbeitslosmeldung bei gleichzeitig offenen Agentur-Schritten
+  - `incomplete` statt falschem `ready`, wenn routing-kritische Pflichtfelder fehlen
+
 ## Testregel
 Wenn diese drei Anker stabil sind, ist der MVP nicht fertig — aber deutlich launch-näher.
 Wenn einer dieser drei Anker driftet, ist Launch-Hardening noch nicht belastbar genug.

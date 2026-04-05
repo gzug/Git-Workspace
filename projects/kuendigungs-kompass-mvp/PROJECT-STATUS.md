@@ -59,6 +59,7 @@ Der Kündigungs-Kompass ist kein loses Konzept mehr, sondern ein **testbarer Run
 - `SOFT-LAUNCH-CHECKLIST-V1.md`
 - telemetry-taugliche Summary-Felder im Runtime-Layer
 - erste Render-Snapshots für den Mehrfachfall
+- `test-launch-hardening-anchors.js` sichert jetzt 3 zentrale Drift-Anker: Wochenend-Klagefrist, Agentur-Meldungs-Trennung, `incomplete` statt falschem `ready`
 
 ## Inhaltlich stabile Entscheidungen
 Diese Punkte nicht leichtfertig wieder aufreißen:

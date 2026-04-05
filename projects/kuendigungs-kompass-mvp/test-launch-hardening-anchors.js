@@ -102,6 +102,49 @@ function run() {
   assert.ok(!('result' in invalidTypedView));
   assert.equal(invalidTypedView.telemetry.status, 'incomplete');
 
+  const invalidOptionView = buildQuestionnaireResultView({
+    case_entry: 'weird',
+    termination_access_date: '2026-03-21',
+    employment_end_date: '2026-04-30',
+    jobseeker_registered: false,
+    already_unemployed_now: false,
+    agreement_present: false,
+    release_status: 'banana',
+    special_protection_indicator: ['none_known', 'bogus'],
+    primary_goal: 'rocket',
+    documents_secured: ['termination_letter', 'bogus'],
+  }, { tier: 'base' });
+
+  assert.equal(invalidOptionView.status, 'incomplete');
+  assert.equal(invalidOptionView.normalizedInput.case_entry, null);
+  assert.equal(invalidOptionView.normalizedInput.release_status, null);
+  assert.equal(invalidOptionView.normalizedInput.primary_goal, null);
+  assert.deepEqual(invalidOptionView.normalizedInput.special_protection_indicator, ['none_known']);
+  assert.deepEqual(invalidOptionView.normalizedInput.documents_secured, ['termination_letter']);
+  assert.ok(invalidOptionView.missingAnswers.some((item) => item.id === 'case_entry'));
+  assert.ok(!('result' in invalidOptionView));
+  assert.equal(invalidOptionView.telemetry.status, 'incomplete');
+
+  const contradictoryMultiSelectView = buildQuestionnaireResultView({
+    case_entry: 'termination_received',
+    termination_access_date: '2026-03-21',
+    employment_end_date: '2026-04-30',
+    jobseeker_registered: false,
+    already_unemployed_now: false,
+    agreement_present: false,
+    release_status: 'no',
+    special_protection_indicator: ['none_known', 'pregnancy_or_maternity'],
+    primary_goal: 'protect_deadlines',
+    documents_secured: ['none_yet', 'termination_letter', 'salary_docs'],
+  }, { tier: 'base' });
+
+  assert.equal(contradictoryMultiSelectView.status, 'ready');
+  assert.deepEqual(contradictoryMultiSelectView.normalizedInput.special_protection_indicator, ['pregnancy_or_maternity']);
+  assert.deepEqual(contradictoryMultiSelectView.normalizedInput.documents_secured, ['termination_letter', 'salary_docs']);
+  assert.equal(contradictoryMultiSelectView.result.synthesisDecision.primaryTrack, 'special-case-review');
+  assert.ok(contradictoryMultiSelectView.result.documentChecklist.some((item) => item.label === 'Kündigungsschreiben' && item.status === 'already-secured'));
+  assert.ok(contradictoryMultiSelectView.result.documentChecklist.some((item) => item.label === 'Lohnunterlagen' && item.status === 'already-secured'));
+
   console.log('All launch hardening anchor tests passed.');
 }
 

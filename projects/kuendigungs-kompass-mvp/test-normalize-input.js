@@ -48,6 +48,26 @@ function run() {
   assert.equal(invalidTypedValues.jobseeker_registered, null);
   assert.equal(invalidTypedValues.already_unemployed_now, null);
 
+  const invalidOptionValues = normalizeQuestionnaireInput({
+    case_entry: 'weird',
+    release_status: 'banana',
+    primary_goal: 'rocket',
+    special_protection_indicator: ['none_known', 'banana', 'unsure'],
+    documents_secured: ['termination_letter', 'bogus'],
+  });
+  assert.equal(invalidOptionValues.case_entry, null);
+  assert.equal(invalidOptionValues.release_status, null);
+  assert.equal(invalidOptionValues.primary_goal, null);
+  assert.deepEqual(invalidOptionValues.special_protection_indicator, ['unsure']);
+  assert.deepEqual(invalidOptionValues.documents_secured, ['termination_letter']);
+
+  const contradictoryMultiSelectValues = normalizeQuestionnaireInput({
+    special_protection_indicator: ['none_known', 'pregnancy_or_maternity'],
+    documents_secured: ['none_yet', 'termination_letter', 'salary_docs'],
+  });
+  assert.deepEqual(contradictoryMultiSelectValues.special_protection_indicator, ['pregnancy_or_maternity']);
+  assert.deepEqual(contradictoryMultiSelectValues.documents_secured, ['termination_letter', 'salary_docs']);
+
   const sparse = normalizeQuestionnaireInput({});
   assert.deepEqual(sparse.special_protection_indicator, []);
   assert.deepEqual(sparse.documents_secured, []);

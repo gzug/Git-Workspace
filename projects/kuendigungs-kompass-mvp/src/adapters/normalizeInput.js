@@ -1,3 +1,16 @@
+const fs = require('fs');
+const path = require('path');
+
+const ROOT = path.resolve(__dirname, '..', '..');
+const questionsSchema = JSON.parse(fs.readFileSync(path.join(ROOT, 'questions.schema.json'), 'utf8'));
+const questions = questionsSchema.questions || questionsSchema.example?.questions || [];
+
+const ALLOWED_OPTIONS_BY_FIELD = new Map(
+  questions
+    .filter((question) => Array.isArray(question.options) && question.options.length > 0)
+    .map((question) => [question.id, new Set(question.options.map((option) => option.value))])
+);
+
 function isEmptyString(value) {
   return typeof value === 'string' && value.trim() === '';
 }
@@ -33,10 +46,32 @@ function isValidIsoDateString(value) {
     && date.getUTCDate() === day;
 }
 
-function normalizeArrayValue(value) {
-  if (value == null) return [];
-  if (Array.isArray(value)) return value.filter((item) => item !== '' && item != null);
-  return [value].filter((item) => item !== '' && item != null);
+function normalizeArrayValue(value, allowedOptions, exclusiveOption) {
+  const values = value == null
+    ? []
+    : Array.isArray(value)
+      ? value.filter((item) => item !== '' && item != null)
+      : [value].filter((item) => item !== '' && item != null);
+
+  const filtered = !allowedOptions
+    ? values
+    : values.filter((item) => allowedOptions.has(item));
+
+  if (!exclusiveOption || filtered.length <= 1 || !filtered.includes(exclusiveOption)) {
+    return filtered;
+  }
+
+  return filtered.filter((item) => item !== exclusiveOption);
+}
+
+function normalizeSingleSelect(value, allowedOptions) {
+  if (value == null) return null;
+  if (typeof value !== 'string') return null;
+
+  const normalized = value.trim();
+  if (normalized === '') return null;
+  if (!allowedOptions) return normalized;
+  return allowedOptions.has(normalized) ? normalized : null;
 }
 
 const ARRAY_FIELDS = new Set([
@@ -57,12 +92,20 @@ const DATE_FIELDS = new Set([
   'employment_end_date',
 ]);
 
+const EXCLUSIVE_MULTI_SELECT_OPTIONS = new Map([
+  ['special_protection_indicator', 'none_known'],
+  ['documents_secured', 'none_yet'],
+]);
+
 function normalizeQuestionnaireInput(rawInput = {}) {
   const normalized = {};
 
   for (const [key, rawValue] of Object.entries(rawInput)) {
+    const allowedOptions = ALLOWED_OPTIONS_BY_FIELD.get(key);
+    const exclusiveOption = EXCLUSIVE_MULTI_SELECT_OPTIONS.get(key);
+
     if (ARRAY_FIELDS.has(key)) {
-      normalized[key] = normalizeArrayValue(rawValue);
+      normalized[key] = normalizeArrayValue(rawValue, allowedOptions, exclusiveOption);
       continue;
     }
 
@@ -84,6 +127,11 @@ function normalizeQuestionnaireInput(rawInput = {}) {
 
     if (BOOLEAN_FIELDS.has(key)) {
       normalized[key] = normalizeBoolean(rawValue);
+      continue;
+    }
+
+    if (allowedOptions) {
+      normalized[key] = normalizeSingleSelect(rawValue, allowedOptions);
       continue;
     }
 

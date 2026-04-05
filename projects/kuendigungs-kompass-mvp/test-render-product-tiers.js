@@ -102,6 +102,7 @@ function runCase(name) {
     assert.ok(previewText.includes('Besonders wichtig: Möglicher besonderer Schutz oder Sonderfall'));
     assert.ok(previewText.includes('Sinnvoll jetzt: Qualifizierte individuelle Prüfung mit Anwalt, Gewerkschaft oder passender Beratungsstelle'));
     assert.ok(previewText.includes('Kündigungsschutzklage prüfen —'));
+    assert.ok(previewText.includes('Reihenfolge jetzt: zuerst die Frist sichern, danach den heiklen Sonderfall sauber prüfen lassen.'));
   }
 
   if (name === '04-vertrag-bereits-unterschrieben') {
@@ -128,6 +129,7 @@ function runCase(name) {
     assert.ok(upgradeText.includes('Anwalt, Gewerkschaft oder passender Beratungsstelle'));
     assert.ok(previewText.includes('Besonders wichtig: Überlagerter Mehrfachfall mit möglichem Sonderfall'));
     assert.ok(previewText.includes('Sinnvoll jetzt: Qualifizierte individuelle Prüfung mit Anwalt, Gewerkschaft oder passender Beratungsstelle'));
+    assert.ok(previewText.includes('Reihenfolge jetzt: zuerst nichts vorschnell unterschreiben und die Frist nicht aus dem Blick verlieren, danach die heiklen Punkte sauber prüfen lassen.'));
   }
 
   if (name === '07-angekuendigt-alg1-risiko') {

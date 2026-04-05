@@ -32,6 +32,16 @@ function renderDeadlineItem(item) {
     + (item.note ? `\n  Hinweis: ${item.note}` : '');
 }
 
+function buildPreviewPriorityHint(projected) {
+  if (!projected.redFlag || !projected.deadline) return null;
+
+  if (/Kündigungsschutzklage/.test(projected.topAction?.label || '')) {
+    return 'Reihenfolge jetzt: zuerst die Frist sichern, danach den heiklen Sonderfall sauber prüfen lassen.';
+  }
+
+  return 'Reihenfolge jetzt: zuerst nichts vorschnell unterschreiben und die Frist nicht aus dem Blick verlieren, danach die heiklen Punkte sauber prüfen lassen.';
+}
+
 function renderPreview(projected) {
   const lines = [];
   lines.push(projected.caseSnapshot.headline);
@@ -49,6 +59,9 @@ function renderPreview(projected) {
   } else if (!projected.redFlag && projected.riskFlag) {
     lines.push(`Wichtiges Risiko: ${projected.riskFlag.label}`);
   }
+
+  const priorityHint = buildPreviewPriorityHint(projected);
+  if (priorityHint) lines.push(priorityHint);
 
   if (projected.disclaimer) lines.push(`Wichtig dabei: ${projected.disclaimer}`);
   return lines.join('\n').trim();

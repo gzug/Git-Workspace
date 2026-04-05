@@ -21,14 +21,25 @@ function firstRedFlag(redFlags = []) {
   return redFlags[0] || null;
 }
 
+function selectPreviewTopAction(result = {}, previewDeadline = null) {
+  const defaultTopAction = result.topActions?.[0] || null;
+
+  if (!previewDeadline || !/Kündigungsschutzklage/.test(previewDeadline.label)) return defaultTopAction;
+  if ((result.redFlags || []).length > 0) return defaultTopAction;
+
+  return result.topActions?.find((item) => /Kündigungsschutzklage/.test(item.label)) || defaultTopAction;
+}
+
 function projectPreview(result) {
+  const deadline = firstCriticalDeadline(result.deadlines);
+
   return {
     tier: 'preview',
     caseSnapshot: {
       headline: result.caseSnapshot.headline,
     },
-    topAction: result.topActions[0] || null,
-    deadline: firstCriticalDeadline(result.deadlines),
+    topAction: selectPreviewTopAction(result, deadline),
+    deadline,
     riskFlag: firstRisk(result.riskFlags),
     redFlag: firstRedFlag(result.redFlags),
     disclaimer: selectPreviewNote(result),

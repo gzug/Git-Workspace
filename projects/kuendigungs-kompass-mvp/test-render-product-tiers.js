@@ -35,7 +35,7 @@ function runCase(name) {
 
   const previewText = renderProductResult(preview, { tier: 'preview' });
   assert.ok(previewText.startsWith(result.caseSnapshot.headline));
-  assert.ok(previewText.includes(`Wichtigster nächster Schritt: ${result.topActions[0].label}`));
+  assert.ok(previewText.includes(`Wichtigster nächster Schritt: ${preview.topAction.label}`));
   assert.ok(!previewText.includes('Unterlagen:'));
   assert.ok(!previewText.includes('Fragen für Beratung:'));
   assert.equal(previewText, readText(`${SNAPSHOT_DIR}/${name}.preview.txt`).trim());
@@ -81,6 +81,7 @@ function runCase(name) {
     assert.ok(baseText.includes('Arbeitslosmeldung:'));
     assert.ok(baseText.includes('Arbeitsuchendmeldung:'));
     assert.ok(baseText.includes('Kündigungsschutzklage prüfen:'));
+    assert.ok(previewText.includes('Wichtigster nächster Schritt: 3-Wochen-Frist für Kündigungsschutzklage sofort einordnen'));
     assert.ok(previewText.includes('Kündigungsschutzklage prüfen — regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung'));
     assert.ok(!previewText.includes('Kritische Frist: Arbeitslosmeldung'));
   }

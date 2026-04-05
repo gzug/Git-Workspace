@@ -118,6 +118,8 @@ function runCase(name) {
   }
 
   if (name === '05-kuendigung-nur-angekuendigt') {
+    assert.ok(previewText.startsWith('Noch keine schriftliche Kündigung – jetzt die nächsten Schritte sauber vorbereiten'));
+    assert.ok(baseText.startsWith('Noch keine schriftliche Kündigung – jetzt die nächsten Schritte sauber vorbereiten'));
     assert.ok(!baseText.includes('Kündigungsschutzklage prüfen:'));
     assert.ok(!previewText.includes('Kündigungsschutzklage prüfen'));
     assert.ok(baseText.includes('Arbeitsuchendmeldung:'));

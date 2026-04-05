@@ -960,7 +960,7 @@ function buildCaseSnapshot(answers, track) {
     };
   }
   return {
-    headline: 'Gut vorbereitet in den nächsten Schritt gehen',
+    headline: 'Noch keine schriftliche Kündigung – jetzt die nächsten Schritte sauber vorbereiten',
     situation: 'Eine Kündigung wurde angekündigt, aber noch nicht schriftlich ausgesprochen. Jetzt helfen vor allem geordnete Unterlagen, Fragen und Prioritäten.',
     riskLevel: 'medium',
     primaryGoal: answers.primary_goal,

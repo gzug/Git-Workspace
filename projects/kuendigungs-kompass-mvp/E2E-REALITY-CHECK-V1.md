@@ -93,6 +93,7 @@ Diese Pfade sind für Launch-Reife besonders wichtig:
 - Arbeitslosmeldungs-Flag ohne echte aktuelle Arbeitslosigkeit → als irrelevanten Altwert neutralisieren statt mitschleppen
 - reiner Vertragsfall ohne Kündigungs-Einstieg → kein stiller Klagefrist-Pfad nur wegen mitgeliefertem Zugangsdatum
 - `settlement_offered` ohne konsistenten Vertragsstatus → nicht in einen falschen Ready-Pfad rutschen, sondern Unterschriftsstatus sauber nachfordern
+- `release_status = unknown` → keine Freistellungs-spezifischen Risiken oder Unterlagen so rendern, als wäre Freistellung sicher bestätigt
 
 ## Testarten nach Risiko
 ### Snapshot-geeignet

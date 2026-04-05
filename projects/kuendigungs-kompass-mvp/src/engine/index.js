@@ -197,6 +197,10 @@ function statementLedgerFromEffects(effects) {
   return ledger;
 }
 
+function hasExplicitReleaseStatus(value) {
+  return value === 'yes_revocable' || value === 'yes_irrevocable';
+}
+
 function buildDocumentChecklist(answers) {
   const secured = new Set(answers.documents_secured || []);
   const items = [];
@@ -246,7 +250,7 @@ function buildDocumentChecklist(answers) {
     });
   }
 
-  if ((answers.release_status && answers.release_status !== 'no') || secured.has('release_or_vacation_info')) {
+  if (hasExplicitReleaseStatus(answers.release_status) || secured.has('release_or_vacation_info')) {
     items.push({
       label: answers.agreement_already_signed ? 'Freistellungs- und Restanspruchsinfos' : 'Infos zu Freistellung / Urlaub / Restansprüchen',
       reason: answers.agreement_already_signed
@@ -618,7 +622,7 @@ function buildRiskFlags(answers, track) {
       severity: 'critical',
       statementClass: 'mvp-reliable',
     });
-    if (answers.release_status && answers.release_status !== 'no') {
+    if (hasExplicitReleaseStatus(answers.release_status)) {
       riskFlags.push({
         label: 'Freistellung ändert nichts daran, dass zentrale Schritte offen bleiben können',
         description: 'Auch während einer Freistellung bleiben Fristen, Meldungen und wichtige Unterlagen relevant.',

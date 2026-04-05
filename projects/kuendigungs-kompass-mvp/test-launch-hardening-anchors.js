@@ -203,6 +203,24 @@ function run() {
   assert.ok(!settlementOnlyView.result.deadlines.some((item) => item.label === 'Kündigungsschutzklage prüfen'));
   assert.ok(!settlementOnlyView.rendered.includes('Kündigungsschutzklage prüfen'));
 
+  const unknownReleaseView = buildQuestionnaireResultView({
+    case_entry: 'settlement_offered',
+    employment_end_date: '2026-05-31',
+    jobseeker_registered: false,
+    already_unemployed_now: false,
+    agreement_present: true,
+    agreement_already_signed: false,
+    release_status: 'unknown',
+    special_protection_indicator: ['none_known'],
+    documents_secured: ['agreement_draft', 'employment_contract'],
+    primary_goal: 'protect_alg1',
+  }, { tier: 'base' });
+
+  assert.equal(unknownReleaseView.status, 'ready');
+  assert.equal(unknownReleaseView.result.synthesisDecision.primaryTrack, 'contract-do-not-sign');
+  assert.ok(!unknownReleaseView.result.riskFlags.some((item) => item.label === 'Freistellung ändert nichts daran, dass zentrale Schritte offen bleiben können'));
+  assert.ok(!unknownReleaseView.result.documentChecklist.some((item) => item.label === 'Infos zu Freistellung / Urlaub / Restansprüchen'));
+
   const settlementOfferedNeedsSignedStateView = buildQuestionnaireResultView({
     case_entry: 'settlement_offered',
     employment_end_date: '2026-05-31',

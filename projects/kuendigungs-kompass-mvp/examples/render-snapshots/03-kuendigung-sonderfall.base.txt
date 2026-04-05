@@ -21,7 +21,6 @@ Unterlagen:
 - Kündigungsschreiben (already-secured) — Zugang und Datum sind für die Fristprüfung zentral.
 - Arbeitsvertrag (already-secured) — Hilft bei Beratung und Einordnung der Ausgangslage.
 - Lohnunterlagen (already-secured) — Hilfreich für Agentur-Themen und Beratungsvorbereitung.
-- Infos zu Freistellung / Urlaub / Restansprüchen (secure-now) — Relevant, weil Freistellung organisatorisch wichtig bleibt und offene Ansprüche später eine Rolle spielen können.
 - Nachweise zum möglichen Schutzstatus (secure-now) — Falls vorhanden, helfen diese Unterlagen, den Sonderfall schneller individuell einzuordnen.
 
 Hinweise:

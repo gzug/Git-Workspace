@@ -71,6 +71,8 @@ function runCase(name) {
   assert.ok(!/\bMVP\b|\bTool\b/.test(previewText));
   assert.ok(!/\bMVP\b|\bTool\b/.test(baseText));
   assert.ok(!/\bMVP\b|\bTool\b/.test(upgradeText));
+  assert.ok(!/Arbeitsuchendmeldung =|Arbeitslosmeldung =/.test(baseText));
+  assert.ok(!/Arbeitsuchendmeldung =|Arbeitslosmeldung =/.test(upgradeText));
   assert.ok(!/already-secured|secure-now/.test(previewText));
   assert.ok(!/already-secured|secure-now/.test(baseText));
   assert.ok(!/already-secured|secure-now/.test(upgradeText));

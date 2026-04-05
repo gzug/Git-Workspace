@@ -962,32 +962,28 @@ function buildOpportunities(answers, track) {
 }
 
 function buildDisclaimers(answers, track) {
-  const agencySeparationDisclaimer = 'Arbeitsuchendmeldung = früher eigener Schritt bei bekanntem Ende; Arbeitslosmeldung = separater Schritt ab tatsächlicher Arbeitslosigkeit.';
+  const agencySeparationDisclaimer = 'Die Arbeitsuchendmeldung ist der frühe Schritt, sobald das Ende des Arbeitsverhältnisses absehbar ist. Die Arbeitslosmeldung ist davon getrennt und wird erst bei tatsächlicher Arbeitslosigkeit relevant.';
 
   if (track === 'contract-do-not-sign') {
     return [
       agencySeparationDisclaimer,
-      'Für eine verbindliche rechtliche Einschätzung braucht es den Blick auf deinen Einzelfall.',
       'Abfindung, Sperrzeit und Ruhen hängen stark vom konkreten Einzelfall ab.'
     ];
   }
   if (track === 'deadline-first') {
     return [
       agencySeparationDisclaimer,
-      'Für eine verbindliche rechtliche Einschätzung braucht es den Blick auf deinen Einzelfall.',
       'Ob eine Kündigungsschutzklage in deinem Fall sinnvoll ist, sollte individuell geprüft werden.'
     ];
   }
   if (track === 'alg1-risk-first') {
     return [
       agencySeparationDisclaimer,
-      'Für eine verbindliche rechtliche Einschätzung braucht es den Blick auf deinen Einzelfall.',
       'Ob und wie sich etwas auf dein Arbeitslosengeld auswirkt, hängt vom Einzelfall und vom weiteren Verlauf ab.'
     ];
   }
   if (track === 'special-case-review' && answers.agreement_already_signed) {
     return [
-      'Für eine verbindliche rechtliche Einschätzung braucht es den Blick auf deinen Einzelfall.',
       'Konkrete Rechtsfolgen eines bereits unterschriebenen Vertrags hängen stark vom Einzelfall ab.',
       'Ob der Vertrag anfechtbar oder wirksam ist, muss gesondert geprüft werden.'
     ];
@@ -995,20 +991,17 @@ function buildDisclaimers(answers, track) {
   if (track === 'special-case-review') {
     if (isOverlappingMultiRiskCase(answers)) {
       return [
-        'Für eine verbindliche rechtliche Einschätzung braucht es den Blick auf deinen Einzelfall.',
         'Hier ist eine klare Reihenfolge wichtig, aber keine vorschnelle Scheinsicherheit.',
         agencySeparationDisclaimer
       ];
     }
     return [
-      'Für eine verbindliche rechtliche Einschätzung braucht es den Blick auf deinen Einzelfall.',
       'Ob tatsächlich ein besonderer Schutz greift, muss im Einzelfall geprüft werden.',
       'Hier geht es zuerst darum, Fristen zu sichern und den Sonderfall danach gezielt prüfen zu lassen.'
     ];
   }
   return [
     'Ohne schriftliche Kündigung sollte jetzt noch keine Klagefrist angenommen werden.',
-    'Für eine verbindliche rechtliche Einschätzung braucht es den Blick auf deinen Einzelfall.',
     agencySeparationDisclaimer
   ];
 }

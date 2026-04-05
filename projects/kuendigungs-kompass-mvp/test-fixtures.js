@@ -115,7 +115,7 @@ for (const [inputPath, expectedPath] of PAIRS) {
       assert.ok(!standardRendered.includes('Kündigungsschutzklage prüfen'));
       assert.ok(!actualDeadlineLabels.includes('Arbeitslosmeldung'));
       assert.equal(actual.topActions[0]?.label, 'Aufhebungsvertrag nicht vorschnell unterschreiben');
-      assert.ok(actual.disclaimers[0].includes('Arbeitsuchendmeldung = früher eigener Schritt'));
+      assert.ok(actual.disclaimers[0].includes('Arbeitsuchendmeldung ist der frühe Schritt'));
       assert.ok(actual.deadlines.some((item) => item.label === 'Arbeitsuchendmeldung' && item.note.includes('Vertrag noch nicht unterschrieben')));
     }
 

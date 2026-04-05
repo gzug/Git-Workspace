@@ -77,6 +77,12 @@ Immer klar benennen:
 - So wenig Duplikate wie möglich
 - Eindeutige Heimat für jede Information
 - Root schlank halten
+- Neue, unsortierte Inputs nach `inbox/`
+- Temporäre oder experimentelle Arbeit nach `scratch/`, nie als Dauerlager nutzen
+- Aktive, relevante und wiederanlauffähige Arbeit nach `projects/<name>/`
+- Nutzbare, vorzeigbare oder referenzwürdige Ergebnisse nach `exports/`
+- Abgeschlossene, verworfene oder bewusst stillgelegte Arbeit nach `archive/`
+- `inbox/` und `scratch/` regelmäßig leeren oder weiterziehen
 
 ## Rote Linien
 

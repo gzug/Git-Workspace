@@ -75,7 +75,8 @@ function normalizeSingleSelect(value, allowedOptions) {
 }
 
 function applyCrossFieldGuardrails(normalized) {
-  if (normalized.case_entry === 'termination_announced_only') {
+  const terminationAccessRelevant = normalized.case_entry === 'termination_received' || normalized.case_entry === 'multiple';
+  if (!terminationAccessRelevant) {
     normalized.termination_access_date = null;
   }
 

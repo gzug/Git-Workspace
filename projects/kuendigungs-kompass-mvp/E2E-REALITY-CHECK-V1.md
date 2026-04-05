@@ -91,6 +91,7 @@ Diese Pfade sind für Launch-Reife besonders wichtig:
 - angekündigte Kündigung + versehentlich gesetztes Zugangsdatum → keine künstliche Klagefrist rechnen
 - bereits unterschriebener Vertrag → Vertragsstatus intern konsistent halten, auch wenn Rohinput widersprüchlich kommt
 - Arbeitslosmeldungs-Flag ohne echte aktuelle Arbeitslosigkeit → als irrelevanten Altwert neutralisieren statt mitschleppen
+- reiner Vertragsfall ohne Kündigungs-Einstieg → kein stiller Klagefrist-Pfad nur wegen mitgeliefertem Zugangsdatum
 
 ## Testarten nach Risiko
 ### Snapshot-geeignet

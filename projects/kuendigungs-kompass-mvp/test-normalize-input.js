@@ -78,6 +78,12 @@ function run() {
   assert.equal(crossFieldGuardrails.agreement_present, true);
   assert.equal(crossFieldGuardrails.agreement_already_signed, true);
 
+  const irrelevantTerminationAccess = normalizeQuestionnaireInput({
+    case_entry: 'settlement_offered',
+    termination_access_date: '2026-03-18',
+  });
+  assert.equal(irrelevantTerminationAccess.termination_access_date, null);
+
   const staleAgencyFlag = normalizeQuestionnaireInput({
     already_unemployed_now: false,
     unemployment_registered: true,

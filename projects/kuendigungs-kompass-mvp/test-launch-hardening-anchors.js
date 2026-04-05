@@ -183,6 +183,26 @@ function run() {
   assert.equal(signedAgreementView.result.synthesisDecision.primaryTrack, 'special-case-review');
   assert.ok(signedAgreementView.result.documentChecklist.some((item) => item.label === 'Unterzeichneter Vertrag'));
 
+  const settlementOnlyView = buildQuestionnaireResultView({
+    case_entry: 'settlement_offered',
+    termination_access_date: '2026-03-18',
+    employment_end_date: '2026-05-31',
+    jobseeker_registered: false,
+    already_unemployed_now: false,
+    agreement_present: true,
+    agreement_already_signed: false,
+    release_status: 'yes_irrevocable',
+    special_protection_indicator: ['none_known'],
+    documents_secured: ['agreement_draft', 'employment_contract'],
+    primary_goal: 'protect_alg1',
+  }, { tier: 'base' });
+
+  assert.equal(settlementOnlyView.status, 'ready');
+  assert.equal(settlementOnlyView.normalizedInput.termination_access_date, null);
+  assert.equal(settlementOnlyView.result.synthesisDecision.primaryTrack, 'contract-do-not-sign');
+  assert.ok(!settlementOnlyView.result.deadlines.some((item) => item.label === 'Kündigungsschutzklage prüfen'));
+  assert.ok(!settlementOnlyView.rendered.includes('Kündigungsschutzklage prüfen'));
+
   const staleAgencyView = buildQuestionnaireResultView({
     case_entry: 'termination_received',
     termination_access_date: '2026-03-21',

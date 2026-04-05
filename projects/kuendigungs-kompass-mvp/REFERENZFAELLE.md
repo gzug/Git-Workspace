@@ -46,6 +46,7 @@ Ziel dieser Referenzfälle: den operativen V2-Stand gegen realistische Nutzerant
 - Arbeitslosmeldung: spätestens am ersten Tag der Arbeitslosigkeit, jetzt sofort prüfen
 - Arbeitsuchendmeldung: spätestens 3 Monate vorher, sonst innerhalb von 3 Tagen nach Kenntnis
 - Kündigungsschutzklage: regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung
+- die beiden Agentur-Meldungen bleiben als getrennte Pflichtschritte sichtbar und dürfen nicht zu einem Sammelblock verschmelzen
 
 #### Erwartete `riskFlags`
 - Fristversäumnis bei Agentur-Meldungen
@@ -182,6 +183,7 @@ Nicht das Result-Schema, sondern der **Frage-/Regel-Layer** brauchte eine kleine
 - `unemployment_registered`
 
 Damit wird die Arbeitslosmeldung als **eigenes Mini-Modul** nur dann aktiviert, wenn sie tatsächlich relevant ist.
+Gleichzeitig bleibt die Arbeitsuchendmeldung ein getrennter Schritt und wird nicht still durch die spätere Arbeitslosmeldung ersetzt.
 
 ### Was bewusst nicht ergänzt wurde
 

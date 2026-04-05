@@ -62,15 +62,19 @@ function run() {
 
   const incompleteView = buildQuestionnaireResultView({
     case_entry: 'termination_received',
+    termination_access_date: 'unknown',
     employment_end_date: '2026-04-30',
     jobseeker_registered: false,
     already_unemployed_now: false,
     agreement_present: false,
     release_status: 'no',
+    special_protection_indicator: ['none_known'],
+    primary_goal: 'protect_deadlines',
   }, { tier: 'upgrade' });
 
   assert.equal(incompleteView.status, 'incomplete');
   assert.equal(incompleteView.tier, 'upgrade');
+  assert.equal(incompleteView.normalizedInput.termination_access_date, null);
   assert.ok(incompleteView.missingAnswers.some((item) => item.id === 'termination_access_date'));
   assert.ok(incompleteView.message.includes('Wann ist dir die schriftliche Kündigung zugegangen?'));
   assert.ok(!('result' in incompleteView));

@@ -28,6 +28,15 @@ function run() {
   assert.deepEqual(normalized.documents_secured, []);
   assert.equal(normalized.primary_goal, 'protect_deadlines');
 
+  const unknownLiterals = normalizeQuestionnaireInput({
+    termination_access_date: 'unknown',
+    employment_end_date: ' unknown ',
+    jobseeker_registered: 'unknown',
+  });
+  assert.equal(unknownLiterals.termination_access_date, null);
+  assert.equal(unknownLiterals.employment_end_date, null);
+  assert.equal(unknownLiterals.jobseeker_registered, null);
+
   const sparse = normalizeQuestionnaireInput({});
   assert.deepEqual(sparse.special_protection_indicator, []);
   assert.deepEqual(sparse.documents_secured, []);

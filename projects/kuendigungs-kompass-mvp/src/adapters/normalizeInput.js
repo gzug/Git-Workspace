@@ -2,6 +2,10 @@ function isEmptyString(value) {
   return typeof value === 'string' && value.trim() === '';
 }
 
+function isUnknownLiteral(value) {
+  return typeof value === 'string' && value.trim().toLowerCase() === 'unknown';
+}
+
 function normalizeBoolean(value) {
   if (value === true || value === false) return value;
   if (value === 'true') return true;
@@ -30,6 +34,11 @@ const BOOLEAN_FIELDS = new Set([
   'agreement_already_signed',
 ]);
 
+const DATE_FIELDS = new Set([
+  'termination_access_date',
+  'employment_end_date',
+]);
+
 function normalizeQuestionnaireInput(rawInput = {}) {
   const normalized = {};
 
@@ -44,9 +53,14 @@ function normalizeQuestionnaireInput(rawInput = {}) {
       continue;
     }
 
+    if (DATE_FIELDS.has(key)) {
+      normalized[key] = isUnknownLiteral(rawValue) ? null : rawValue;
+      continue;
+    }
+
     if (BOOLEAN_FIELDS.has(key)) {
       const boolValue = normalizeBoolean(rawValue);
-      normalized[key] = boolValue === '' ? null : boolValue;
+      normalized[key] = isUnknownLiteral(boolValue) || boolValue === '' ? null : boolValue;
       continue;
     }
 

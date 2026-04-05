@@ -4,7 +4,7 @@ _Bei jeder Session: lesen. Bei wichtigen Änderungen: updaten._
 ---
 
 # MEMORY.md — Langzeitgedächtnis
-_Erstellt: 2026-03-21 | Zuletzt aktualisiert: 2026-03-25 | Quelle: Repo-Rekonstruktion aus OC-HOf_
+_Erstellt: 2026-03-21 | Zuletzt aktualisiert: 2026-04-05 | Quelle: Repo-Rekonstruktion aus OC-HOf_
 
 ## Identität
 
@@ -13,12 +13,11 @@ Ich bin ein OpenClaw-Agent namens **Selo**. Mein Workspace ist das Repo `gzug/OC
 
 ### Wer ist mein Mensch?
 - **Name:** Y. Hatabi
-- **Telegram-ID:** 8750096017
-- **Username:** Schoepfer_of_Work
 - **Sprache:** Deutsch (du)
 - **Ort:** München, DE
 - **Hauptkanal:** Telegram Direkt
 - **Gruppe:** "Selo Abi's OHG" (topic:6 = mein Channel)
+- Detaildaten wie IDs/Usernames stehen in `USER.md`, nicht hier.
 
 ## Dauerhafte Arbeitsprinzipien
 
@@ -30,7 +29,7 @@ Ich bin ein OpenClaw-Agent namens **Selo**. Mein Workspace ist das Repo `gzug/OC
 
 ## Setup & Betrieb
 
-### OpenClaw-Setup (Stand 2026-03-25)
+### OpenClaw-Setup (Stand 2026-04-05)
 - **Version:** 2026.3.23-2
 - **Hauptmodell:** GPT-5.4 via `openai-codex` (ChatGPT Pro OAuth) — Token 25.03. neu eingerichtet nach Auth-Fehler
 - **Fallback-Modell:** `ollama/qwen3:8b` (lokal, aktiv als Backup)
@@ -42,6 +41,7 @@ Ich bin ein OpenClaw-Agent namens **Selo**. Mein Workspace ist das Repo `gzug/OC
 - **Nerve UI:** http://localhost:3080 (installiert, aktiv)
 - **Memory Search:** aktiv und lokal funktionsfähig
 - **Sandbox:** off (Docker nicht installiert, bewusste Entscheidung)
+- **Exec-Autonomie:** seit 2026-04-05 Approval-Hürde für `exec` bewusst gelockert (`tools.exec.ask=off`, `tools.exec.security=full`) für trusted owner workflow; trotzdem keine destruktiven oder extern wirksamen Aktionen ohne klare Freigabe
 
 ### Strategische Entscheidung
 Fokus auf **Stabilität, Runbook und wiederholbare Arbeitsroutinen** statt auf neue Features. Erst wenn Betrieb und Kern-Workflows belastbar sind, wieder stärker in Feature-Arbeit gehen.
@@ -64,6 +64,13 @@ Fokus auf **Stabilität, Runbook und wiederholbare Arbeitsroutinen** statt auf n
 - Meta-Optimierung ist ein aktives Risiko: keine Infrastruktur- oder Agentenpolitur, wenn sie echte Projektarbeit verdrängt.
 - WICHTIG: qwen3:8b immer mit Effort 'low' verwenden. Bei 'medium' oder höher triggert Extended Thinking und die Antwort dauert 3-10+ Minuten. Fix: Stop → Effort auf 'low' → Anfrage neu senden. Präventiv: kurze, direkte Anfragen stellen, eine Aufgabe pro Request.
 - Stand 2026-04-05: `gemma4:e4b` ist lokal eingebunden, aber noch nicht als produktiver Standard-Worker freigegeben. Aktueller Befund: der delegierte Local-Worker-Pfad lieferte im Setup noch keinen belastbaren Output; Projektarbeit im Kündigungs-Kompass deshalb nicht an Local-Worker-Routing blockieren.
+
+### Modell-Routing (operativ)
+- **`gpt-5.4`** → schwere Planung, Priorisierung, Review, Korrekturschleifen, riskante Entscheidungen
+- **`qwen3:8b`** → lokaler Fallback, Heartbeat, einfache kurze Aufgaben; immer mit Effort `low`
+- **`qwen2.5-coder:7b`** → lokale coding-nahe Vorarbeit bei klar eingegrenzten Aufgaben
+- **`gemma4:e4b`** → günstige Vorarbeit, Verdichtung, Strukturierung; aktuell **kein** produktiver Kernpfad
+- **`nomic-embed-text:latest`** → nur Memory-Embeddings / Retrieval, nicht für Chat-Ausgaben
 
 ## Aktive Projektlage
 
@@ -98,23 +105,6 @@ Fokus auf **Stabilität, Runbook und wiederholbare Arbeitsroutinen** statt auf n
 - Nicht wieder breit neu konzipieren, wenn der aktive Tunnel konservative Launch-Härtung verlangt.
 - GPT-5.4 OAuth-Token: neu eingerichtet 25.03.2026 — bei erneutem 401-Fehler sofort `openclaw onboard` wiederholen.
 
-## Nächste offene Schritte (Stand 2026-03-25)
-Stand: 2026-03-25 (Nachmittags-Session)
-
-ERLEDIGT heute:
-- AEO/GEO Deep-Dive + 5 Ratgeber-Outlines in AEO-SEO-STRATEGY-V1.md
-- Docker-Plan Phase 2+3 in openclaw.md
-- 4 neue Tasks im Board (Sandbox, SEO-Content, Rechts-Agent, DSGVO)
-
-NOCH OFFEN (Prio-Reihenfolge):
-1. openclaw sandbox build (Terminal) — BLOCKER fuer GPT-5.4
-2. DSGVO-Checkliste vor Launch abarbeiten
-3. KSchG-Wochenendlogik und Feiertagshinweise in Engine
-4. Arbeitslosenmeldung vs. Arbeitsuchendmeldung trennen
-5. 5 Ratgeber-Seiten Content schreiben (Outlines fertig)
-6. Rechts-Agent V1 in Nerve aufsetzen
-7. UI/API-Anschluss nach Fristenlogik-Fix
-8. Memory-Pflege: Daily → MEMORY kuratieren
-
-## Aktuelle Risiken & Blocker
-- KRITISCH (Stand: 2026-03-25): OpenClaw nicht funktionstüchtig. Y. muss manuell ausführen wenn zurück: 1) openclaw sandbox build 2) mkdir -p ~/.openclaw/agents/main/agent && cp ~/.openclaw/auth-profiles.json ~/.openclaw/agents/main/agent/auth-profiles.json 3) Gateway Restart in Nerve Settings 4) openclaw onboard (GPT Pro OAuth). Danach: gpt-5.4 API-Key in Nerve Einstellungen erneuern (401-Fehler seit 2026-03-25).
+## Historische Blocker
+- Der frühere Setup-Blocker vom 2026-03-25 (`openclaw sandbox build`, Auth-Profil-Kopie, OAuth-Reonboarding) ist **seit 2026-04-05 nicht mehr aktuell** und darf nicht mehr als aktiver KRITISCH-Block gelesen werden.
+- Offene, datierte To-do-Listen gehören in `memory/daily/` oder Projektstatus-Dateien, nicht in `MEMORY.md`.

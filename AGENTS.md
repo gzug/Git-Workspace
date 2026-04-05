@@ -43,6 +43,7 @@ Wenn etwas bleiben soll:
 - Nur kuratierte Wahrheit, keine Rohlogs
 - Enthält Entscheidungen, stabile Präferenzen, Projektlage, relevante Risiken
 - Nicht jede Kleinigkeit hineinpromoten
+- Nach jeder Session mit Setup-, Modell-, Rollen- oder Projektstatus-Änderung prüfen: muss `MEMORY.md` jetzt aktualisiert werden?
 
 ## Standard-Arbeitsweise
 

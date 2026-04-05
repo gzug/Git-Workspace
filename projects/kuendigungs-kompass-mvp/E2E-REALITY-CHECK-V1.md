@@ -88,6 +88,8 @@ Diese Pfade sind für Launch-Reife besonders wichtig:
 - Red Flag aktiv + fehlende Detailantwort → konservativer Eskalationspfad
 - ungültige Datums- oder Bool-Eingaben → Normalisierung auf `null` und kontrollierter `incomplete`-Pfad statt falschem `ready`
 - widersprüchliche Multi-Select-Kombinationen (`none_known` + echter Sonderfall, `none_yet` + konkrete Unterlagen) → konservativ entkoppeln statt still gemischt weiterzurechnen
+- angekündigte Kündigung + versehentlich gesetztes Zugangsdatum → keine künstliche Klagefrist rechnen
+- bereits unterschriebener Vertrag → Vertragsstatus intern konsistent halten, auch wenn Rohinput widersprüchlich kommt
 
 ## Testarten nach Risiko
 ### Snapshot-geeignet

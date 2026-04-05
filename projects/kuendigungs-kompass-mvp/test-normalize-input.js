@@ -23,7 +23,7 @@ function run() {
   assert.equal(normalized.already_unemployed_now, true);
   assert.equal(normalized.unemployment_registered, null);
   assert.equal(normalized.agreement_present, false);
-  assert.equal(normalized.agreement_already_signed, false);
+  assert.equal(normalized.agreement_already_signed, null);
   assert.deepEqual(normalized.special_protection_indicator, ['unsure']);
   assert.deepEqual(normalized.documents_secured, []);
   assert.equal(normalized.primary_goal, 'protect_deadlines');
@@ -67,6 +67,23 @@ function run() {
   });
   assert.deepEqual(contradictoryMultiSelectValues.special_protection_indicator, ['pregnancy_or_maternity']);
   assert.deepEqual(contradictoryMultiSelectValues.documents_secured, ['termination_letter', 'salary_docs']);
+
+  const crossFieldGuardrails = normalizeQuestionnaireInput({
+    case_entry: 'termination_announced_only',
+    termination_access_date: '2026-03-18',
+    agreement_present: false,
+    agreement_already_signed: true,
+  });
+  assert.equal(crossFieldGuardrails.termination_access_date, null);
+  assert.equal(crossFieldGuardrails.agreement_present, true);
+  assert.equal(crossFieldGuardrails.agreement_already_signed, true);
+
+  const irrelevantAgreementFlag = normalizeQuestionnaireInput({
+    agreement_present: false,
+    agreement_already_signed: false,
+  });
+  assert.equal(irrelevantAgreementFlag.agreement_present, false);
+  assert.equal(irrelevantAgreementFlag.agreement_already_signed, null);
 
   const sparse = normalizeQuestionnaireInput({});
   assert.deepEqual(sparse.special_protection_indicator, []);

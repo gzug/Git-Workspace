@@ -74,6 +74,22 @@ function normalizeSingleSelect(value, allowedOptions) {
   return allowedOptions.has(normalized) ? normalized : null;
 }
 
+function applyCrossFieldGuardrails(normalized) {
+  if (normalized.case_entry === 'termination_announced_only') {
+    normalized.termination_access_date = null;
+  }
+
+  if (normalized.agreement_already_signed === true) {
+    normalized.agreement_present = true;
+  }
+
+  if (normalized.agreement_present !== true && normalized.agreement_already_signed !== true) {
+    normalized.agreement_already_signed = null;
+  }
+
+  return normalized;
+}
+
 const ARRAY_FIELDS = new Set([
   'special_protection_indicator',
   'documents_secured',
@@ -142,7 +158,7 @@ function normalizeQuestionnaireInput(rawInput = {}) {
     if (!(key in normalized)) normalized[key] = [];
   }
 
-  return normalized;
+  return applyCrossFieldGuardrails(normalized);
 }
 
 module.exports = {

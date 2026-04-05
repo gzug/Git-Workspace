@@ -145,6 +145,44 @@ function run() {
   assert.ok(contradictoryMultiSelectView.result.documentChecklist.some((item) => item.label === 'Kündigungsschreiben' && item.status === 'already-secured'));
   assert.ok(contradictoryMultiSelectView.result.documentChecklist.some((item) => item.label === 'Lohnunterlagen' && item.status === 'already-secured'));
 
+  const announcedOnlyView = buildQuestionnaireResultView({
+    case_entry: 'termination_announced_only',
+    termination_access_date: '2026-03-18',
+    employment_end_date: '2026-04-30',
+    jobseeker_registered: false,
+    already_unemployed_now: false,
+    agreement_present: false,
+    release_status: 'no',
+    special_protection_indicator: ['none_known'],
+    documents_secured: ['employment_contract'],
+    primary_goal: 'prepare_advice',
+  }, { tier: 'base' });
+
+  assert.equal(announcedOnlyView.status, 'ready');
+  assert.equal(announcedOnlyView.normalizedInput.termination_access_date, null);
+  assert.equal(announcedOnlyView.result.synthesisDecision.primaryTrack, 'prepare-advice');
+  assert.ok(!announcedOnlyView.result.deadlines.some((item) => item.label === 'Kündigungsschutzklage prüfen'));
+  assert.ok(!announcedOnlyView.rendered.includes('Kündigungsschutzklage prüfen'));
+
+  const signedAgreementView = buildQuestionnaireResultView({
+    case_entry: 'settlement_offered',
+    employment_end_date: '2026-05-31',
+    jobseeker_registered: false,
+    already_unemployed_now: false,
+    agreement_present: false,
+    agreement_already_signed: true,
+    release_status: 'yes_irrevocable',
+    special_protection_indicator: ['none_known'],
+    documents_secured: ['agreement_draft', 'employment_contract', 'salary_docs'],
+    primary_goal: 'protect_alg1',
+  }, { tier: 'base' });
+
+  assert.equal(signedAgreementView.status, 'ready');
+  assert.equal(signedAgreementView.normalizedInput.agreement_present, true);
+  assert.equal(signedAgreementView.normalizedInput.agreement_already_signed, true);
+  assert.equal(signedAgreementView.result.synthesisDecision.primaryTrack, 'special-case-review');
+  assert.ok(signedAgreementView.result.documentChecklist.some((item) => item.label === 'Unterzeichneter Vertrag'));
+
   console.log('All launch hardening anchor tests passed.');
 }
 

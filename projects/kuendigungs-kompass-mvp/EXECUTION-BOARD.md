@@ -28,7 +28,7 @@ Die Hauptlücken liegen aktuell in **vollständiger Testhärtung**, **konkreter 
 - Status: erledigt
 - Priorität: P0
 - Befund:
-  - `examples/PAIRS.md` dokumentiert 6 Paare
+  - `examples/PAIRS.md` dokumentiert inzwischen 7 Paare
   - `test-fixtures.js` prüft aktuell nur 5
   - Pair 6 schlägt fachlich gegen die aktuelle Engine aus
 - Done-When:

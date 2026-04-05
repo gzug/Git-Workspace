@@ -38,6 +38,12 @@ Diese Datei koppelt die Input-Fixtures mit den erwarteten Result-Fixtures.
 - **Track:** `special-case-review`
 - **Zweck:** Priorisierung bei überlagerten Risikotreibern
 
+## Paar 7
+- **Input:** `inputs/07-angekuendigt-alg1-risiko.input.json`
+- **Expected Result:** `07-angekuendigt-alg1-risiko.result.json`
+- **Track:** `alg1-risk-first`
+- **Zweck:** eigener ALG-I-Risikopfad bei angekündigter Beendigung ohne schriftliche Kündigung, aber mit offener Arbeitsuchendmeldung
+
 ## Operative Nutzung
 Ein Mapper ist für ein Fixture-Paar korrekt, wenn mindestens Folgendes stabil stimmt:
 1. `synthesisDecision.primaryTrack`

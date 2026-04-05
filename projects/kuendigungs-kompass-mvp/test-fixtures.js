@@ -11,6 +11,7 @@ const PAIRS = [
   ['examples/inputs/04-vertrag-bereits-unterschrieben.input.json', 'examples/04-vertrag-bereits-unterschrieben.result.json'],
   ['examples/inputs/05-kuendigung-nur-angekuendigt.input.json', 'examples/05-kuendigung-nur-angekuendigt.result.json'],
   ['examples/inputs/06-mehrere-eingaenge-gleichzeitig.input.json', 'examples/06-mehrere-eingaenge-gleichzeitig.result.json'],
+  ['examples/inputs/07-angekuendigt-alg1-risiko.input.json', 'examples/07-angekuendigt-alg1-risiko.result.json'],
 ];
 
 function readJson(relativePath) {
@@ -136,6 +137,16 @@ for (const [inputPath, expectedPath] of PAIRS) {
       assert.ok(!standardRendered.includes('Kündigungsschutzklage prüfen'));
       assert.ok(actual.disclaimers.some((item) => item.includes('keine Klagefrist fingieren')));
       assert.equal(actual.topActions[0]?.label, 'Arbeitsuchendmeldung jetzt prüfen oder nachholen');
+    }
+
+    if (name.startsWith('07-')) {
+      assert.equal(actual.synthesisDecision.primaryTrack, 'alg1-risk-first');
+      assert.equal(actual.caseSnapshot.headline, 'Jetzt zuerst sicherstellen, dass dein Arbeitslosengeld nicht in Gefahr gerät');
+      assert.ok(actualDeadlineLabels.includes('Arbeitsuchendmeldung'));
+      assert.ok(!actualDeadlineLabels.includes('Kündigungsschutzklage prüfen'));
+      assert.ok(actual.riskFlags.some((item) => item.label === 'Offene Arbeitsuchendmeldung kann sich später beim Arbeitslosengeld auswirken'));
+      assert.ok(!standardRendered.includes('Gut vorbereitet in den nächsten Schritt gehen'));
+      assert.ok(!adviceRendered.includes('Welche Schritte sollte ich jetzt schon vorbereiten, obwohl noch nichts Schriftliches vorliegt?'));
     }
 
     console.log(`PASS ${name}`);

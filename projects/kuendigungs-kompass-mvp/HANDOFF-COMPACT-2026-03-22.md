@@ -65,7 +65,7 @@ Kernänderungen:
 Geschärft wurden:
 - `V2-DECISIONS.md`
 - `RESULT-MAPPING.md`
-- `RESULT-COPY.md`
+- `RESULT-COPY-V2.md`
 - `MAPPING-RENDERING-V1.md`
 - `TEST-CONCEPT.md`
 - `examples/PAIRS.md`

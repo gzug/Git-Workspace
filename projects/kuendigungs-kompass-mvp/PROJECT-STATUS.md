@@ -9,7 +9,7 @@ Der Kündigungs-Kompass ist kein loses Konzept mehr, sondern ein **testbarer Run
 - Ergebnis-Views
 - Produktstufen (`preview`, `base`, `upgrade`)
 - Fallback-Zuständen (`ready`, `incomplete`, `render-fallback`, `error`)
-- 6 Fixture-Paaren
+- 7 Fixture-Paaren
 - ersten textuellen Render-Snapshots
 - Launch-Hardening-Artefakten
 
@@ -33,7 +33,7 @@ Der Kündigungs-Kompass ist kein loses Konzept mehr, sondern ein **testbarer Run
 ## Was bereits belastbar steht
 ### Core / Stabilität
 - Mini-Testkonzept steht
-- alle 6 Fixture-Paare im Testlauf
+- alle 7 Fixture-Paare im Testlauf
 - Mehrfachfall (`06-mehrere-eingaenge-gleichzeitig`) in Engine und Tests nachgeschärft
 - Render-Assertions für `short`, `standard`, `advice`
 - erste Datumslogik eingebaut
@@ -62,6 +62,7 @@ Der Kündigungs-Kompass ist kein loses Konzept mehr, sondern ein **testbarer Run
 - kanonischer Runtime-Emissionspunkt vorhanden: `buildQuestionnaireResultView(..., { onEvent })` emittiert jetzt pro View genau ein strukturiertes `questionnaire_result_view_built`-Event
 - `incomplete` trägt zusätzlich anonymen Flow-Abbruchkontext (`lastQuestionKey`, `nextQuestionKey`, `trackContext`, `hadRedFlag`, `hadKnownDeadlineDate`) für Soft-Launch-Monitoring
 - erste Render-Snapshots für den Mehrfachfall
+- `alg1-risk-first` ist jetzt als echter MVP-Pfad abgesichert: angekündigte Beendigung + ALG-I-Fokus rendert nicht mehr still in `prepare-advice`, sondern als eigener Track mit Fixture- und Snapshot-Abdeckung
 - `test-launch-hardening-anchors.js` sichert jetzt 11 zentrale Drift-Anker: Wochenend-Klagefrist, Agentur-Meldungs-Trennung, `incomplete` statt falschem `ready`, Typed-Input-Guardrails gegen ungültige Datums-/Bool-Werte, widerspruchsarme Multi-Select-Normalisierung (`none_known` / `none_yet`), Cross-Field-Guardrails für angekündigte Kündigung ohne echte Zugangsfrist, konsistente Vertragsflags bei bereits unterschriebenem Vertrag, Neutralisierung irrelevanter Arbeitslosmeldungs-Flags außerhalb echter Arbeitslosigkeit, kein falscher Klagefrist-Pfad in reinen Vertragsfällen, semantisch konsistenter Vertrags-Einstieg bei `settlement_offered` sowie explizite statt nur vermutete Freistellungs-Logik bei Risiko-/Dokumentenblöcken
 
 ## Inhaltlich stabile Entscheidungen
@@ -90,6 +91,7 @@ Der nächste Hebel ist **konservative Launch-Härtung**:
    - `projects/kuendigungs-kompass-mvp/MONITORING-ANALYTICS-V1.md`
    - `projects/kuendigungs-kompass-mvp/LAUNCH-HARDENING-V1.md`
 4. `README.md` ist nur Intro; `HANDOFF-COMPACT-2026-03-22.md` ist historischer Kontext, kein Pflicht-Einstieg
+5. Führender Copy-Stand im Root ist jetzt `RESULT-COPY-V2.md`; der ältere Copy-Stand liegt nur noch unter `archive/review-docs/`
 
 ## Kurzfazit
 Das Projekt ist fachlich und technisch weit genug, dass nicht neue Feature-Fläche der Engpass ist, sondern **Drift-Kontrolle, Guardrails und Launch-Reife**.

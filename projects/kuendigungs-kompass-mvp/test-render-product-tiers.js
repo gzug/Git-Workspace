@@ -13,6 +13,7 @@ const CASES = [
   '03-kuendigung-sonderfall',
   '05-kuendigung-nur-angekuendigt',
   '06-mehrere-eingaenge-gleichzeitig',
+  '07-angekuendigt-alg1-risiko',
 ];
 
 function readJson(relativePath) {
@@ -92,6 +93,14 @@ function runCase(name) {
     assert.ok(baseText.includes('bis 13.04.2026'));
     assert.ok(baseText.includes('Fällt das rechnerische Fristende auf Samstag oder Sonntag'));
     assert.ok(baseText.includes('Mögliche Landesfeiertage werden im MVP nicht automatisch berechnet'));
+  }
+
+  if (name === '07-angekuendigt-alg1-risiko') {
+    assert.ok(previewText.includes('Arbeitslosengeld nicht in Gefahr gerät'));
+    assert.ok(baseText.includes('Arbeitsuchendmeldung:'));
+    assert.ok(baseText.includes('Offene Arbeitsuchendmeldung kann sich später beim Arbeitslosengeld auswirken'));
+    assert.ok(!baseText.includes('Gut vorbereitet in den nächsten Schritt gehen'));
+    assert.ok(upgradeText.includes('ALG-I-Risiken'));
   }
 }
 

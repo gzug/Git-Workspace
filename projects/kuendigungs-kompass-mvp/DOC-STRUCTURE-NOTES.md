@@ -15,8 +15,8 @@ Diese Datei hält die aktuelle Arbeitslogik für die Projektdokumentation fest, 
 - `REFERENZFAELLE.md` → fachliche Referenzfälle / Soll-Outputs
 - `RESULT-COPY-V2.md` → präferierter überarbeiteter Copy-Stand
 
-### Noch aktiv, aber reviewbedürftig
-- `RESULT-COPY.md` → älterer Copy-Stand; nicht löschen, aber nicht mehr stillschweigend als gleichrangig zu V2 behandeln
+### Historisiert / nicht mehr führend
+- `archive/review-docs/RESULT-COPY-legacy-2026-03-22.md` → älterer Copy-Stand; bewusst aus dem Root genommen, damit `RESULT-COPY-V2.md` nicht mehr mit einem Altstand konkurriert
 
 ## Arbeitsregel
 - Wenn mehrere Versionen einer Fachdoku im Root des Projektordners liegen, braucht es eine klar erkennbare führende Datei.
@@ -24,7 +24,5 @@ Diese Datei hält die aktuelle Arbeitslogik für die Projektdokumentation fest, 
 - Unklare Altstände zuerst nach `archive/review-docs/` oder in einen klaren Review-Status überführen statt blind löschen.
 
 ## Nächster sinnvoller Schritt
-- `RESULT-COPY.md` gegen `RESULT-COPY-V2.md` final entscheiden:
-  - entweder konsolidieren und Altstand archivieren
-  - oder den Statusunterschied explizit markieren
+- `RESULT-COPY-V2.md` gegen Runtime, Fixtures und Render-Snapshots spiegeln, damit die jetzt führende Copy-Datei nicht nur nominell, sondern faktisch der Referenzstand ist
 - weitere V1/V2-Dateipaare im Projekt künftig früh markieren, damit keine Doku-Drift entsteht

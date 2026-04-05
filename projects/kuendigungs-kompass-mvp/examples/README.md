@@ -11,6 +11,7 @@ Diese JSON-Dateien sind die maschinenlesbaren Golden Outputs für den Kündigung
 - `04-vertrag-bereits-unterschrieben.result.json`
 - `05-kuendigung-nur-angekuendigt.result.json`
 - `06-mehrere-eingaenge-gleichzeitig.result.json`
+- `07-angekuendigt-alg1-risiko.result.json`
 
 ### Inputs
 - `inputs/01-kuendigung-arbeitslosmeldung-offen.input.json`
@@ -19,6 +20,7 @@ Diese JSON-Dateien sind die maschinenlesbaren Golden Outputs für den Kündigung
 - `inputs/04-vertrag-bereits-unterschrieben.input.json`
 - `inputs/05-kuendigung-nur-angekuendigt.input.json`
 - `inputs/06-mehrere-eingaenge-gleichzeitig.input.json`
+- `inputs/07-angekuendigt-alg1-risiko.input.json`
 
 ### Pairing
 - `PAIRS.md`

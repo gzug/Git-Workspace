@@ -1,0 +1,15 @@
+{
+  "case_entry": "termination_announced_only",
+  "employment_end_date": "2026-05-31",
+  "jobseeker_registered": false,
+  "already_unemployed_now": false,
+  "agreement_present": false,
+  "release_status": "no",
+  "special_protection_indicator": [
+    "none_known"
+  ],
+  "documents_secured": [
+    "none_yet"
+  ],
+  "primary_goal": "protect_alg1"
+}

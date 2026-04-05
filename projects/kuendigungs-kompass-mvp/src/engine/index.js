@@ -290,6 +290,13 @@ function buildAdvisorQuestions(answers, track) {
       'Welche Alternative habe ich, wenn ich jetzt nicht unterschreibe?'
     ];
   }
+  if (track === 'alg1-risk-first') {
+    return [
+      'Welche Meldung sollte ich in meinem Fall jetzt als Erstes sauber erledigen?',
+      'Was an der Beendigung kann für mein Arbeitslosengeld besonders wichtig werden?',
+      'Welche Unterlagen sollte ich für Agentur oder Beratung direkt bereithalten?'
+    ];
+  }
   if (track === 'special-case-review') {
     if (isOverlappingMultiRiskCase(answers)) {
       return [
@@ -412,6 +419,37 @@ function buildTopActions(answers, effects, track) {
         timing: 'heute',
         statementClass: 'mvp-reliable',
         _severity: 'critical',
+      });
+    }
+  }
+
+  if (track === 'alg1-risk-first') {
+    if (answers.jobseeker_registered === false) {
+      actions.push({
+        priority: 1,
+        label: 'Arbeitsuchendmeldung sofort prüfen oder nachholen',
+        why: 'Wenn diese frühe Meldung offen bleibt, kann das später beim Arbeitslosengeld unnötige Nachteile auslösen.',
+        timing: 'sofort',
+        statementClass: 'mvp-reliable',
+        _severity: 'critical',
+      });
+    }
+    actions.push({
+      priority: 2,
+      label: 'Beendigungsverlauf und Agentur-relevante Eckdaten sauber festhalten',
+      why: 'Für die weitere Einordnung ist wichtig, wann und wie dir das Ende des Arbeitsverhältnisses angekündigt wurde und welche Meldungen schon erledigt sind.',
+      timing: 'heute',
+      statementClass: 'mvp-reliable',
+      _severity: 'medium',
+    });
+    if (answers.case_entry === 'termination_announced_only') {
+      actions.push({
+        priority: 3,
+        label: 'Sobald etwas Schriftliches kommt, den Fall direkt neu einordnen',
+        why: 'Erst mit einer schriftlichen Kündigung werden Fristen wie die Kündigungsschutzklage konkret relevant.',
+        timing: 'ab dann sofort',
+        statementClass: 'mvp-reliable',
+        _severity: 'medium',
       });
     }
   }
@@ -632,6 +670,23 @@ function buildRiskFlags(answers, track) {
     }
   }
 
+  if (track === 'alg1-risk-first') {
+    if (answers.jobseeker_registered === false) {
+      riskFlags.push({
+        label: 'Offene Arbeitsuchendmeldung kann sich später beim Arbeitslosengeld auswirken',
+        description: 'Wenn die frühe Arbeitsuchendmeldung offen bleibt, kann das den späteren ALG-I-Prozess unnötig belasten.',
+        severity: 'critical',
+        statementClass: 'mvp-reliable',
+      });
+    }
+    riskFlags.push({
+      label: 'Unklarer Verlauf der Beendigung erschwert die spätere Einordnung',
+      description: 'Wenn Meldungen, Ankündigung und weitere Schritte unsauber dokumentiert sind, wird die spätere Klärung mit Agentur oder Beratung unnötig schwer.',
+      severity: 'high',
+      statementClass: 'mvp-reliable',
+    });
+  }
+
   if (track === 'special-case-review') {
     if (isOverlappingMultiRiskCase(answers)) {
       riskFlags.push({
@@ -763,6 +818,18 @@ function selectPrimaryTrack(rawAnswers, evaluation = evaluateRules(rawAnswers)) 
   }
 
   if (answers.case_entry === 'termination_announced_only') {
+    if (
+      answers.primary_goal === 'protect_alg1'
+      || answers.already_unemployed_now
+      || answers.unemployment_registered === false
+    ) {
+      return {
+        primaryTrack: 'alg1-risk-first',
+        reasoning: 'Weil hier noch keine schriftliche Kündigung vorliegt, aber frühe Meldungen und der weitere Verlauf der Beendigung für das Arbeitslosengeld wichtig werden können, liegt der Fokus zuerst auf ALG-I-Risiken.',
+        confidenceClass: 'mvp-reliable',
+      };
+    }
+
     return {
       primaryTrack: 'prepare-advice',
       reasoning: 'Weil noch keine schriftliche Kündigung zugegangen ist, steht nicht die 3-Wochen-Klagefrist im Vordergrund, sondern Vorbereitung und frühe Agentur-Absicherung.',
@@ -805,6 +872,14 @@ function buildCaseSnapshot(answers, track) {
     return {
       headline: 'Jetzt zuerst: Fristen und Meldungen im Blick behalten',
       situation: 'Du hast eine schriftliche Kündigung erhalten. Jetzt kommt es darauf an, dass keine Frist und keine Meldung durchrutscht.',
+      riskLevel: 'high',
+      primaryGoal: answers.primary_goal,
+    };
+  }
+  if (track === 'alg1-risk-first') {
+    return {
+      headline: 'Jetzt zuerst sicherstellen, dass dein Arbeitslosengeld nicht in Gefahr gerät',
+      situation: 'Bei dir hängt gerade am meisten davon ab, wie die Meldungen und die Beendigung weiterlaufen.',
       riskLevel: 'high',
       primaryGoal: answers.primary_goal,
     };
@@ -867,6 +942,13 @@ function buildDisclaimers(answers, track) {
       agencySeparationDisclaimer,
       'Der MVP ersetzt keine individuelle Rechtsberatung.',
       'Das Tool bewertet keine Erfolgsaussichten einer Kündigungsschutzklage im Einzelfall.'
+    ];
+  }
+  if (track === 'alg1-risk-first') {
+    return [
+      agencySeparationDisclaimer,
+      'Der MVP ersetzt keine individuelle Rechtsberatung.',
+      'Ob und wie sich etwas auf dein Arbeitslosengeld auswirkt, hängt vom Einzelfall und vom weiteren Verlauf ab.'
     ];
   }
   if (track === 'special-case-review' && answers.agreement_already_signed) {

@@ -6,7 +6,7 @@ Stand: 2026-03-22
 
 ### A. Runtime-Stabilität
 - [ ] alle vorhandenen Tests grün
-- [ ] alle 6 Fixture-Paare grün
+- [ ] alle 7 Fixture-Paare grün
 - [ ] Routing-kritische Pfade bewusst geprüft
 - [ ] `ready`, `incomplete`, `render-fallback`, `error` bewusst geprüft
 - [ ] unbekannte Tier-Angabe fällt kontrolliert auf `base` zurück

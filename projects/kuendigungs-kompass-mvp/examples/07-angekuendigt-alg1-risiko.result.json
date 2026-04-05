@@ -1,0 +1,101 @@
+{
+  "resultVersion": "v2",
+  "caseSnapshot": {
+    "headline": "Jetzt zuerst sicherstellen, dass dein Arbeitslosengeld nicht in Gefahr gerät",
+    "situation": "Bei dir hängt gerade am meisten davon ab, wie die Meldungen und die Beendigung weiterlaufen.",
+    "riskLevel": "high",
+    "primaryGoal": "protect_alg1"
+  },
+  "synthesisDecision": {
+    "primaryTrack": "alg1-risk-first",
+    "reasoning": "Weil hier noch keine schriftliche Kündigung vorliegt, aber frühe Meldungen und der weitere Verlauf der Beendigung für das Arbeitslosengeld wichtig werden können, liegt der Fokus zuerst auf ALG-I-Risiken.",
+    "confidenceClass": "mvp-reliable"
+  },
+  "topActions": [
+    {
+      "priority": 1,
+      "label": "Arbeitsuchendmeldung sofort prüfen oder nachholen",
+      "why": "Wenn diese frühe Meldung offen bleibt, kann das später beim Arbeitslosengeld unnötige Nachteile auslösen.",
+      "timing": "sofort",
+      "statementClass": "mvp-reliable"
+    },
+    {
+      "priority": 2,
+      "label": "Beendigungsverlauf und Agentur-relevante Eckdaten sauber festhalten",
+      "why": "Für die weitere Einordnung ist wichtig, wann und wie dir das Ende des Arbeitsverhältnisses angekündigt wurde und welche Meldungen schon erledigt sind.",
+      "timing": "heute",
+      "statementClass": "mvp-reliable"
+    },
+    {
+      "priority": 3,
+      "label": "Sobald etwas Schriftliches kommt, den Fall direkt neu einordnen",
+      "why": "Erst mit einer schriftlichen Kündigung werden Fristen wie die Kündigungsschutzklage konkret relevant.",
+      "timing": "ab dann sofort",
+      "statementClass": "mvp-reliable"
+    }
+  ],
+  "deadlines": [
+    {
+      "label": "Arbeitsuchendmeldung",
+      "timing": "spätestens 3 Monate vor Ende, sonst innerhalb von 3 Tagen nach Kenntnis",
+      "importance": "critical",
+      "note": "Diese Meldung sollte nicht aufgeschoben werden, auch wenn der Vertrag noch nicht unterschrieben ist.",
+      "statementClass": "mvp-reliable"
+    }
+  ],
+  "riskFlags": [
+    {
+      "label": "Offene Arbeitsuchendmeldung kann sich später beim Arbeitslosengeld auswirken",
+      "description": "Wenn die frühe Arbeitsuchendmeldung offen bleibt, kann das den späteren ALG-I-Prozess unnötig belasten.",
+      "severity": "critical",
+      "statementClass": "mvp-reliable"
+    },
+    {
+      "label": "Unklarer Verlauf der Beendigung erschwert die spätere Einordnung",
+      "description": "Wenn Meldungen, Ankündigung und weitere Schritte unsauber dokumentiert sind, wird die spätere Klärung mit Agentur oder Beratung unnötig schwer.",
+      "severity": "high",
+      "statementClass": "mvp-reliable"
+    }
+  ],
+  "redFlags": [],
+  "documentChecklist": [
+    {
+      "label": "Schriftliche Kommunikation zur angekündigten Kündigung",
+      "reason": "Hilfreich, um den Verlauf später nachvollziehen zu können.",
+      "status": "secure-now"
+    },
+    {
+      "label": "Arbeitsvertrag",
+      "reason": "Hilft bei Beratung und Einordnung der Ausgangslage.",
+      "status": "secure-now"
+    },
+    {
+      "label": "Lohnunterlagen",
+      "reason": "Hilfreich für Agentur-Themen und Beratungsvorbereitung.",
+      "status": "secure-now"
+    }
+  ],
+  "advisorQuestions": [
+    "Welche Meldung sollte ich in meinem Fall jetzt als Erstes sauber erledigen?",
+    "Was an der Beendigung kann für mein Arbeitslosengeld besonders wichtig werden?",
+    "Welche Unterlagen sollte ich für Agentur oder Beratung direkt bereithalten?"
+  ],
+  "opportunities": [],
+  "disclaimers": [
+    "Arbeitsuchendmeldung = früher eigener Schritt bei bekanntem Ende; Arbeitslosmeldung = separater Schritt ab tatsächlicher Arbeitslosigkeit.",
+    "Der MVP ersetzt keine individuelle Rechtsberatung.",
+    "Ob und wie sich etwas auf dein Arbeitslosengeld auswirkt, hängt vom Einzelfall und vom weiteren Verlauf ab."
+  ],
+  "statementLedger": {
+    "mvpReliable": [
+      "Die Arbeitsuchendmeldung soll in der Regel spätestens 3 Monate vor Ende des Arbeitsverhältnisses erfolgen; erfährst du später davon, binnen 3 Tagen.",
+      "Zu späte Meldungen können finanzielle Nachteile beim späteren Arbeitslosengeld auslösen.",
+      "Beide Meldungen sind fachlich getrennt. Im MVP soll diese Unterscheidung explizit sichtbar bleiben.",
+      "Mindestens Kündigung / Vertrag / Entwurf / Lohnunterlagen sichern, damit Beratung und Behördenwege sauber vorbereitet sind."
+    ],
+    "cautiousChecks": [],
+    "notUsedYet": [
+      "Der MVP soll keine belastbare Erwartung zu Abfindungshöhe oder Durchsetzbarkeit suggerieren."
+    ]
+  }
+}

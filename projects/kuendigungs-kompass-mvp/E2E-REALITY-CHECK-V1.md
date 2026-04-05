@@ -86,6 +86,7 @@ Diese Pfade sind für Launch-Reife besonders wichtig:
 - Wochenende am Fristende → saubere Verschiebung
 - möglicher Landesfeiertag → Prüfhinweis statt stiller automatischer Verschiebung
 - Red Flag aktiv + fehlende Detailantwort → konservativer Eskalationspfad
+- ungültige Datums- oder Bool-Eingaben → Normalisierung auf `null` und kontrollierter `incomplete`-Pfad statt falschem `ready`
 
 ## Testarten nach Risiko
 ### Snapshot-geeignet

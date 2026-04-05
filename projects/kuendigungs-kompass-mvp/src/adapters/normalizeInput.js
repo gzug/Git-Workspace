@@ -8,11 +8,29 @@ function isUnknownLiteral(value) {
 
 function normalizeBoolean(value) {
   if (value === true || value === false) return value;
-  if (value === 'true') return true;
-  if (value === 'false') return false;
-  if (value === 'yes') return true;
-  if (value === 'no') return false;
-  return value;
+  if (typeof value !== 'string') return null;
+
+  const normalized = value.trim().toLowerCase();
+  if (normalized === 'true' || normalized === 'yes') return true;
+  if (normalized === 'false' || normalized === 'no') return false;
+  if (normalized === 'unknown') return null;
+  return null;
+}
+
+function isValidIsoDateString(value) {
+  if (typeof value !== 'string') return false;
+  const normalized = value.trim();
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(normalized)) return false;
+
+  const [yearString, monthString, dayString] = normalized.split('-');
+  const year = Number(yearString);
+  const month = Number(monthString);
+  const day = Number(dayString);
+  const date = new Date(Date.UTC(year, month - 1, day));
+
+  return date.getUTCFullYear() === year
+    && date.getUTCMonth() === month - 1
+    && date.getUTCDate() === day;
 }
 
 function normalizeArrayValue(value) {
@@ -54,13 +72,18 @@ function normalizeQuestionnaireInput(rawInput = {}) {
     }
 
     if (DATE_FIELDS.has(key)) {
-      normalized[key] = isUnknownLiteral(rawValue) ? null : rawValue;
+      if (isUnknownLiteral(rawValue)) {
+        normalized[key] = null;
+      } else if (isValidIsoDateString(rawValue)) {
+        normalized[key] = rawValue.trim();
+      } else {
+        normalized[key] = null;
+      }
       continue;
     }
 
     if (BOOLEAN_FIELDS.has(key)) {
-      const boolValue = normalizeBoolean(rawValue);
-      normalized[key] = isUnknownLiteral(boolValue) || boolValue === '' ? null : boolValue;
+      normalized[key] = normalizeBoolean(rawValue);
       continue;
     }
 

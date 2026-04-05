@@ -37,6 +37,17 @@ function run() {
   assert.equal(unknownLiterals.employment_end_date, null);
   assert.equal(unknownLiterals.jobseeker_registered, null);
 
+  const invalidTypedValues = normalizeQuestionnaireInput({
+    termination_access_date: '2026-99-99',
+    employment_end_date: '18.03.2026',
+    jobseeker_registered: 'maybe',
+    already_unemployed_now: '1',
+  });
+  assert.equal(invalidTypedValues.termination_access_date, null);
+  assert.equal(invalidTypedValues.employment_end_date, null);
+  assert.equal(invalidTypedValues.jobseeker_registered, null);
+  assert.equal(invalidTypedValues.already_unemployed_now, null);
+
   const sparse = normalizeQuestionnaireInput({});
   assert.deepEqual(sparse.special_protection_indicator, []);
   assert.deepEqual(sparse.documents_secured, []);

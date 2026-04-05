@@ -21,7 +21,8 @@ Der Kündigungs-Kompass ist kein loses Konzept mehr, sondern ein **testbarer Run
 2. Arbeitslosmeldung vs. Arbeitsuchendmeldung logisch und sprachlich final trennen
 3. Snapshot-/Drift-Abdeckung gezielt auf repräsentative Fälle ausbauen
 4. Sonderfall-/Pflichtfeld-/Unknown-Logik nachschärfen
-5. Erst danach UI/API- und Soft-Launch-Schicht weiterziehen
+5. Typed-Input-Guardrails gegen falsches `ready` absichern
+6. Erst danach UI/API- und Soft-Launch-Schicht weiterziehen
 
 ## Größte aktuelle Risiken
 - Drift zwischen Research, Doku, Fixtures und Runtime
@@ -59,7 +60,7 @@ Der Kündigungs-Kompass ist kein loses Konzept mehr, sondern ein **testbarer Run
 - `SOFT-LAUNCH-CHECKLIST-V1.md`
 - telemetry-taugliche Summary-Felder im Runtime-Layer
 - erste Render-Snapshots für den Mehrfachfall
-- `test-launch-hardening-anchors.js` sichert jetzt 3 zentrale Drift-Anker: Wochenend-Klagefrist, Agentur-Meldungs-Trennung, `incomplete` statt falschem `ready`
+- `test-launch-hardening-anchors.js` sichert jetzt 4 zentrale Drift-Anker: Wochenend-Klagefrist, Agentur-Meldungs-Trennung, `incomplete` statt falschem `ready`, Typed-Input-Guardrails gegen ungültige Datums-/Bool-Werte
 
 ## Inhaltlich stabile Entscheidungen
 Diese Punkte nicht leichtfertig wieder aufreißen:

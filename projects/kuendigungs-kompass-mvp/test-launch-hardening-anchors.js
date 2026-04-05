@@ -82,6 +82,26 @@ function run() {
   assert.equal(incompleteView.telemetry.status, 'incomplete');
   assert.equal(incompleteView.telemetry.primaryTrack, null);
 
+  const invalidTypedView = buildQuestionnaireResultView({
+    case_entry: 'termination_received',
+    termination_access_date: '2026-99-99',
+    employment_end_date: '2026-04-30',
+    jobseeker_registered: 'maybe',
+    already_unemployed_now: false,
+    agreement_present: false,
+    release_status: 'no',
+    special_protection_indicator: ['none_known'],
+    primary_goal: 'protect_deadlines',
+  }, { tier: 'base' });
+
+  assert.equal(invalidTypedView.status, 'incomplete');
+  assert.equal(invalidTypedView.normalizedInput.termination_access_date, null);
+  assert.equal(invalidTypedView.normalizedInput.jobseeker_registered, null);
+  assert.ok(invalidTypedView.missingAnswers.some((item) => item.id === 'termination_access_date'));
+  assert.ok(invalidTypedView.missingAnswers.some((item) => item.id === 'jobseeker_registered'));
+  assert.ok(!('result' in invalidTypedView));
+  assert.equal(invalidTypedView.telemetry.status, 'incomplete');
+
   console.log('All launch hardening anchor tests passed.');
 }
 

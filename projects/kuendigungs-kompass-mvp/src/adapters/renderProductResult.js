@@ -31,16 +31,20 @@ function renderPreview(projected) {
   const lines = [];
   lines.push(projected.caseSnapshot.headline);
   if (projected.topAction) lines.push(`Wichtigster nächster Schritt: ${projected.topAction.label}`);
-  if (projected.deadline) {
-    lines.push(`Kritische Frist: ${projected.deadline.label} — ${projected.deadline.timing}`);
-  } else if (projected.redFlag) {
+
+  if (projected.redFlag) {
     lines.push(`Besonders wichtig: ${projected.redFlag.label}`);
     if (projected.redFlag.recommendedEscalation) {
       lines.push(`Sinnvoll jetzt: ${projected.redFlag.recommendedEscalation}`);
     }
-  } else if (projected.riskFlag) {
+  }
+
+  if (projected.deadline) {
+    lines.push(`Kritische Frist: ${projected.deadline.label} — ${projected.deadline.timing}`);
+  } else if (!projected.redFlag && projected.riskFlag) {
     lines.push(`Wichtiges Risiko: ${projected.riskFlag.label}`);
   }
+
   if (projected.disclaimer) lines.push(`Wichtig dabei: ${projected.disclaimer}`);
   return lines.join('\n').trim();
 }

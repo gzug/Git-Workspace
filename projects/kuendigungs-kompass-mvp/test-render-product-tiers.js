@@ -93,6 +93,8 @@ function runCase(name) {
     assert.ok(baseText.includes('Möglicher besonderer Schutz oder Sonderfall'));
     assert.ok(baseText.includes('Kündigungsschutzklage prüfen:'));
     assert.ok(baseText.includes('Anwalt, Gewerkschaft oder passender Beratungsstelle'));
+    assert.ok(previewText.includes('Besonders wichtig: Möglicher besonderer Schutz oder Sonderfall'));
+    assert.ok(previewText.includes('Sinnvoll jetzt: Qualifizierte individuelle Prüfung mit Anwalt, Gewerkschaft oder passender Beratungsstelle'));
     assert.ok(previewText.includes('Kündigungsschutzklage prüfen —'));
   }
 
@@ -116,6 +118,8 @@ function runCase(name) {
     assert.ok(baseText.includes('Wenn ein Landesfeiertag in Frage kommt, sollte das Fristende vorsichtshalber zusätzlich geprüft werden.'));
     assert.ok(baseText.includes('Anwalt, Gewerkschaft oder passender Beratungsstelle'));
     assert.ok(upgradeText.includes('Anwalt, Gewerkschaft oder passender Beratungsstelle'));
+    assert.ok(previewText.includes('Besonders wichtig: Überlagerter Mehrfachfall mit möglichem Sonderfall'));
+    assert.ok(previewText.includes('Sinnvoll jetzt: Qualifizierte individuelle Prüfung mit Anwalt, Gewerkschaft oder passender Beratungsstelle'));
   }
 
   if (name === '07-angekuendigt-alg1-risiko') {

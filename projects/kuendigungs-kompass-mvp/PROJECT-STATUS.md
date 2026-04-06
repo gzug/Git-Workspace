@@ -1,6 +1,6 @@
 # Kündigungs-Kompass MVP — Projektstatus
 
-Stand: 2026-04-05
+Stand: 2026-04-06
 Status: aktiv
 
 ## Kurzstatus
@@ -20,7 +20,7 @@ Der Kündigungs-Kompass ist kein loses Konzept mehr, sondern ein **testbarer Run
 1. Launch-Hardening-Go/No-Go jetzt gegen explizite Exit-Kriterien statt Bauchgefühl fahren (`LAUNCH-HARDENING-DONE.md`)
 2. Drift zwischen Runtime, Fixtures, Snapshots, Mockup und Steuerdoku weiter klein halten
 3. Monitoring-/Telemetry-Felder für den späteren UI/API-Anschluss andockbar halten
-4. Erst danach echten UI/API- und Soft-Launch-Anschluss weiterziehen
+4. UI/API-Caller bis auf Weiteres bewusst dünn halten: direkter Aufruf von `buildQuestionnaireResultView(..., { onEvent })`, kein zusätzlicher Systemlayer auf Verdacht
 
 ## Größte aktuelle Risiken
 - Drift zwischen Research, Doku, Fixtures und Runtime
@@ -61,6 +61,7 @@ Der Kündigungs-Kompass ist kein loses Konzept mehr, sondern ein **testbarer Run
 - kanonischer Runtime-Emissionspunkt vorhanden: `buildQuestionnaireResultView(..., { onEvent })` emittiert jetzt pro View genau ein strukturiertes `questionnaire_result_view_built`-Event
 - dünner V1-Telemetrie-Anschluss liegt jetzt außerhalb des Runtime-Cores: `src/runtime/telemetry/emitResultViewEvent.js`, `fileTelemetrySink.js`, `aggregateTelemetry.js`
 - kleinster Dev-Hook dafür ist jetzt real nutzbar: `src/demo.js --telemetry-out <path>`; lokales Prüf-Runbook liegt unter `vault/runbooks/kk-telemetry-dev.md`
+- `INTEGRATION-CONTRACT-V1.md` ist jetzt auf den aktuellen Runtime-/Telemetry-Stand gezogen; V1-Entscheid: künftiger UI/API-Anschluss bleibt ein dünner Adapter über `buildQuestionnaireResultView(..., { onEvent })`, ohne neuen äußeren Systemlayer
 - `incomplete` trägt zusätzlich anonymen Flow-Abbruchkontext (`lastQuestionKey`, `nextQuestionKey`, `trackContext`, `hadRedFlag`, `hadKnownDeadlineDate`) für Soft-Launch-Monitoring
 - sichtbarer Output für Kernfälle weiter geschärft: action-orientierte Agentur-Labels, scanbarere Preview-Fristen, klarere angekündigt-Kündigung-Headline, `Besonders wichtig` vor `Risiken`
 - statisches Sicht-Mockup für Ergebnisprüfung vorhanden: `mockup/static-result-mockup.html`
@@ -89,6 +90,7 @@ Der nächste Hebel ist **konservative Launch-Härtung**:
 1. `projects/kuendigungs-kompass-mvp/PROJECT-STATUS.md`
 2. `projects/kuendigungs-kompass-mvp/EXECUTION-BOARD.md`
 3. danach nur blockrelevante Dateien, aktuell vor allem:
+   - `projects/kuendigungs-kompass-mvp/INTEGRATION-CONTRACT-V1.md`
    - `projects/kuendigungs-kompass-mvp/DATE-LOGIC-MVP.md`
    - `projects/kuendigungs-kompass-mvp/SNAPSHOT-ANCHORS-V1.md`
    - `projects/kuendigungs-kompass-mvp/MONITORING-ANALYTICS-V1.md`

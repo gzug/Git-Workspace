@@ -1,8 +1,8 @@
 # Kündigungs-Kompass — Status Update 2026-04-06
 
 ## Stand jetzt
-- Repo ist sauber gesichert; letzter abgeschlossener Block: **Dev-Hook + Telemetrie-Runbook**
-- Launch Hardening ist nicht mehr nur Doku, sondern hat jetzt:
+- Repo ist sauber gesichert; letzter abgeschlossener Block ist jetzt **Integration Contract + dünner Caller-Entscheid**
+- Launch Hardening ist nicht mehr nur Doku, sondern hat weiter belastbare Gate-/Test-Artefakte:
   - Go/No-Go-Gate (`LAUNCH-HARDENING-DONE.md`)
   - ausführbaren Gate-Test (`test-launch-hardening-done.js`)
   - Drift-/Härtefall-Anker (`test-launch-hardening-anchors.js`)
@@ -12,61 +12,44 @@
   - `src/runtime/telemetry/aggregateTelemetry.js`
   - `src/demo.js --telemetry-out <path>`
   - `vault/runbooks/kk-telemetry-dev.md`
+- `INTEGRATION-CONTRACT-V1.md` ist jetzt auf den aktuellen Runtime-/Telemetry-Stand gezogen
+- V1-Entscheid ist fest: **kein zusätzlicher äußerer Caller-Layer**; künftiger UI/API-Anschluss bleibt ein dünner Adapter über `buildQuestionnaireResultView(..., { onEvent })`
+- relevante Verifikationsläufe für diesen Block sind grün:
+  - `node test-questionnaire-result-view.js`
+  - `node test-runtime-telemetry.js`
 - sichtbarer Output ist für Kernfälle stark gehärtet
 - `agents/coder/` ist spezifiziert, aber **nicht aktiviert**
 
 ## Aktueller Engpass
-Der nächste Engpass ist **nicht** neue Produktlogik und **nicht** breiteres Feature-Bauen, sondern der dünnste saubere Übergang von der bestehenden Runtime zu einem späteren UI/API-Aufrufer.
+Der Engpass ist weiter **nicht** neue Produktlogik und **nicht** breites Feature-Bauen.
+
+Der saubere Stand ist jetzt:
+- die Runtime ist der fachliche Kern
+- `onEvent` ist der einzige kanonische Emissionspunkt
+- der spätere UI/API-Caller soll nur aufrufen, Zustände mappen und optional einen Sink anschließen
 
 Kurz:
-**Wie dockt ein äußerer Caller sauber an `buildQuestionnaireResultView(..., { onEvent })` an, ohne das Projekt wieder in Website-/Infra-Breite zu ziehen?**
+**Keine neue Architektur auf Verdacht bauen. Erst wieder anfassen, wenn ein echter konkreter Caller mehr braucht als Aufruf + Status-Mapping + optionalen Sink.**
 
 ## Nächste autonome Aufgaben
-### 1. Integration Contract auf aktuellen Stand ziehen
-**Ziel:** `INTEGRATION-CONTRACT-V1.md` von Block-3-Vorarbeit auf den aktuellen Block-4-Stand heben.
-
-**Dabei festziehen:**
-- aktueller Runtime-Vertrag (`ready`, `incomplete`, `render-fallback`, `error`)
-- Rolle von `buildQuestionnaireResultView(...)`
-- Rolle des optionalen `onEvent`
-- äußerer Telemetrie-Anschluss als externer Hook, nicht als Runtime-Core-Logik
-- kleinste sinnvolle Verantwortung eines künftigen UI/API-Callers
+### 1. Launch-Hardening weiter nur dort schärfen, wo echter Drift sichtbar ist
+**Ziel:** keine neue Fläche bauen, sondern nur konkrete Mismatches zwischen Runtime, Snapshots, Fixtures und Steuerdoku schließen.
 
 **Nicht tun:**
-- keine neue Produktlogik
 - keine Frontend-Debatte
-- keine Vendor-Entscheidung
+- kein API-Server
 - keine neue State-Machine
+- keine Analytics-/Vendor-Auswahl
 
-**Done when:**
-- `INTEGRATION-CONTRACT-V1.md` enthält keine Block-3-Stale-Annahmen mehr
-- der künftige äußere Caller ist als dünner Adapter beschrieben, nicht als neuer Systemlayer
-
----
-
-### 2. Danach nur wenn Task 1 klar ist: dünnsten äußeren Caller skizzieren
-**Ziel:** entscheiden, ob ein kleiner zusätzlicher technischer Adapter wirklich nötig ist.
+### 2. UI/API-Anschluss nur bei echtem Bedarf wieder öffnen
+**Ziel:** den dünnen Anschluss nicht wieder künstlich aufblasen.
 
 **Erlaubte Ergebnisse:**
-- entweder **nur** ein sauberer Vertrag / kein weiterer Code nötig
-- oder ein **sehr kleiner** zusätzlicher Adapter/Beispielpfad, wenn damit der spätere UI/API-Anschluss real deutlich klarer wird
-
-**Wichtig:**
-- kein echter Frontend-Bau
-- kein API-Server
-- keine breite neue Runtime-Fläche
-- nur der dünnste sinnvolle Anschluss
+- direkter Runtime-Aufruf bleibt bestehen
+- optional ein sehr kleiner echter Caller-Beispielpfad, aber nur wenn ein konkreter Integrationskontext ihn wirklich erzwingt
 
 **Stop-Regel:**
-Wenn dafür echte Produkt- oder API-Entscheidungen fehlen, **stoppen statt raten**.
-
----
-
-### 3. Danach Drift schließen und erneut prüfen
-Wenn 1 oder 2 Änderungen erzeugen:
-- relevante Tests laufen lassen
-- nur wirklich betroffene Steuerdateien synchronisieren
-- dann sauber stoppen
+Wenn dafür Produkt- oder API-Entscheidungen fehlen, **stoppen statt raten**.
 
 ## Harte Grenzen für den nächsten Block
 Nicht anfassen in diesem Schritt:
@@ -80,12 +63,12 @@ Nicht anfassen in diesem Schritt:
 1. diese Datei lesen
 2. `PROJECT-STATUS.md`
 3. `EXECUTION-BOARD.md`
-4. dann `INTEGRATION-CONTRACT-V1.md`
-5. danach direkt mit Aufgabe 1 starten
+4. `INTEGRATION-CONTRACT-V1.md`
+5. dann nur noch die blockrelevanten Launch-Hardening-Dateien öffnen
 
 ## Wenn etwas unklar wird
 Nicht breit neu konzipieren.
 Erst prüfen:
-- ist es wirklich für den dünnen UI/API-Anschluss nötig?
+- ist es wirklich für Launch-Hardening oder einen realen Caller nötig?
 - wenn nein: nicht jetzt
 - wenn ja, aber Produkturteil nötig: stoppen und Y. fragen

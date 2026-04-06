@@ -1,6 +1,6 @@
 # Kündigungs-Kompass — Execution Board
 
-Stand: 2026-03-21
+Stand: 2026-04-06
 Status: aktiv
 
 ## Kurzdiagnose
@@ -136,13 +136,16 @@ Die Hauptlücken liegen aktuell in **vollständiger Testhärtung**, **konkreter 
 - Priorität: P1
 - Ergebnis bisher:
   - `MONITORING-ANALYTICS-V1.md` definiert das MVP-Monitoring-Minimum
-  - `buildQuestionnaireResultView` liefert jetzt eine telemetry-taugliche Summary für `ready`, `incomplete`, `render-fallback` und `error`
+  - `buildQuestionnaireResultView(..., { onEvent })` liefert jetzt pro View genau ein telemetry-taugliches Event für `ready`, `incomplete`, `render-fallback` und `error`
+  - lokaler Dev-Anschluss ist real prüfbar über `src/demo.js --telemetry-out <path>`, `src/runtime/telemetry/fileTelemetrySink.js` und `aggregateTelemetry.js`
 
 ### Task 4.3 — Minimal-Analytics
 - Status: in Arbeit
 - Priorität: P2
 - Ergebnis bisher:
   - Analytics-Scope auf wenige belastbare Runtime-Felder eingegrenzt
+  - `INTEGRATION-CONTRACT-V1.md` ist jetzt auf den aktuellen Runtime-/Telemetry-Stand gezogen
+  - V1-Entscheid: kein zusätzlicher äußerer Caller-Layer; späterer UI/API-Anschluss bleibt ein dünner Adapter über `buildQuestionnaireResultView(..., { onEvent })`
   - noch nicht an ein echtes Persistenz-/Event-System angeschlossen
 
 ### Task 4.4 — Soft-Launch-Checkliste und Rollback
@@ -156,7 +159,7 @@ Die Hauptlücken liegen aktuell in **vollständiger Testhärtung**, **konkreter 
 
 ## Aktueller Fokus
 1. End-to-End-Anschluss zwischen Flow, Engine und Produktausgabe weiter härten
-2. Monitoring-/Telemetry-Felder an den späteren UI/API-Anschluss andockbar halten
+2. UI/API-Caller bewusst dünn halten: direkter Runtime-Aufruf plus optionaler `onEvent`-Hook, kein zusätzlicher Systemlayer auf Verdacht
 3. Render-Snapshots gezielt ausbauen, wo Copy-Stabilität kritisch ist
 4. UI-Polish weiter hinter Stabilität halten
 
@@ -168,7 +171,7 @@ Die Hauptlücken liegen aktuell in **vollständiger Testhärtung**, **konkreter 
 - Steering-Doku, Runtime, Fixtures, Snapshots und statisches Mockup eng synchron halten
 
 ### Next
-- späteren UI/API-Anschluss so vorbereiten, dass Monitoring-/Telemetry-Felder sauber andocken können
+- echten UI/API-Anschluss erst dann weiterziehen, wenn ein konkreter Caller mehr verlangt als Aufruf + Status-Mapping + optionalen Sink
 - Frontend-/Mockup-Weiterbau erst gegen grünes Hardening-Gate priorisieren
 
 ### Risks

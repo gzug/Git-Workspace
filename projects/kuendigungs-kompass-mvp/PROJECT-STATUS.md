@@ -59,6 +59,7 @@ Der Kündigungs-Kompass ist kein loses Konzept mehr, sondern ein **testbarer Run
 - `SOFT-LAUNCH-CHECKLIST-V1.md`
 - telemetry-taugliche Summary-Felder im Runtime-Layer
 - kanonischer Runtime-Emissionspunkt vorhanden: `buildQuestionnaireResultView(..., { onEvent })` emittiert jetzt pro View genau ein strukturiertes `questionnaire_result_view_built`-Event
+- dünner V1-Telemetrie-Anschluss liegt jetzt außerhalb des Runtime-Cores: `src/runtime/telemetry/emitResultViewEvent.js`, `fileTelemetrySink.js`, `aggregateTelemetry.js`
 - `incomplete` trägt zusätzlich anonymen Flow-Abbruchkontext (`lastQuestionKey`, `nextQuestionKey`, `trackContext`, `hadRedFlag`, `hadKnownDeadlineDate`) für Soft-Launch-Monitoring
 - sichtbarer Output für Kernfälle weiter geschärft: action-orientierte Agentur-Labels, scanbarere Preview-Fristen, klarere angekündigt-Kündigung-Headline, `Besonders wichtig` vor `Risiken`
 - statisches Sicht-Mockup für Ergebnisprüfung vorhanden: `mockup/static-result-mockup.html`

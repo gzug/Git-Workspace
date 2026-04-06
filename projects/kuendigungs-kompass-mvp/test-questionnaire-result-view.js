@@ -32,6 +32,15 @@ function run() {
   assert.equal(readyEvents.length, 1);
   assert.deepEqual(readyEvents[0], readyView.telemetry);
 
+  const throwInHookView = buildQuestionnaireResultView(completeInput, {
+    tier: 'base',
+    onEvent: () => {
+      throw new Error('sink failed');
+    },
+  });
+  assert.equal(throwInHookView.status, 'ready');
+  assert.ok(typeof throwInHookView.rendered === 'string');
+
   const incompleteEvents = [];
   const incompleteView = buildQuestionnaireResultView({
     case_entry: 'termination_received',

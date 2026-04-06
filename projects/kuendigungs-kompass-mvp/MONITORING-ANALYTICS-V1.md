@@ -64,6 +64,12 @@ Nur anonym und minimal:
 - `hadRedFlag`
 - `hadKnownDeadlineDate`
 
+### V1-Adapter für den lokalen Anschluss
+- `src/runtime/telemetry/emitResultViewEvent.js` → dünner Mapper/Emitter für result-view-kompatible Payloads
+- `src/runtime/telemetry/fileTelemetrySink.js` → schreibt pro Event eine JSON-Zeile in `telemetry.ndjson`
+- `src/runtime/telemetry/aggregateTelemetry.js` → aggregiert Status, Tracks, Abbruchfragen und Error-Codes aus NDJSON
+- der Sink bleibt extern andockbar; `buildQuestionnaireResultView(..., { onEvent })` bleibt der einzige Runtime-Emissionspunkt
+
 ### Später optional
 - separates Event `questionnaire_flow_abandoned`, falls UI/API später lieber zwei Events statt eines kanonischen Payloads haben will
 - separates Event `questionnaire_result_view_failed`, falls `status=error` im Hauptevent operativ nicht reicht

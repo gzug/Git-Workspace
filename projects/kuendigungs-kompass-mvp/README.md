@@ -51,6 +51,7 @@ Wichtig:
 - `EXECUTION-BOARD.md` → aktiver Arbeitsfokus, Risiken, Delegation, Waiting
 - `PROJECT-STATUS.md` → kuratierter Gesamtstatus
 - `FLOW-CONTRACT-V1.md` → Flow- und Fragebogenlogik
+- `INTEGRATION-CONTRACT-V1.md` → aktueller Runtime-/Hook-Vertrag für den dünnen UI/API-Anschluss
 - `DATE-LOGIC-MVP.md` → Datums- und Fristenlogik
 - `LAUNCH-HARDENING-V1.md` → Launch-Härtung
 - `E2E-REALITY-CHECK-V1.md` → Pflichtfälle / Reality Check
@@ -73,14 +74,18 @@ Wichtig:
 - `test-product-tiers.js`
 - `test-render-product-tiers.js`
 - `test-questionnaire-flow.js`
+- `test-questionnaire-result-view.js`
+- `test-launch-hardening-anchors.js`
+- `test-launch-hardening-done.js`
+- `test-runtime-telemetry.js`
 
 ## Aktueller Engpass
 Nicht neue Features.
 Der aktuelle Engpass ist **Launch Hardening**:
 - Exit-Kriterien explizit gegen Go/No-Go-Gate prüfen
 - Snapshot-/Drift-Abdeckung und Steuerdoku synchron halten
-- Monitoring-/Telemetry-Anschluss für späteren UI/API-Pfad sauber halten
-- UI/API erst danach weiterziehen
+- Monitoring-/Telemetry-Anschluss für den späteren UI/API-Pfad sauber halten
+- den UI/API-Caller bis auf Weiteres bewusst dünn halten: direkter Runtime-Aufruf plus optionaler `onEvent`-Hook, kein zusätzlicher Systemlayer auf Verdacht
 
 ## Wiedereinstieg
 Kanonischer Einstieg: **`PROJECT-STATUS.md`**.
@@ -88,7 +93,7 @@ Kanonischer Einstieg: **`PROJECT-STATUS.md`**.
 Wenn du neu oder nach Pause ins Projekt gehst, lies in dieser Reihenfolge:
 1. `PROJECT-STATUS.md`
 2. `EXECUTION-BOARD.md`
-3. danach nur die für den aktuellen Block relevanten Dateien, z. B. `DATE-LOGIC-MVP.md`, `RESULT-MAPPING.md`, `MONITORING-ANALYTICS-V1.md`
+3. danach nur die für den aktuellen Block relevanten Dateien, z. B. `INTEGRATION-CONTRACT-V1.md`, `DATE-LOGIC-MVP.md`, `RESULT-MAPPING.md`, `MONITORING-ANALYTICS-V1.md`
 
 `README.md` ist nur das kurze Projekt-Intro, nicht die führende Steuerdatei.
 

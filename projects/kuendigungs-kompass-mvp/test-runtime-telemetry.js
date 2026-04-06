@@ -35,7 +35,11 @@ function run() {
   const filePath = path.join(tempDir, 'telemetry.ndjson');
   const sink = createFileTelemetrySink({ filePath });
 
-  assert.equal(sink(readyView), true);
+  const hookedReadyView = buildQuestionnaireResultView(
+    readJson('examples/inputs/01-kuendigung-arbeitslosmeldung-offen.input.json'),
+    { tier: 'upgrade', onEvent: sink },
+  );
+  assert.equal(hookedReadyView.status, 'ready');
 
   const incompleteView = buildQuestionnaireResultView({
     case_entry: 'termination_received',
@@ -44,6 +48,10 @@ function run() {
     release_status: 'no',
   }, { tier: 'base' });
   assert.equal(sink(incompleteView), true);
+
+  const demoReadyLine = JSON.parse(fs.readFileSync(filePath, 'utf8').trim().split(/\r?\n/)[0]);
+  assert.equal(demoReadyLine.status, 'ready');
+  assert.equal(demoReadyLine.primaryTrack, 'deadline-first');
 
   const manualErrorEvent = {
     event: 'questionnaire_result_view_built',

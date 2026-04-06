@@ -56,6 +56,7 @@ Wichtig:
 - `E2E-REALITY-CHECK-V1.md` → Pflichtfälle / Reality Check
 - `MONITORING-ANALYTICS-V1.md` → Monitoring-Minimum
 - `SOFT-LAUNCH-CHECKLIST-V1.md` → Go/No-Go / Rollback
+- `vault/runbooks/kk-telemetry-dev.md` → lokaler Dev-Hook + Auswertung für Telemetrie ohne UI/API-Anschluss
 
 ### Technische Kernbereiche
 - `src/runtime/`

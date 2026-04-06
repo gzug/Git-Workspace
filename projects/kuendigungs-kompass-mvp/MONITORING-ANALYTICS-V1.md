@@ -68,6 +68,8 @@ Nur anonym und minimal:
 - `src/runtime/telemetry/emitResultViewEvent.js` → dünner Mapper/Emitter für result-view-kompatible Payloads
 - `src/runtime/telemetry/fileTelemetrySink.js` → schreibt pro Event eine JSON-Zeile in `telemetry.ndjson`
 - `src/runtime/telemetry/aggregateTelemetry.js` → aggregiert Status, Tracks, Abbruchfragen und Error-Codes aus NDJSON
+- `src/demo.js --telemetry-out <path>` → kleinster Dev-Hook, um den Sink ohne UI/API-Anschluss real zu benutzen
+- Runbook dafür: `vault/runbooks/kk-telemetry-dev.md`
 - der Sink bleibt extern andockbar; `buildQuestionnaireResultView(..., { onEvent })` bleibt der einzige Runtime-Emissionspunkt
 
 ### Später optional

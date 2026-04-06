@@ -67,10 +67,20 @@ Nur anonym und minimal:
 ### V1-Adapter für den lokalen Anschluss
 - `src/runtime/telemetry/emitResultViewEvent.js` → dünner Mapper/Emitter für result-view-kompatible Payloads
 - `src/runtime/telemetry/fileTelemetrySink.js` → schreibt pro Event eine JSON-Zeile in `telemetry.ndjson`
-- `src/runtime/telemetry/aggregateTelemetry.js` → aggregiert Status, Tracks, Abbruchfragen und Error-Codes aus NDJSON
+- `src/runtime/telemetry/aggregateTelemetry.js` → aggregiert Status, Tracks, Abbruchfragen und Error-Codes aus NDJSON und leitet daraus minimale `stopSignals` ab
 - `src/demo.js --telemetry-out <path>` → kleinster Dev-Hook, um den Sink ohne UI/API-Anschluss real zu benutzen
 - Runbook dafür: `vault/runbooks/kk-telemetry-dev.md`
 - der Sink bleibt extern andockbar; `buildQuestionnaireResultView(..., { onEvent })` bleibt der einzige Runtime-Emissionspunkt
+
+### `stopSignals` aus dem Aggregator
+Der Aggregator hebt die wichtigsten Soft-Launch-Warnsignale in eine kleine, direkte Summary:
+- `repeatedRenderFallback` → `true`, wenn `render-fallback` den Stop-Schwellenwert erreicht oder überschreitet (V1 default: 2)
+- `errorsPresent` → `true`, wenn mindestens ein `error`-Event gesehen wurde (V1 default: 1)
+- `invalidTelemetryLines` → `true`, wenn kaputte NDJSON-Zeilen auftauchen
+- `monitoringBlind` → `true`, wenn überhaupt keine Events vorliegen
+- `requiresAttention` → `true`, sobald eines dieser Warnsignale aktiv ist
+
+Wichtig: Das ist bewusst kein neues Monitoring-System, sondern nur der kleinste maschinenlesbare Stop-/Rollback-Hinweis über den bestehenden NDJSON-Pfad.
 
 ### Später optional
 - separates Event `questionnaire_flow_abandoned`, falls UI/API später lieber zwei Events statt eines kanonischen Payloads haben will

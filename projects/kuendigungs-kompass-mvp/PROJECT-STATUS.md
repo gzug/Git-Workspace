@@ -61,10 +61,15 @@ Der Kündigungs-Kompass ist kein loses Konzept mehr, sondern ein **testbarer Run
 - kanonischer Runtime-Emissionspunkt vorhanden: `buildQuestionnaireResultView(..., { onEvent })` emittiert jetzt pro View genau ein strukturiertes `questionnaire_result_view_built`-Event
 - dünner V1-Telemetrie-Anschluss liegt jetzt außerhalb des Runtime-Cores: `src/runtime/telemetry/emitResultViewEvent.js`, `fileTelemetrySink.js`, `aggregateTelemetry.js`
 - kleinster Dev-Hook dafür ist jetzt real nutzbar: `src/demo.js --telemetry-out <path>`; lokales Prüf-Runbook liegt unter `vault/runbooks/kk-telemetry-dev.md`
+- `aggregateTelemetry.js` liefert jetzt zusätzlich minimale `stopSignals` (`repeatedRenderFallback`, `errorsPresent`, `invalidTelemetryLines`, `monitoringBlind`, `requiresAttention`) statt Stop-/Rollback-Hinweise nur implizit in Rohzählungen zu verstecken
 - `INTEGRATION-CONTRACT-V1.md` ist jetzt auf den aktuellen Runtime-/Telemetry-Stand gezogen; V1-Entscheid: künftiger UI/API-Anschluss bleibt ein dünner Adapter über `buildQuestionnaireResultView(..., { onEvent })`, ohne neuen äußeren Systemlayer
 - `incomplete` trägt zusätzlich anonymen Flow-Abbruchkontext (`lastQuestionKey`, `nextQuestionKey`, `trackContext`, `hadRedFlag`, `hadKnownDeadlineDate`) für Soft-Launch-Monitoring
 - sichtbarer Output für Kernfälle weiter geschärft: action-orientierte Agentur-Labels, scanbarere Preview-Fristen, klarere angekündigt-Kündigung-Headline, `Besonders wichtig` vor `Risiken`
 - statisches Sicht-Mockup für Ergebnisprüfung vorhanden: `mockup/static-result-mockup.html`
+- die drei im Mockup gezeigten Preview-Fälle (`announced`, `signed`, `mixed`) sind jetzt zusätzlich gegen die echten Render-Snapshots abgesichert: `test-mockup-preview-sync.js`
+- der Base-Mockup-Fall `announced` ist nachgezogen und jetzt ebenfalls gegen den echten Base-Snapshot abgesichert: `test-mockup-base-announced-sync.js`
+- der Base-Mockup-Fall `signed` ist jetzt ebenfalls auf Snapshot-Stand gezogen und testlich abgesichert: `test-mockup-base-signed-sync.js`
+- der Base-Mockup-Fall `mixed` ist jetzt ebenfalls auf Snapshot-Stand gezogen und testlich abgesichert: `test-mockup-base-mixed-sync.js`
 - `alg1-risk-first` ist jetzt als echter MVP-Pfad abgesichert: angekündigte Beendigung + ALG-I-Fokus rendert nicht mehr still in `prepare-advice`, sondern als eigener Track mit Fixture- und Snapshot-Abdeckung
 - `test-launch-hardening-anchors.js` sichert 11 zentrale Drift-Anker
 - `test-launch-hardening-done.js` bündelt die Exit-Gate-Prüfung über Regressionssicherheit, Observability und UI-Konsistenz

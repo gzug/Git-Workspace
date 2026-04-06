@@ -12,12 +12,17 @@
   - `src/runtime/telemetry/aggregateTelemetry.js`
   - `src/demo.js --telemetry-out <path>`
   - `vault/runbooks/kk-telemetry-dev.md`
+- der Telemetrie-Aggregator liefert jetzt zusätzlich explizite `stopSignals`, damit wiederholte `render-fallback`-, `error`-, Blindflug- oder kaputte-NDJSON-Lagen nicht nur implizit aus Rohzählungen gelesen werden müssen
 - `INTEGRATION-CONTRACT-V1.md` ist jetzt auf den aktuellen Runtime-/Telemetry-Stand gezogen
 - V1-Entscheid ist fest: **kein zusätzlicher äußerer Caller-Layer**; künftiger UI/API-Anschluss bleibt ein dünner Adapter über `buildQuestionnaireResultView(..., { onEvent })`
 - relevante Verifikationsläufe für diesen Block sind grün:
   - `node test-questionnaire-result-view.js`
   - `node test-runtime-telemetry.js`
 - sichtbarer Output ist für Kernfälle stark gehärtet
+- der statische Ergebnis-Mockup ist für seine drei gezeigten Preview-Fälle jetzt nicht mehr nur Deko, sondern testlich gegen die echten Render-Snapshots abgesichert (`test-mockup-preview-sync.js`)
+- der sichtbar driftende Base-Fall `announced` im Mockup wurde außerdem auf den realen Snapshot-Stand gezogen und mit `test-mockup-base-announced-sync.js` abgesichert
+- der nächste sichtbar vereinfachte Base-Fall `signed` wurde ebenfalls auf den realen Snapshot-Stand gezogen und mit `test-mockup-base-signed-sync.js` abgesichert
+- der letzte verbleibende Base-Fall `mixed` wurde ebenfalls auf den realen Snapshot-Stand gezogen und mit `test-mockup-base-mixed-sync.js` abgesichert
 - `agents/coder/` ist spezifiziert, aber **nicht aktiviert**
 
 ## Aktueller Engpass

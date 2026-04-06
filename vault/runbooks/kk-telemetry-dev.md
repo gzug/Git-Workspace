@@ -66,6 +66,13 @@ Erwartung im Summary-Output:
 - `topNextQuestionKeys`
 - `errorCodeCounts`
 - `invalidLineCount`
+- `stopSignals`
+
+Besonders relevant in `stopSignals`:
+- `repeatedRenderFallback: true` → Soft-Launch nicht still weiterlaufen lassen; Renderproblem erst eingrenzen
+- `errorsPresent: true` → Runtime-/Adapterfehler aktiv prüfen
+- `monitoringBlind: true` → der Pfad liefert noch gar keine operative Sicht
+- `requiresAttention: true` → mindestens ein Warnsignal ist aktiv
 
 ## 5. Wichtige Interpretationsregel
 - viele `incomplete` mit demselben `nextQuestionKey` → wahrscheinlich Fragebogen-Reibung

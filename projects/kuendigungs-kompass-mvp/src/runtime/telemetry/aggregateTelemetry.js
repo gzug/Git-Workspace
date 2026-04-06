@@ -13,8 +13,35 @@ function sortCounts(bucket, limit = Infinity) {
     .map(([key, count]) => ({ key, count }));
 }
 
-function emptySummary(filePath, topLimit) {
+function buildStopSignals(summary, options = {}) {
+  const renderFallbackStopCount = Number.isInteger(options.renderFallbackStopCount)
+    ? options.renderFallbackStopCount
+    : 2;
+  const errorStopCount = Number.isInteger(options.errorStopCount)
+    ? options.errorStopCount
+    : 1;
+
+  const renderFallbackCount = summary.countsByStatus['render-fallback'] || 0;
+  const errorCount = summary.countsByStatus.error || 0;
+
   return {
+    renderFallbackStopCount,
+    errorStopCount,
+    repeatedRenderFallback: renderFallbackCount >= renderFallbackStopCount,
+    errorsPresent: errorCount >= errorStopCount,
+    invalidTelemetryLines: summary.invalidLineCount > 0,
+    monitoringBlind: summary.totalEvents === 0,
+    requiresAttention: (
+      renderFallbackCount >= renderFallbackStopCount
+      || errorCount >= errorStopCount
+      || summary.invalidLineCount > 0
+      || summary.totalEvents === 0
+    ),
+  };
+}
+
+function emptySummary(filePath, topLimit, options = {}) {
+  const summary = {
     filePath,
     totalEvents: 0,
     invalidLineCount: 0,
@@ -23,6 +50,11 @@ function emptySummary(filePath, topLimit) {
     errorCodeCounts: {},
     topNextQuestionKeys: [],
     topLimit,
+  };
+
+  return {
+    ...summary,
+    stopSignals: buildStopSignals(summary, options),
   };
 }
 
@@ -36,7 +68,7 @@ function aggregateTelemetry(options = {}) {
     content = fsImpl.readFileSync(filePath, 'utf8');
   } catch (error) {
     if (error && error.code === 'ENOENT') {
-      return emptySummary(filePath, topLimit);
+      return emptySummary(filePath, topLimit, options);
     }
     throw error;
   }
@@ -67,7 +99,7 @@ function aggregateTelemetry(options = {}) {
     increment(nextQuestionCounts, event.flowAbandonment?.nextQuestionKey);
   }
 
-  return {
+  const summary = {
     filePath,
     totalEvents,
     invalidLineCount,
@@ -77,10 +109,16 @@ function aggregateTelemetry(options = {}) {
     topNextQuestionKeys: sortCounts(nextQuestionCounts, topLimit),
     topLimit,
   };
+
+  return {
+    ...summary,
+    stopSignals: buildStopSignals(summary, options),
+  };
 }
 
 module.exports = {
   aggregateTelemetry,
+  buildStopSignals,
 };
 
 if (require.main === module) {

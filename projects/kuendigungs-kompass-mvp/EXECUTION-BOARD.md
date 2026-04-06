@@ -169,6 +169,8 @@ Die Hauptlücken liegen aktuell in **vollständiger Testhärtung**, **konkreter 
 ### Now
 - Launch-Hardening-Exit nicht mehr implizit behandeln, sondern gegen `LAUNCH-HARDENING-DONE.md` und den ausführbaren Gate-Test prüfen
 - Steering-Doku, Runtime, Fixtures, Snapshots und statisches Mockup eng synchron halten
+- Mockup-Drift nicht nur visuell prüfen: `test-mockup-preview-sync.js` hält die drei gezeigten Preview-Fälle gegen die echten Render-Snapshots zusammen; `test-mockup-base-announced-sync.js`, `test-mockup-base-signed-sync.js` und `test-mockup-base-mixed-sync.js` sichern jetzt alle drei Base-Fälle gegen echten Snapshot-Drift
+- Monitoring-Minimum nicht nur als Zählwerk lesen: `aggregateTelemetry.js` hebt Stop-/Rollback-nahe Warnsignale jetzt explizit als `stopSignals` hoch
 
 ### Next
 - echten UI/API-Anschluss erst dann weiterziehen, wenn ein konkreter Caller mehr verlangt als Aufruf + Status-Mapping + optionalen Sink

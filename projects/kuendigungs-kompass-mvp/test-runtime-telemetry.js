@@ -95,11 +95,47 @@ function run() {
   assert.deepEqual(summary.topNextQuestionKeys, [
     { key: 'termination_access_date', count: 1 },
   ]);
+  assert.deepEqual(summary.stopSignals, {
+    renderFallbackStopCount: 2,
+    errorStopCount: 1,
+    repeatedRenderFallback: false,
+    errorsPresent: true,
+    invalidTelemetryLines: true,
+    monitoringBlind: false,
+    requiresAttention: true,
+  });
 
   const missingSummary = aggregateTelemetry({ filePath: path.join(tempDir, 'missing.ndjson') });
   assert.equal(missingSummary.totalEvents, 0);
   assert.equal(missingSummary.invalidLineCount, 0);
   assert.deepEqual(missingSummary.countsByStatus, {});
+  assert.deepEqual(missingSummary.stopSignals, {
+    renderFallbackStopCount: 2,
+    errorStopCount: 1,
+    repeatedRenderFallback: false,
+    errorsPresent: false,
+    invalidTelemetryLines: false,
+    monitoringBlind: true,
+    requiresAttention: true,
+  });
+
+  const stopSignalPath = path.join(tempDir, 'stop-signals.ndjson');
+  fs.writeFileSync(stopSignalPath, [
+    JSON.stringify({ status: 'ready', primaryTrack: 'deadline-first', errorCode: null, flowAbandonment: null }),
+    JSON.stringify({ status: 'render-fallback', primaryTrack: 'deadline-first', errorCode: 'render_failed', flowAbandonment: null }),
+    JSON.stringify({ status: 'render-fallback', primaryTrack: 'deadline-first', errorCode: 'render_failed', flowAbandonment: null }),
+  ].join('\n'));
+
+  const stopSignalSummary = aggregateTelemetry({ filePath: stopSignalPath });
+  assert.deepEqual(stopSignalSummary.stopSignals, {
+    renderFallbackStopCount: 2,
+    errorStopCount: 1,
+    repeatedRenderFallback: true,
+    errorsPresent: false,
+    invalidTelemetryLines: false,
+    monitoringBlind: false,
+    requiresAttention: true,
+  });
 
   const failingSink = createFileTelemetrySink({
     filePath: path.join(tempDir, 'will-not-write.ndjson'),

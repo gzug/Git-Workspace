@@ -76,10 +76,9 @@ Wichtig:
 ## Aktueller Engpass
 Nicht neue Features.
 Der aktuelle Engpass ist **Launch Hardening**:
-- Fristenlogik konservativ stabilisieren
-- Arbeitslosmeldung vs. Arbeitsuchendmeldung sauber trennen
-- Snapshot-/Drift-Abdeckung ausbauen
-- Sonderfall-/Unknown-/Pflichtfeldlogik schärfen
+- Exit-Kriterien explizit gegen Go/No-Go-Gate prüfen
+- Snapshot-/Drift-Abdeckung und Steuerdoku synchron halten
+- Monitoring-/Telemetry-Anschluss für späteren UI/API-Pfad sauber halten
 - UI/API erst danach weiterziehen
 
 ## Wiedereinstieg

@@ -164,11 +164,12 @@ Die Hauptlücken liegen aktuell in **vollständiger Testhärtung**, **konkreter 
 
 ## Steuerformat
 ### Now
-- KSchG-Wochenendlogik und konservative Feiertagshinweise sauber in Engine / Doku / Fixtures ziehen
+- Launch-Hardening-Exit nicht mehr implizit behandeln, sondern gegen `LAUNCH-HARDENING-DONE.md` und den ausführbaren Gate-Test prüfen
+- Steering-Doku, Runtime, Fixtures, Snapshots und statisches Mockup eng synchron halten
 
 ### Next
-- Arbeitslosmeldung vs. Arbeitsuchendmeldung logisch und sprachlich final trennen
-- Snapshot-Abdeckung gezielt auf 2–3 Drift-Anker ausbauen
+- späteren UI/API-Anschluss so vorbereiten, dass Monitoring-/Telemetry-Felder sauber andocken können
+- Frontend-/Mockup-Weiterbau erst gegen grünes Hardening-Gate priorisieren
 
 ### Risks
 - Main-Agent bleibt zu stark im Executor-Modus statt früh genug zu delegieren

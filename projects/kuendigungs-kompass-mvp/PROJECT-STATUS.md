@@ -17,12 +17,10 @@ Der Kündigungs-Kompass ist kein loses Konzept mehr, sondern ein **testbarer Run
 **Aktiver Schwerpunkt ist Block 4: Launch Hardening.**
 
 ## Aktiver Fokus
-1. KSchG-Wochenendlogik und konservative Feiertagshinweise sauber in Engine, Doku und Fixtures ziehen
-2. Arbeitslosmeldung vs. Arbeitsuchendmeldung logisch und sprachlich final trennen
-3. Snapshot-/Drift-Abdeckung gezielt auf repräsentative Fälle ausbauen
-4. Sonderfall-/Pflichtfeld-/Unknown-Logik nachschärfen
-5. Typed-Input-Guardrails gegen falsches `ready` absichern
-6. Erst danach UI/API- und Soft-Launch-Schicht weiterziehen
+1. Launch-Hardening-Go/No-Go jetzt gegen explizite Exit-Kriterien statt Bauchgefühl fahren (`LAUNCH-HARDENING-DONE.md`)
+2. Drift zwischen Runtime, Fixtures, Snapshots, Mockup und Steuerdoku weiter klein halten
+3. Monitoring-/Telemetry-Felder für den späteren UI/API-Anschluss andockbar halten
+4. Erst danach echten UI/API- und Soft-Launch-Anschluss weiterziehen
 
 ## Größte aktuelle Risiken
 - Drift zwischen Research, Doku, Fixtures und Runtime
@@ -55,15 +53,18 @@ Der Kündigungs-Kompass ist kein loses Konzept mehr, sondern ein **testbarer Run
 
 ### Launch Hardening
 - `LAUNCH-HARDENING-V1.md`
+- `LAUNCH-HARDENING-DONE.md`
 - `E2E-REALITY-CHECK-V1.md`
 - `MONITORING-ANALYTICS-V1.md`
 - `SOFT-LAUNCH-CHECKLIST-V1.md`
 - telemetry-taugliche Summary-Felder im Runtime-Layer
 - kanonischer Runtime-Emissionspunkt vorhanden: `buildQuestionnaireResultView(..., { onEvent })` emittiert jetzt pro View genau ein strukturiertes `questionnaire_result_view_built`-Event
 - `incomplete` trägt zusätzlich anonymen Flow-Abbruchkontext (`lastQuestionKey`, `nextQuestionKey`, `trackContext`, `hadRedFlag`, `hadKnownDeadlineDate`) für Soft-Launch-Monitoring
-- erste Render-Snapshots für den Mehrfachfall
+- sichtbarer Output für Kernfälle weiter geschärft: action-orientierte Agentur-Labels, scanbarere Preview-Fristen, klarere angekündigt-Kündigung-Headline, `Besonders wichtig` vor `Risiken`
+- statisches Sicht-Mockup für Ergebnisprüfung vorhanden: `mockup/static-result-mockup.html`
 - `alg1-risk-first` ist jetzt als echter MVP-Pfad abgesichert: angekündigte Beendigung + ALG-I-Fokus rendert nicht mehr still in `prepare-advice`, sondern als eigener Track mit Fixture- und Snapshot-Abdeckung
-- `test-launch-hardening-anchors.js` sichert jetzt 11 zentrale Drift-Anker: Wochenend-Klagefrist, Agentur-Meldungs-Trennung, `incomplete` statt falschem `ready`, Typed-Input-Guardrails gegen ungültige Datums-/Bool-Werte, widerspruchsarme Multi-Select-Normalisierung (`none_known` / `none_yet`), Cross-Field-Guardrails für angekündigte Kündigung ohne echte Zugangsfrist, konsistente Vertragsflags bei bereits unterschriebenem Vertrag, Neutralisierung irrelevanter Arbeitslosmeldungs-Flags außerhalb echter Arbeitslosigkeit, kein falscher Klagefrist-Pfad in reinen Vertragsfällen, semantisch konsistenter Vertrags-Einstieg bei `settlement_offered` sowie explizite statt nur vermutete Freistellungs-Logik bei Risiko-/Dokumentenblöcken
+- `test-launch-hardening-anchors.js` sichert 11 zentrale Drift-Anker
+- `test-launch-hardening-done.js` bündelt die Exit-Gate-Prüfung über Regressionssicherheit, Observability und UI-Konsistenz
 
 ## Inhaltlich stabile Entscheidungen
 Diese Punkte nicht leichtfertig wieder aufreißen:

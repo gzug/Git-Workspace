@@ -36,7 +36,4 @@
 - [ ] Google Search Console einrichten
 - [ ] A/B-Test: Upgrade-CTA Varianten
 
-## Blockierende offene Punkte
-- OpenClaw reparieren (sandbox build + auth-profiles) — Y. manuell
-- GPT API-Key erneuern (gpt-5.4 401) — Y. manuell
 ---

@@ -14,14 +14,14 @@
   "topActions": [
     {
       "priority": 1,
-      "label": "Arbeitslosmeldung sofort prüfen oder nachholen",
+      "label": "Jetzt bei tatsächlicher Arbeitslosigkeit arbeitslos melden oder Status prüfen",
       "why": "Wenn du bereits arbeitslos bist, ist das ein eigener zeitkritischer Schritt gegenüber der Agentur für Arbeit.",
       "timing": "sofort",
       "statementClass": "mvp-reliable"
     },
     {
       "priority": 2,
-      "label": "Arbeitsuchendmeldung ebenfalls sofort prüfen oder nachholen",
+      "label": "Danach auch bei der Agentur für Arbeit arbeitssuchend melden oder Status prüfen",
       "why": "Die Arbeitsuchendmeldung ist fachlich getrennt von der Arbeitslosmeldung und sollte nicht offen bleiben.",
       "timing": "sofort",
       "statementClass": "mvp-reliable"
@@ -36,14 +36,14 @@
   ],
   "deadlines": [
     {
-      "label": "Arbeitslosmeldung",
+      "label": "Bei tatsächlicher Arbeitslosigkeit arbeitslos melden",
       "timing": "spätestens am ersten Tag der Arbeitslosigkeit; wenn noch offen, jetzt sofort prüfen",
       "importance": "critical",
       "note": "Die Arbeitslosmeldung ist ein eigener Schritt und nicht dasselbe wie die Arbeitsuchendmeldung.",
       "statementClass": "mvp-reliable"
     },
     {
-      "label": "Arbeitsuchendmeldung",
+      "label": "Bei der Agentur für Arbeit arbeitssuchend melden",
       "timing": "bei Ende am 20.03.2026 grundsätzlich bis 20.12.2025; falls dir das Ende erst später bekannt wurde, regelmäßig innerhalb von 3 Tagen nach Kenntnis",
       "importance": "critical",
       "note": "Auch wenn du schon arbeitslos bist, sollte diese Meldung als eigener Pflichtpunkt nicht übersehen werden.",

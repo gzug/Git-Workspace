@@ -384,7 +384,7 @@ function buildTopActions(answers, effects, track) {
     if (answers.jobseeker_registered === false) {
       actions.push({
         priority: 2,
-        label: 'Arbeitsuchendmeldung sofort prüfen oder nachholen',
+        label: 'Jetzt bei der Agentur für Arbeit arbeitssuchend melden oder Status prüfen',
         why: 'Auch ohne bereits eingetretene Arbeitslosigkeit ist diese frühe Meldung ein kritischer Pflichtpunkt.',
         timing: 'sofort',
         statementClass: 'mvp-reliable',
@@ -405,7 +405,7 @@ function buildTopActions(answers, effects, track) {
     if (answers.already_unemployed_now && answers.unemployment_registered === false) {
       actions.push({
         priority: 1,
-        label: 'Arbeitslosmeldung sofort prüfen oder nachholen',
+        label: 'Jetzt bei tatsächlicher Arbeitslosigkeit arbeitslos melden oder Status prüfen',
         why: 'Wenn du bereits arbeitslos bist, ist das ein eigener zeitkritischer Schritt gegenüber der Agentur für Arbeit.',
         timing: 'sofort',
         statementClass: 'mvp-reliable',
@@ -416,8 +416,8 @@ function buildTopActions(answers, effects, track) {
       actions.push({
         priority: 2,
         label: answers.already_unemployed_now
-          ? 'Arbeitsuchendmeldung ebenfalls sofort prüfen oder nachholen'
-          : 'Arbeitsuchendmeldung sofort prüfen oder nachholen',
+          ? 'Danach auch bei der Agentur für Arbeit arbeitssuchend melden oder Status prüfen'
+          : 'Jetzt bei der Agentur für Arbeit arbeitssuchend melden oder Status prüfen',
         why: answers.already_unemployed_now
           ? 'Die Arbeitsuchendmeldung ist fachlich getrennt von der Arbeitslosmeldung und sollte nicht offen bleiben.'
           : 'Diese frühe Meldung gehört zu den ersten kritischen Schritten.',
@@ -442,7 +442,7 @@ function buildTopActions(answers, effects, track) {
     if (answers.jobseeker_registered === false) {
       actions.push({
         priority: 1,
-        label: 'Arbeitsuchendmeldung sofort prüfen oder nachholen',
+        label: 'Jetzt bei der Agentur für Arbeit arbeitssuchend melden oder Status prüfen',
         why: 'Wenn diese frühe Meldung offen bleibt, kann das später beim Arbeitslosengeld unnötige Nachteile auslösen.',
         timing: 'sofort',
         statementClass: 'mvp-reliable',
@@ -581,7 +581,7 @@ function buildTopActions(answers, effects, track) {
     if (answers.jobseeker_registered === false) {
       actions.push({
         priority: 1,
-        label: 'Arbeitsuchendmeldung jetzt prüfen oder nachholen',
+        label: 'Jetzt bei der Agentur für Arbeit arbeitssuchend melden oder Status prüfen',
         why: 'Die Arbeitsuchendmeldung ist ein eigener Schritt und sollte jetzt geprüft oder nachgeholt werden — sie ist nicht dasselbe wie die spätere Arbeitslosmeldung.',
         timing: 'sofort',
         statementClass: 'mvp-reliable',
@@ -620,7 +620,7 @@ function buildDeadlines(answers) {
   const deadlines = [];
   if (answers.already_unemployed_now && answers.unemployment_registered === false) {
     deadlines.push({
-      label: 'Arbeitslosmeldung',
+      label: 'Bei tatsächlicher Arbeitslosigkeit arbeitslos melden',
       timing: 'spätestens am ersten Tag der Arbeitslosigkeit; wenn noch offen, jetzt sofort prüfen',
       importance: 'critical',
       note: 'Die Arbeitslosmeldung ist ein eigener Schritt und nicht dasselbe wie die Arbeitsuchendmeldung.',
@@ -636,7 +636,7 @@ function buildDeadlines(answers) {
       : 'spätestens 3 Monate vor Ende, sonst innerhalb von 3 Tagen nach Kenntnis';
 
     deadlines.push({
-      label: 'Arbeitsuchendmeldung',
+      label: 'Bei der Agentur für Arbeit arbeitssuchend melden',
       timing,
       importance: 'critical',
       note: answers.already_unemployed_now

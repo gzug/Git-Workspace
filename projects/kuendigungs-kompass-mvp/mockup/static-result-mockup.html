@@ -1,0 +1,853 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kündigungs-Kompass – statisches Ergebnis-Mockup</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --panel: rgba(255,255,255,0.88);
+      --panel-strong: #ffffff;
+      --text: #132238;
+      --muted: #617188;
+      --line: #d8e1ee;
+      --blue: #2563eb;
+      --blue-soft: #dbeafe;
+      --amber: #b45309;
+      --amber-soft: #fef3c7;
+      --red: #b91c1c;
+      --red-soft: #fee2e2;
+      --green: #0f766e;
+      --green-soft: #ccfbf1;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, #dbeafe 0, rgba(219,234,254,0.55) 18%, transparent 44%),
+        radial-gradient(circle at top right, #ede9fe 0, rgba(237,233,254,0.55) 16%, transparent 40%),
+        var(--bg);
+      color: var(--text);
+    }
+
+    .app {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 32px;
+      display: grid;
+      grid-template-columns: 320px minmax(0, 1fr);
+      gap: 24px;
+    }
+
+    .sidebar,
+    .stage,
+    .panel,
+    .preview-card,
+    .result-card,
+    .section-card {
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .sidebar {
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,0.65);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 20px;
+      align-self: start;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 16px 0 10px;
+      font-size: 30px;
+      line-height: 1.08;
+    }
+
+    .sidebar p,
+    .muted {
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .stack {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .case-button,
+    .tier-button {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.75);
+      color: var(--text);
+      text-align: left;
+      border-radius: 16px;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: 160ms ease;
+      font: inherit;
+    }
+
+    .case-button:hover,
+    .tier-button:hover { transform: translateY(-1px); border-color: #bfd0eb; }
+
+    .case-button.active,
+    .tier-button.active {
+      background: linear-gradient(180deg, #eff6ff 0%, #ffffff 100%);
+      border-color: #93c5fd;
+      box-shadow: 0 8px 22px rgba(37, 99, 235, 0.12);
+    }
+
+    .case-title {
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .case-meta {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .stage {
+      display: grid;
+      gap: 20px;
+    }
+
+    .topbar {
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,0.65);
+      border-radius: 24px;
+      padding: 20px 24px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #eef2ff;
+      color: #4338ca;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 370px minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .preview-card,
+    .result-card,
+    .panel {
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,0.65);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .preview-card {
+      padding: 22px;
+      position: sticky;
+      top: 20px;
+    }
+
+    .preview-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .preview-phone {
+      width: 100%;
+      border-radius: 28px;
+      background: linear-gradient(180deg, #0f172a, #1e293b);
+      padding: 14px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+    }
+
+    .phone-inner {
+      background: #f8fafc;
+      border-radius: 22px;
+      padding: 18px 16px 16px;
+      min-height: 520px;
+    }
+
+    .preview-lines {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .preview-line {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 12px 14px;
+      line-height: 1.45;
+      font-size: 14px;
+      white-space: pre-wrap;
+    }
+
+    .result-card { padding: 24px; }
+
+    .result-hero h2 {
+      margin: 10px 0 8px;
+      font-size: 34px;
+      line-height: 1.08;
+    }
+
+    .result-lead {
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.65;
+      max-width: 72ch;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .section-card {
+      background: var(--panel-strong);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+    }
+
+    .section-card.full { grid-column: 1 / -1; }
+    .section-card.highlight-blue { background: linear-gradient(180deg, #eff6ff, #ffffff); border-color: #bfdbfe; }
+    .section-card.highlight-amber { background: linear-gradient(180deg, #fffbeb, #ffffff); border-color: #fcd34d; }
+    .section-card.highlight-red { background: linear-gradient(180deg, #fef2f2, #ffffff); border-color: #fecaca; }
+    .section-card.highlight-green { background: linear-gradient(180deg, #f0fdfa, #ffffff); border-color: #99f6e4; }
+
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .02em;
+      margin-bottom: 12px;
+    }
+
+    .blue { background: var(--blue-soft); color: var(--blue); }
+    .amber { background: var(--amber-soft); color: var(--amber); }
+    .red { background: var(--red-soft); color: var(--red); }
+    .green { background: var(--green-soft); color: var(--green); }
+
+    .section-card h3 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      line-height: 1.2;
+    }
+
+    .section-card p,
+    .section-card li {
+      color: #334155;
+      line-height: 1.58;
+    }
+
+    ul.clean {
+      margin: 12px 0 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .split {
+      display: grid;
+      gap: 14px;
+    }
+
+    .rail {
+      border-left: 3px solid #dbeafe;
+      padding-left: 14px;
+      margin-top: 10px;
+    }
+
+    .footnote {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 1120px) {
+      .app { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .layout { grid-template-columns: 1fr; }
+      .preview-card { position: static; }
+    }
+
+    @media (max-width: 760px) {
+      .app { padding: 18px; }
+      .topbar, .sidebar, .preview-card, .result-card { border-radius: 20px; }
+      .section-grid { grid-template-columns: 1fr; }
+      .result-hero h2 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <span class="eyebrow">Statisch · kein Backend</span>
+      <h1>KK Ergebnis-Mockup</h1>
+      <p>Nur zur Sichtprüfung. Alle Daten unten sind hartcodiert und repräsentieren echte Ergebnisformen aus dem aktuellen MVP – ohne API, ohne Fragebogen-Flow, ohne Live-Engine.</p>
+
+      <div class="stack" id="caseButtons"></div>
+
+      <div class="stack" id="tierButtons" style="margin-top:20px"></div>
+
+      <div class="panel" style="padding:18px; margin-top:20px; background:rgba(255,255,255,0.72)">
+        <div class="case-title">Worauf hier geachtet werden soll</div>
+        <ul class="clean" style="margin-top:10px">
+          <li>Ist die Preview kurz genug und trotzdem klar priorisiert?</li>
+          <li>Trägt die Base-Ansicht als echte Hauptauswertung?</li>
+          <li>Fühlt sich Upgrade nach besserer Vorbereitung an – nicht nach Informationsentzug?</li>
+          <li>Wirkt das Design vertrauenswürdig, ruhig und nicht kanzleihaft?</li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="stage">
+      <section class="topbar">
+        <div>
+          <div class="eyebrow" id="modeBadge">Fall 1</div>
+          <div style="margin-top:10px; font-size:28px; font-weight:800" id="stageTitle">–</div>
+          <div class="muted" style="margin-top:8px" id="stageSubtitle">–</div>
+        </div>
+        <div class="chips" id="stageChips"></div>
+      </section>
+
+      <section class="layout">
+        <article class="preview-card">
+          <div class="preview-head">
+            <div>
+              <div class="eyebrow">Mobile Preview</div>
+              <div class="muted" style="margin-top:8px">Die kurze Karte muss Stress-Scanning aushalten.</div>
+            </div>
+          </div>
+          <div class="preview-phone">
+            <div class="phone-inner">
+              <div style="font-size:13px; color:#64748b; font-weight:700; letter-spacing:.02em; text-transform:uppercase">Preview</div>
+              <div class="preview-lines" id="previewLines"></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="result-card">
+          <div class="result-hero">
+            <div class="eyebrow" id="tierEyebrow">Base</div>
+            <h2 id="resultHeadline">–</h2>
+            <div class="result-lead" id="resultLead">–</div>
+          </div>
+          <div class="section-grid" id="sectionGrid"></div>
+          <div class="footnote">Dieses Mockup ist absichtlich statisch. Es dient nur dazu, Hierarchie, Dichte, Ton und Lesefluss der Ergebnisansicht zu prüfen, bevor ein echtes Frontend an die Runtime gehängt wird.</div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const DATA = {
+      announced: {
+        id: 'announced',
+        title: 'Nur angekündigt',
+        subtitle: 'Noch keine schriftliche Kündigung. Fokus liegt auf früher Orientierung ohne künstliche Panik.',
+        chips: ['angekündigte Beendigung', 'Agentur-Schritt offen', 'keine Klagefrist aktiv'],
+        preview: [
+          'Noch keine schriftliche Kündigung – jetzt die nächsten Schritte sauber vorbereiten',
+          'Wichtigster nächster Schritt: Jetzt bei der Agentur für Arbeit arbeitssuchend melden oder Status prüfen',
+          'Kritische Frist: Bei der Agentur für Arbeit arbeitssuchend melden — grundsätzlich bis 30.03.2026',
+          'Wenn dir das Ende erst später bekannt wurde, gilt regelmäßig die 3-Tage-Regel.',
+          'Wichtig dabei: Ohne schriftliche Kündigung sollte jetzt noch keine Klagefrist angenommen werden.'
+        ],
+        tiers: {
+          preview: {
+            eyebrow: 'Preview',
+            headline: 'Noch keine schriftliche Kündigung – jetzt die nächsten Schritte sauber vorbereiten',
+            lead: 'Die Kompaktansicht soll sofort entlasten und gleichzeitig den einzigen frühen Pflichtpunkt klar benennen.',
+            sections: [
+              {
+                title: 'Mobile-Karte',
+                kicker: 'kurz & führend',
+                tone: 'blue',
+                highlight: 'highlight-blue',
+                full: true,
+                list: [
+                  'Entlastung zuerst: noch keine schriftliche Kündigung.',
+                  'Dann klare Aktion: arbeitssuchend melden oder Status prüfen.',
+                  'Klagefrist bleibt bewusst draußen, solange nichts Schriftliches vorliegt.'
+                ]
+              }
+            ]
+          },
+          base: {
+            eyebrow: 'Base',
+            headline: 'Noch keine schriftliche Kündigung – jetzt die nächsten Schritte sauber vorbereiten',
+            lead: 'Die Basisansicht muss ohne Upgrade bereits handlungsfähig sein: erster Agentur-Schritt, keine falsche Fristpanik, Unterlagen bündeln.',
+            sections: [
+              {
+                title: 'Als Erstes',
+                kicker: 'Priorität',
+                tone: 'blue',
+                highlight: 'highlight-blue',
+                list: ['Jetzt bei der Agentur für Arbeit arbeitssuchend melden oder Status prüfen — Die Arbeitsuchendmeldung ist ein eigener Schritt und nicht dasselbe wie die spätere Arbeitslosmeldung.']
+              },
+              {
+                title: 'Danach',
+                kicker: 'Nächste Schritte',
+                tone: 'green',
+                highlight: 'highlight-green',
+                list: [
+                  'Schriftliche Kündigung erst zeitnah einordnen, wenn sie vorliegt.',
+                  'Kernunterlagen schon jetzt sichern.'
+                ]
+              },
+              {
+                title: 'Fristen',
+                kicker: 'Zeitkritisch',
+                tone: 'amber',
+                highlight: 'highlight-amber',
+                list: ['Bei der Agentur für Arbeit arbeitssuchend melden — grundsätzlich bis 30.03.2026; bei später Kenntnis regelmäßig 3-Tage-Regel.']
+              },
+              {
+                title: 'Risiko',
+                kicker: 'Nicht übersehen',
+                tone: 'red',
+                highlight: 'highlight-red',
+                list: ['Frühe Agentur-Schritte könnten übersehen werden, wenn nur auf das Kündigungsschreiben gewartet wird.']
+              },
+              {
+                title: 'Unterlagen',
+                kicker: 'Jetzt sichern',
+                tone: 'green',
+                list: ['Schriftliche Kommunikation zur angekündigten Kündigung', 'Arbeitsvertrag', 'Lohnunterlagen']
+              },
+              {
+                title: 'Hinweise',
+                kicker: 'Guardrails',
+                tone: 'amber',
+                full: true,
+                list: [
+                  'Ohne schriftliche Kündigung sollte jetzt noch keine Klagefrist angenommen werden.',
+                  'Arbeitsuchendmeldung ist der frühe Schritt; Arbeitslosmeldung bleibt davon getrennt.'
+                ]
+              }
+            ]
+          },
+          upgrade: {
+            eyebrow: 'Upgrade',
+            headline: 'Noch keine schriftliche Kündigung – jetzt die nächsten Schritte sauber vorbereiten',
+            lead: 'Upgrade soll hier nicht mehr Drohung bringen, sondern bessere Vorbereitung: mehr Struktur, klarere Fragen, ruhigere Einordnung.',
+            sections: [
+              {
+                title: 'Warum dieser Fokus',
+                kicker: 'Einordnung',
+                tone: 'blue',
+                highlight: 'highlight-blue',
+                full: true,
+                copy: 'Wenn noch nicht alles schriftlich vorliegt, bringt eine saubere Vorbereitung meist mehr als vorschneller Aktionismus. Der frühe Agentur-Schritt bleibt trotzdem nicht optional.'
+              },
+              {
+                title: 'Für das nächste Gespräch',
+                kicker: 'Beratung',
+                tone: 'green',
+                list: [
+                  'Welche Unterlagen sollte ich vor einer schriftlichen Kündigung schon bereithalten?',
+                  'Ab wann wird aus der Ankündigung eine fristkritische Lage?',
+                  'Welche Agentur-Schritte sind sofort und welche erst später relevant?'
+                ]
+              },
+              {
+                title: 'Unterlagen',
+                kicker: 'Vollständigkeit',
+                tone: 'green',
+                list: ['Arbeitsvertrag', 'letzte Lohnunterlagen', 'Schriftverkehr zur angekündigten Beendigung']
+              },
+              {
+                title: 'Hinweise',
+                kicker: 'Sauber trennen',
+                tone: 'amber',
+                highlight: 'highlight-amber',
+                list: [
+                  'Noch keine künstliche Klagefrist erzeugen.',
+                  'Arbeitsuchend und arbeitslos weiterhin sprachlich und fachlich trennen.'
+                ]
+              }
+            ]
+          }
+        }
+      },
+      signed: {
+        id: 'signed',
+        title: 'Vertrag bereits unterschrieben',
+        subtitle: 'Hohe Einzelfallabhängigkeit. Eskalation muss vor allgemeinen Risiken sichtbar sein.',
+        chips: ['Vertrag unterschrieben', 'Eskalation nötig', 'Einzelfallprüfung'],
+        preview: [
+          'Jetzt geht es um Folgen, Fristen und saubere Einordnung',
+          'Wichtigster nächster Schritt: Unterzeichneten Vertrag sofort individuell prüfen lassen',
+          'Besonders wichtig: Bereits unterschriebener Beendigungsvertrag',
+          'Sinnvoll jetzt: Qualifizierte individuelle Prüfung mit Anwalt, Gewerkschaft oder passender Beratungsstelle',
+          'Wichtig dabei: Konkrete Rechtsfolgen eines bereits unterschriebenen Vertrags hängen stark vom Einzelfall ab.'
+        ],
+        tiers: {
+          preview: {
+            eyebrow: 'Preview',
+            headline: 'Jetzt geht es um Folgen, Fristen und saubere Einordnung',
+            lead: 'Hier muss die Preview nicht trösten, sondern sofort sagen: Standardmodus vorbei, Einzelfallprüfung jetzt.',
+            sections: [
+              {
+                title: 'Signalwirkung',
+                kicker: 'Eskalation',
+                tone: 'red',
+                highlight: 'highlight-red',
+                full: true,
+                list: [
+                  'Der Red-Flag-Block steht sichtbar vor allem weicheren Warntexten.',
+                  'Der nächste sinnvolle Schritt nennt direkt den Eskalationskanal.'
+                ]
+              }
+            ]
+          },
+          base: {
+            eyebrow: 'Base',
+            headline: 'Jetzt geht es um Folgen, Fristen und saubere Einordnung',
+            lead: 'In der Basis muss sofort klar sein, dass hier Beratungsvorbereitung und Einzelfallprüfung wichtiger sind als allgemeine Standardhinweise.',
+            sections: [
+              {
+                title: 'Als Erstes',
+                kicker: 'Priorität',
+                tone: 'blue',
+                highlight: 'highlight-blue',
+                list: ['Unterzeichneten Vertrag sofort individuell prüfen lassen — jetzt geht es vor allem darum, Folgen und verbleibende Optionen belastbar einzuordnen.']
+              },
+              {
+                title: 'Besonders wichtig',
+                kicker: 'Vorrang vor Risiken',
+                tone: 'red',
+                highlight: 'highlight-red',
+                list: ['Bereits unterschriebener Beendigungsvertrag — Nächster sinnvoller Schritt: qualifizierte individuelle Prüfung mit Anwalt, Gewerkschaft oder passender Beratungsstelle.']
+              },
+              {
+                title: 'Risiken',
+                kicker: 'Danach lesen',
+                tone: 'amber',
+                highlight: 'highlight-amber',
+                list: ['Folgen für Arbeitslosengeld, Fristen und Verhandlungsspielraum hängen stark vom konkreten Vertragsinhalt ab.']
+              },
+              {
+                title: 'Unterlagen',
+                kicker: 'Mitnehmen',
+                tone: 'green',
+                list: ['unterzeichneter Vertrag', 'Freistellungs- oder Zusatzvereinbarungen', 'Schriftverkehr zur Beendigung']
+              }
+            ]
+          },
+          upgrade: {
+            eyebrow: 'Upgrade',
+            headline: 'Jetzt geht es um Folgen, Fristen und saubere Einordnung',
+            lead: 'Upgrade liefert hier vor allem bessere Gesprächsvorbereitung: Was genau prüfen, womit hingehen, welche Punkte gezielt nachfassen.',
+            sections: [
+              {
+                title: 'Warum dieser Fokus',
+                kicker: 'Einordnung',
+                tone: 'blue',
+                highlight: 'highlight-blue',
+                full: true,
+                copy: 'Nach einer Unterschrift wird aus einer allgemeinen Orientierung ein Einzelfall. Der Mehrwert liegt jetzt in präziser Prüfung statt in mehr allgemeinem Text.'
+              },
+              {
+                title: 'Fragen für Beratung',
+                kicker: 'Mitnehmen',
+                tone: 'green',
+                list: [
+                  'Welche Folgen löst genau dieser Vertrag für Arbeitslosengeld oder Sperrzeit aus?',
+                  'Gibt es noch Ansatzpunkte für Korrektur, Anfechtung oder flankierende Schritte?',
+                  'Welche Fristen laufen trotz Unterschrift noch weiter?'
+                ]
+              },
+              {
+                title: 'Besonders wichtig',
+                kicker: 'früh sichtbar',
+                tone: 'red',
+                highlight: 'highlight-red',
+                list: ['Individuelle Prüfung hat Vorrang vor pauschaler Bewertung.']
+              }
+            ]
+          }
+        }
+      },
+      mixed: {
+        id: 'mixed',
+        title: 'Mehrfachfall',
+        subtitle: 'Mehrere harte Signale gleichzeitig. Reihenfolge und Sicht-Hierarchie entscheiden über Verständlichkeit.',
+        chips: ['Klagefrist', 'Sonderfall', 'Vertragsthema', 'Mehrfachrisiko'],
+        preview: [
+          'Bei dir greifen gerade mehrere wichtige Themen gleichzeitig ineinander',
+          'Wichtigster nächster Schritt: 3-Wochen-Frist für Kündigungsschutzklage sofort prüfen',
+          'Besonders wichtig: Überlagerter Mehrfachfall mit möglichem Sonderfall',
+          'Sinnvoll jetzt: Qualifizierte individuelle Prüfung mit Anwalt, Gewerkschaft oder passender Beratungsstelle',
+          'Kritische Frist: Kündigungsschutzklage — bis 13.04.2026',
+          'Reihenfolge jetzt: zuerst die Frist sichern, danach den heiklen Sonderfall sauber prüfen lassen.',
+          'Wichtig dabei: Hier ist eine klare Reihenfolge wichtig, aber keine vorschnelle Scheinsicherheit.'
+        ],
+        tiers: {
+          preview: {
+            eyebrow: 'Preview',
+            headline: 'Bei dir greifen gerade mehrere wichtige Themen gleichzeitig ineinander',
+            lead: 'Dieser Fall zeigt am besten, ob das Produkt unter Stress trägt: nur wenige Zeilen, aber keine widersprüchlichen Top-Signale.',
+            sections: [
+              {
+                title: 'Was die Preview leisten muss',
+                kicker: 'Härtefall',
+                tone: 'red',
+                highlight: 'highlight-red',
+                full: true,
+                list: [
+                  'Top-Action und kritische Frist müssen dieselbe Priorität zeigen.',
+                  'Red-Flag darf nicht von der Frist verschluckt werden.',
+                  'Die Reihenfolge-Brücke nimmt den Nutzer an die Hand, ohne lang zu werden.'
+                ]
+              }
+            ]
+          },
+          base: {
+            eyebrow: 'Base',
+            headline: 'Bei dir greifen gerade mehrere wichtige Themen gleichzeitig ineinander',
+            lead: 'Die Basisschicht soll nicht alles gleichzeitig auskippen, sondern die Reihenfolge festziehen: erst Frist, dann Vertragsruhe, dann Sonderfall sauber eskalieren.',
+            sections: [
+              {
+                title: 'Als Erstes',
+                kicker: 'Kritisch',
+                tone: 'red',
+                highlight: 'highlight-red',
+                list: ['3-Wochen-Frist für Kündigungsschutzklage sofort prüfen — diese Frist läuft kurz und darf im Mehrfachfall nicht untergehen.']
+              },
+              {
+                title: 'Danach',
+                kicker: 'Reihenfolge',
+                tone: 'blue',
+                highlight: 'highlight-blue',
+                list: [
+                  'Vor der Unterschrift kurz innehalten.',
+                  'Besonderheiten individuell prüfen lassen.'
+                ]
+              },
+              {
+                title: 'Fristen',
+                kicker: 'bis 13.04.2026',
+                tone: 'amber',
+                highlight: 'highlight-amber',
+                list: ['Kündigungsschutzklage prüfen — ausgehend vom Zugangsdatum bis 13.04.2026.']
+              },
+              {
+                title: 'Besonders wichtig',
+                kicker: 'früh sichtbar',
+                tone: 'red',
+                highlight: 'highlight-red',
+                list: ['Überlagerter Mehrfachfall mit möglichem Sonderfall — qualifizierte individuelle Prüfung mit Anwalt, Gewerkschaft oder passender Beratungsstelle.']
+              },
+              {
+                title: 'Risiken',
+                kicker: 'nicht zuerst',
+                tone: 'amber',
+                list: ['Mehrere richtige Themen gleichzeitig können sonst die eigentliche Priorität verdecken.']
+              },
+              {
+                title: 'Hinweise',
+                kicker: 'Guardrails',
+                tone: 'green',
+                full: true,
+                list: ['Keine Scheinsicherheit erzeugen: Frist sichern, aber Sonderfall nicht weichzeichnen.']
+              }
+            ]
+          },
+          upgrade: {
+            eyebrow: 'Upgrade',
+            headline: 'Bei dir greifen gerade mehrere wichtige Themen gleichzeitig ineinander',
+            lead: 'Upgrade hilft hier vor allem bei Struktur und Beratungsvorbereitung: nicht mehr Warnung, sondern bessere Sortierung eines komplizierten Falls.',
+            sections: [
+              {
+                title: 'Warum dieser Fokus',
+                kicker: 'Einordnung',
+                tone: 'blue',
+                highlight: 'highlight-blue',
+                full: true,
+                copy: 'Wenn Klagefrist, Vertragsthema und Sonderfall gleichzeitig auflaufen, ist Reihenfolge wichtiger als Vollständigkeitsgefühl. Der Output muss zuerst stabilisieren, dann vertiefen.'
+              },
+              {
+                title: 'Fragen für Beratung',
+                kicker: 'gezielt',
+                tone: 'green',
+                list: [
+                  'Welcher Punkt darf rechtlich auf keinen Fall zuerst untergehen?',
+                  'Was sollte ich bis zur Frist gesichert haben und was kann danach folgen?',
+                  'Welche Sonderfall-Hinweise ändern die Standardbewertung?'
+                ]
+              },
+              {
+                title: 'Besonders wichtig',
+                kicker: 'Eskalation',
+                tone: 'red',
+                highlight: 'highlight-red',
+                list: ['Sonderfallprüfung bleibt sichtbar vor allgemeinen Risiken.']
+              },
+              {
+                title: 'Hinweise',
+                kicker: 'Tonalität',
+                tone: 'amber',
+                list: ['Der Text soll führen, nicht hektisch werden. Mehr Klarheit statt mehr Lautstärke.']
+              }
+            ]
+          }
+        }
+      }
+    };
+
+    const CASE_ORDER = ['announced', 'signed', 'mixed'];
+    const TIER_ORDER = ['preview', 'base', 'upgrade'];
+    let activeCase = 'announced';
+    let activeTier = 'base';
+
+    const caseButtons = document.getElementById('caseButtons');
+    const tierButtons = document.getElementById('tierButtons');
+    const previewLines = document.getElementById('previewLines');
+    const sectionGrid = document.getElementById('sectionGrid');
+    const stageTitle = document.getElementById('stageTitle');
+    const stageSubtitle = document.getElementById('stageSubtitle');
+    const stageChips = document.getElementById('stageChips');
+    const tierEyebrow = document.getElementById('tierEyebrow');
+    const resultHeadline = document.getElementById('resultHeadline');
+    const resultLead = document.getElementById('resultLead');
+    const modeBadge = document.getElementById('modeBadge');
+
+    function renderButtons() {
+      caseButtons.innerHTML = '';
+      CASE_ORDER.forEach((id, index) => {
+        const item = DATA[id];
+        const button = document.createElement('button');
+        button.className = `case-button${id === activeCase ? ' active' : ''}`;
+        button.innerHTML = `<div class="case-title">Fall ${index + 1}: ${item.title}</div><div class="case-meta">${item.subtitle}</div>`;
+        button.onclick = () => { activeCase = id; render(); };
+        caseButtons.appendChild(button);
+      });
+
+      tierButtons.innerHTML = '';
+      TIER_ORDER.forEach((tier) => {
+        const button = document.createElement('button');
+        button.className = `tier-button${tier === activeTier ? ' active' : ''}`;
+        button.textContent = tier === 'preview' ? 'Preview-Fokus' : tier === 'base' ? 'Base-Fokus' : 'Upgrade-Fokus';
+        button.onclick = () => { activeTier = tier; render(); };
+        tierButtons.appendChild(button);
+      });
+    }
+
+    function renderSection(section) {
+      const card = document.createElement('section');
+      card.className = `section-card${section.full ? ' full' : ''}${section.highlight ? ' ' + section.highlight : ''}`;
+
+      const kickerTone = section.tone || 'blue';
+      card.innerHTML = `
+        <div class="section-kicker ${kickerTone}">${section.kicker}</div>
+        <h3>${section.title}</h3>
+      `;
+
+      if (section.copy) {
+        const p = document.createElement('p');
+        p.textContent = section.copy;
+        card.appendChild(p);
+      }
+
+      if (section.list) {
+        const ul = document.createElement('ul');
+        ul.className = 'clean';
+        section.list.forEach((entry) => {
+          const li = document.createElement('li');
+          li.textContent = entry;
+          ul.appendChild(li);
+        });
+        card.appendChild(ul);
+      }
+
+      return card;
+    }
+
+    function render() {
+      renderButtons();
+      const item = DATA[activeCase];
+      const tier = item.tiers[activeTier];
+
+      modeBadge.textContent = `Mockup · ${item.title}`;
+      stageTitle.textContent = item.title;
+      stageSubtitle.textContent = item.subtitle;
+      stageChips.innerHTML = '';
+      item.chips.forEach((chip) => {
+        const node = document.createElement('span');
+        node.className = 'chip';
+        node.textContent = chip;
+        stageChips.appendChild(node);
+      });
+
+      previewLines.innerHTML = '';
+      item.preview.forEach((line) => {
+        const div = document.createElement('div');
+        div.className = 'preview-line';
+        div.textContent = line;
+        previewLines.appendChild(div);
+      });
+
+      tierEyebrow.textContent = tier.eyebrow;
+      resultHeadline.textContent = tier.headline;
+      resultLead.textContent = tier.lead;
+
+      sectionGrid.innerHTML = '';
+      tier.sections.forEach((section) => sectionGrid.appendChild(renderSection(section)));
+    }
+
+    render();
+  </script>
+</body>
+</html>

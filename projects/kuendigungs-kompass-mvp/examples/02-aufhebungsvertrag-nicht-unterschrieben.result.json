@@ -21,7 +21,7 @@
     },
     {
       "priority": 2,
-      "label": "Arbeitsuchendmeldung sofort prüfen oder nachholen",
+      "label": "Jetzt bei der Agentur für Arbeit arbeitssuchend melden oder Status prüfen",
       "why": "Auch ohne bereits eingetretene Arbeitslosigkeit ist diese frühe Meldung ein kritischer Pflichtpunkt.",
       "timing": "sofort",
       "statementClass": "mvp-reliable"
@@ -36,7 +36,7 @@
   ],
   "deadlines": [
     {
-      "label": "Arbeitsuchendmeldung",
+      "label": "Bei der Agentur für Arbeit arbeitssuchend melden",
       "timing": "bei Ende am 31.05.2026 grundsätzlich bis 28.02.2026; falls dir das Ende erst später bekannt wurde, regelmäßig innerhalb von 3 Tagen nach Kenntnis",
       "importance": "critical",
       "note": "Diese Meldung sollte nicht aufgeschoben werden, auch wenn der Vertrag noch nicht unterschrieben ist.",

@@ -104,8 +104,8 @@ for (const [inputPath, expectedPath] of PAIRS) {
     assert.ok(adviceRendered.indexOf('Hinweise:') > adviceRendered.indexOf('Fragen für Beratung:'));
 
     if (name.startsWith('01-')) {
-      assert.ok(actualDeadlineLabels.includes('Arbeitslosmeldung'));
-      assert.ok(actualDeadlineLabels.includes('Arbeitsuchendmeldung'));
+      assert.ok(actualDeadlineLabels.includes('Bei tatsächlicher Arbeitslosigkeit arbeitslos melden'));
+      assert.ok(actualDeadlineLabels.includes('Bei der Agentur für Arbeit arbeitssuchend melden'));
       assert.ok(actual.riskFlags.some((item) => item.label === 'Offene Arbeitsuchendmeldung kann Nachteile auslösen'));
       assert.ok(actual.riskFlags.some((item) => item.label === 'Offene Arbeitslosmeldung kann den Leistungsstart erschweren'));
     }
@@ -114,10 +114,10 @@ for (const [inputPath, expectedPath] of PAIRS) {
       assert.equal(actual.synthesisDecision.primaryTrack, 'contract-do-not-sign');
       assert.ok(!actualDeadlineLabels.includes('Kündigungsschutzklage prüfen'));
       assert.ok(!standardRendered.includes('Kündigungsschutzklage prüfen'));
-      assert.ok(!actualDeadlineLabels.includes('Arbeitslosmeldung'));
+      assert.ok(!actualDeadlineLabels.includes('Bei tatsächlicher Arbeitslosigkeit arbeitslos melden'));
       assert.equal(actual.topActions[0]?.label, 'Aufhebungsvertrag nicht vorschnell unterschreiben');
       assert.ok(actual.disclaimers[0].includes('Arbeitsuchendmeldung ist der frühe Schritt'));
-      assert.ok(actual.deadlines.some((item) => item.label === 'Arbeitsuchendmeldung' && item.note.includes('Vertrag noch nicht unterschrieben')));
+      assert.ok(actual.deadlines.some((item) => item.label === 'Bei der Agentur für Arbeit arbeitssuchend melden' && item.note.includes('Vertrag noch nicht unterschrieben')));
     }
 
     if (name.startsWith('03-')) {
@@ -143,8 +143,8 @@ for (const [inputPath, expectedPath] of PAIRS) {
       assert.ok(!actualDeadlineLabels.includes('Kündigungsschutzklage prüfen'));
       assert.ok(!standardRendered.includes('Kündigungsschutzklage prüfen'));
       assert.ok(actual.disclaimers.some((item) => item.includes('keine Klagefrist angenommen')));
-      assert.equal(actual.topActions[0]?.label, 'Arbeitsuchendmeldung jetzt prüfen oder nachholen');
-      assert.ok(actual.deadlines.some((item) => item.label === 'Arbeitsuchendmeldung' && item.note.includes('Beendigung bisher nur angekündigt')));
+      assert.equal(actual.topActions[0]?.label, 'Jetzt bei der Agentur für Arbeit arbeitssuchend melden oder Status prüfen');
+      assert.ok(actual.deadlines.some((item) => item.label === 'Bei der Agentur für Arbeit arbeitssuchend melden' && item.note.includes('Beendigung bisher nur angekündigt')));
       assert.ok(!standardRendered.includes('Vertrag noch nicht unterschrieben'));
     }
 
@@ -156,10 +156,10 @@ for (const [inputPath, expectedPath] of PAIRS) {
     if (name.startsWith('07-')) {
       assert.equal(actual.synthesisDecision.primaryTrack, 'alg1-risk-first');
       assert.equal(actual.caseSnapshot.headline, 'Jetzt zuerst sicherstellen, dass dein Arbeitslosengeld nicht in Gefahr gerät');
-      assert.ok(actualDeadlineLabels.includes('Arbeitsuchendmeldung'));
+      assert.ok(actualDeadlineLabels.includes('Bei der Agentur für Arbeit arbeitssuchend melden'));
       assert.ok(!actualDeadlineLabels.includes('Kündigungsschutzklage prüfen'));
       assert.ok(actual.riskFlags.some((item) => item.label === 'Offene Arbeitsuchendmeldung kann sich später beim Arbeitslosengeld auswirken'));
-      assert.ok(actual.deadlines.some((item) => item.label === 'Arbeitsuchendmeldung' && item.note.includes('Beendigung bisher nur angekündigt')));
+      assert.ok(actual.deadlines.some((item) => item.label === 'Bei der Agentur für Arbeit arbeitssuchend melden' && item.note.includes('Beendigung bisher nur angekündigt')));
       assert.ok(!standardRendered.includes('Gut vorbereitet in den nächsten Schritt gehen'));
       assert.ok(!standardRendered.includes('Vertrag noch nicht unterschrieben'));
       assert.ok(!adviceRendered.includes('Welche Schritte sollte ich jetzt schon vorbereiten, obwohl noch nichts Schriftliches vorliegt?'));

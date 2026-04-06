@@ -50,10 +50,10 @@ function buildPreviewDeadlineLines(deadline) {
     if (match) return [`Kritische Frist: Kündigungsschutzklage — bis ${match[1]}`];
   }
 
-  if (/Arbeitsuchendmeldung/.test(deadline.label)) {
+  if (/arbeitssuchend/i.test(deadline.label)) {
     const match = deadline.timing.match(/bis (\d{2}\.\d{2}\.\d{4})/);
     if (match) {
-      const lines = [`Kritische Frist: Arbeitsuchendmeldung — grundsätzlich bis ${match[1]}`];
+      const lines = [`Kritische Frist: ${deadline.label} — grundsätzlich bis ${match[1]}`];
       if (/3 Tagen nach Kenntnis/.test(deadline.timing)) {
         lines.push('Wenn dir das Ende erst später bekannt wurde, gilt regelmäßig die 3-Tage-Regel.');
       }

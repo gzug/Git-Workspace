@@ -1,0 +1,1 @@
+Arbeitsrechtliche Kernlogik des MVP bleibt bundesweit grundsätzlich tragfähig; bundeslandspezifische Unterschiede werden aktuell nur konservativ über Feiertagshinweise berücksichtigt und sind kein Launch-Blocker für den jetzigen Scope.

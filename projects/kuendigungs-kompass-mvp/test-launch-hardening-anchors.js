@@ -49,15 +49,15 @@ function run() {
   const agencyRiskLabels = agencyResult.riskFlags.map((item) => item.label);
 
   assert.deepEqual(agencyTopActionLabels.slice(0, 2), [
-    'Arbeitslosmeldung sofort prüfen oder nachholen',
-    'Arbeitsuchendmeldung ebenfalls sofort prüfen oder nachholen',
+    'Jetzt bei tatsächlicher Arbeitslosigkeit arbeitslos melden oder Status prüfen',
+    'Danach auch bei der Agentur für Arbeit arbeitssuchend melden oder Status prüfen',
   ]);
-  assert.ok(agencyDeadlineLabels.includes('Arbeitslosmeldung'));
-  assert.ok(agencyDeadlineLabels.includes('Arbeitsuchendmeldung'));
+  assert.ok(agencyDeadlineLabels.includes('Bei tatsächlicher Arbeitslosigkeit arbeitslos melden'));
+  assert.ok(agencyDeadlineLabels.includes('Bei der Agentur für Arbeit arbeitssuchend melden'));
   assert.ok(agencyRiskLabels.includes('Offene Arbeitslosmeldung kann den Leistungsstart erschweren'));
   assert.ok(agencyRiskLabels.includes('Offene Arbeitsuchendmeldung kann Nachteile auslösen'));
-  assert.ok(agencyRendered.includes('Arbeitslosmeldung: spätestens am ersten Tag der Arbeitslosigkeit; wenn noch offen, jetzt sofort prüfen'));
-  assert.ok(agencyRendered.includes('Arbeitsuchendmeldung: bei Ende am 20.03.2026 grundsätzlich bis 20.12.2025; falls dir das Ende erst später bekannt wurde, regelmäßig innerhalb von 3 Tagen nach Kenntnis'));
+  assert.ok(agencyRendered.includes('Bei tatsächlicher Arbeitslosigkeit arbeitslos melden: spätestens am ersten Tag der Arbeitslosigkeit; wenn noch offen, jetzt sofort prüfen'));
+  assert.ok(agencyRendered.includes('Bei der Agentur für Arbeit arbeitssuchend melden: bei Ende am 20.03.2026 grundsätzlich bis 20.12.2025; falls dir das Ende erst später bekannt wurde, regelmäßig innerhalb von 3 Tagen nach Kenntnis'));
   assert.ok(!agencyRendered.includes('Agentur-Meldungen:'));
 
   const incompleteView = buildQuestionnaireResultView({
@@ -254,8 +254,8 @@ function run() {
 
   assert.equal(staleAgencyView.status, 'ready');
   assert.equal(staleAgencyView.normalizedInput.unemployment_registered, null);
-  assert.ok(!staleAgencyView.result.deadlines.some((item) => item.label === 'Arbeitslosmeldung'));
-  assert.ok(!staleAgencyView.rendered.includes('Arbeitslosmeldung:'));
+  assert.ok(!staleAgencyView.result.deadlines.some((item) => item.label === 'Bei tatsächlicher Arbeitslosigkeit arbeitslos melden'));
+  assert.ok(!staleAgencyView.rendered.includes('Bei tatsächlicher Arbeitslosigkeit arbeitslos melden:'));
 
   console.log('All launch hardening anchor tests passed.');
 }

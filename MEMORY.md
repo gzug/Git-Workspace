@@ -18,7 +18,7 @@ Diese Dinge gehören in `memory/daily/`.
 ---
 
 # MEMORY.md — Langzeitgedächtnis
-_Erstellt: 2026-03-21 | Zuletzt aktualisiert: 2026-04-05 | Quelle: Repo-Rekonstruktion aus OC-HOf_
+_Erstellt: 2026-03-21 | Zuletzt aktualisiert: 2026-04-06 | Quelle: Repo-Rekonstruktion aus OC-HOf_
 
 ## Identität
 
@@ -63,6 +63,8 @@ Fokus auf **Stabilität, Runbook und wiederholbare Arbeitsroutinen** statt auf n
 ### Operative Präferenzen (Stand März/April 2026)
 - Skill-Set bewusst schlank halten; aktiv priorisiert sind vor allem `github`, `coding-agent`, `summarize`, `healthcheck`, `session-logs`, `node-connect` und `gh-issues`.
 - Monitoring und wiederkehrende Checks sollen standardmäßig **still** laufen und nur dann melden, wenn ein Fehler, Drift oder fehlgeschlagene Automatik Aufmerksamkeit braucht.
+- Seit 2026-04-06 besteht für interne Workspace- und Projektarbeit eine Standing-Freigabe: autonom weiterarbeiten, Fortschritt in Dateien sichern und nicht auf zeitnahe Antworten oder Bestätigungen warten. Für externe oder destruktive Aktionen gilt diese Freigabe nicht.
+- Für den Kündigungs-Kompass läuft seit 2026-04-06 zusätzlich ein stiller Cron-Autopilot (Europe/Berlin 09/13/17/21, Session `kk-autopilot`) für interne Launch-Hardening-Blöcke; keine Außenwirkung, kein Push, keine Messaging-Aktionen.
 - Backup-Strategie vorerst pragmatisch: lokales Backup-Staging auf dem Mac mini unter `/Users/shashko/Backups/mac-mini/`, externe/cloud Ablage erfolgt manuell durch Y.
 - Wenn ich Recherche- oder Nebenaufgaben an Y. delegiere, soll ich sie standardmäßig als **fertige, eng geführte Prompts** übergeben — inklusive Ziel, Scope, Quellenhygiene, gewünschtem Output-Format und klarer Struktur.
 - Main arbeitet idealerweise als **Orchestrator zuerst**, nicht als Alles-selbst-Executor.

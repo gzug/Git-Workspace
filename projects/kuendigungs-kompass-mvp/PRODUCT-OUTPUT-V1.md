@@ -1,10 +1,10 @@
-# Kündigungs-Kompass MVP — Product Output V1
+# Kündigungs-Kompass — Product Output V1
 
 Stand: 2026-03-21
 Status: Arbeitsentscheid für Block 2
 
 ## Ziel
-Die Engine-Ausgabe wird in ein klares MVP-Erlebnis übersetzt:
+Die Engine-Ausgabe wird in ein klares erstes nutzbares Produkterlebnis übersetzt:
 - verständlich unter Stress
 - klar priorisiert
 - vertrauenswürdig
@@ -80,7 +80,7 @@ Auch im Upgrade nicht:
 - Rechtsberatung simulieren
 - Wirksamkeit verbindlich beurteilen
 - Abfindung versprechen
-- Sonderfälle „auflösen", die der MVP nur eskalieren sollte
+- Sonderfälle „auflösen", die die erste Version nur eskalieren sollte
 
 Das Upgrade ist **besser strukturierte Vorbereitung**, nicht Pseudo-Expertise.
 

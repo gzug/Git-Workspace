@@ -1,4 +1,4 @@
-# Kündigungs-Kompass MVP — Snapshot Anchors V1
+# Kündigungs-Kompass — Snapshot Anchors V1
 
 Stand: 2026-04-05
 Status: aktiv
@@ -14,7 +14,7 @@ Nicht viele Fälle snapshotten, sondern die wenigen, die echte Launch-Drift frü
 - kein automatischer Landesfeiertags-Sonderfall
 
 ### Warum dieser Fall
-- prüft die heikelste konkrete Datumslogik im MVP
+- prüft die heikelste konkrete Datumslogik in der ersten Version
 - deckt Scheingenauigkeit besonders früh auf
 - ist fachlich riskanter als reine Copy-Drift
 
@@ -67,5 +67,5 @@ Nicht viele Fälle snapshotten, sondern die wenigen, die echte Launch-Drift frü
   - `incomplete` statt falschem `ready`, wenn routing-kritische Pflichtfelder fehlen
 
 ## Testregel
-Wenn diese drei Anker stabil sind, ist der MVP nicht fertig — aber deutlich launch-näher.
+Wenn diese drei Anker stabil sind, ist die erste Version nicht fertig — aber deutlich launch-näher.
 Wenn einer dieser drei Anker driftet, ist Launch-Hardening noch nicht belastbar genug.

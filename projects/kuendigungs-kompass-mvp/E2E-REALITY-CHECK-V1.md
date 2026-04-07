@@ -1,9 +1,9 @@
-# Kündigungs-Kompass MVP — E2E-Realitätscheck V1
+# Kündigungs-Kompass — E2E-Realitätscheck V1
 
 Stand: 2026-03-22
 
 ## Ziel
-Den gesamten Pfad **vom Rohinput bis zur nutzbaren Ergebnisansicht** unter realistischen MVP-Bedingungen gegenzuprüfen.
+Den gesamten Pfad **vom Rohinput bis zur nutzbaren Ergebnisansicht** unter realistischen Bedingungen der ersten Version gegenzuprüfen.
 
 ## Prüfebenen
 1. Input-Normalisierung

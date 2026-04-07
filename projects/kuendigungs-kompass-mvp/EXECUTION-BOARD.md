@@ -44,11 +44,11 @@ Die Hauptlücken liegen aktuell in **vollständiger Testhärtung**, **konkreter 
   - für jeden View existieren harte Assertions
   - Reihenfolge und Guardrails sind abgesichert
 
-### Task 1.4 — Datumslogik-MVP definieren
+### Task 1.4 — Datumslogik für die erste Version definieren
 - Status: erledigt
 - Priorität: P1
 - Ziel:
-  - textliche Fristpriorisierung um konkrete MVP-relevante Datumslogik ergänzen
+  - textliche Fristpriorisierung um konkrete für die erste Version relevante Datumslogik ergänzen
 - Done-When:
   - Engine kann relevante Fristdaten für Kernfälle konsistent berechnen oder markieren
   - Tests decken mindestens die Kernpfade ab
@@ -137,7 +137,7 @@ Die Hauptlücken liegen aktuell in **vollständiger Testhärtung**, **konkreter 
 - Status: in Arbeit
 - Priorität: P1
 - Ergebnis bisher:
-  - `MONITORING-ANALYTICS-V1.md` definiert das MVP-Monitoring-Minimum
+  - `MONITORING-ANALYTICS-V1.md` definiert das Monitoring-Minimum für die erste Version
   - `buildQuestionnaireResultView(..., { onEvent })` liefert jetzt pro View genau ein telemetry-taugliches Event für `ready`, `incomplete`, `render-fallback` und `error`
   - lokaler Dev-Anschluss ist real prüfbar über `src/demo.js --telemetry-out <path>`, `src/runtime/telemetry/fileTelemetrySink.js` und `aggregateTelemetry.js`
 

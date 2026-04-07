@@ -1,4 +1,4 @@
-# Kündigungs-Kompass MVP — Result Mapping
+# Kündigungs-Kompass — Result Mapping
 
 Stand: 2026-03-22
 Status: aktiv

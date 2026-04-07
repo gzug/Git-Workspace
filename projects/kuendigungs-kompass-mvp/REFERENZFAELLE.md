@@ -1,4 +1,4 @@
-# Kündigungs-Kompass MVP — Referenzfälle V2
+# Kündigungs-Kompass — Referenzfälle V2
 
 Ziel dieser Referenzfälle: den operativen V2-Stand gegen realistische Nutzerantworten spiegeln, ohne neue Scope-Baustellen aufzumachen.
 

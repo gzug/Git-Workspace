@@ -1,4 +1,4 @@
-# Kündigungs-Kompass MVP — Golden Outputs
+# Kündigungs-Kompass — Golden Outputs
 
 Ziel: vollständige Soll-Ergebnisse im Format von `result.schema.json`, abgeleitet aus den Referenzfällen.
 
@@ -89,7 +89,7 @@ Diese Outputs sind **keine zusätzliche Produktlogik**, sondern ein Prüfmaßsta
       "label": "Kündigungsschutzklage prüfen",
       "timing": "regelmäßig innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung (ausgehend vom angegebenen Zugangsdatum: bis 08.04.2026)",
       "importance": "critical",
-      "note": "Der MVP prüft nicht die Erfolgsaussicht, sondern markiert die Frist als priorisiert.",
+      "note": "Die erste Version prüft nicht die Erfolgsaussicht, sondern markiert die Frist als priorisiert.",
       "statementClass": "mvp-reliable"
     }
   ],
@@ -133,7 +133,7 @@ Diese Outputs sind **keine zusätzliche Produktlogik**, sondern ein Prüfmaßsta
   "opportunities": [],
   "disclaimers": [
     "Die Arbeitsuchendmeldung ersetzt nicht die Arbeitslosmeldung.",
-    "Der MVP ersetzt keine individuelle Rechtsberatung.",
+    "Die erste Version ersetzt keine individuelle Rechtsberatung.",
     "Das Tool bewertet keine Erfolgsaussichten einer Kündigungsschutzklage im Einzelfall."
   ],
   "statementLedger": {
@@ -142,13 +142,13 @@ Diese Outputs sind **keine zusätzliche Produktlogik**, sondern ein Prüfmaßsta
       "Zu späte Meldungen können finanzielle Nachteile beim späteren Arbeitslosengeld auslösen.",
       "Die Arbeitslosmeldung ist eine eigene Pflicht und soll spätestens am ersten Tag der Arbeitslosigkeit erfolgt sein. Wenn das noch offen ist, jetzt direkt handeln.",
       "Arbeitsuchendmeldung und Arbeitslosmeldung sind nicht dasselbe. Für Leistungsbezug und Start der Arbeitslosigkeit muss die separate Meldung geprüft werden.",
-      "Beide Meldungen sind fachlich getrennt. Im MVP soll diese Unterscheidung explizit sichtbar bleiben.",
+      "Beide Meldungen sind fachlich getrennt. In der ersten Version soll diese Unterscheidung explizit sichtbar bleiben.",
       "Wer die Unwirksamkeit einer schriftlichen Kündigung geltend machen will, muss regelmäßig innerhalb von 3 Wochen nach Zugang Klage erheben.",
-      "Ob die Kündigung im Einzelfall wirksam oder angreifbar ist, leistet der MVP nicht."
+      "Ob die Kündigung im Einzelfall wirksam oder angreifbar ist, leistet die erste Version nicht."
     ],
     "cautiousChecks": [],
     "notUsedYet": [
-      "Der MVP soll keine belastbare Erwartung zu Abfindungshöhe oder Durchsetzbarkeit suggerieren."
+      "Die erste Version soll keine belastbare Erwartung zu Abfindungshöhe oder Durchsetzbarkeit suggerieren."
     ]
   }
 }
@@ -274,21 +274,21 @@ Diese Outputs sind **keine zusätzliche Produktlogik**, sondern ein Prüfmaßsta
   "opportunities": [],
   "disclaimers": [
     "Arbeitsuchendmeldung und Arbeitslosmeldung sind nicht dasselbe.",
-    "Der MVP ersetzt keine individuelle Rechtsberatung.",
+    "Die erste Version ersetzt keine individuelle Rechtsberatung.",
     "Abfindung, Sperrzeit und Ruhen hängen stark vom konkreten Einzelfall ab."
   ],
   "statementLedger": {
     "mvpReliable": [
       "Die Arbeitsuchendmeldung soll in der Regel spätestens 3 Monate vor Ende des Arbeitsverhältnisses erfolgen; erfährst du später davon, binnen 3 Tagen.",
       "Zu späte Meldungen können finanzielle Nachteile beim späteren Arbeitslosengeld auslösen.",
-      "Beide Meldungen sind fachlich getrennt. Im MVP soll diese Unterscheidung explizit sichtbar bleiben.",
+      "Beide Meldungen sind fachlich getrennt. In der ersten Version soll diese Unterscheidung explizit sichtbar bleiben.",
       "Aufhebungs- oder Abwicklungsverträge können erhebliche Folgen für Arbeitslosengeld und Verhandlungsspielraum haben.",
       "Bei Vertragsbeendigungen mit eigener Mitwirkung können Auswirkungen auf das Arbeitslosengeld entstehen.",
       "Auch bei Freistellung bleiben Meldungen, Fristen und Unterlagenthemen relevant."
     ],
     "cautiousChecks": [],
     "notUsedYet": [
-      "Der MVP soll keine belastbare Erwartung zu Abfindungshöhe oder Durchsetzbarkeit suggerieren."
+      "Die erste Version soll keine belastbare Erwartung zu Abfindungshöhe oder Durchsetzbarkeit suggerieren."
     ]
   }
 }
@@ -387,7 +387,7 @@ Diese Outputs sind **keine zusätzliche Produktlogik**, sondern ein Prüfmaßsta
   "redFlags": [
     {
       "label": "Möglicher besonderer Schutz oder Sonderfall",
-      "whyEscalated": "Es gibt Hinweise auf Schwangerschaft / Mutterschutz oder eine unklare Schutzlage, die der MVP nicht selbst verlässlich auflösen sollte.",
+      "whyEscalated": "Es gibt Hinweise auf Schwangerschaft / Mutterschutz oder eine unklare Schutzlage, die die erste Version nicht selbst verlässlich auflösen sollte.",
       "recommendedEscalation": "Qualifizierte individuelle Prüfung mit Anwalt, Gewerkschaft oder passender Beratungsstelle"
     }
   ],
@@ -425,23 +425,23 @@ Diese Outputs sind **keine zusätzliche Produktlogik**, sondern ein Prüfmaßsta
   ],
   "opportunities": [],
   "disclaimers": [
-    "Der MVP ersetzt keine individuelle Rechtsberatung.",
+    "Die erste Version ersetzt keine individuelle Rechtsberatung.",
     "Ob tatsächlich ein besonderer Schutz greift, muss im Einzelfall geprüft werden.",
     "Das Tool priorisiert Fristen und Eskalation, entscheidet aber keinen Sonderfall abschließend."
   ],
   "statementLedger": {
     "mvpReliable": [
-      "Beide Meldungen sind fachlich getrennt. Im MVP soll diese Unterscheidung explizit sichtbar bleiben.",
+      "Beide Meldungen sind fachlich getrennt. In der ersten Version soll diese Unterscheidung explizit sichtbar bleiben.",
       "Wer die Unwirksamkeit einer schriftlichen Kündigung geltend machen will, muss regelmäßig innerhalb von 3 Wochen nach Zugang Klage erheben.",
-      "Ob die Kündigung im Einzelfall wirksam oder angreifbar ist, leistet der MVP nicht.",
+      "Ob die Kündigung im Einzelfall wirksam oder angreifbar ist, leistet die erste Version nicht.",
       "Auch bei Freistellung bleiben Meldungen, Fristen und Unterlagenthemen relevant.",
-      "Hier sollte der MVP nicht normalisieren, sondern auf erhöhte Vorsicht und individuelle Prüfung umschalten."
+      "Hier sollte die erste Version nicht normalisieren, sondern auf erhöhte Vorsicht und individuelle Prüfung umschalten."
     ],
     "cautiousChecks": [
       "Ob tatsächlich ein besonderer Schutz greift, muss im Einzelfall verifiziert werden."
     ],
     "notUsedYet": [
-      "Der MVP soll keine belastbare Erwartung zu Abfindungshöhe oder Durchsetzbarkeit suggerieren."
+      "Die erste Version soll keine belastbare Erwartung zu Abfindungshöhe oder Durchsetzbarkeit suggerieren."
     ]
   }
 }

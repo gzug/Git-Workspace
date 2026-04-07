@@ -18,7 +18,7 @@ Diese Dinge gehören in `memory/daily/`.
 ---
 
 # MEMORY.md — Langzeitgedächtnis
-_Erstellt: 2026-03-21 | Zuletzt aktualisiert: 2026-04-06 | Quelle: Repo-Rekonstruktion aus OC-HOf_
+_Erstellt: 2026-03-21 | Zuletzt aktualisiert: 2026-04-07 | Quelle: Repo-Rekonstruktion aus OC-HOf_
 
 ## Identität
 
@@ -90,12 +90,14 @@ Fokus auf **Stabilität, Runbook und wiederholbare Arbeitsroutinen** statt auf n
 
 ## Aktive Projektlage
 
-### Kündigungs-Kompass MVP
+### Kündigungs-Kompass
 - **Pfad:** `projects/kuendigungs-kompass-mvp/`
 - **Ziel:** Sofortmaßnahmen, Fristen, Fehlervermeidung und Chancen für Menschen nach Kündigung oder Aufhebungsvertrag
 - **Rahmen:** Deutschland, Arbeitnehmer:innen, kein Rechtsberater-Ersatz
+- **Produktframing:** nicht mehr als „MVP“ führen, sondern als **erste Version der Website auf dem Pfad zum Endprodukt**.
 - **Status:** Blöcke 1–3 (Core Stabilization, Product Output, Integration) durch; aktiver Schwerpunkt ist Block 4 **Launch Hardening**.
 - **Aktueller Fokus:** konservative Fristenlogik, Arbeitslosmeldung vs. Arbeitsuchendmeldung sauber trennen, Snapshot-/Drift-Abdeckung ausbauen.
+- **Quellenprinzip für künftigen Evidence-Layer:** so primär und seriös wie möglich belegen; bei Gesetzen bevorzugt direkt die Primärquelle mit genauen Paragraphen-/Fundstellen statt bloß sekundäre Webseiten, die selbst nur auf Gesetze verweisen.
 
 ## Archivierte Projektlage
 

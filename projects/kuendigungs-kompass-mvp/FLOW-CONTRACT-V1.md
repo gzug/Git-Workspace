@@ -1,4 +1,4 @@
-# Kündigungs-Kompass MVP — Flow Contract V1
+# Kündigungs-Kompass — Flow Contract V1
 
 Stand: 2026-03-22
 Status: aktives Anschlussdokument

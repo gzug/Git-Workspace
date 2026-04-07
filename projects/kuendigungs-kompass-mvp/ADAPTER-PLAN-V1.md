@@ -1,4 +1,4 @@
-# Kündigungs-Kompass MVP — Adapter Plan V1
+# Kündigungs-Kompass — Adapter Plan V1
 
 Stand: 2026-03-21
 Status: Block 3 Vorarbeit

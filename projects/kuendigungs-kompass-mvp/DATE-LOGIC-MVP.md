@@ -1,9 +1,9 @@
-# Kündigungs-Kompass MVP — Datumslogik V1
+# Kündigungs-Kompass — Datumslogik V1
 
 Stand: 2026-03-22
 
 ## Ziel
-Die Datumslogik soll für den MVP **konkreten Nutzwert** bringen, ohne in eine fehleranfällige Volljuristen-Engine auszuarten.
+Die Datumslogik soll für die erste Version **konkreten Nutzwert** bringen, ohne in eine fehleranfällige Volljuristen-Engine auszuarten.
 
 ## Grundsatz
 Nur Fristen mit **klarer, direkt modellierbarer Datengrundlage** werden konkret berechnet.

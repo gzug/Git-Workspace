@@ -1,4 +1,4 @@
-# Kündigungs-Kompass MVP — Local Model Decision
+# Kündigungs-Kompass — Local Model Decision
 
 Stand: 2026-04-05
 Status: entschieden für den aktuellen Arbeitsstand

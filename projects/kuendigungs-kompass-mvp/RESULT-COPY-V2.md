@@ -1,4 +1,4 @@
-# Kündigungs-Kompass MVP — Result Copy Layer V2
+# Kündigungs-Kompass — Result Copy Layer V2
 
 Stand: 2026-03-21  
 Status: überarbeiteter Copy-Stand nach externer Review aus `~/Downloads/External Review - Copy.md`
@@ -204,7 +204,7 @@ Muster:
 
 ## 6. Was aus der Review fachlich übernommen wurde
 
-Übernommen wurden nur Änderungen, die mit den Guardrails des MVP zusammenpassen:
+Übernommen wurden nur Änderungen, die mit den Guardrails der ersten Version zusammenpassen:
 - ruhigerer Ton
 - weniger Tool- und Meta-Sprache
 - weniger Wiederholung

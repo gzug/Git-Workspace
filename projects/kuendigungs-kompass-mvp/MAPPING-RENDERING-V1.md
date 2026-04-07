@@ -1,10 +1,10 @@
-# Kündigungs-Kompass MVP — Mapping & Rendering V1
+# Kündigungs-Kompass — Mapping & Rendering V1
 
 Stand: 2026-03-22
 Status: aktiv
 
 ## Ziel
-Aus Antworten + Rules + Result-Schema + Copy-Layer einen klaren, deterministischen MVP-Output bauen, ohne künstliche Smartness oder schweres Scoring.
+Aus Antworten + Rules + Result-Schema + Copy-Layer einen klaren, deterministischen Output der ersten Version bauen, ohne künstliche Smartness oder schweres Scoring.
 
 ## Operative Prinzipien
 - lieber nachvollziehbar als clever

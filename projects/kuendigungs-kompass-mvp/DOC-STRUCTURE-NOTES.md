@@ -1,4 +1,4 @@
-# Kündigungs-Kompass MVP — Doku-Struktur-Notizen
+# Kündigungs-Kompass — Doku-Struktur-Notizen
 
 Stand: 2026-04-05
 Status: aktiv

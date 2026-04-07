@@ -1,4 +1,4 @@
-# Kündigungs-Kompass MVP — Launch Hardening Done
+# Kündigungs-Kompass — Launch Hardening Done
 
 Status: Gate-Definition
 

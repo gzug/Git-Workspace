@@ -1,6 +1,6 @@
 # Examples / Fixtures
 
-Diese JSON-Dateien sind die maschinenlesbaren Golden Outputs für den Kündigungs-Kompass MVP.
+Diese JSON-Dateien sind die maschinenlesbaren Golden Outputs für den Kündigungs-Kompass.
 
 ## Dateien
 

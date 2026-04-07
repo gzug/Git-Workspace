@@ -1,6 +1,6 @@
-# Kündigungs-Kompass MVP
+# Kündigungs-Kompass
 
-Der Kündigungs-Kompass ist ein MVP für Menschen in Deutschland nach **Kündigung** oder bei **Aufhebungsvertrag**.
+Der Kündigungs-Kompass ist die erste Version für Menschen in Deutschland nach **Kündigung** oder bei **Aufhebungsvertrag**.
 Er soll **Fristen priorisieren, typische Fehler vermeiden, Risiken sichtbar machen und nächste Schritte ordnen** — ohne Rechtsberatung zu simulieren.
 
 ## Aktueller Stand
@@ -24,14 +24,14 @@ Der Runtime-Layer kennt kontrollierte Zustände wie:
 - `error`
 
 ## Produktprinzipien
-Der MVP soll:
+Die erste Version soll:
 - Sofortmaßnahmen sichtbar machen
 - kritische Fristen priorisieren
 - Scheingenauigkeit vermeiden
 - Sonderfälle eskalieren statt weichzeichnen
 - Beratung vorbereiten, aber nicht ersetzen
 
-Der MVP soll **nicht**:
+Die erste Version soll **nicht**:
 - Rechtsberatung simulieren
 - Wirksamkeit oder Klageerfolg prognostizieren
 - Abfindung oder ALG-Höhe scheingenau berechnen

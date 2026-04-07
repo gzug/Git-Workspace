@@ -1,9 +1,9 @@
-# Kündigungs-Kompass MVP — Launch Hardening V1
+# Kündigungs-Kompass — Launch Hardening V1
 
 Stand: 2026-03-22
 
 ## Ziel
-Der MVP soll nicht nur fachlich plausibel, sondern **kontrolliert live-fähig** werden.
+Die erste Version soll nicht nur fachlich plausibel, sondern **kontrolliert live-fähig** werden.
 
 Launch Hardening bedeutet hier bewusst **nicht**: große Produktfläche bauen.
 Es bedeutet:
@@ -79,7 +79,7 @@ Reaktion:
 - nicht mit Launch-Stop verwechseln
 
 ## 4. Soft-Launch-Stop-Regeln
-Der MVP sollte **nicht** still weiterlaufen, wenn:
+Die erste Version sollte **nicht** still weiterlaufen, wenn:
 - kritische Fehler sichtbar werden
 - `render-fallback` wiederholt auftritt
 - `incomplete` wie Flow-Drift statt normales Verhalten aussieht

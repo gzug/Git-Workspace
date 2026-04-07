@@ -1,4 +1,4 @@
-# Kündigungs-Kompass MVP — Projektstatus
+# Kündigungs-Kompass — Projektstatus
 
 Stand: 2026-04-06
 Status: aktiv
@@ -78,7 +78,7 @@ Der Kündigungs-Kompass ist kein loses Konzept mehr, sondern ein **testbarer Run
 - der Base-Mockup-Fall `announced` ist nachgezogen und jetzt ebenfalls gegen den echten Base-Snapshot abgesichert: `test-mockup-base-announced-sync.js`
 - der Base-Mockup-Fall `signed` ist jetzt ebenfalls auf Snapshot-Stand gezogen und testlich abgesichert: `test-mockup-base-signed-sync.js`
 - der Base-Mockup-Fall `mixed` ist jetzt ebenfalls auf Snapshot-Stand gezogen und testlich abgesichert: `test-mockup-base-mixed-sync.js`
-- `alg1-risk-first` ist jetzt als echter MVP-Pfad abgesichert: angekündigte Beendigung + ALG-I-Fokus rendert nicht mehr still in `prepare-advice`, sondern als eigener Track mit Fixture- und Snapshot-Abdeckung
+- `alg1-risk-first` ist jetzt als echter Pfad der ersten Version abgesichert: angekündigte Beendigung + ALG-I-Fokus rendert nicht mehr still in `prepare-advice`, sondern als eigener Track mit Fixture- und Snapshot-Abdeckung
 - `test-launch-hardening-anchors.js` sichert 11 zentrale Drift-Anker
 - `test-launch-hardening-done.js` bündelt die Exit-Gate-Prüfung über Regressionssicherheit, Observability und UI-Konsistenz
 

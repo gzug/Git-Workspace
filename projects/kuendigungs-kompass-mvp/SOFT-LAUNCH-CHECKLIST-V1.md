@@ -1,4 +1,4 @@
-# Kündigungs-Kompass MVP — Soft-Launch-Checkliste V1
+# Kündigungs-Kompass — Soft-Launch-Checkliste V1
 
 Stand: 2026-03-22
 
@@ -55,7 +55,7 @@ Stand: 2026-03-22
 - unerklärliche `error`-Häufung
 
 ## Minimaler Rollback-Gedanke
-Wenn der MVP live angeschlossen ist und Guardrails oder Rendering sichtbar kippen:
+Wenn die erste Version live angeschlossen ist und Guardrails oder Rendering sichtbar kippen:
 1. neuen Traffic stoppen
 2. betroffenen Pfad deaktivieren oder auf letzte stabile Version zurückgehen
 3. betroffene Fälle aus Logs/Monitoring clustern

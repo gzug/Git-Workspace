@@ -1,9 +1,9 @@
-# Kündigungs-Kompass MVP — Monitoring & Minimal-Analytics V1
+# Kündigungs-Kompass — Monitoring & Minimal-Analytics V1
 
 Stand: 2026-03-22
 
 ## Ziel
-Ein kleines, belastbares Beobachtungsmodell für den MVP schaffen — ohne direkt in schwere Analytics oder personenbezogene Auswertung abzurutschen.
+Ein kleines, belastbares Beobachtungsmodell für die erste Version schaffen — ohne direkt in schwere Analytics oder personenbezogene Auswertung abzurutschen.
 
 ## Monitoring-Minimum
 ### Technisch beobachten
@@ -36,7 +36,7 @@ Ein kleines, belastbares Beobachtungsmodell für den MVP schaffen — ohne direk
 
 ## Empfohlenes Event-Schema
 ### Kanonischer Runtime-Emissionspunkt
-Der MVP hat jetzt einen einzigen andockbaren Emissionspunkt im Runtime-Layer:
+Die erste Version hat jetzt einen einzigen andockbaren Emissionspunkt im Runtime-Layer:
 - `buildQuestionnaireResultView(rawInput, { onEvent })`
 - pro gebautem View genau **ein** Event-Payload
 - aktueller Event-Name: `questionnaire_result_view_built`
@@ -94,7 +94,7 @@ Wichtig: Das ist bewusst kein neues Monitoring-System, sondern nur der kleinste 
 - viele unbekannte Tiers = UI/API schickt falsche Produktstufe
 - viele Abbrüche an derselben Frage = Abbruchtreiber oder zu private / unklare / zu frühe Frage prüfen
 
-## MVP-Regel
+## Regel für die erste Version
 Lieber wenige, robuste Felder tracken als viele, unzuverlässige.
 Monitoring dient hier zuerst der **Produktstabilität**, nicht der Optimierungsschleife.
 

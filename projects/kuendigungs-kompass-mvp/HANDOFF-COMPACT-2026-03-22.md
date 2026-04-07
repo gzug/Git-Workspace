@@ -1,4 +1,4 @@
-# Kündigungs-Kompass MVP — Compact Handoff
+# Kündigungs-Kompass — Compact Handoff
 
 Stand: 2026-03-22
 Status: historischer Zwischenstand
@@ -30,7 +30,7 @@ Kernänderungen:
 - Delegation früher prüfen und sauber schneiden
 - Heartbeat nur bei echtem Risiko/Drift/Blocker melden
 - CleanUp enger auf Intake, Vorsortierung und strukturierte Deltas geführt
-- Research-Verdichtung auf **Typ / Härtegrad / MVP-Wirkung / klare Empfehlung / max. 1 Unsicherheit** geschärft
+- Research-Verdichtung auf **Typ / Härtegrad / Wirkung für die erste Version / klare Empfehlung / max. 1 Unsicherheit** geschärft
 - Workspace-Lärm reduziert (`.gitignore`, `memory/notes/INBOX.md`)
 
 ### B. Projekt-Steuer- und Wiedereinstiegsdateien

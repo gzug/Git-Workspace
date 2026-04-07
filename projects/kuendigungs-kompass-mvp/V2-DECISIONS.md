@@ -1,4 +1,4 @@
-# Kündigungs-Kompass MVP — Leitentscheidungen
+# Kündigungs-Kompass — Leitentscheidungen
 
 Stand: 2026-03-22
 Status: aktiv
@@ -8,7 +8,7 @@ Diese Datei hält nur die **noch geltenden Leitentscheidungen** fest, die für M
 
 ## Geltende Kernentscheidungen
 1. **Deadline-first statt feature-first.**
-   Der MVP priorisiert Fristen, Meldungen, Guardrails und nächste Schritte vor Tiefe, Feature-Fläche oder Conversion.
+   Die erste Version priorisiert Fristen, Meldungen, Guardrails und nächste Schritte vor Tiefe, Feature-Fläche oder Conversion.
 
 2. **Sonderfälle werden eskaliert, nicht „mitgelöst“.**
    Red Flags und Schutzindikatoren erzeugen Eskalation oder konservative Prüfung statt Pseudo-Sicherheit.

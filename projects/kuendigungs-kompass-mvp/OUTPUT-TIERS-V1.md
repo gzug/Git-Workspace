@@ -1,4 +1,4 @@
-# Kündigungs-Kompass MVP — Output Tiers V1
+# Kündigungs-Kompass — Output Tiers V1
 
 Stand: 2026-03-21
 Status: Block 2 Arbeitsentscheid

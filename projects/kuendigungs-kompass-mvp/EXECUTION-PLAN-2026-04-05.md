@@ -1,4 +1,4 @@
-# Kündigungs-Kompass MVP — Execution Plan
+# Kündigungs-Kompass — Execution Plan
 
 Stand: 2026-04-05
 Status: aktiv

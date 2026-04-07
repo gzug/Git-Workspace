@@ -1,4 +1,4 @@
-# Kündigungs-Kompass MVP — Mini-Testkonzept
+# Kündigungs-Kompass — Mini-Testkonzept
 
 Stand: 2026-03-22
 Status: aktiv

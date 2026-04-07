@@ -21,7 +21,7 @@
 
 ## Aktuelle Prioritäten
 
-1. **Kündigungs-Kompass** — aktives MVP-Projekt
+1. **Kündigungs-Kompass** — aktive erste Produktversion
 2. OpenClaw-Setup, Stabilität, Automatisierung
 3. Resell-Themen nur bei Bedarf — Material liegt archiviert
 

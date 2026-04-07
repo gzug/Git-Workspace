@@ -1,4 +1,4 @@
-# Kündigungs-Kompass MVP — Result Copy Layer
+# Kündigungs-Kompass — Result Copy Layer
 
 Stand: 2026-03-22
 Status: aktiv

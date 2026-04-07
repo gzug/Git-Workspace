@@ -1,4 +1,4 @@
-# Kündigungs-Kompass MVP — Integration Contract V1
+# Kündigungs-Kompass — Integration Contract V1
 
 Stand: 2026-04-06
 Status: aktualisiert auf Block-4-Runtime

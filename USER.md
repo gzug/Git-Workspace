@@ -35,6 +35,8 @@
 - Bei laufender Arbeit Fokus schützen: lieber still weiterarbeiten als mit halbrelevanten Zwischenmeldungen stören
 - Rückfragen nur wenn sie echten Hebel haben oder ein sauberer Stop nötig ist
 - Für interne Workspace- und Projektarbeit besteht seit 2026-04-06 eine Standing-Freigabe: autonom weiterarbeiten, nicht auf Bestätigungen oder zeitnahe Antworten spekulieren
+- Persönliche Notizdateien von Y. im Workspace nicht blind in die Projektarbeit ziehen oder committen; konkret `Tech Begriffe Lernen.md` ignorieren
+- Zusätzliche rohe Nutzerquellen und Ideensammlungen liegen unter `user/raw/`; sie sind Material für spätere Verdichtung in `USER.md` oder andere kuratierte Dateien, aber kein Auto-Kontext
 - Research-Feedback ultrakurz halten: primär sagen, was besser/exakter hätte sein können
 - Standardmäßig nur die relevanten Infos geben; Antworten aktiv auf das Nötige minimieren
 

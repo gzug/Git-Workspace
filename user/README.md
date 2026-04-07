@@ -1,4 +1,4 @@
-# User Sources
+# User-Quellen
 
 Dieser Ordner trennt kuratierte Nutzerabbilder von rohen Nutzerquellen.
 

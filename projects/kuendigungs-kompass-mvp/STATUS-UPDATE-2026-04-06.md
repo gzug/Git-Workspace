@@ -24,6 +24,14 @@
 - der nächste sichtbar vereinfachte Base-Fall `signed` wurde ebenfalls auf den realen Snapshot-Stand gezogen und mit `test-mockup-base-signed-sync.js` abgesichert
 - der letzte verbleibende Base-Fall `mixed` wurde ebenfalls auf den realen Snapshot-Stand gezogen und mit `test-mockup-base-mixed-sync.js` abgesichert
 - `agents/coder/` ist spezifiziert, aber **nicht aktiviert**
+- es gibt jetzt zusätzlich einen ersten echten dünnen lokalen Webcaller unter `src/web/`:
+  - `src/web/server.js`
+  - `src/web/public/index.html`
+  - `src/web/public/app.js`
+  - `src/web/public/styles.css`
+  - `test-web-app.js`
+- Startkommando für die vorzeigbare lokale Version:
+  - `node src/web/server.js --port 3090`
 
 ## Aktueller Engpass
 Der Engpass ist weiter **nicht** neue Produktlogik und **nicht** breites Feature-Bauen.
@@ -31,10 +39,11 @@ Der Engpass ist weiter **nicht** neue Produktlogik und **nicht** breites Feature
 Der saubere Stand ist jetzt:
 - die Runtime ist der fachliche Kern
 - `onEvent` ist der einzige kanonische Emissionspunkt
-- der spätere UI/API-Caller soll nur aufrufen, Zustände mappen und optional einen Sink anschließen
+- der erste echte lokale Web-Caller folgt genau diesem Vertrag bereits praktisch
+- der spätere UI/API-Caller soll weiter nur aufrufen, Zustände mappen und optional einen Sink anschließen
 
 Kurz:
-**Keine neue Architektur auf Verdacht bauen. Erst wieder anfassen, wenn ein echter konkreter Caller mehr braucht als Aufruf + Status-Mapping + optionalen Sink.**
+**Keine neue Architektur auf Verdacht bauen. Den vorhandenen dünnen Caller jetzt lieber härten als wieder einen neuen Layer zu erfinden.**
 
 ## Nächste autonome Aufgaben
 ### 1. Launch-Hardening weiter nur dort schärfen, wo echter Drift sichtbar ist

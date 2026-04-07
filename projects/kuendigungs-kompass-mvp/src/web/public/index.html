@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kündigungs-Kompass</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Launch-V1 Webcaller</p>
+          <h1>Kündigungs-Kompass</h1>
+          <p class="hero-copy">
+            Schritt für Schritt durch die wichtigsten Angaben — mit echter Runtime-Logik,
+            konservativen Guardrails und direkt nutzbarer Ergebnisansicht.
+          </p>
+        </div>
+        <div class="hero-actions">
+          <label class="tier-picker">
+            <span>Produktstufe</span>
+            <select id="tier-select"></select>
+          </label>
+          <button id="reset-button" class="ghost-button" type="button">Neu starten</button>
+        </div>
+      </header>
+
+      <section class="examples-panel">
+        <div>
+          <h2>Demo-Fälle</h2>
+          <p>Zum Vorzeigen oder schnellen Gegencheck direkt einen echten Beispielinput laden.</p>
+        </div>
+        <div id="example-buttons" class="example-buttons"></div>
+      </section>
+
+      <main class="main-grid">
+        <aside class="sidebar card">
+          <div class="sidebar-section">
+            <h2>Fortschritt</h2>
+            <div id="progress-steps" class="progress-steps"></div>
+          </div>
+
+          <div class="sidebar-section">
+            <h2>Status</h2>
+            <div id="status-chips" class="chip-row"></div>
+          </div>
+
+          <div class="sidebar-section">
+            <h2>Hinweise</h2>
+            <div id="warning-list" class="warning-list"></div>
+          </div>
+        </aside>
+
+        <section class="content-column">
+          <div id="screen-card" class="card"></div>
+          <div id="result-card" class="card"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>

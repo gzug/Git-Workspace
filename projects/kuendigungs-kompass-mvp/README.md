@@ -64,6 +64,30 @@ Wichtig:
 - `src/adapters/`
 - `src/engine/`
 - `src/flow/`
+- `src/web/` → dünner lokaler Webcaller (`server.js` + statische UI unter `public/`)
+
+## Lokale Web-Version starten
+Für eine vorzeigbare nutzbare lokale Web-Version:
+
+```bash
+cd projects/kuendigungs-kompass-mvp
+node src/web/server.js --port 3090
+```
+
+Dann im Browser öffnen:
+- `http://127.0.0.1:3090`
+
+Optional mit Telemetrie-Datei:
+
+```bash
+node src/web/server.js --port 3090 --telemetry-out tmp/web-telemetry.ndjson
+```
+
+Die Web-Version bleibt bewusst dünn:
+- ruft direkt `buildQuestionnaireResultView(...)` auf
+- zeigt die echten Flow-Screens
+- rendert die strukturierten Ergebnisdaten für `preview` / `base` / `upgrade`
+- lädt Demo-Fälle aus `examples/inputs/`
 
 ### Prüfbasis
 - `examples/PAIRS.md`

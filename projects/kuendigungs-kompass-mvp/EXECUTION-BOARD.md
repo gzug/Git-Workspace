@@ -130,6 +130,8 @@ Die Hauptlücken liegen aktuell in **vollständiger Testhärtung**, **konkreter 
 - Ergebnis bisher:
   - `E2E-REALITY-CHECK-V1.md` definiert die Pflichtfälle und Done-When-Kriterien
   - Runtime-Result-View-Tests decken zentrale Zustände bereits technisch ab
+  - ein echter dünner lokaler Web-Caller existiert jetzt unter `src/web/`, damit der Runtime-Pfad nicht nur als CLI-/Test-Flow, sondern als vorzeigbare nutzbare Oberfläche geprüft werden kann
+  - `test-web-app.js` deckt den kleinsten Web-Smoke-Test für Bootstrap, View-API und HTML-Auslieferung ab
 
 ### Task 4.2 — Monitoring und Error Logging
 - Status: in Arbeit
@@ -171,10 +173,11 @@ Die Hauptlücken liegen aktuell in **vollständiger Testhärtung**, **konkreter 
 - Steering-Doku, Runtime, Fixtures, Snapshots und statisches Mockup eng synchron halten
 - Mockup-Drift nicht nur visuell prüfen: `test-mockup-preview-sync.js` hält die drei gezeigten Preview-Fälle gegen die echten Render-Snapshots zusammen; `test-mockup-base-announced-sync.js`, `test-mockup-base-signed-sync.js` und `test-mockup-base-mixed-sync.js` sichern jetzt alle drei Base-Fälle gegen echten Snapshot-Drift
 - Monitoring-Minimum nicht nur als Zählwerk lesen: `aggregateTelemetry.js` hebt Stop-/Rollback-nahe Warnsignale jetzt explizit als `stopSignals` hoch
+- den neuen Web-Caller gegen echte Pflichtfälle und erkennbare UX-/Flow-Reibung härten, statt sofort wieder in Feature-Breite zu kippen
 
 ### Next
-- echten UI/API-Anschluss erst dann weiterziehen, wenn ein konkreter Caller mehr verlangt als Aufruf + Status-Mapping + optionalen Sink
-- Frontend-/Mockup-Weiterbau erst gegen grünes Hardening-Gate priorisieren
+- Web-Version an den heiklen Launch-Fällen durchprüfen: unvollständige Pfade, Red-Flag-Fälle, Base-vs-Preview-Verständlichkeit, Render-Fallback-Darstellung
+- Telemetrie aus dem Web-Caller lokal mitlaufen lassen und nur die minimal nötigen UX-/Ops-Lücken schließen
 
 ### Risks
 - Main-Agent bleibt zu stark im Executor-Modus statt früh genug zu delegieren

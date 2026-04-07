@@ -50,6 +50,10 @@ Der Kündigungs-Kompass ist kein loses Konzept mehr, sondern ein **testbarer Run
 - Ergebnisansicht implementiert
 - Fallback-/Fehlerverhalten vorhanden
 - `src/runtime/buildQuestionnaireResultView.js` verbindet Flow → Normalisierung → Engine → Tier-Projektion → Rendering
+- neuer dünner lokaler Webcaller vorhanden: `src/web/server.js` + `src/web/public/*`
+- die Web-Version nutzt bewusst keinen zusätzlichen Systemlayer, sondern ruft direkt den bestehenden Runtime-Entry auf
+- Demo-Fälle aus `examples/inputs/` sind direkt in der Web-Oberfläche ladbar
+- Smoke-Test vorhanden: `test-web-app.js`
 
 ### Launch Hardening
 - `LAUNCH-HARDENING-V1.md`
@@ -61,6 +65,9 @@ Der Kündigungs-Kompass ist kein loses Konzept mehr, sondern ein **testbarer Run
 - kanonischer Runtime-Emissionspunkt vorhanden: `buildQuestionnaireResultView(..., { onEvent })` emittiert jetzt pro View genau ein strukturiertes `questionnaire_result_view_built`-Event
 - dünner V1-Telemetrie-Anschluss liegt jetzt außerhalb des Runtime-Cores: `src/runtime/telemetry/emitResultViewEvent.js`, `fileTelemetrySink.js`, `aggregateTelemetry.js`
 - kleinster Dev-Hook dafür ist jetzt real nutzbar: `src/demo.js --telemetry-out <path>`; lokales Prüf-Runbook liegt unter `vault/runbooks/kk-telemetry-dev.md`
+- zusätzlich existiert jetzt ein echter dünner lokaler Web-Caller: `src/web/server.js --port 3090 [--telemetry-out <path>]`
+- der Web-Caller nutzt denselben Runtime-Entry, zeigt die echten Flow-Screens, rendert strukturierte Ergebnisse und kann Demo-Fälle direkt laden
+- `test-web-app.js` prüft Bootstrap, API-View und statische Web-Auslieferung als Smoke-Test
 - `aggregateTelemetry.js` liefert jetzt zusätzlich minimale `stopSignals` (`repeatedRenderFallback`, `errorsPresent`, `invalidTelemetryLines`, `monitoringBlind`, `requiresAttention`) statt Stop-/Rollback-Hinweise nur implizit in Rohzählungen zu verstecken
 - `INTEGRATION-CONTRACT-V1.md` ist jetzt auf den aktuellen Runtime-/Telemetry-Stand gezogen; V1-Entscheid: künftiger UI/API-Anschluss bleibt ein dünner Adapter über `buildQuestionnaireResultView(..., { onEvent })`, ohne neuen äußeren Systemlayer
 - `incomplete` trägt zusätzlich anonymen Flow-Abbruchkontext (`lastQuestionKey`, `nextQuestionKey`, `trackContext`, `hadRedFlag`, `hadKnownDeadlineDate`) für Soft-Launch-Monitoring

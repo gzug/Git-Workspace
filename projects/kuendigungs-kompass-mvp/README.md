@@ -88,6 +88,8 @@ Die Web-Version bleibt bewusst dünn:
 - zeigt die echten Flow-Screens
 - rendert die strukturierten Ergebnisdaten für `preview` / `base` / `upgrade`
 - lädt Demo-Fälle aus `examples/inputs/`
+- markiert `render-fallback` explizit als weiter nutzbaren Struktur-Fallback
+- zeigt bei `incomplete` die konkret fehlenden Pflichtangaben statt nur einen generischen Stopp-Zustand
 
 ### Prüfbasis
 - `examples/PAIRS.md`

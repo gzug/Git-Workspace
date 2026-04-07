@@ -32,6 +32,10 @@
   - `test-web-app.js`
 - Startkommando für die vorzeigbare lokale Version:
   - `node src/web/server.js --port 3090`
+- letzter Launch-Hardening-Block am Web-Caller:
+  - `incomplete` zeigt fehlende Pflichtangaben jetzt expliziter inklusive Sprung zurück zur offenen Frage
+  - `render-fallback` wird im UI sichtbar als weiter nutzbarer Struktur-Fallback markiert statt still wie ein voller Ready-State auszusehen
+  - `test-web-app.js` prüft jetzt zusätzlich einen synthetischen `render-fallback`-API-Pfad und den `bad_request`-Pfad für kaputtes JSON
 
 ## Aktueller Engpass
 Der Engpass ist weiter **nicht** neue Produktlogik und **nicht** breites Feature-Bauen.

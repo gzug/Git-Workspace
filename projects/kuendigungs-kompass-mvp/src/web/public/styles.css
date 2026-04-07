@@ -347,6 +347,19 @@ h3 {
   background: #fbfcfe;
 }
 
+.fallback-callout {
+  background: var(--warn-soft);
+  border-color: rgba(154, 103, 0, 0.18);
+}
+
+.inline-note {
+  color: var(--muted);
+}
+
+.incomplete-summary-card {
+  background: #f4f7fb;
+}
+
 .question-label {
   display: block;
   margin-bottom: 6px;

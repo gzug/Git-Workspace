@@ -176,6 +176,8 @@ function createTelemetrySink(telemetryOut) {
 
 function createWebServer(options = {}) {
   const onEvent = options.onEvent;
+  const buildBootstrap = options.buildBootstrapPayloadFn || buildBootstrapPayload;
+  const buildView = options.buildViewPayloadFn || buildViewPayload;
 
   return http.createServer(async (request, response) => {
     const url = new URL(request.url, `http://${request.headers.host || 'localhost'}`);
@@ -187,14 +189,14 @@ function createWebServer(options = {}) {
     }
 
     if (request.method === 'GET' && pathname === '/api/bootstrap') {
-      sendJson(response, 200, buildBootstrapPayload(onEvent));
+      sendJson(response, 200, buildBootstrap(onEvent));
       return;
     }
 
     if (request.method === 'POST' && pathname === '/api/view') {
       try {
         const body = await readRequestBody(request);
-        sendJson(response, 200, buildViewPayload(body, onEvent));
+        sendJson(response, 200, buildView(body, onEvent));
       } catch (error) {
         sendJson(response, 400, {
           status: 'error',

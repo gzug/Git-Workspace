@@ -140,6 +140,13 @@ function renderStatus() {
 function renderWarnings() {
   const items = [];
 
+  if (state.view?.status === 'render-fallback') {
+    items.push({
+      tone: 'warning',
+      text: 'Die Textansicht konnte gerade nicht gebaut werden. Die strukturierte Auswertung bleibt sichtbar und ist weiter nutzbar.',
+    });
+  }
+
   if (Array.isArray(state.view?.warnings)) {
     for (const warning of state.view.warnings) {
       items.push({ tone: 'warning', text: warning });
@@ -399,6 +406,14 @@ function renderReadyResult() {
   const projected = state.view?.projected;
   const headline = projected?.caseSnapshot?.headline || 'Auswertung bereit';
   const situation = projected?.caseSnapshot?.situation || state.view?.message || 'Die Runtime hat eine belastbare Ergebnisansicht gebaut.';
+  const fallbackNotice = state.view?.status === 'render-fallback'
+    ? `
+      <section class="result-section fallback-callout">
+        <h3>Render-Fallback aktiv</h3>
+        <p class="detail-copy">Die Textansicht fehlt gerade. Für Demo, Review und Gegencheck bleibt die strukturierte Auswertung unten bewusst sichtbar.</p>
+      </section>
+    `
+    : '';
 
   elements.resultCard.innerHTML = `
     <div class="result-header">
@@ -411,6 +426,7 @@ function renderReadyResult() {
         <button type="button" class="secondary-button" data-jump-next>${isResultState() ? 'Zur letzten Frage springen' : 'Offene Frage zeigen'}</button>
       </div>
     </div>
+    ${fallbackNotice}
     ${renderMetaCards()}
     ${renderResultSections()}
     ${state.view?.rendered ? `<section class="result-section"><h3>Textansicht</h3><pre class="rendered-block">${escapeHtml(state.view.rendered)}</pre></section>` : ''}
@@ -421,6 +437,7 @@ function renderIncompleteResult() {
   const firstMissing = state.view?.missingAnswers?.[0];
   const flowAbandonment = state.view?.telemetry?.flowAbandonment;
   const details = [];
+  const missingAnswers = state.view?.missingAnswers || [];
 
   if (firstMissing) details.push(`Nächste Pflichtangabe: ${firstMissing.label}`);
   if (flowAbandonment?.trackContext) details.push(`Kontext: ${flowAbandonment.trackContext}`);
@@ -434,8 +451,17 @@ function renderIncompleteResult() {
         <h2 class="result-title">Noch nicht rechenbar</h2>
         <p class="result-lead">${escapeHtml(state.view?.message || 'Es fehlen noch Angaben, bevor die Runtime eine fertige Auswertung bauen kann.')}</p>
       </div>
+      <div class="result-actions">
+        <button type="button" class="secondary-button" data-jump-next ${firstMissing ? '' : 'disabled'}>Zur nächsten Pflichtangabe</button>
+      </div>
     </div>
     <div class="summary-sections">
+      <section class="summary-card incomplete-summary-card">
+        <h3>Was jetzt fehlt</h3>
+        <ul class="result-list">
+          ${missingAnswers.map((item) => `<li><strong>${escapeHtml(item.label)}</strong><span class="inline-note"> · ${escapeHtml(item.screenTitle)}</span></li>`).join('') || '<li>Die Runtime wartet auf Pflichtangaben im aktuellen Flow-Schritt.</li>'}
+        </ul>
+      </section>
       <section class="summary-card">
         <h3>Warum gestoppt wurde</h3>
         <ul class="result-list">

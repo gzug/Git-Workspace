@@ -329,11 +329,11 @@ function renderMetaCards() {
   const track = state.view?.result?.synthesisDecision?.primaryTrack;
   const riskLevel = state.view?.result?.caseSnapshot?.riskLevel;
 
-  if (track) cards.push({ label: 'Primärer Track', value: track });
+  if (track) cards.push({ label: 'Primärer Pfad', value: track });
   if (riskLevel) cards.push({ label: 'Risikolevel', value: riskLevel });
   if (telemetry?.deadlinesCount != null) cards.push({ label: 'Fristen', value: String(telemetry.deadlinesCount) });
-  if (telemetry?.redFlagsCount != null) cards.push({ label: 'Red Flags', value: String(telemetry.redFlagsCount) });
-  if (telemetry?.topActionsCount != null) cards.push({ label: 'Top Actions', value: String(telemetry.topActionsCount) });
+  if (telemetry?.redFlagsCount != null) cards.push({ label: 'Besonders wichtige Signale', value: String(telemetry.redFlagsCount) });
+  if (telemetry?.topActionsCount != null) cards.push({ label: 'Nächste Schritte', value: String(telemetry.topActionsCount) });
 
   if (cards.length === 0) return '';
 
@@ -414,6 +414,16 @@ function renderReadyResult() {
       </section>
     `
     : '';
+  const reassuranceSection = `
+    <section class="result-section trust-callout">
+      <h3>Wie du dieses Ergebnis lesen kannst</h3>
+      <ul class="result-list trust-list">
+        <li><strong>Reihenfolge vor Vollständigkeit:</strong> Erst Fristen und Top-Actions prüfen, danach Unterlagen und Beratungspunkte.</li>
+        <li><strong>Konservativer Zuschnitt:</strong> Unsichere oder fehlende Angaben sollen eher bremsen als ein zu glattes Gefühl von Sicherheit erzeugen.</li>
+        <li><strong>Saubere Rolle:</strong> Die Website gibt Orientierung für den nächsten Schritt; verbindliche Einzelfallprüfung bleibt bei Bedarf separat.</li>
+      </ul>
+    </section>
+  `;
 
   elements.resultCard.innerHTML = `
     <div class="result-header">
@@ -427,6 +437,7 @@ function renderReadyResult() {
       </div>
     </div>
     ${fallbackNotice}
+    ${reassuranceSection}
     ${renderMetaCards()}
     ${renderResultSections()}
     ${state.view?.rendered ? `<section class="result-section"><h3>Textansicht</h3><pre class="rendered-block">${escapeHtml(state.view.rendered)}</pre></section>` : ''}

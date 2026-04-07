@@ -131,7 +131,8 @@ Die Hauptlücken liegen aktuell in **vollständiger Testhärtung**, **konkreter 
   - `E2E-REALITY-CHECK-V1.md` definiert die Pflichtfälle und Done-When-Kriterien
   - Runtime-Result-View-Tests decken zentrale Zustände bereits technisch ab
   - ein echter dünner lokaler Web-Caller existiert jetzt unter `src/web/`, damit der Runtime-Pfad nicht nur als CLI-/Test-Flow, sondern als vorzeigbare nutzbare Oberfläche geprüft werden kann
-  - `test-web-app.js` deckt nicht mehr nur den kleinsten Web-Smoke-Test ab, sondern jetzt zusätzlich einen synthetischen `render-fallback`-Pfad und den `bad_request`-Pfad für kaputtes JSON
+  - der Web-Caller hat jetzt zusätzlich einen sichtbaren Vertrauens-/Orientierungsblock und einen neutralen Platzhalter-Footer, um professioneller und psychologisch ruhiger zu wirken, ohne Fake-Signale einzubauen
+  - `test-web-app.js` deckt nicht mehr nur den kleinsten Web-Smoke-Test ab, sondern jetzt zusätzlich einen synthetischen `render-fallback`-Pfad, den `bad_request`-Pfad für kaputtes JSON und die statischen Trust-/Footer-Inhalte
 
 ### Task 4.2 — Monitoring und Error Logging
 - Status: in Arbeit

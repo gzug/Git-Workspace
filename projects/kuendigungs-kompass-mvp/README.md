@@ -90,6 +90,7 @@ Die Web-Version bleibt bewusst dünn:
 - lädt Demo-Fälle aus `examples/inputs/`
 - markiert `render-fallback` explizit als weiter nutzbaren Struktur-Fallback
 - zeigt bei `incomplete` die konkret fehlenden Pflichtangaben statt nur einen generischen Stopp-Zustand
+- ergänzt jetzt einen ruhigen Vertrauens-/Orientierungsblock und einen neutralen Platzhalter-Footer, ohne erfundene Partner, Gütesiegel oder Fake-Endorsements
 
 ### Prüfbasis
 - `examples/PAIRS.md`

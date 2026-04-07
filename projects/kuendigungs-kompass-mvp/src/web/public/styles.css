@@ -46,6 +46,7 @@ button {
 
 .hero,
 .examples-panel,
+.trust-panel,
 .card {
   background: var(--card);
   border: 1px solid rgba(216, 224, 235, 0.9);
@@ -79,6 +80,7 @@ h3 {
 
 .hero-copy,
 .examples-panel p,
+.trust-panel p,
 .muted,
 .question-help,
 .empty-note,
@@ -159,9 +161,45 @@ h3 {
   transform: translateY(-1px);
 }
 
-.examples-panel {
+.trust-panel,
+.examples-panel,
+.page-footer {
   padding: 22px 24px;
   margin-bottom: 20px;
+}
+
+.trust-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 18px;
+}
+
+.trust-copy h2,
+.examples-panel h2,
+.page-footer h2 {
+  margin-bottom: 6px;
+}
+
+.trust-points {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.trust-point,
+.footer-pill {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: #fbfcfe;
+}
+
+.trust-point {
+  padding: 16px;
+}
+
+.trust-point h3 {
+  font-size: 1rem;
+  margin-bottom: 8px;
 }
 
 .examples-panel h2 {
@@ -347,6 +385,11 @@ h3 {
   background: #fbfcfe;
 }
 
+.trust-callout {
+  background: linear-gradient(180deg, #f7faff 0%, #fbfcfe 100%);
+  border-color: rgba(36, 73, 216, 0.14);
+}
+
 .fallback-callout {
   background: var(--warn-soft);
   border-color: rgba(154, 103, 0, 0.18);
@@ -463,13 +506,46 @@ h3 {
   line-height: 1.55;
 }
 
+.page-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.footer-pill {
+  padding: 10px 14px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
 .hidden {
   display: none !important;
 }
 
 @media (max-width: 960px) {
-  .main-grid {
+  .main-grid,
+  .trust-panel {
     grid-template-columns: 1fr;
+  }
+
+  .trust-points {
+    grid-template-columns: 1fr;
+  }
+
+  .page-footer {
+    flex-direction: column;
+  }
+
+  .footer-links {
+    justify-content: flex-start;
   }
 
   .sidebar {
@@ -484,6 +560,8 @@ h3 {
 
   .hero,
   .examples-panel,
+  .trust-panel,
+  .page-footer,
   .card {
     border-radius: 20px;
     padding: 18px;

@@ -60,6 +60,9 @@ async function runSmokeFlow() {
     const html = await htmlResponse.text();
     assert.ok(html.includes('Kündigungs-Kompass'));
     assert.ok(html.includes('Demo-Fälle'));
+    assert.ok(html.includes('Wofür diese erste Website-Version gedacht ist'));
+    assert.ok(html.includes('Quellenprinzip'));
+    assert.ok(html.includes('Impressum · Platzhalter'));
   });
 }
 

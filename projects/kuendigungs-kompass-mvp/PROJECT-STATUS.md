@@ -54,7 +54,8 @@ Der Kündigungs-Kompass ist kein loses Konzept mehr, sondern ein **testbarer Run
 - die Web-Version nutzt bewusst keinen zusätzlichen Systemlayer, sondern ruft direkt den bestehenden Runtime-Entry auf
 - Demo-Fälle aus `examples/inputs/` sind direkt in der Web-Oberfläche ladbar
 - Web-Caller-UX für Launch-Hardening weiter geschärft: `incomplete` zeigt jetzt fehlende Pflichtangaben explizit mit Sprung-CTA; `render-fallback` wird sichtbar als nutzbarer Struktur-Fallback markiert statt still wie `ready` auszusehen
-- Web-Härtungstests gehen jetzt über Smoke hinaus: `test-web-app.js` prüft zusätzlich einen synthetischen `render-fallback`-API-Pfad und den `bad_request`-Pfad bei kaputtem JSON
+- zusätzlicher ruhiger Vertrauens-/Orientierungsblock im Web-Caller vorhanden: klare Einordnung der ersten Website-Version, lokaler Datenhaltung, Quellenprinzip und neutraler Platzhalter-Footer statt erfundener Vertrauenssignale
+- Web-Härtungstests gehen jetzt über Smoke hinaus: `test-web-app.js` prüft zusätzlich einen synthetischen `render-fallback`-API-Pfad, den `bad_request`-Pfad bei kaputtem JSON und die neuen Vertrauens-/Footer-Blöcke in der ausgelieferten HTML-Datei
 
 ### Launch Hardening
 - `LAUNCH-HARDENING-V1.md`

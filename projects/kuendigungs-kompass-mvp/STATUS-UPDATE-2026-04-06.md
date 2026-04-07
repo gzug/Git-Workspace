@@ -35,7 +35,9 @@
 - letzter Launch-Hardening-Block am Web-Caller:
   - `incomplete` zeigt fehlende Pflichtangaben jetzt expliziter inklusive Sprung zurück zur offenen Frage
   - `render-fallback` wird im UI sichtbar als weiter nutzbarer Struktur-Fallback markiert statt still wie ein voller Ready-State auszusehen
-  - `test-web-app.js` prüft jetzt zusätzlich einen synthetischen `render-fallback`-API-Pfad und den `bad_request`-Pfad für kaputtes JSON
+  - zusätzlicher ruhiger Vertrauens-/Orientierungsblock erklärt Rolle, lokale Datenhaltung und Quellenprinzip der ersten Website-Version
+  - neutraler Platzhalter-Footer schafft seriösen Abschluss, ohne Partner, Logos oder externe Bestätigung zu erfinden
+  - `test-web-app.js` prüft jetzt zusätzlich einen synthetischen `render-fallback`-API-Pfad, den `bad_request`-Pfad für kaputtes JSON und die ausgelieferten Trust-/Footer-Texte
 
 ## Aktueller Engpass
 Der Engpass ist weiter **nicht** neue Produktlogik und **nicht** breites Feature-Bauen.
